@@ -25,7 +25,7 @@ export function createBknd<Env>(config: AdapterModeWithOptions<Env>, env?: Env) 
    async function getApp(): Promise<App> {
       if (!appPromise) {
          if (mode === "standalone") {
-            if (!options.serveStatic && !options.adminOptions) {
+            if (options.adminOptions && !options.serveStatic) {
                $console.warn(
                   "adminOptions provided without serveStatic — admin UI assets may not be served. " +
                      "See `serveStatic`, `serveStaticViaImport`, or add a `package.json` script that runs `bknd copy-assets --out {relative_static_assets_directory_path}`.",
@@ -46,7 +46,7 @@ export function createBknd<Env>(config: AdapterModeWithOptions<Env>, env?: Env) 
          await api.verifyAuth();
          return api;
       }
-      return app.getApi();
+      return app.getApi(opts?.headers ? { headers: opts.headers } : undefined);
    }
 
    function serve() {
