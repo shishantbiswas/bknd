@@ -84,8 +84,9 @@ describe("web adapter via createBknd in standalone mode", () => {
             adminOptions: { adminBasepath: "/admin" },
          }
       });
-      const app = await bknd.getApp();
-      expect(app.isBuilt()).toBe(true);
+      const handler = bknd.serve();
+      const res = await handler(new Request("http://localhost:3000/api/system/config"));
+      expect(res.status).toBe(200);
    });
 
    test("check admin route", async () => {
