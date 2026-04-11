@@ -105,15 +105,22 @@ export class MysqlIntrospector extends BaseIntrospector {
             hasDefaultValue: col.dflt != null,
             comment: undefined,
          })),
-         indices: (table.indices || []).map((index) => ({
-            name: index.name,
-            table: table.name,
-            isUnique: index.non_unique === 0,
-            columns: index.columns.map((col) => ({
-               name: col.name,
-               order: col.seqno - 1,
+         indices: (table.indices || [])
+            .filter((index) => {
+               if (index.name === "PRIMARY") return false;
+               const pkCol = table.columns.find((c) => c.pk && c.name === index.name);
+               if (pkCol && index.non_unique === 0) return false;
+               return true;
+            })
+            .map((index) => ({
+               name: index.name,
+               table: table.name,
+               isUnique: index.non_unique === 0,
+               columns: index.columns.map((col) => ({
+                  name: col.name,
+                  order: col.seqno - 1,
+               })),
             })),
-         })),
       }));
    }
 }

@@ -9,7 +9,7 @@ import { bunTestRunner } from "adapter/bun/test";
 
 const credentials = {
    host: "127.0.0.1",
-   port: 3306,
+   port: 3307,
    user: "mysql",
    password: "mysql",
    database: "bknd",
