@@ -1,11 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useAuth } from "bknd/client";
-import "bknd/dist/styles.css";
+import bkndCssUrl from "bknd/dist/styles.css?url";
 import { Admin } from "bknd/ui";
 
 export const Route = createFileRoute("/admin/$")({
   ssr: false, // "data-only" works too
   component: RouteComponent,
+   head: () => ({
+    links: [
+      {
+        rel: "stylesheet",
+        href: bkndCssUrl,
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {

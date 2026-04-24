@@ -93,9 +93,9 @@ export type TanstackStartConfig<Env = TanstackStartEnv> = FrameworkBkndConfig<En
 
 ## Serve the API
 
-The Tanstack Start adapter uses Tanstack Start's hooks mechanism to handle API requests. Create a `/src/routes/api.$.ts` file:
+The Tanstack Start adapter uses Web Standard `Request` and `Response` to handle API requests. Create a `src/routes/api.$.ts` file:
 
-```typescript title="/src/routes/api.$.ts"
+```typescript title="src/routes/api.$.ts"
 import { createFileRoute } from "@tanstack/react-router";
 import config from "../../bknd.config";
 import { serve } from "bknd/adapter/tanstack-start";
@@ -140,11 +140,43 @@ export async function getApi({
   The adapter uses `process.env` to access environment variables, this works because Tanstack Start uses Nitro underneath and it will use polyfills for `process.env` making it platform/runtime agnostic.
 </Callout>
 
+## React SDK configuration
+
+To use queries and mutation on client side, bknd provides first class support for it with it's [React SDK](/usage/react)
+to set it up with Tanstack Start add the `ClientProvider` in `src/routes/__root.tsx`
+
+```tsx title="src/routes/__root.tsx"
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import { ClientProvider } from "bknd/client";
+
+import appCss from "../styles.css?url";
+
+export const Route = createRootRoute({
+  shellComponent: RootDocument,
+});
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <ClientProvider>
+          {children}
+        </ClientProvider>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+```
+
 ## Enabling the Admin UI
 
-Create a page at /src/routes/admin.$.tsx:
+Create a page at `src/routes/admin.$.tsx`:
 
-```typescript title="/src/routes/admin.$.tsx"
+```tsx title="src/routes/admin.$.tsx"
 import { createFileRoute } from "@tanstack/react-router";
 import { useAuth } from "bknd/client";
 import "bknd/dist/styles.css";
@@ -181,7 +213,7 @@ function RouteComponent() {
 You can use the `getApp` function to access the bknd API in your app:
 These are a few examples how you can validate user and handle server-side requests using `createServerFn`.
 
-```typescript title="src/routes/index.tsx"
+```tsx title="src/routes/index.tsx"
 import { createFileRoute } from "@tanstack/react-router";
 import { getApi } from "@/bknd";
 import { createServerFn } from "@tanstack/react-start";
@@ -224,7 +256,7 @@ function App() {
 
 To use authentication in your app, pass the request headers to the API:
 
-```typescript title="src/routes/user.tsx"
+```tsx title="src/routes/user.tsx"
 import { getApi } from "@/bknd";
 import { createServerFn } from "@tanstack/react-start";
 import { Link } from "@tanstack/react-router";
