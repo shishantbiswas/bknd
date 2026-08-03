@@ -82,13 +82,13 @@ import { AppEvents } from "bknd";
 Available events:
 
 {/* <AutoTypeTable path="../app/src/App.ts" name="AppEvents" />  */}
-| Event | Params | Description |
-|:------|:--------|:------------|
-| `AppConfigUpdatedEvent` | `{ app: App }` | Emitted when the app configuration is updated |
-| `AppBuiltEvent` | `{ app: App }` | Emitted when the app is built |
-| `AppFirstBoot` | `{ app: App }` | Emitted when the app is first booted |
-| `AppRequest` | `{ app: App, request: Request }` | Emitted when a request is received |
-| `AppBeforeResponse` | `{ app: App, request: Request, response: Response }` | Emitted before a response is sent |
+| Event                    | Params                                               | Description                                   |
+| :----------------------- | :--------------------------------------------------- | :-------------------------------------------- |
+| `AppConfigUpdatedEvent`  | `{ app: App }`                                       | Emitted when the app configuration is updated |
+| `AppBuiltEvent`          | `{ app: App }`                                       | Emitted when the app is built                 |
+| `AppFirstBoot`           | `{ app: App }`                                       | Emitted when the app is first booted          |
+| `AppRequest`             | `{ app: App, request: Request }`                     | Emitted when a request is received            |
+| `AppBeforeResponse`      | `{ app: App, request: Request, response: Response }` | Emitted before a response is sent             |
 
 ## Database Events
 
@@ -138,4 +138,19 @@ import { MediaEvents } from "bknd";
 
 ## Auth Events
 
-Coming soon.
+These events are emitted by the `Authenticator` class and are available on the `AuthEvents` object.
+
+```typescript
+import { AuthEvents } from "bknd";
+```
+
+| Event                       | Params                              |  Description                                                             |
+| :-------------------------- | :---------------------------------- | :----------------------------------------------------------------------- |
+| `AuthBeforeLogin`           | `{ user: User }`                    | Emitted when a user attempts to log in.                                  |
+| `AuthAfterLogin`            | `{ user: User }`                    | Emitted when a user successfully logs in.                                |
+| `AuthBeforeRegister`        | `{ user: CreateUser }`              | Emitted when a user attempts to register.                                |
+| `AuthAfterRegister`         | `{ user: User }`                    | Emitted when a user successfully registers.                              |
+| `AuthBeforeLogout`          | `{ user: SafeUser \| undefined }`   | Emitted when a user attempts to log out.                                 |
+| `AuthAfterLogout`           | `{ user: SafeUser \| undefined }`   | Emitted when a user successfully logs out.                               |
+| `AuthBeforePasswordChange`  | `{ user: User }`                    | Emitted when a user attempts to change their password.                   |
+| `AuthAfterPasswordChange`   | `{ user: User }`                    | Emitted when a user successfully changes their password.                 |

@@ -1,4 +1,5 @@
 import type { DB } from "bknd";
+import { EventManager, type EmitsEvents } from "core/events";
 import { Exception } from "core/errors";
 import { addFlashMessage } from "core/server/flash";
 import type { Context } from "hono";
@@ -8,6 +9,7 @@ import { type CookieOptions, serializeSigned } from "hono/utils/cookie";
 import type { ServerEnv } from "modules/Controller";
 import { InvalidConditionsException } from "auth/errors";
 import { s, parse, secret, runtimeSupports, truncate, $console, pickKeys } from "bknd/utils";
+import { AuthEvents } from "auth/events";
 import type { AuthStrategy } from "./strategies/Strategy";
 
 type Input = any; // workaround
@@ -98,15 +100,21 @@ type AuthClaims = SafeUser & {
 
 export class Authenticator<
    Strategies extends Record<string, AuthStrategy> = Record<string, AuthStrategy>,
-> {
+> implements EmitsEvents
+{
+   static readonly Events = AuthEvents;
+   readonly emgr: EventManager<typeof Authenticator.Events>;
    private readonly config: AuthConfig;
 
    constructor(
       private readonly strategies: Strategies,
       private readonly userPool: UserPool,
       config?: AuthConfig,
+      emgr?: EventManager<typeof Authenticator.Events>,
    ) {
       this.config = parse(authenticatorConfig, config ?? {});
+      this.emgr = emgr ?? new EventManager(Authenticator.Events);
+      this.emgr.registerEvents(Authenticator.Events);
    }
 
    async resolveLogin(
@@ -139,8 +147,10 @@ export class Authenticator<
             throw new InvalidConditionsException("User signed up with a different strategy");
          }
 
+         await this.emgr.emit(new Authenticator.Events.AuthBeforeLogin({ user: user }));
          await verify(user);
          const data = await this.safeAuthResponse(user);
+         await this.emgr.emit(new Authenticator.Events.AuthAfterLogin({ user: user }));
          return this.respondWithUser(c, data, opts);
       } catch (e) {
          return this.respondWithError(c, e as Error, opts);
@@ -169,6 +179,7 @@ export class Authenticator<
             throw new InvalidConditionsException("Role cannot be provided during registration");
          }
 
+         await this.emgr.emit(new Authenticator.Events.AuthBeforeRegister({ user: profile }));
          const user = await this.userPool.create(strategy.getName(), {
             ...profile,
             role: this.config.default_role_register,
@@ -177,6 +188,7 @@ export class Authenticator<
 
          await verify(user);
          const data = await this.safeAuthResponse(user);
+         await this.emgr.emit(new Authenticator.Events.AuthAfterRegister({ user: user }));
          return this.respondWithUser(c, data, opts);
       } catch (e) {
          return this.respondWithError(c, e as Error, opts);
@@ -369,6 +381,8 @@ export class Authenticator<
 
    async logout(c: Context<ServerEnv>) {
       $console.info("Logging out");
+      const user = c.get("auth")?.user;
+      this.emgr.emit(new Authenticator.Events.AuthBeforeLogout({ user }));
       c.set("auth", undefined);
 
       const cookie = await this.getAuthCookie(c);
@@ -380,6 +394,7 @@ export class Authenticator<
       // therefore adding deleting cookie at the end
       // as the flash isn't that important
       this.deleteAuthCookie(c);
+      this.emgr.emit(new Authenticator.Events.AuthAfterLogout({ user }));
    }
 
    // @todo: move this to a server helper

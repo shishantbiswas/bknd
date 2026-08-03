@@ -95,11 +95,16 @@ export class AppAuth extends Module<AppAuthSchema> {
          }
       });
 
-      this._authenticator = new Authenticator(strategies, new AppUserPool(this), {
-         jwt: this.config.jwt,
-         cookie: this.config.cookie,
-         default_role_register: this.config.default_role_register,
-      });
+      this._authenticator = new Authenticator(
+         strategies,
+         new AppUserPool(this),
+         {
+            jwt: this.config.jwt,
+            cookie: this.config.cookie,
+            default_role_register: this.config.default_role_register,
+         },
+         this.ctx.emgr,
+      );
 
       this.registerEntities();
       super.setBuilt();
@@ -228,6 +233,10 @@ export class AppAuth extends Module<AppAuthSchema> {
          throw new Error("User is not using password strategy");
       }
 
+      await this.authenticator.emgr.emit(
+         new Authenticator.Events.AuthBeforePasswordChange({ user }),
+      );
+
       const togglePw = (visible: boolean) => {
          const field = this.em.entity(users_entity).field("strategy_value")!;
 
@@ -241,6 +250,10 @@ export class AppAuth extends Module<AppAuthSchema> {
          strategy_value: await pw.hash(newPassword),
       });
       togglePw(false);
+
+      await this.authenticator.emgr.emit(
+         new Authenticator.Events.AuthAfterPasswordChange({ user }),
+      );
 
       return true;
    }

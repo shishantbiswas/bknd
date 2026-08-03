@@ -9,6 +9,7 @@ import {
    UnableToConnectException,
 } from "../errors";
 import { MutatorEvents, RepositoryEvents } from "../events";
+import { AuthEvents } from "auth/events"; 
 import type { Field } from "../fields/Field";
 import type { EntityIndex } from "../fields/indices/EntityIndex";
 import type { EntityRelation } from "../relations";
@@ -35,7 +36,7 @@ export class EntityManager<TBD extends object = DefaultDB> {
    private _relations: EntityRelation[] = [];
    private _indices: EntityIndex[] = [];
    readonly emgr: EventManager<typeof EntityManager.Events>;
-   static readonly Events = { ...MutatorEvents, ...RepositoryEvents };
+   static readonly Events = { ...MutatorEvents, ...RepositoryEvents, ...AuthEvents };
 
    constructor(
       entities: Entity[],
