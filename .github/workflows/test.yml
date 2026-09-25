@@ -16,8 +16,8 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DB: bknd
-        ports:
-          - 5430:5432
+        # ports:
+        #   - 5430:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s

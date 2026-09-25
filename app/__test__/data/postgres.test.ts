@@ -8,9 +8,11 @@ import { $ } from "bun";
 import { connectionTestSuite } from "data/connection/connection-test-suite";
 import { bunTestRunner } from "adapter/bun/test";
 
+const isCI = !!(process.env.GITEA_ACTIONS || process.env.GITHUB_ACTIONS);
+
 const credentials = {
-   host: "localhost",
-   port: 5430,
+   host: isCI ? "postgres" : "localhost", 
+   port: 5432,
    user: "postgres",
    password: "postgres",
    database: "bknd",
@@ -39,6 +41,11 @@ async function isPostgresRunning() {
 
 describe("postgres", () => {
    beforeAll(async () => {
+      if (process.env.GITEA_ACTIONS || process.env.GITHUB_ACTIONS) {
+         console.log("Running in CI: Skipping manual docker run");
+         return;
+      }
+       
       if (!(await isPostgresRunning())) {
          await $`docker run --rm --name bknd-test-postgres -d -e POSTGRES_PASSWORD=${credentials.password} -e POSTGRES_USER=${credentials.user} -e POSTGRES_DB=${credentials.database} -p ${credentials.port}:5432 postgres:17`;
          await $waitUntil("Postgres is running", isPostgresRunning);
