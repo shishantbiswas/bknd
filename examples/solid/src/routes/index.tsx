@@ -1,8 +1,8 @@
-import type { DB } from "bknd";
+import type { DB } from "userbase";
 import { For, Suspense } from "solid-js";
 import { Footer } from "~/components/Footer";
 import { List } from "~/components/List";
-import { getApi } from "~/lib/bknd";
+import { getApi } from "~/lib/userbase";
 import { action, redirect, useAction, useSubmission } from "@solidjs/router";
 import { query, createAsync } from "@solidjs/router";
 
@@ -67,8 +67,8 @@ export default function Home() {
           <div class="ml-3.5 mr-2  opacity-70">&amp;</div>
           <img
             class="dark:invert"
-            src="/bknd.svg"
-            alt="bknd logo"
+            src="/userbase.svg"
+            alt="userbase logo"
             width={183}
             height={59}
           />

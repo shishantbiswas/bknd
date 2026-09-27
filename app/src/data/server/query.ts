@@ -1,4 +1,4 @@
-import { s, isObject, $console } from "bknd/utils";
+import { s, isObject, $console } from "userbase/utils";
 import { WhereBuilder, type WhereQuery } from "data/entities/query/WhereBuilder";
 
 // -------

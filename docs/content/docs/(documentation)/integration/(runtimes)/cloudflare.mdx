@@ -1,41 +1,41 @@
 ---
 title: "Cloudflare"
-description: "Run bknd inside Cloudflare Worker"
+description: "Run userbase inside Cloudflare Worker"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with Cloudflare Workers and bknd you can either install the package manually, and follow the descriptions below, or use the CLI starter:
+To get started with Cloudflare Workers and userbase you can either install the package manually, and follow the descriptions below, or use the CLI starter:
 
 ### CLI Starter
 
 Create a new Cloudflare CLI starter project by running the following command:
 
 ```sh
-npx bknd create -i cloudflare
+npx userbase create -i cloudflare
 ```
 
 ### Manual
 
-Create a new cloudflare worker project by following the [official guide](https://developers.cloudflare.com/workers/get-started/guide/), and then install bknd as a dependency:
+Create a new cloudflare worker project by following the [official guide](https://developers.cloudflare.com/workers/get-started/guide/), and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -45,7 +45,7 @@ bun add bknd
 If you don't choose anything specific, it uses the first D1 binding it finds.
 
 ```ts title="src/index.ts"
-import { serve, d1 } from "bknd/adapter/cloudflare";
+import { serve, d1 } from "userbase/adapter/cloudflare";
 
 // scans your environment for the first D1 binding it finds
 export default serve();
@@ -83,25 +83,25 @@ Now in order to also server the static admin files, you have to modify the `wran
 
 ### Assets (recommended)
 
-Make sure your assets point to the static assets included in the bknd package:
+Make sure your assets point to the static assets included in the userbase package:
 
 ```toml title="wrangler.toml"
-assets = { directory = "node_modules/bknd/dist/static" }
+assets = { directory = "node_modules/userbase/dist/static" }
 ```
 
 ### Workers Sites (legacy)
 
-Make sure your site points to the static assets included in the bknd package:
+Make sure your site points to the static assets included in the userbase package:
 
 ```toml title="wrangler.toml"
 [site]
-bucket = "node_modules/bknd/dist/static"
+bucket = "node_modules/userbase/dist/static"
 ```
 
 And then modify the worker entry as follows:
 
 ```ts title="src/index.ts"
-import { serve } from "bknd/adapter/cloudflare";
+import { serve } from "userbase/adapter/cloudflare";
 import manifest from "__STATIC_CONTENT_MANIFEST"; // [!code highlight]
 
 export default serve<Env>({
@@ -118,7 +118,7 @@ export default serve<Env>({
 You can also add custom routes by defining them after the app has been built, like so:
 
 ```ts
-import { serve } from "bknd/adapter/cloudflare";
+import { serve } from "userbase/adapter/cloudflare";
 
 export default serve<Env>({
   // ...
@@ -132,10 +132,10 @@ The property `app.server` is a [Hono](https://hono.dev/) instance, you can liter
 
 ## D1 Sessions (experimental)
 
-D1 now supports to enable [global read replication](https://developers.cloudflare.com/d1/best-practices/read-replication/). This allows to reduce latency by reading from the closest region. In order for this to work, D1 has to be started from a bookmark. You can enable this behavior on bknd by setting the `d1.session` property:
+D1 now supports to enable [global read replication](https://developers.cloudflare.com/d1/best-practices/read-replication/). This allows to reduce latency by reading from the closest region. In order for this to work, D1 has to be started from a bookmark. You can enable this behavior on userbase by setting the `d1.session` property:
 
 ```typescript title="src/index.ts"
-import { serve } from "bknd/adapter/cloudflare";
+import { serve } from "userbase/adapter/cloudflare";
 
 export default serve({
   // ...
@@ -152,7 +152,7 @@ export default serve({
 });
 ```
 
-If bknd is used in a stateful user context (like in a browser), it'll automatically send the session cookie to the server to set the correct bookmark. If you need to manually set the bookmark, you can do so by setting the `x-cf-d1-session` header:
+If userbase is used in a stateful user context (like in a browser), it'll automatically send the session cookie to the server to set the correct bookmark. If you need to manually set the bookmark, you can do so by setting the `x-cf-d1-session` header:
 
 ```bash
 curl -H "x-cf-d1-session: <bookmark>" ...
@@ -161,10 +161,10 @@ curl -H "x-cf-d1-session: <bookmark>" ...
 ## Filesystem access with Vite Plugin
 The [Cloudflare Vite Plugin](https://developers.cloudflare.com/workers/vite-plugin/) allows to use Vite with Miniflare to emulate the Cloudflare Workers runtime. This is great, however, `unenv` disables any Node.js APIs that aren't supported, including the `fs` module. If you want to use plugins such as [`syncTypes`](/extending/plugins#synctypes), this will cause issues.
 
-To fix this, bknd exports a Vite plugin that provides filesystem access during development. You can use it by adding the following to your `vite.config.ts` file:
+To fix this, userbase exports a Vite plugin that provides filesystem access during development. You can use it by adding the following to your `vite.config.ts` file:
 
 ```ts
-import { devFsVitePlugin } from "bknd/adapter/cloudflare";
+import { devFsVitePlugin } from "userbase/adapter/cloudflare";
 
 export default defineConfig({
   plugins: [devFsVitePlugin()], // [!code highlight]
@@ -174,29 +174,29 @@ export default defineConfig({
 Now to use this polyfill, you can use the `devFsWrite` function to write files to the filesystem.
 
 ```ts
-import { devFsWrite } from "bknd/adapter/cloudflare"; // [!code highlight]
-import { syncTypes } from "bknd/plugins";
+import { devFsWrite } from "userbase/adapter/cloudflare"; // [!code highlight]
+import { syncTypes } from "userbase/plugins";
 
 export default {
    options: {
       plugins: [
          syncTypes({ 
             write: async (et) => {
-               await devFsWrite("bknd-types.d.ts", et.toString()); // [!code highlight]
+               await devFsWrite("userbase-types.d.ts", et.toString()); // [!code highlight]
             }
          }),
       ]
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ## Cloudflare Bindings in CLI
 
-The bknd CLI does not automatically have access to the Cloudflare bindings. We need to manually proxy them to the CLI by using the `withPlatformProxy` helper function:
+The userbase CLI does not automatically have access to the Cloudflare bindings. We need to manually proxy them to the CLI by using the `withPlatformProxy` helper function:
 
-```typescript title="bknd.config.ts"
-import { d1 } from "bknd/adapter/cloudflare";
-import { withPlatformProxy } from "bknd/adapter/cloudflare/proxy";
+```typescript title="userbase.config.ts"
+import { d1 } from "userbase/adapter/cloudflare";
+import { withPlatformProxy } from "userbase/adapter/cloudflare/proxy";
 
 export default withPlatformProxy({
   app: (env) => ({
@@ -211,22 +211,22 @@ Now you can use the CLI with your Cloudflare resources.
   Make sure to not import from this file in your app, as this would include `wrangler` as a dependency.
 </Callout>
 
-Instead, it's recommended to split this configuration into separate files, e.g. `bknd.config.ts` and `config.ts`:
+Instead, it's recommended to split this configuration into separate files, e.g. `userbase.config.ts` and `config.ts`:
 
 ```typescript title="config.ts"
-import { d1, type CloudflareBkndConfig } from "bknd/adapter/cloudflare";
+import { d1, type CloudflareUserbaseConfig } from "userbase/adapter/cloudflare";
 
 export default {
   app: (env) => ({
      connection: d1({ binding: env.DB }),
   }),
-} satisfies CloudflareBkndConfig;
+} satisfies CloudflareUserbaseConfig;
 ```
 
-`config.ts` now holds the configuration, and can safely be imported in your app. Since the CLI looks for a `bknd.config.ts` file by default, we change it to wrap the configuration from `config.ts` in the `withPlatformProxy` helper function.
+`config.ts` now holds the configuration, and can safely be imported in your app. Since the CLI looks for a `userbase.config.ts` file by default, we change it to wrap the configuration from `config.ts` in the `withPlatformProxy` helper function.
 
-```typescript title="bknd.config.ts"
-import { withPlatformProxy } from "bknd/adapter/cloudflare/proxy";
+```typescript title="userbase.config.ts"
+import { withPlatformProxy } from "userbase/adapter/cloudflare/proxy";
 import config from "./config";
 
 export default withPlatformProxy(config);
@@ -235,5 +235,5 @@ export default withPlatformProxy(config);
 As an additional safe guard, you have to set a `PROXY` environment variable to `1` to enable the proxy.
 
 ```bash
-PROXY=1 npx bknd types
+PROXY=1 npx userbase types
 ```

@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeAll, afterAll } from "bun:test";
 import { sort } from "./sort.plugin";
-import { em, entity, text, number } from "bknd";
+import { em, entity, text, number } from "userbase";
 import { createApp } from "core/test/utils";
 import { disableConsoleLog, enableConsoleLog } from "core/utils/test";
 

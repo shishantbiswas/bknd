@@ -1,4 +1,4 @@
-import { getApi } from "@/bknd";
+import { getApi } from "@/userbase";
 import { Buttons } from "@/components/Buttons";
 import { List } from "@/components/List";
 import Link from "next/link";
@@ -32,7 +32,7 @@ export default async function SSRPage() {
                   <p className="text-xs opacity-50">
                      Sign in with:{" "}
                      <b>
-                        <code>test@bknd.io</code>
+                        <code>test@userbase.io</code>
                      </b>{" "}
                      /{" "}
                      <b>

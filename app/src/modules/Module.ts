@@ -1,4 +1,4 @@
-import type { App } from "bknd";
+import type { App } from "userbase";
 import type { EventManager } from "core/events";
 import type { Connection } from "data/connection";
 import type { EntityManager } from "data/entities";
@@ -7,7 +7,7 @@ import type { ServerEnv } from "modules/Controller";
 import type { ModuleHelper } from "./ModuleHelper";
 import { SchemaObject } from "core/object/SchemaObject";
 import type { Guard } from "auth/authorize/Guard";
-import type { McpServer, DebugLogger } from "bknd/utils";
+import type { McpServer, DebugLogger } from "userbase/utils";
 
 type PartialRec<T> = { [P in keyof T]?: PartialRec<T[P]> };
 

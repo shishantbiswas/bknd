@@ -1,6 +1,6 @@
 import { cloneDeep, transform } from "lodash-es";
 import type { ModuleConfigs, ModuleSchemas } from "modules";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { fieldSpecs } from "ui/modules/data/components/fields-specs";
 import { Route, Switch } from "wouter";
 import { Setting } from "../components/Setting";
@@ -70,7 +70,7 @@ export const DataSettings = ({
    schema: ModuleSchemas["data"];
    config: ModuleConfigs["data"];
 }) => {
-   const { app, readonly } = useBknd();
+   const { app, readonly } = useUserbase();
    const prefix = app.getAbsolutePath("settings");
    const entities = Object.keys(config.entities ?? {});
 

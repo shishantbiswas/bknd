@@ -2,8 +2,8 @@ import { IconBrandAws, IconBrandCloudflare, IconCloud, IconServer } from "@table
 import { isDebug } from "core/env";
 import { autoFormatString } from "core/utils";
 import { twMerge } from "tailwind-merge";
-import { useBknd } from "ui/client/BkndProvider";
-import { useBkndMedia } from "ui/client/schema/media/use-bknd-media";
+import { useUserbase } from "ui/client/UserbaseProvider";
+import { useUserbaseMedia } from "ui/client/schema/media/use-userbase-media";
 import { Button } from "ui/components/buttons/Button";
 import { Alert } from "ui/components/display/Alert";
 import { Message } from "ui/components/display/Message";
@@ -25,7 +25,7 @@ import { testIds } from "ui/lib/config";
 export function MediaSettings(props) {
    useBrowserTitle(["Media", "Settings"]);
 
-   const { hasSecrets } = useBknd({ withSecrets: true });
+   const { hasSecrets } = useUserbase({ withSecrets: true });
    if (!hasSecrets) {
       return <Message.MissingPermission what="Media Settings" />;
    }
@@ -39,8 +39,8 @@ const formConfig = {
 };
 
 function MediaSettingsInternal() {
-   const { config, schema: _schema, actions } = useBkndMedia();
-   const { readonly } = useBknd();
+   const { config, schema: _schema, actions } = useUserbaseMedia();
+   const { readonly } = useUserbase();
    const schema = JSON.parse(JSON.stringify(_schema));
 
    schema.if = { properties: { enabled: { const: true } } };
@@ -141,7 +141,7 @@ const AdapterIcon = ({ type }: { type: string }) => {
 
 function Adapters() {
    const ctx = AnyOf.useContext();
-   const { readonly } = useBknd();
+   const { readonly } = useUserbase();
 
    return (
       <Formy.Group>

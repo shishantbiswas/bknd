@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { IconButton } from "../buttons/IconButton";
 import ErrorBoundary from "ui/components/display/ErrorBoundary";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import { formatNumber } from "bknd/utils";
+import { formatNumber } from "userbase/utils";
 
 export type JsonViewerProps = {
    json: object | null;

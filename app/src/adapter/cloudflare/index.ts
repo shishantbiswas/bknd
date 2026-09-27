@@ -5,7 +5,7 @@ export {
    createApp,
    serve,
    type CloudflareEnv,
-   type CloudflareBkndConfig,
+   type CloudflareUserbaseConfig,
 } from "./cloudflare-workers.adapter";
 export { d1Sqlite, type D1ConnectionConfig };
 export { doSqlite, type DoConnectionConfig } from "./connection/DoConnection";
@@ -18,7 +18,7 @@ export {
 } from "./bindings";
 export { constants, makeConfig, type CloudflareContext } from "./config";
 export { StorageR2Adapter, registerMedia } from "./storage/StorageR2Adapter";
-export { registries } from "bknd";
+export { registries } from "userbase";
 export { devFsVitePlugin, devFsWrite } from "./vite";
 
 // for compatibility with old code

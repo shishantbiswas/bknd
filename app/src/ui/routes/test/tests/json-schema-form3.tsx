@@ -1,7 +1,7 @@
 import type { JSONSchema } from "json-schema-to-ts";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Button } from "ui/components/buttons/Button";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import {
    AnyOf,
    AnyOfField,
@@ -69,7 +69,7 @@ const formOptions = {
 };
 
 export default function JsonSchemaForm3() {
-   const { schema: _schema, config } = useBknd();
+   const { schema: _schema, config } = useUserbase();
    const schema = JSON.parse(JSON.stringify(_schema));
 
    config.media.storage.body_max_size = 1;
@@ -410,7 +410,7 @@ const ss = {
 } as const satisfies JSONSchema;
 
 function CustomMediaForm() {
-   const { schema: _schema, config } = useBknd();
+   const { schema: _schema, config } = useUserbase();
    const schema = JSON.parse(JSON.stringify(_schema));
 
    config.media.storage.body_max_size = 1;

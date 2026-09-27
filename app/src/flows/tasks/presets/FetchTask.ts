@@ -1,5 +1,5 @@
 import { Task, dynamic } from "../Task";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 
 const FetchMethods = ["GET", "POST", "PUT", "PATCH", "DELETE"];
 

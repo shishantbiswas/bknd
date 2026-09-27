@@ -1,5 +1,5 @@
 import { Task } from "../Task";
-import { $console, s } from "bknd/utils";
+import { $console, s } from "userbase/utils";
 
 export class LogTask extends Task<typeof LogTask.schema> {
    type = "log";

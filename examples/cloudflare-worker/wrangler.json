@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "bknd-cf-worker-example",
+  "name": "userbase-cf-worker-example",
   "main": "src/index.ts",
   "compatibility_date": "2025-08-03",
   "compatibility_flags": ["nodejs_compat"],
@@ -15,14 +15,14 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "bknd-dev-weur",
+      "database_name": "userbase-dev-weur",
       "database_id": "81d8dfcc-4eaf-4453-8f0f-8f6d463fb867"
     }
   ],
   "r2_buckets": [
     {
       "binding": "BUCKET",
-      "bucket_name": "bknd-cf-example"
+      "bucket_name": "userbase-cf-example"
     }
   ]
 }

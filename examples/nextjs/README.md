@@ -1,5 +1,5 @@
-# bknd starter: Next.js
-A minimal Next.js (app router) project with bknd integration.
+# userbase starter: Next.js
+A minimal Next.js (app router) project with userbase integration.
 
 ## Project Structure
 
@@ -17,16 +17,16 @@ Inside of your Next.js project, you'll see the following folders and files:
 │   │   │   └── [[...admin]]
 │   │   │       └── page.tsx
 │   │   ├── api
-│   │   │   └── [[...bknd]]
+│   │   │   └── [[...userbase]]
 │   │   │       └── route.ts
 │   │   └── ...
-│   └── bknd.ts
+│   └── userbase.ts
 └── package.json
 ```
 
-Here is a quick overview about how to adjust the behavior of `bknd`:
-* Initialization of the `bknd` config with helper functions are located at `src/bknd.ts`
-* API routes are exposed at `src/api/[[...bknd]]/route.ts`
+Here is a quick overview about how to adjust the behavior of `userbase`:
+* Initialization of the `userbase` config with helper functions are located at `src/userbase.ts`
+* API routes are exposed at `src/api/[[...userbase]]/route.ts`
 * Admin UI is rendered at `src/admin/[[...admin]]/page.tsx`
 
 ## Commands
@@ -42,4 +42,4 @@ All commands are run from the root of the project, from a terminal:
 
 ## Want to learn more?
 
-Feel free to check [our documentation](https://docs.bknd.io/integration/nextjs) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).
+Feel free to check [our documentation](https://docs.userbase.io/integration/nextjs) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).

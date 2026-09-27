@@ -1,6 +1,6 @@
-import type { FileBody, FileListObject, FileMeta, FileUploadPayload } from "bknd";
-import { StorageAdapter, guessMimeType } from "bknd";
-import { parse, s, isFile, isBlob } from "bknd/utils";
+import type { FileBody, FileListObject, FileMeta, FileUploadPayload } from "userbase";
+import { StorageAdapter, guessMimeType } from "userbase";
+import { parse, s, isFile, isBlob } from "userbase/utils";
 
 export const opfsAdapterConfig = s.object(
    {

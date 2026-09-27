@@ -3,7 +3,7 @@ import { createApp } from "core/test/utils";
 import type { CreateAppConfig } from "App";
 import * as proto from "data/prototype";
 import { mergeObject } from "core/utils/objects";
-import type { App, DB } from "bknd";
+import type { App, DB } from "userbase";
 import type { CreateUserPayload } from "auth/AppAuth";
 import { disableConsoleLog, enableConsoleLog } from "core/utils/test";
 

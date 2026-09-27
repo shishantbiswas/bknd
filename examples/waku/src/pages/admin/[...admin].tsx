@@ -11,7 +11,7 @@ export default async function HomePage() {
    const api = await getUserApi({ verify: true });
 
    // @ts-ignore
-   const styles = await import("bknd/dist/styles.css?inline").then((m) => m.default);
+   const styles = await import("userbase/dist/styles.css?inline").then((m) => m.default);
    return (
       <>
          <style>{styles}</style>

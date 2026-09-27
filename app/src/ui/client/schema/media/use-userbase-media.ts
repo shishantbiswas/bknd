@@ -1,14 +1,14 @@
 import type { TAppMediaConfig } from "media/media-schema";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 
-export function useBkndMedia() {
-   const { config, schema, actions: bkndActions } = useBknd();
+export function useUserbaseMedia() {
+   const { config, schema, actions: userbaseActions } = useUserbase();
 
    const actions = {
       config: {
          patch: async (data: Partial<TAppMediaConfig>) => {
-            if (await bkndActions.set("media", data, true)) {
-               await bkndActions.reload();
+            if (await userbaseActions.set("media", data, true)) {
+               await userbaseActions.reload();
                return true;
             }
 

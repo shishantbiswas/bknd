@@ -24,7 +24,7 @@ async function handleSubmit(event: Event) {
       <div class="flex flex-row items-center justify-evenly min-w-full">
         <img class="size-24" src="/nuxt.svg" alt="Nuxt logo" />
         <div class="ml-3.5 mr-2 font-mono opacity-70">&amp;</div>
-        <img class="dark:invert" src="/bknd.svg" alt="bknd logo" width="183" height="59" />
+        <img class="dark:invert" src="/userbase.svg" alt="userbase logo" width="183" height="59" />
       </div>
 
       <List :items="['Get started with a full backend.', 'Focus on what matters instead of repetition.']" />

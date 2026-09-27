@@ -1,19 +1,19 @@
-# bknd starter: Cloudflare Vite Code-Only
-A fullstack React + Vite application with bknd integration, showcasing **code-only mode** and Cloudflare Workers deployment.
+# userbase starter: Cloudflare Vite Code-Only
+A fullstack React + Vite application with userbase integration, showcasing **code-only mode** and Cloudflare Workers deployment.
 
 ## Key Features
 
-This example demonstrates a minimal, code-first approach to building with bknd:
+This example demonstrates a minimal, code-first approach to building with userbase:
 
 ### 💻 Code-Only Mode
 Define your entire backend **programmatically** using a Drizzle-like API. Your data structure, authentication, and configuration live directly in code with zero build-time tooling required. Perfect for developers who prefer traditional code-first workflows.
 
 ### 🎯 Minimal Boilerplate
-Unlike the hybrid mode template, this example uses **no automatic type generation**, **no filesystem plugins**, and **no auto-synced configuration files**. This simulates a typical development environment where you manage types generation manually. If you prefer automatic type generation, you can easily add it using the [CLI](https://docs.bknd.io/usage/cli#generating-types-types) or [Vite plugin](https://docs.bknd.io/extending/plugins#synctypes).
+Unlike the hybrid mode template, this example uses **no automatic type generation**, **no filesystem plugins**, and **no auto-synced configuration files**. This simulates a typical development environment where you manage types generation manually. If you prefer automatic type generation, you can easily add it using the [CLI](https://docs.userbase.io/usage/cli#generating-types-types) or [Vite plugin](https://docs.userbase.io/extending/plugins#synctypes).
 
 ### ⚡ Split Configuration Pattern
 - **`config.ts`**: Main configuration that defines your schema and can be safely imported in your worker
-- **`bknd.config.ts`**: Wraps the configuration with `withPlatformProxy` for CLI usage with Cloudflare bindings (should NOT be imported in your worker)
+- **`userbase.config.ts`**: Wraps the configuration with `withPlatformProxy` for CLI usage with Cloudflare bindings (should NOT be imported in your worker)
 
 This pattern prevents bundling `wrangler` into your worker while still allowing CLI access to Cloudflare resources.
 
@@ -27,15 +27,15 @@ Inside of your project, you'll see the following folders and files:
 │   ├── app/              # React frontend application
 │   │   ├── App.tsx
 │   │   ├── routes/
-│   │   │   ├── admin.tsx # bknd Admin UI route
+│   │   │   ├── admin.tsx # userbase Admin UI route
 │   │   │   └── home.tsx  # Example frontend route
 │   │   └── main.tsx
 │   └── worker/
 │       └── index.ts      # Cloudflare Worker entry
-├── config.ts             # bknd configuration with schema definition
-├── bknd.config.ts        # CLI configuration with platform proxy
+├── config.ts             # userbase configuration with schema definition
+├── userbase.config.ts        # CLI configuration with platform proxy
 ├── seed.ts               # Optional: seed data for development
-├── vite.config.ts        # Standard Vite config (no bknd plugins)
+├── vite.config.ts        # Standard Vite config (no userbase plugins)
 ├── package.json
 └── wrangler.json         # Cloudflare Workers configuration
 ```
@@ -49,7 +49,7 @@ Inside of your project, you'll see the following folders and files:
 
 ## Admin UI & Frontend
 
-- `/admin` mounts `<Admin />` from `bknd/ui` with `withProvider={{ user }}` so it respects the authenticated user returned by `useAuth`.
+- `/admin` mounts `<Admin />` from `userbase/ui` with `withProvider={{ user }}` so it respects the authenticated user returned by `useAuth`.
 - `/` showcases `useEntityQuery("todos")`, mutation helpers, and authentication state — demonstrating how manually declared types flow into the React code.
 
 
@@ -59,9 +59,9 @@ Inside of your project, you'll see the following folders and files:
 The main configuration file that uses the `code()` mode helper:
 
 ```typescript
-import type { CloudflareBkndConfig } from "bknd/adapter/cloudflare";
-import { code } from "bknd/modes";
-import { boolean, em, entity, text } from "bknd";
+import type { CloudflareUserbaseConfig } from "userbase/adapter/cloudflare";
+import { code } from "userbase/modes";
+import { boolean, em, entity, text } from "userbase";
 
 // define your schema using a Drizzle-like API
 const schema = em({
@@ -74,11 +74,11 @@ const schema = em({
 // register your schema for type completion (optional)
 // alternatively, you can use the CLI to auto-generate types
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
    interface DB extends Database {}
 }
 
-export default code<CloudflareBkndConfig>({
+export default code<CloudflareUserbaseConfig>({
    app: (env) => ({
       config: {
          // convert schema to JSON format
@@ -101,20 +101,20 @@ export default code<CloudflareBkndConfig>({
 ```
 
 Key differences from hybrid mode:
-- **No auto-generated files**: No `bknd-config.json`, `bknd-types.d.ts`, or `.env.example`
-- **Manual type declaration**: Types are declared inline using `declare module "bknd"`
+- **No auto-generated files**: No `userbase-config.json`, `userbase-types.d.ts`, or `.env.example`
+- **Manual type declaration**: Types are declared inline using `declare module "userbase"`
 - **Direct secret access**: Secrets come directly from `env` parameters
 - **Simpler setup**: No filesystem plugins or readers/writers needed
 
 If you prefer automatic type generation, you can add it later using:
-- **CLI**: `npm run bknd -- types` (requires adding `typesFilePath` to config)
+- **CLI**: `npm run userbase -- types` (requires adding `typesFilePath` to config)
 - **Plugin**: Import `syncTypes` plugin and configure it in your app
 
-### `bknd.config.ts`
+### `userbase.config.ts`
 Wraps the configuration for CLI usage with Cloudflare bindings:
 
 ```typescript
-import { withPlatformProxy } from "bknd/adapter/cloudflare/proxy";
+import { withPlatformProxy } from "userbase/adapter/cloudflare/proxy";
 import config from "./config.ts";
 
 export default withPlatformProxy(config, {
@@ -122,10 +122,10 @@ export default withPlatformProxy(config, {
 });
 ```
 
-**Important**: Don't import this file in your worker, as it would bundle `wrangler` into your production code. This file is only used by the bknd CLI.
+**Important**: Don't import this file in your worker, as it would bundle `wrangler` into your production code. This file is only used by the userbase CLI.
 
 ### `vite.config.ts`
-Standard Vite configuration without bknd-specific plugins:
+Standard Vite configuration without userbase-specific plugins:
 
 ```typescript
 import { defineConfig } from "vite";
@@ -149,8 +149,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`    | Builds the application for production                     |
 | `npm run preview`  | Builds and previews the production build locally          |
 | `npm run deploy`   | Builds, syncs the schema and deploys to Cloudflare Workers|
-| `npm run bknd`     | Runs bknd CLI commands                                    |
-| `npm run bknd:seed`| Seeds the database with example data                      |
+| `npm run userbase`     | Runs userbase CLI commands                                    |
+| `npm run userbase:seed`| Seeds the database with example data                      |
 | `npm run cf:types` | Generates Cloudflare Worker types from `wrangler.json`    |
 | `npm run check`    | Type checks and does a dry-run deployment                 |
 
@@ -180,7 +180,7 @@ All commands are run from the root of the project, from a terminal:
 4. **Manually declare types** (optional, but recommended for IDE support):
    ```typescript
    type Database = (typeof schema)["DB"];
-   declare module "bknd" {
+   declare module "userbase" {
       interface DB extends Database {}
    }
    ```
@@ -198,7 +198,7 @@ All commands are run from the root of the project, from a terminal:
    npm run dev
    
    # Production database (safe operations only)
-   CLOUDFLARE_ENV=production npm run bknd -- sync --force
+   CLOUDFLARE_ENV=production npm run userbase -- sync --force
    ```
 
 ## Before You Deploy
@@ -253,7 +253,7 @@ This will:
 3. Sync the database schema (safe operations only)
 4. Deploy to Cloudflare Workers using Wrangler
 
-In production, bknd will:
+In production, userbase will:
 - Use the configuration defined in `config.ts`
 - Skip config validation for better performance
 - Expect secrets to be provided via environment variables
@@ -261,7 +261,7 @@ In production, bknd will:
 ## How Code Mode Works
 
 1. **Define Schema:** Create entities and fields using the Drizzle-like API in `config.ts`
-2. **Convert to JSON:** Use `schema.toJSON()` to convert your schema to bknd's configuration format
+2. **Convert to JSON:** Use `schema.toJSON()` to convert your schema to userbase's configuration format
 3. **Manual Types:** Optionally declare types inline for IDE support and type safety
 4. **Deploy:** Same configuration runs in both development and production
 
@@ -270,7 +270,7 @@ In production, bknd will:
 | Feature | Code Mode | Hybrid Mode |
 |---------|-----------|-------------|
 | Schema Definition | Code-only (`em`, `entity`, `text`) | Visual UI in dev, code in prod |
-| Configuration Files | None (all in code) | Auto-generated `bknd-config.json` |
+| Configuration Files | None (all in code) | Auto-generated `userbase-config.json` |
 | Type Generation | Manual or opt-in | Automatic |
 | Setup Complexity | Minimal | Requires plugins & filesystem access |
 | Use Case | Traditional code-first workflows | Rapid prototyping, visual development |
@@ -289,7 +289,7 @@ Add `typesFilePath` to your config:
 
 ```typescript
 export default code({
-   typesFilePath: "./bknd-types.d.ts",
+   typesFilePath: "./userbase-types.d.ts",
    // ... rest of config
 });
 ```
@@ -297,7 +297,7 @@ export default code({
 For Cloudflare Workers, you'll need the `devFsVitePlugin`:
 ```typescript
 // vite.config.ts
-import { devFsVitePlugin } from "bknd/adapter/cloudflare";
+import { devFsVitePlugin } from "userbase/adapter/cloudflare";
 
 export default defineConfig({
    plugins: [
@@ -311,7 +311,7 @@ Finally, add the generated types to your `tsconfig.json`:
 ```json
 {
    "compilerOptions": {
-      "types": ["./bknd-types.d.ts"]
+      "types": ["./userbase-types.d.ts"]
    }
 }
 ```
@@ -323,26 +323,26 @@ This provides filesystem access for auto-syncing types despite Cloudflare's `une
 You may also use the CLI to generate types:
 
 ```sh
-npx bknd types --outfile ./bknd-types.d.ts
+npx userbase types --outfile ./userbase-types.d.ts
 ```
 
 ## Database Seeding
 
-Unlike UI-only and hybrid modes where bknd can automatically detect an empty database (by attempting to fetch the configuration. A "table not found" error indicates a fresh database), **code mode requires manual seeding**. This is because in code mode, the configuration is always provided from code, so bknd can't determine if the database is empty without additional queries, which would impact performance.
+Unlike UI-only and hybrid modes where userbase can automatically detect an empty database (by attempting to fetch the configuration. A "table not found" error indicates a fresh database), **code mode requires manual seeding**. This is because in code mode, the configuration is always provided from code, so userbase can't determine if the database is empty without additional queries, which would impact performance.
 
-This example includes a [`seed.ts`](./seed.ts) file that you can run manually. For Cloudflare, it uses `bknd.config.ts` (with `withPlatformProxy`) to access Cloudflare resources like D1 during CLI execution:
+This example includes a [`seed.ts`](./seed.ts) file that you can run manually. For Cloudflare, it uses `userbase.config.ts` (with `withPlatformProxy`) to access Cloudflare resources like D1 during CLI execution:
 
 ```sh
-npm run bknd:seed
+npm run userbase:seed
 ```
 
 The seed script manually checks if the database is empty before inserting data. See the [seed.ts](./seed.ts) file for implementation details.
 
 ## Want to Learn More?
 
-- [Cloudflare Integration Documentation](https://docs.bknd.io/integration/cloudflare)
-- [Code Mode Guide](https://docs.bknd.io/usage/introduction#code-only-mode)
-- [Mode Helpers Documentation](https://docs.bknd.io/usage/introduction#mode-helpers)
-- [Data Structure & Schema API](https://docs.bknd.io/usage/database#data-structure)
+- [Cloudflare Integration Documentation](https://docs.userbase.io/integration/cloudflare)
+- [Code Mode Guide](https://docs.userbase.io/usage/introduction#code-only-mode)
+- [Mode Helpers Documentation](https://docs.userbase.io/usage/introduction#mode-helpers)
+- [Data Structure & Schema API](https://docs.userbase.io/usage/database#data-structure)
 - [Discord Community](https://discord.gg/952SFk8Tb8)
 

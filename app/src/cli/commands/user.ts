@@ -10,7 +10,7 @@ import type { PasswordStrategy } from "auth/authenticate/strategies";
 import { makeAppFromEnv } from "cli/commands/run";
 import type { CliCommand } from "cli/types";
 import { Argument } from "commander";
-import { $console, isBun } from "bknd/utils";
+import { $console, isBun } from "userbase/utils";
 import c from "picocolors";
 import { withConfigOptions, type WithConfigOptions } from "cli/utils/options";
 

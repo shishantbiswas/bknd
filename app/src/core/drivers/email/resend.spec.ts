@@ -1,3 +1,4 @@
+
 import { describe, it, expect } from "bun:test";
 import { resendEmail } from "./resend";
 
@@ -12,9 +13,9 @@ describe.skipIf(ALL_TESTS)("resend", () => {
    it("should send an email", async () => {
       const driver = resendEmail({
          apiKey: process.env.RESEND_API_KEY!,
-         from: "BKND <help@bknd.io>",
+         from: "BKND <help@userbase.io>",
       });
-      const response = await driver.send("help@bknd.io", "Test", "Test");
+      const response = await driver.send("help@userbase.io", "Test", "Test");
       expect(response).toBeDefined();
       expect(response.id).toBeDefined();
    });

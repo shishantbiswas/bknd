@@ -1,4 +1,4 @@
-import { dayjs, $console, s } from "bknd/utils";
+import { dayjs, $console, s } from "userbase/utils";
 import type { EntityManager } from "../entities";
 import { Field, type TActionContext, type TRenderContext, baseFieldConfigSchema } from "./Field";
 import type { TFieldTSType } from "data/entities/EntityTypescript";

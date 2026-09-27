@@ -1,5 +1,5 @@
 import { isDebug } from "core/env";
-import { pick } from "bknd/utils";
+import { pick } from "userbase/utils";
 import type { Connection } from "data/connection";
 import type {
    Compilable,

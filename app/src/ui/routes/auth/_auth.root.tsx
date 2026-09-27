@@ -1,6 +1,6 @@
 import { IconFingerprint } from "@tabler/icons-react";
 import { TbSettings } from "react-icons/tb";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Empty } from "ui/components/display/Empty";
 import { Icon } from "ui/components/display/Icon";
@@ -10,7 +10,7 @@ import * as AppShell from "ui/layouts/AppShell/AppShell";
 import { routes } from "ui/lib/routes";
 
 export function AuthRoot({ children }) {
-   const { config, $auth } = useBkndAuth();
+   const { config, $auth } = useUserbaseAuth();
 
    return (
       <>

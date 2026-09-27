@@ -24,7 +24,7 @@ declare module "@mantine/modals" {
    }
 }
 
-export function BkndModalsProvider({ children }) {
+export function UserbaseModalsProvider({ children }) {
    return <ModalsProvider modals={modals}>{children}</ModalsProvider>;
 }
 
@@ -59,7 +59,7 @@ function close<Modal extends keyof typeof modals>(modal: Modal) {
    return closeModal(modal);
 }
 
-export const bkndModals = {
+export const userbaseModals = {
    ids: Object.fromEntries(Object.keys(modals).map((key) => [key, key])) as {
       [K in keyof typeof modals]: K;
    },

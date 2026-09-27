@@ -1,5 +1,5 @@
-import { type App, type AppPlugin, em, entity, datetime, DatabaseEvents } from "bknd";
-import { $console } from "bknd/utils";
+import { type App, type AppPlugin, em, entity, datetime, DatabaseEvents } from "userbase";
+import { $console } from "userbase/utils";
 
 export type TimestampsPluginOptions = {
    entities: string[];
@@ -9,7 +9,7 @@ export type TimestampsPluginOptions = {
 
 /**
  * This plugin adds `created_at` and `updated_at` fields to the specified entities.
- * Add it to your plugins in `bknd.config.ts` like this:
+ * Add it to your plugins in `userbase.config.ts` like this:
  *
  * ```ts
  * export default {
@@ -78,7 +78,7 @@ export function timestamps({
             },
             {
                mode: "sync",
-               id: "bknd-timestamps",
+               id: "userbase-timestamps",
             },
          );
 
@@ -96,7 +96,7 @@ export function timestamps({
             },
             {
                mode: "sync",
-               id: "bknd-timestamps",
+               id: "userbase-timestamps",
             },
          );
       },

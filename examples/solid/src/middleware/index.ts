@@ -1,6 +1,6 @@
 import { createMiddleware } from "@solidjs/start/middleware";
-import config from "../../bknd.config";
-import { serve } from "bknd/adapter/solid-start";
+import config from "../../userbase.config";
+import { serve } from "userbase/adapter/solid-start";
 
 const handler = serve(config);
 

@@ -1,11 +1,11 @@
-import type { App } from "bknd";
+import type { App } from "userbase";
 import { handle } from "hono/aws-lambda";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { type RuntimeBkndConfig, createRuntimeApp } from "bknd/adapter";
+import { type RuntimeUserbaseConfig, createRuntimeApp } from "userbase/adapter";
 
 type AwsLambdaEnv = object;
-export type AwsLambdaBkndConfig<Env extends AwsLambdaEnv = AwsLambdaEnv> =
-   RuntimeBkndConfig<Env> & {
+export type AwsLambdaUserbaseConfig<Env extends AwsLambdaEnv = AwsLambdaEnv> =
+   RuntimeUserbaseConfig<Env> & {
       assets?:
          | {
               mode: "local";
@@ -18,10 +18,10 @@ export type AwsLambdaBkndConfig<Env extends AwsLambdaEnv = AwsLambdaEnv> =
    };
 
 export async function createApp<Env extends AwsLambdaEnv = AwsLambdaEnv>(
-   { adminOptions = false, assets, ...config }: AwsLambdaBkndConfig<Env> = {},
+   { adminOptions = false, assets, ...config }: AwsLambdaUserbaseConfig<Env> = {},
    args: Env = {} as Env,
 ): Promise<App> {
-   let additional: Partial<RuntimeBkndConfig> = {
+   let additional: Partial<RuntimeUserbaseConfig> = {
       adminOptions,
    };
 
@@ -60,7 +60,7 @@ export async function createApp<Env extends AwsLambdaEnv = AwsLambdaEnv>(
 }
 
 export function serve<Env extends AwsLambdaEnv = AwsLambdaEnv>(
-   config: AwsLambdaBkndConfig<Env> = {},
+   config: AwsLambdaUserbaseConfig<Env> = {},
    args: Env = {} as Env,
 ) {
    return async (event) => {

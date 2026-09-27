@@ -1,7 +1,7 @@
-import { registerLocalMediaAdapter } from "bknd/adapter/node";
-import type { BkndConfig } from "bknd/adapter";
-import { boolean, em, entity, text } from "bknd";
-import { secureRandomString } from "bknd/utils";
+import { registerLocalMediaAdapter } from "userbase/adapter/node";
+import type { UserbaseConfig } from "userbase/adapter";
+import { boolean, em, entity, text } from "userbase";
+import { secureRandomString } from "userbase/utils";
 
 // since we're running in node, we can register the local media adapter
 const local = registerLocalMediaAdapter();
@@ -15,7 +15,7 @@ const schema = em({
 
 // register your schema to get automatic type completion
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
    interface DB extends Database {}
 }
 
@@ -31,7 +31,7 @@ export default {
       auth: {
          enabled: true,
          jwt: {
-            issuer: "bknd-waku-example",
+            issuer: "userbase-waku-example",
             secret: secureRandomString(64),
          },
       },
@@ -48,15 +48,15 @@ export default {
       seed: async (ctx) => {
          // create some entries
          await ctx.em.mutator("todos").insertMany([
-            { title: "Learn bknd", done: true },
+            { title: "Learn userbase", done: true },
             { title: "Build something cool", done: false },
          ]);
 
          // and create a user
          await ctx.app.module.auth.createUser({
-            email: "test@bknd.io",
+            email: "test@userbase.io",
             password: "12345678",
          });
       },
    },
-} as const satisfies BkndConfig<{ DB_URL?: string }>;
+} as const satisfies UserbaseConfig<{ DB_URL?: string }>;

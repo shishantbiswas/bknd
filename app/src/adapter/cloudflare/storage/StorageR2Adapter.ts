@@ -1,7 +1,7 @@
-import { registries as $registries, isDebug, guessMimeType } from "bknd";
+import { registries as $registries, isDebug, guessMimeType } from "userbase";
 import { getBindings } from "../bindings";
-import { s } from "bknd/utils";
-import { StorageAdapter, type FileBody } from "bknd";
+import { s } from "userbase/utils";
+import { StorageAdapter, type FileBody } from "userbase";
 
 export function makeSchema(bindings: string[] = []) {
    return s.object(

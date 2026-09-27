@@ -8,7 +8,7 @@ import {
    type TInput,
 } from "modules/ModuleApi";
 import type { ApiFetcher } from "Api";
-import type { DB, FileUploadedEventData } from "bknd";
+import type { DB, FileUploadedEventData } from "userbase";
 
 export type MediaApiOptions = BaseModuleApiOptions & {
    upload_fetcher: ApiFetcher;

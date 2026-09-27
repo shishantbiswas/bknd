@@ -1,6 +1,6 @@
-import { Admin, type BkndAdminProps } from "bknd/ui";
-import "bknd/dist/styles.css";
+import { Admin, type UserbaseAdminProps } from "userbase/ui";
+import "userbase/dist/styles.css";
 
-export default function AdminPage(props: BkndAdminProps) {
+export default function AdminPage(props: UserbaseAdminProps) {
    return <Admin {...props} />;
 }

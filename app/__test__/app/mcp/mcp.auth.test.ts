@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach, beforeAll, afterAll } from "bun:test";
 import { type App, createApp, createMcpToolCaller } from "core/test/utils";
 import { disableConsoleLog, enableConsoleLog } from "core/utils";
-import type { McpServer } from "bknd/utils";
+import type { McpServer } from "userbase/utils";
 
 beforeAll(disableConsoleLog);
 afterAll(enableConsoleLog);

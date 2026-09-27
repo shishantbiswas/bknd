@@ -1,5 +1,5 @@
 import type { JSONSchema } from "json-schema-to-ts";
-import { omitKeys, type s } from "bknd/utils";
+import { omitKeys, type s } from "userbase/utils";
 
 export function extractSchema<
    Schema extends s.ObjectSchema,

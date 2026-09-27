@@ -1,5 +1,5 @@
 import { get, has, omit, set } from "lodash-es";
-import { type s, parse, stripMark, getFullPathKeys, mergeObjectWith, deepFreeze } from "bknd/utils";
+import { type s, parse, stripMark, getFullPathKeys, mergeObjectWith, deepFreeze } from "userbase/utils";
 
 export type SchemaObjectOptions<Schema extends s.Schema> = {
    onUpdate?: (config: s.Static<Schema>) => void | Promise<void>;

@@ -15,7 +15,7 @@ describe.skipIf(ALL_TESTS)("plunk", () => {
          from: undefined, // Default to what Plunk sets
       });
       const response = await driver.send(
-         "help@bknd.io",
+         "help@userbase.io",
          "Test Email from Plunk",
          "This is a test email",
       );
@@ -31,7 +31,7 @@ describe.skipIf(ALL_TESTS)("plunk", () => {
          from: undefined,
       });
       const htmlBody = "<h1>Test Email</h1><p>This is a test email</p>";
-      const response = await driver.send("help@bknd.io", "HTML Test", htmlBody);
+      const response = await driver.send("help@userbase.io", "HTML Test", htmlBody);
       expect(response).toBeDefined();
       expect(response.success).toBe(true);
    });
@@ -42,7 +42,7 @@ describe.skipIf(ALL_TESTS)("plunk", () => {
          from: undefined,
       });
       const response = await driver.send("test@example.com", "Test Email", {
-         text: "help@bknd.io",
+         text: "help@userbase.io",
          html: "<p>This is HTML</p>",
       });
       expect(response).toBeDefined();

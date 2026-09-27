@@ -1,5 +1,5 @@
 {
-  "name": "bknd-docs",
+  "name": "userbase-docs",
   "private": true,
   "scripts": {
     "dev": "next dev",

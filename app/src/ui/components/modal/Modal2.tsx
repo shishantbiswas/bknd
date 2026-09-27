@@ -41,7 +41,7 @@ export const Modal2 = forwardRef<Modal2Ref, Modal2Props>(
             onClose={close}
             classNames={{
                ...classNames,
-               root: "bknd-admin",
+               root: "userbase-admin",
                content: "rounded-lg select-none",
             }}
          >

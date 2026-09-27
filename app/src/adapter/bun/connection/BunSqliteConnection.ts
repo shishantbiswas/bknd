@@ -3,8 +3,8 @@ import {
    genericSqlite,
    type GenericSqliteConnection,
    type GenericSqliteConnectionConfig,
-} from "bknd";
-import { omitKeys } from "bknd/utils";
+} from "userbase";
+import { omitKeys } from "userbase/utils";
 
 export type BunSqliteConnection = GenericSqliteConnection<Database>;
 export type BunSqliteConnectionConfig = Omit<

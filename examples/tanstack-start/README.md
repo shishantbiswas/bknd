@@ -1,6 +1,6 @@
-# bknd + Tanstack Start Example
+# userbase + Tanstack Start Example
 
-This is a minimal example to shows how to integrate bknd with Tanstack Start.
+This is a minimal example to shows how to integrate userbase with Tanstack Start.
 
 ## Setup
 
@@ -11,8 +11,8 @@ bun run dev
 
 ## How it works
 
-1. **`bknd.config.ts`** - bknd configuration with database connection, schema, and seed data
-2. **`src/routes/api.$.ts`** - Handles `/api/*` requests for bknd
+1. **`userbase.config.ts`** - userbase configuration with database connection, schema, and seed data
+2. **`src/routes/api.$.ts`** - Handles `/api/*` requests for userbase
 3. **`src/routes/index.tsx`** - Using `getApp()` to fetch data in loader
 3. **`src/routes/ssr.tsx`** - Server Side example with `getApp()` to fetch data on server
 
@@ -24,5 +24,5 @@ bun run dev
 
 ## Test Credentials
 
-- Email: `test@bknd.io`
+- Email: `test@userbase.io`
 - Password: `12345678`

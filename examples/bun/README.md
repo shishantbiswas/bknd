@@ -1,5 +1,5 @@
-# bknd starter: Bun
-A minimal Bun project with bknd integration.
+# userbase starter: Bun
+A minimal Bun project with userbase integration.
 
 ## Project Structure
 
@@ -12,7 +12,7 @@ Inside of your Bun project, you'll see the following folders and files:
 └── package.json
 ```
 
-To update `bknd` config, check `index.ts`.
+To update `userbase` config, check `index.ts`.
 
 ## Commands
 
@@ -25,4 +25,4 @@ All commands are run from the root of the project, from a terminal:
 
 ## Want to learn more?
 
-Feel free to check [our documentation](https://docs.bknd.io/integration/bun) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).
+Feel free to check [our documentation](https://docs.userbase.io/integration/bun) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).

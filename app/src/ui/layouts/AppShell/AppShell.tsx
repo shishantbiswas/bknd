@@ -1,6 +1,6 @@
 import { useClickOutside, useHotkeys } from "@mantine/hooks";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
-import { transformObject, clampNumber } from "bknd/utils";
+import { transformObject, clampNumber } from "userbase/utils";
 import { throttle } from "lodash-es";
 import { ScrollArea } from "radix-ui";
 import {

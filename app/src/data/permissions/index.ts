@@ -1,5 +1,5 @@
 import { Permission } from "auth/authorize/Permission";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 
 export const entityRead = new Permission(
    "data.entity.read",

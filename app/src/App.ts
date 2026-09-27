@@ -1,5 +1,5 @@
 import type { CreateUserPayload } from "auth/AppAuth";
-import { $console, McpClient } from "bknd/utils";
+import { $console, McpClient } from "userbase/utils";
 import { Event } from "core/events";
 import type { em as prototypeEm } from "data/prototype";
 import { Connection } from "data/connection/Connection";
@@ -346,7 +346,7 @@ export class App<
 
          try {
             // gracefully add the app id
-            c.res.headers.set("X-bknd-id", this._id);
+            c.res.headers.set("X-userbase-id", this._id);
          } catch (e) {}
 
          await this.emgr.emit(

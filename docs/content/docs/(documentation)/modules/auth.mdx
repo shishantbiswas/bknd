@@ -6,11 +6,11 @@ tags: ["documentation"]
 
 <Callout type="info" title="The documentation is currently a work in progress">
   Check back soon — or stay updated on our progress on
-  [GitHub](https://github.com/bknd-io/bknd) and join the conversation in
+  [GitHub](https://github.com/userbase-io/userbase) and join the conversation in
   [Discord](https://discord.gg/952SFk8Tb8).
 </Callout>
 
-Authentication is essential for securing applications, and **bknd** provides a straightforward approach to implementing robust strategies.
+Authentication is essential for securing applications, and **userbase** provides a straightforward approach to implementing robust strategies.
 
 ### **Core Features**
 
@@ -26,7 +26,7 @@ Authentication is essential for securing applications, and **bknd** provides a s
 - **OAuth/OIDC**: Works with providers like Google and GitHub.
 - Compatible with any specification-compliant provider.
 
-With a focus on flexibility and ease of integration, bknd's authentication system offers the essentials for managing secure user access in your applications.
+With a focus on flexibility and ease of integration, userbase's authentication system offers the essentials for managing secure user access in your applications.
 
 ---
 
@@ -88,8 +88,8 @@ Complete these steps **in order** before turning on the Guard:
 If you enabled the Guard without setting up an admin user, you'll need to access your database directly:
 
 1. Connect to your database using a database client or CLI tool
-2. Find the `__bknd` table
+2. Find the `__userbase` table
 3. Locate the row where `type = 'config'`
 4. In the `json` column, set `auth.guard.enabled` to `false`
-5. Restart your bknd instance
+5. Restart your userbase instance
 6. Complete the checklist above, then re-enable the Guard

@@ -1,18 +1,18 @@
-import { createRuntimeApp, type RuntimeBkndConfig } from "bknd/adapter";
+import { createRuntimeApp, type RuntimeUserbaseConfig } from "userbase/adapter";
 
 type TSvelteKit = {
    request: Request;
 };
 
-export type SvelteKitBkndConfig<Env> = Pick<RuntimeBkndConfig<Env>, "adminOptions">;
+export type SvelteKitUserbaseConfig<Env> = Pick<RuntimeUserbaseConfig<Env>, "adminOptions">;
 
 /**
- * Get bknd app instance
- * @param config - bknd configuration
+ * Get userbase app instance
+ * @param config - userbase configuration
  * @param args - environment variables (use $env/dynamic/private for universal runtime support)
  */
 export async function getApp<Env>(
-   config: SvelteKitBkndConfig<Env> = {} as SvelteKitBkndConfig<Env>,
+   config: SvelteKitUserbaseConfig<Env> = {} as SvelteKitUserbaseConfig<Env>,
    args: Env,
 ) {
    return await createRuntimeApp(config, args);
@@ -20,11 +20,11 @@ export async function getApp<Env>(
 
 /**
  * Create request handler for hooks.server.ts
- * @param config - bknd configuration
+ * @param config - userbase configuration
  * @param args - environment variables (use $env/dynamic/private for universal runtime support)
  */
 export function serve<Env>(
-   config: SvelteKitBkndConfig<Env> = {} as SvelteKitBkndConfig<Env>,
+   config: SvelteKitUserbaseConfig<Env> = {} as SvelteKitUserbaseConfig<Env>,
    args: Env,
 ) {
    return async (fnArgs: TSvelteKit) => {

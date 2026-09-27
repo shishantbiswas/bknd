@@ -1,6 +1,6 @@
-# Contributing to bknd
+# Contributing to userbase
 
-Thank you for your interest in contributing to bknd. This guide will help you get started, understand the codebase, and submit contributions that align with the project's direction.
+Thank you for your interest in contributing to userbase. This guide will help you get started, understand the codebase, and submit contributions that align with the project's direction.
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ Thank you for your interest in contributing to bknd. This guide will help you ge
 
 **Open a GitHub Issue before writing code.** This is the preferred way to propose any change. It lets maintainers and the community align on the approach before time is spent on implementation. If you have discussed a contribution in the [Discord server](https://discord.com/invite/952SFk8Tb8) instead, include a link to the relevant Discord thread in your pull request. Pull requests submitted without a corresponding issue or Discord discussion may be closed.
 
-**Unsolicited architectural changes will be closed.** The internal architecture of bknd is intentional. Refactors, restructuring, or changes to core patterns must be discussed and approved before any code is written.
+**Unsolicited architectural changes will be closed.** The internal architecture of userbase is intentional. Refactors, restructuring, or changes to core patterns must be discussed and approved before any code is written.
 
 Contributions that are generally welcome (after opening an issue):
 
@@ -33,12 +33,12 @@ Contributions that are generally welcome (after opening an issue):
 - New examples
 - Test coverage improvements
 
-**A note on versioning**: bknd is pre-1.0 and under active development. Full backward compatibility is not guaranteed before v1.0.0. Contributors should be aware that APIs and internal interfaces may change between releases.
+**A note on versioning**: userbase is pre-1.0 and under active development. Full backward compatibility is not guaranteed before v1.0.0. Contributors should be aware that APIs and internal interfaces may change between releases.
 
 ## Important Resources
 
-- **Documentation**: https://docs.bknd.io
-- **Issue Tracker**: https://github.com/bknd-io/bknd/issues
+- **Documentation**: https://docs.userbase.io
+- **Issue Tracker**: https://github.com/userbase-io/userbase/issues
 - **Discord**: https://discord.com/invite/952SFk8Tb8
 - **FAQ / Search**: https://www.answeroverflow.com/c/1308395750564302952
 
@@ -86,8 +86,8 @@ Contributions that are generally welcome (after opening an issue):
 This is a Bun monorepo using workspaces. The vast majority of the code lives in `app/`.
 
 ```
-bknd/
-  app/                    # Main "bknd" npm package (this is where most work happens)
+userbase/
+  app/                    # Main "userbase" npm package (this is where most work happens)
     src/
       adapter/            # Runtime/framework adapters (node, bun, cloudflare, nextjs, astro, etc.)
       auth/               # Authentication module (strategies, sessions, user pool)
@@ -100,9 +100,9 @@ bknd/
       modules/            # Module system, MCP server, permissions framework
       plugins/            # Built-in plugins (auth, data, cloudflare, dev)
       ui/                 # All frontend code
-        client/           # TypeScript SDK and React hooks (exported as bknd/client)
-        elements/         # React components for auth/media (exported as bknd/elements)
-        (everything else) # Admin UI (exported as bknd/ui)
+        client/           # TypeScript SDK and React hooks (exported as userbase/client)
+        elements/         # React components for auth/media (exported as userbase/elements)
+        (everything else) # Admin UI (exported as userbase/ui)
       App.ts              # Central application orchestrator
       index.ts            # Main package exports
     __test__/             # Unit tests (mirrors src/ structure)
@@ -110,11 +110,11 @@ bknd/
     build.ts              # Build script (tsup/esbuild)
     build.cli.ts          # CLI build script
   packages/               # Small satellite packages
-    cli/                  # Standalone CLI package (bknd-cli)
+    cli/                  # Standalone CLI package (userbase-cli)
     plasmic/              # Plasmic integration
     postgres/             # Postgres helper
     sqlocal/              # SQLocal helper
-  docs/                   # Documentation site (Next.js + Fumadocs, deployed to docs.bknd.io)
+  docs/                   # Documentation site (Next.js + Fumadocs, deployed to docs.userbase.io)
   examples/               # Example projects across runtimes and frameworks
   docker/                 # Docker configuration
 ```
@@ -127,7 +127,7 @@ The project uses TypeScript path aliases defined in `app/tsconfig.json`. Imports
 
 ### Module System
 
-bknd is built around four core modules, each with its own schema, API routes, and permissions:
+userbase is built around four core modules, each with its own schema, API routes, and permissions:
 
 - **Data** -- entity definitions, field types, relations, queries (backed by Kysely)
 - **Auth** -- authentication strategies, sessions, user management
@@ -138,7 +138,7 @@ These modules are managed by the `ModuleManager` (in `app/src/modules/`), which 
 
 ### Adapter Pattern
 
-Adapters in `app/src/adapter/` allow bknd to run on different runtimes and frameworks. Each adapter provides the glue between bknd's Hono-based server and a specific environment (Node, Bun, Cloudflare Workers, Next.js, Astro, etc.).
+Adapters in `app/src/adapter/` allow userbase to run on different runtimes and frameworks. Each adapter provides the glue between userbase's Hono-based server and a specific environment (Node, Bun, Cloudflare Workers, Next.js, Astro, etc.).
 
 ### Plugin System
 
@@ -242,26 +242,26 @@ Open a GitHub Issue with:
 - A clear title describing the problem.
 - Steps to reproduce the bug.
 - Expected behavior vs. actual behavior.
-- Your environment (runtime, database, adapter, bknd version).
+- Your environment (runtime, database, adapter, userbase version).
 - Any relevant error messages or logs.
 
 ## Getting Help
 
 - **Discord**: https://discord.com/invite/952SFk8Tb8
 - **FAQ / Search**: https://www.answeroverflow.com/c/1308395750564302952
-- **GitHub Issues**: https://github.com/bknd-io/bknd/issues
+- **GitHub Issues**: https://github.com/userbase-io/userbase/issues
 
 ## Contributors
 
-Thank you to everyone who has contributed to bknd.
+Thank you to everyone who has contributed to userbase.
 
-<a href="https://github.com/bknd-io/bknd/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=bknd-io/bknd" />
+<a href="https://github.com/userbase-io/userbase/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=userbase-io/userbase" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
 
 ## Maintainers
 
-- **Dennis** ([@dswbx](https://github.com/dswbx)) -- Creator and maintainer of bknd
-- **Cameron Pak** ([@cameronapak](https://github.com/cameronapak)) -- Maintainer of bknd docs
+- **Dennis** ([@dswbx](https://github.com/dswbx)) -- Creator and maintainer of userbase
+- **Cameron Pak** ([@cameronapak](https://github.com/cameronapak)) -- Maintainer of userbase docs

@@ -1,23 +1,23 @@
-import { useApi, useInvalidate } from "bknd/client";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+import { useApi, useInvalidate } from "userbase/client";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { routes, useNavigate } from "ui/lib/routes";
-import { bkndModals } from "ui/modals";
+import { userbaseModals } from "ui/modals";
 
 export function useCreateUserModal() {
    const api = useApi();
-   const { config } = useBkndAuth();
+   const { config } = useUserbaseAuth();
    const invalidate = useInvalidate();
    const [navigate] = useNavigate();
 
    const open = async () => {
-      const loading = bkndModals.open("overlay", {
+      const loading = userbaseModals.open("overlay", {
          content: "Loading...",
       });
 
       const schema = await api.auth.actionSchema("password", "create");
       loading.closeAll(); // currently can't close by id...
 
-      bkndModals.open(
+      userbaseModals.open(
          "form",
          {
             schema,

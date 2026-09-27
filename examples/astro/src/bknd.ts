@@ -1,11 +1,11 @@
 import type { AstroGlobal } from "astro";
-import { getApp as getBkndApp } from "bknd/adapter/astro";
-import config from "../bknd.config";
+import { getApp as getUserbaseApp } from "userbase/adapter/astro";
+import config from "../userbase.config";
 
 export { config };
 
 export async function getApp() {
-   return await getBkndApp(config);
+   return await getUserbaseApp(config);
 }
 
 export async function getApi(

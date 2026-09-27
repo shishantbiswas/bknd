@@ -35,7 +35,7 @@ export function Footer() {
       </A>
       <a
         class="flex items-center gap-2 hover:underline hover:underline-offset-4"
-        href={"https://bknd.io"}
+        href={"https://userbase.io"}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -46,7 +46,7 @@ export function Footer() {
           width={16}
           height={16}
         />
-        Go to bknd.io →
+        Go to userbase.io →
       </a>
     </footer>
   );

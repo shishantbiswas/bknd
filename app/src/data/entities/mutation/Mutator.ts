@@ -1,4 +1,4 @@
-import type { DB as DefaultDB, PrimaryFieldType } from "bknd";
+import type { DB as DefaultDB, PrimaryFieldType } from "userbase";
 import { type EmitsEvents, EventManager } from "core/events";
 import type { DeleteQueryBuilder, InsertQueryBuilder, UpdateQueryBuilder } from "kysely";
 import type { TActionContext } from "data/fields";

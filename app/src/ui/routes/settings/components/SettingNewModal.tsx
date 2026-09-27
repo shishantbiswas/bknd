@@ -1,14 +1,14 @@
 import { useDisclosure, useFocusTrap } from "@mantine/hooks";
 import { omit } from "lodash-es";
 import { useRef, useState } from "react";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 import { Button } from "ui/components/buttons/Button";
 import * as Formy from "ui/components/form/Formy";
 import { JsonSchemaForm, type JsonSchemaFormRef } from "ui/components/form/json-schema";
 import { Dropdown } from "ui/components/overlay/Dropdown";
 import { Modal } from "ui/components/overlay/Modal";
 import { useLocation } from "wouter";
-import type { s } from "bknd/utils";
+import type { s } from "userbase/utils";
 
 export type SettingsNewModalProps = {
    schema: s.ObjectSchema;
@@ -30,7 +30,7 @@ export const SettingNewModal = ({
    const [location, navigate] = useLocation();
    const [formSchema, setFormSchema] = useState(schema);
    const [submitting, setSubmitting] = useState(false);
-   const { actions, readonly } = useBknd();
+   const { actions, readonly } = useUserbase();
    const [opened, { open, close }] = useDisclosure(false);
    const isGeneratedKey = generateKey !== undefined;
    const isStaticGeneratedKey = typeof generateKey === "string";

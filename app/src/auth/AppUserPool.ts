@@ -1,6 +1,6 @@
 import { AppAuth } from "auth/AppAuth";
 import type { CreateUser, SafeUser, User, UserPool } from "auth/authenticate/Authenticator";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 import { pick } from "lodash-es";
 import {
    InvalidConditionsException,

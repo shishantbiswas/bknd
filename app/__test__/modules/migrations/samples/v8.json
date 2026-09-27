@@ -546,7 +546,7 @@
       "config": {
         "access_key": "123",
         "secret_access_key": "123",
-        "url": "https://123.r2.cloudflarestorage.com/bknd-123"
+        "url": "https://123.r2.cloudflarestorage.com/userbase-123"
       }
     }
   },

@@ -1,10 +1,10 @@
 import { type Schema as JsonSchema, Validator } from "@cfworker/json-schema";
-import { objectToJsLiteral } from "bknd/utils";
+import { objectToJsLiteral } from "userbase/utils";
 import type { EntityManager } from "data/entities";
 import { TransformPersistFailedException } from "../errors";
 import { Field, type TActionContext, type TRenderContext, baseFieldConfigSchema } from "./Field";
 import type { TFieldTSType } from "data/entities/EntityTypescript";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 
 export const jsonSchemaFieldConfigSchema = s
    .strictObject({

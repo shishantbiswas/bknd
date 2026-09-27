@@ -1,17 +1,17 @@
 import { serveStatic } from "@hono/node-server/serve-static";
 import { type DevServerOptions, default as honoViteDevServer } from "@hono/vite-dev-server";
-import type { App } from "bknd";
-import { type RuntimeBkndConfig, createRuntimeApp } from "bknd/adapter";
-import { registerLocalMediaAdapter } from "bknd/adapter/node";
+import type { App } from "userbase";
+import { type RuntimeUserbaseConfig, createRuntimeApp } from "userbase/adapter";
+import { registerLocalMediaAdapter } from "userbase/adapter/node";
 import { devServerConfig } from "./dev-server-config";
 import type { MiddlewareHandler } from "hono";
 
 export type ViteEnv = NodeJS.ProcessEnv;
-export type ViteBkndConfig<Env = ViteEnv> = RuntimeBkndConfig<Env> & {
+export type ViteUserbaseConfig<Env = ViteEnv> = RuntimeUserbaseConfig<Env> & {
    serveStatic?: false | MiddlewareHandler;
 };
 
-export function addViteScript(html: string, addBkndContext: boolean = true) {
+export function addViteScript(html: string, addUserbaseContext: boolean = true) {
    return html.replace(
       "</head>",
       `<script type="module">
@@ -22,13 +22,13 @@ window.$RefreshSig$ = () => (type) => type
 window.__vite_plugin_react_preamble_installed__ = true
 </script>
 <script type="module" src="/@vite/client"></script>
-${addBkndContext ? "<!-- BKND_CONTEXT -->" : ""}
+${addUserbaseContext ? "<!-- BKND_CONTEXT -->" : ""}
 </head>`,
    );
 }
 
 async function createApp<ViteEnv>(
-   config: ViteBkndConfig<ViteEnv> = {},
+   config: ViteUserbaseConfig<ViteEnv> = {},
    env: ViteEnv = {} as ViteEnv,
 ): Promise<App> {
    registerLocalMediaAdapter();
@@ -49,7 +49,7 @@ async function createApp<ViteEnv>(
    );
 }
 
-export function serve<ViteEnv>(config: ViteBkndConfig<ViteEnv> = {}, args?: ViteEnv) {
+export function serve<ViteEnv>(config: ViteUserbaseConfig<ViteEnv> = {}, args?: ViteEnv) {
    return {
       async fetch(request: Request, env: any, ctx: ExecutionContext) {
          const app = await createApp(config, env);

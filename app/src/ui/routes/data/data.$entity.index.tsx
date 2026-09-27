@@ -1,10 +1,10 @@
-import type { Entity } from "bknd";
+import type { Entity } from "userbase";
 import { repoQuery } from "data/server/query";
 import { Fragment } from "react";
 import { TbDots } from "react-icons/tb";
-import { useApiQuery } from "bknd/client";
-import { useBknd } from "ui/client/bknd";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { useApiQuery } from "userbase/client";
+import { useUserbase } from "ui/client/userbase";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Message } from "ui/components/display/Message";
@@ -15,7 +15,7 @@ import * as AppShell from "ui/layouts/AppShell/AppShell";
 import { routes, useNavigate } from "ui/lib/routes";
 import { useCreateUserModal } from "ui/modules/auth/hooks/use-create-user-modal";
 import { EntityTable2 } from "ui/modules/data/components/EntityTable2";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import { pick } from "core/utils/objects";
 import { useEntityAdminOptions } from "ui/options";
 
@@ -32,7 +32,7 @@ export function DataEntityList({ params }) {
 }
 
 function DataEntityListImpl({ params }) {
-   const { $data } = useBkndData();
+   const { $data } = useUserbaseData();
    const entity = $data.entity(params.entity as string);
    if (!entity) {
       return <Message.NotFound description={`Entity "${params.entity}" doesn't exist.`} />;
@@ -167,7 +167,7 @@ function DataEntityListImpl({ params }) {
 }
 
 function EntityCreateButton({ entity }: { entity: Entity }) {
-   const b = useBknd();
+   const b = useUserbase();
    const createUserModal = useCreateUserModal();
 
    const [navigate] = useNavigate();

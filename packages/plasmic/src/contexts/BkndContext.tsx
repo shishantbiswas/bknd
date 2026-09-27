@@ -5,39 +5,39 @@ import {
    registerGlobalContext,
    usePlasmicCanvasContext
 } from "@plasmicapp/host";
-import type { AppConfig } from "bknd";
+import type { AppConfig } from "userbase";
 // @ts-ignore
-import { ClientProvider, useApi, useAuth, useBaseUrl } from "bknd/client";
+import { ClientProvider, useApi, useAuth, useBaseUrl } from "userbase/client";
 // biome-ignore lint/style/useImportType: <explanation>
 import React from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 // Users will be able to set these props in Studio.
-interface BkndGlobalContextProps {
+interface UserbaseGlobalContextProps {
    // You might use this to override the auth URL to a test or local URL.
    baseUrl?: string;
    appConfig?: AppConfig;
    auth: any; // @todo: add typings
 }
 
-type BkndContextProps = {
+type UserbaseContextProps = {
    baseUrl?: string;
    initialAuth?: any;
 };
 
-const BkndContextContext = createContext<BkndGlobalContextProps>({} as any);
-BkndContextContext.displayName = "BkndContext";
+const UserbaseContextContext = createContext<UserbaseGlobalContextProps>({} as any);
+UserbaseContextContext.displayName = "UserbaseContext";
 
-export const BkndContext = ({
+export const UserbaseContext = ({
    children,
    baseUrl,
    initialAuth
-}: React.PropsWithChildren<BkndContextProps>) => {
+}: React.PropsWithChildren<UserbaseContextProps>) => {
    const auth = useAuth();
    const baseurl = baseUrl ?? useBaseUrl();
    const api = useApi(baseurl);
 
-   const [data, setData] = useState<BkndGlobalContextProps>({
+   const [data, setData] = useState<UserbaseGlobalContextProps>({
       baseUrl: baseurl,
       auth: auth ?? initialAuth,
       appConfig: undefined
@@ -67,37 +67,37 @@ export const BkndContext = ({
       [baseUrl]
    );
 
-   console.log("plasmic.bknd.context", { baseurl });
+   console.log("plasmic.userbase.context", { baseurl });
    return (
-      <GlobalActionsProvider contextName="BkndContext" actions={actions}>
-         <BkndContextContext.Provider value={data}>
-            <DataProvider name="bknd" data={data}>
+      <GlobalActionsProvider contextName="UserbaseContext" actions={actions}>
+         <UserbaseContextContext.Provider value={data}>
+            <DataProvider name="userbase" data={data}>
                <ClientProvider baseUrl={data.baseUrl}>{children}</ClientProvider>
             </DataProvider>
-         </BkndContextContext.Provider>
+         </UserbaseContextContext.Provider>
       </GlobalActionsProvider>
    );
 };
 
-export function usePlasmicBkndContext() {
-   const context = useContext(BkndContextContext);
+export function usePlasmicUserbaseContext() {
+   const context = useContext(UserbaseContextContext);
    return context;
 }
 
-export function registerBkndContext(
+export function registerUserbaseContext(
    loader?: { registerGlobalContext: typeof registerGlobalContext },
-   customMeta?: GlobalContextMeta<BkndContextProps>
+   customMeta?: GlobalContextMeta<UserbaseContextProps>
 ) {
    if (loader) {
-      loader.registerGlobalContext(BkndContext, customMeta ?? BkndContextMeta);
+      loader.registerGlobalContext(UserbaseContext, customMeta ?? UserbaseContextMeta);
    } else {
-      registerGlobalContext(BkndContext, customMeta ?? BkndContextMeta);
+      registerGlobalContext(UserbaseContext, customMeta ?? UserbaseContextMeta);
    }
 }
 
-export const BkndContextMeta: GlobalContextMeta<BkndContextProps> = {
-   name: "BkndContext",
-   importPath: "@bknd/plasmic",
+export const UserbaseContextMeta: GlobalContextMeta<UserbaseContextProps> = {
+   name: "UserbaseContext",
+   importPath: "@userbase/plasmic",
    props: { baseUrl: { type: "string" }, initialAuth: { type: "object" } },
    providesData: true,
    globalActions: {

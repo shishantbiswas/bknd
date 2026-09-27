@@ -1,5 +1,5 @@
-import { useAuth, useEntityQuery } from "bknd/client";
-import bkndLogo from "../assets/bknd.svg";
+import { useAuth, useEntityQuery } from "userbase/client";
+import userbaseLogo from "../assets/userbase.svg";
 import cloudflareLogo from "../assets/cloudflare.svg";
 import viteLogo from "../assets/vite.svg";
 
@@ -15,7 +15,7 @@ export default function Home() {
    return (
       <div className="flex-col gap-10 max-w-96 mx-auto w-full min-h-full flex justify-center items-center">
          <div className="flex flex-row items-center gap-3">
-            <img src={bkndLogo} alt="bknd" className="w-48 dark:invert" />
+            <img src={userbaseLogo} alt="userbase" className="w-48 dark:invert" />
             <div className="font-mono opacity-70">&amp;</div>
             <div className="flex flex-row gap-2 items-center">
                <img src={cloudflareLogo} alt="cloudflare" className="h-10" />

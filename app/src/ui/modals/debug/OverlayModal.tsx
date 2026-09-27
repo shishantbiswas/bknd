@@ -14,7 +14,7 @@ OverlayModal.modalProps = {
    withCloseButton: false,
    classNames: {
       size: "md",
-      root: "bknd-admin",
+      root: "userbase-admin",
       content: "text-center justify-center",
       title: "font-bold !text-md",
       body: "py-3 px-5 gap-4 flex flex-col",

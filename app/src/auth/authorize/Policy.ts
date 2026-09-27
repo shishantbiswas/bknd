@@ -1,4 +1,4 @@
-import { s, parse, recursivelyReplacePlaceholders } from "bknd/utils";
+import { s, parse, recursivelyReplacePlaceholders } from "userbase/utils";
 import * as query from "core/object/query/object-query";
 
 export const policySchema = s

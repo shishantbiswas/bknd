@@ -1,7 +1,7 @@
 import { PostHog } from "posthog-js-lite";
 import { getVersion } from "cli/utils/sys";
-import { env, isDebug } from "bknd";
-import { $console } from "bknd/utils";
+import { env, isDebug } from "userbase";
+import { $console } from "userbase/utils";
 
 type Properties = { [p: string]: any };
 

@@ -1,4 +1,4 @@
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 
 import type {
    CustomValidator,

@@ -1,15 +1,15 @@
 import { Api, type ApiOptions, type AuthState } from "Api";
 import { isDebug } from "core/env";
 import { createContext, type ReactNode, useContext, useMemo, useState } from "react";
-import type { AdminBkndWindowContext } from "modules/server/AdminController";
+import type { AdminUserbaseWindowContext } from "modules/server/AdminController";
 
-export type BkndClientContext = {
+export type UserbaseClientContext = {
    baseUrl: string;
    api: Api;
    authState?: Partial<AuthState>;
 };
 
-const ClientContext = createContext<BkndClientContext>(undefined!);
+const ClientContext = createContext<UserbaseClientContext>(undefined!);
 
 export type ClientProviderProps = {
    children?: ReactNode;
@@ -24,7 +24,7 @@ export const ClientProvider = ({
    api: _api,
    ...props
 }: ClientProviderProps) => {
-   const winCtx = useBkndWindowContext();
+   const winCtx = useUserbaseWindowContext();
    const _ctx = useClientContext();
    let actualBaseUrl = _baseUrl ?? _ctx?.baseUrl ?? "";
    let user: any;
@@ -91,7 +91,7 @@ export const useBaseUrl = () => {
    return context?.baseUrl;
 };
 
-export function useBkndWindowContext(): AdminBkndWindowContext {
+export function useUserbaseWindowContext(): AdminUserbaseWindowContext {
    const defaults = {
       logout_route: "/api/auth/logout",
       admin_basepath: "",

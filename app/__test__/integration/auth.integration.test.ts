@@ -57,11 +57,11 @@ const configs = {
    },
    users: {
       normal: {
-         email: "normal@bknd.io",
+         email: "normal@userbase.io",
          password: "12345678",
       },
       admin: {
-         email: "admin@bknd.io",
+         email: "admin@userbase.io",
          password: "12345678",
          role: "admin",
       },
@@ -271,7 +271,7 @@ describe("integration auth", () => {
       expect(
          await app
             .createUser({
-               email: "test@bknd.io",
+               email: "test@userbase.io",
                password: "12345678",
             })
             .then((r) => r.role),
@@ -280,7 +280,7 @@ describe("integration auth", () => {
       // throws error if role doesn't exist
       expect(
          app.createUser({
-            email: "test@bknd.io",
+            email: "test@userbase.io",
             password: "12345678",
             role: "doesnt exist",
          }),
@@ -290,7 +290,7 @@ describe("integration auth", () => {
       expect(
          await app
             .createUser({
-               email: "test2@bknd.io",
+               email: "test2@userbase.io",
                password: "12345678",
                role: "admin",
             })
@@ -301,7 +301,7 @@ describe("integration auth", () => {
       expect(
          await $fns
             .register({
-               email: "test3@bknd.io",
+               email: "test3@userbase.io",
                password: "12345678",
                role: "admin",
             })
@@ -312,7 +312,7 @@ describe("integration auth", () => {
       expect(
          await $fns
             .register({
-               email: "test3@bknd.io",
+               email: "test3@userbase.io",
                password: "12345678",
             })
             .then((r) => r.data.user.role),

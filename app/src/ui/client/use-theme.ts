@@ -1,4 +1,4 @@
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { create } from "zustand";
 import { combine, persist } from "zustand/middleware";
 
@@ -17,13 +17,13 @@ const themeStore = create(
          },
       })),
       {
-         name: "bknd-admin-theme",
+         name: "userbase-admin-theme",
       },
    ),
 );
 
 export function useTheme(fallback: AppTheme = "system") {
-   const b = useBknd();
+   const b = useUserbase();
    const theme_state = themeStore((state) => state.theme);
    const theme_set = themeStore((state) => state.setTheme);
 

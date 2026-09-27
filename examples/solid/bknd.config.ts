@@ -1,6 +1,6 @@
-import { em, entity, text, boolean } from "bknd";
-import { secureRandomString } from "bknd/utils";
-import type { SolidStartBkndConfig } from "bknd/adapter/solid-start";
+import { em, entity, text, boolean } from "userbase";
+import { secureRandomString } from "userbase/utils";
+import type { SolidStartUserbaseConfig } from "userbase/adapter/solid-start";
 
 const schema = em({
   todos: entity("todos", {
@@ -11,7 +11,7 @@ const schema = em({
 
 // register your schema to get automatic type completion
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
   interface DB extends Database { }
 }
 
@@ -22,13 +22,13 @@ export default {
     seed: async (ctx) => {
       // create some entries
       await ctx.em.mutator("todos").insertMany([
-        { title: "Learn bknd", done: true },
+        { title: "Learn userbase", done: true },
         { title: "Build something cool", done: false },
       ]);
 
       // and create a user
       await ctx.app.module.auth.createUser({
-        email: "test@bknd.io",
+        email: "test@userbase.io",
         password: "12345678",
       });
     },
@@ -47,5 +47,5 @@ export default {
     assetsPath: "/admin/",
     logoReturnPath: "../..",
   },
-} satisfies SolidStartBkndConfig;
+} satisfies SolidStartUserbaseConfig;
 

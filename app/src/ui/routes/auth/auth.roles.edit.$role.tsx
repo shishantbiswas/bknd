@@ -1,6 +1,6 @@
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Message } from "ui/components/display/Message";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { useBrowserTitle } from "ui/hooks/use-browser-title";
 import { useState } from "react";
 import { useNavigate } from "ui/lib/routes";
@@ -13,8 +13,8 @@ import { Breadcrumbs2 } from "ui/layouts/AppShell/Breadcrumbs2";
 import { routes } from "ui/lib/routes";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
 import * as Formy from "ui/components/form/Formy";
-import { ucFirst, s, transformObject, isObject, autoFormatString } from "bknd/utils";
-import type { ModuleSchemas } from "bknd";
+import { ucFirst, s, transformObject, isObject, autoFormatString } from "userbase/utils";
+import type { ModuleSchemas } from "userbase";
 import {
    CustomField,
    Field,
@@ -35,7 +35,7 @@ import { SegmentedControl, Tooltip } from "@mantine/core";
 import { Popover } from "ui/components/overlay/Popover";
 import { cn } from "ui/lib/utils";
 import { JsonViewer } from "ui/components/code/JsonViewer";
-import { mountOnce, useApiQuery } from "bknd/client";
+import { mountOnce, useApiQuery } from "userbase/client";
 import { CodePreview } from "ui/components/code/CodePreview";
 import type { JsonError } from "json-schema-library";
 import { Alert } from "ui/components/display/Alert";
@@ -43,7 +43,7 @@ import { Alert } from "ui/components/display/Alert";
 export function AuthRolesEdit(props) {
    useBrowserTitle(["Auth", "Roles", props.params.role]);
 
-   const { hasSecrets } = useBknd({ withSecrets: true });
+   const { hasSecrets } = useUserbase({ withSecrets: true });
    if (!hasSecrets) {
       return <Message.MissingPermission what="Roles & Permissions" />;
    }
@@ -73,11 +73,11 @@ const formConfig = {
 
 function AuthRolesEditInternal({ params }: { params: { role: string } }) {
    const [navigate] = useNavigate();
-   const { config, schema: authSchema, actions } = useBkndAuth();
+   const { config, schema: authSchema, actions } = useUserbaseAuth();
    const [error, setError] = useState<JsonError[]>();
    const roleName = params.role;
    const role = config.roles?.[roleName];
-   const { readonly, permissions } = useBknd();
+   const { readonly, permissions } = useUserbase();
    const schema = getSchema(authSchema);
    const data = {
       ...role,
@@ -198,7 +198,7 @@ type PermissionsData = Exclude<RoleSchema["permissions"], string[] | undefined>;
 type PermissionData = PermissionsData[number];
 
 const Permissions = () => {
-   const { permissions } = useBknd();
+   const { permissions } = useUserbase();
 
    const grouped = permissions.reduce(
       (acc, permission, index) => {
@@ -382,11 +382,11 @@ const Policy = ({ permission }: { permission: TPermission }) => {
    const { value } = useDerivedFieldContext("", ({ value }) => ({
       effect: (value?.effect ?? "allow") as "allow" | "deny" | "filter",
    }));
-   const $bknd = useBknd();
+   const $userbase = useUserbase();
    const $permissions = useApiQuery((api) => api.system.permissions(), {
       use: [mountOnce],
    });
-   const entities = Object.keys($bknd.config.data.entities ?? {});
+   const entities = Object.keys($userbase.config.data.entities ?? {});
    const ctx = $permissions.data
       ? mergeSchemas(
            $permissions.data.context,

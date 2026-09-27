@@ -21,8 +21,8 @@ export default async function Layout({
                <div className="ml-3.5 mr-2 font-mono opacity-70">&amp;</div>
                <Image
                   className="dark:invert"
-                  src="/bknd.svg"
-                  alt="bknd logo"
+                  src="/userbase.svg"
+                  alt="userbase logo"
                   width={183}
                   height={59}
                   priority

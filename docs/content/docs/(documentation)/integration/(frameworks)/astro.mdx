@@ -1,41 +1,41 @@
 ---
 title: "Astro"
-description: "Run bknd inside Astro"
+description: "Run userbase inside Astro"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with Astro and bknd you can either install the package manually, and follow the descriptions below, or use the CLI starter:
+To get started with Astro and userbase you can either install the package manually, and follow the descriptions below, or use the CLI starter:
 
 ### CLI Starter
 
 Create a new Astro CLI starter project by running the following command:
 
 ```sh
-  npx bknd create -i astro
+  npx userbase create -i astro
 ```
 
 ### Manual
 
-Create a new Astro project by following the [official guide](https://docs.astro.build/en/install-and-setup/), and then install bknd as a dependency:
+Create a new Astro project by following the [official guide](https://docs.astro.build/en/install-and-setup/), and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -61,10 +61,10 @@ export default defineConfig({
 
 <Callout type="info">
   If you don't want to use React with Astro, there is also an option to serve
-  the bknd Admin UI statically using Astro's middleware. In case you're
+  the userbase Admin UI statically using Astro's middleware. In case you're
   interested in this, feel free to reach out in
   [Discord](https://discord.gg/952SFk8Tb8) or open an [issue on
-  GitHub](https://github.com/bknd-io/bknd/issues/new).
+  GitHub](https://github.com/userbase-io/userbase/issues/new).
 </Callout>
 
 ## Configuration
@@ -75,38 +75,38 @@ export default defineConfig({
   [upgrade](https://nodejs.org/en/download/) if necessary.
 </Callout>
 
-Now create a `bknd.config.ts` file in the root of your project. If you created the project using the CLI starter, this file is already created for you.
+Now create a `userbase.config.ts` file in the root of your project. If you created the project using the CLI starter, this file is already created for you.
 
-```typescript title="bknd.config.ts"
-import type { AstroBkndConfig } from "bknd/adapter/astro";
+```typescript title="userbase.config.ts"
+import type { AstroUserbaseConfig } from "userbase/adapter/astro";
 
 export default {
   connection: {
     url: "file:data.db",
   },
-} satisfies AstroBkndConfig;
+} satisfies AstroUserbaseConfig;
 ```
 
-See [bknd.config.ts](/extending/config) for more information on how to configure bknd. The `AstroBkndConfig` type extends the `BkndConfig` type with the following additional properties:
+See [userbase.config.ts](/extending/config) for more information on how to configure userbase. The `AstroUserbaseConfig` type extends the `UserbaseConfig` type with the following additional properties:
 
 ```typescript
 type AstroEnv = NodeJS.ProcessEnv;
-export type AstroBkndConfig<Env = AstroEnv> = FrameworkBkndConfig<Env>;
+export type AstroUserbaseConfig<Env = AstroEnv> = FrameworkUserbaseConfig<Env>;
 ```
 
 ## Serve the API
 
-Create a helper file to instantiate the bknd instance and retrieve the API, importing the configurationfrom the `bknd.config.ts` file:
+Create a helper file to instantiate the userbase instance and retrieve the API, importing the configurationfrom the `userbase.config.ts` file:
 
-```ts title="src/bknd.ts"
+```ts title="src/userbase.ts"
 import type { AstroGlobal } from "astro";
-import { getApp as getBkndApp } from "bknd/adapter/astro";
-import config from "../bknd.config";
+import { getApp as getUserbaseApp } from "userbase/adapter/astro";
+import config from "../userbase.config";
 
 export { config };
 
 export async function getApp() {
-  return await getBkndApp(config);
+  return await getUserbaseApp(config);
 }
 
 export async function getApi(
@@ -127,7 +127,7 @@ export async function getApi(
 Create a new catch-all route at `src/pages/api/[...api].ts`.
 
 ```ts title="src/pages/api/[...api].ts"
-import { serve } from "bknd/adapter/astro";
+import { serve } from "userbase/adapter/astro";
 
 export const prerender = false;
 
@@ -150,10 +150,10 @@ Create a new catch-all route at `src/pages/admin/[...admin].astro`:
 
 ```jsx title="src/pages/admin/[...admin].astro"
 ---
-import { Admin } from "bknd/ui";
-import "bknd/dist/styles.css";
+import { Admin } from "userbase/ui";
+import "userbase/dist/styles.css";
 
-import { getApi } from "../../../bknd.ts"; // /src/bknd.ts
+import { getApi } from "../../../userbase.ts"; // /src/userbase.ts
 
 const api = await getApi(Astro, { mode: "dynamic" });
 const user = api.getUser();
@@ -185,7 +185,7 @@ Here is an example of using the API in static context:
 
 ```jsx
 ---
-import { getApi } from "bknd/adapter/astro";
+import { getApi } from "userbase/adapter/astro";
 const api = await getApi(Astro);
 const { data } = await api.data.readMany("todos");
 ---
@@ -201,7 +201,7 @@ On SSR pages, you can also access the authenticated user:
 
 ```jsx
 ---
-import { getApi } from "bknd/adapter/astro";
+import { getApi } from "userbase/adapter/astro";
 const api = await getApi(Astro, { mode: "dynamic" });
 const user = api.getUser();
 const { data } = await api.data.readMany("todos");
@@ -219,5 +219,5 @@ export const prerender = false;
 </ul>
 ```
 
-Check the [astro repository example](https://github.com/bknd-io/bknd/tree/main/examples/astro)
-for more implementation details or a [fully working example using Astro DB](https://github.com/dswbx/bknd-astro-example).
+Check the [astro repository example](https://github.com/userbase-io/userbase/tree/main/examples/astro)
+for more implementation details or a [fully working example using Astro DB](https://github.com/dswbx/userbase-astro-example).

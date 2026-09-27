@@ -1,4 +1,4 @@
-import { decodeSearch, encodeSearch, mergeObject, type s, parse } from "bknd/utils";
+import { decodeSearch, encodeSearch, mergeObject, type s, parse } from "userbase/utils";
 import { isEqual, transform } from "lodash-es";
 import { useLocation, useSearch as useWouterSearch } from "wouter";
 import { useEffect, useMemo, useState } from "react";

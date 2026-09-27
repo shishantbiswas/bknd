@@ -19,8 +19,8 @@
   "exclude": ["test"],
   "include": [
     "worker-configuration.d.ts",
-    "bknd-types.d.ts",
-    "bknd.config.ts",
+    "userbase-types.d.ts",
+    "userbase.config.ts",
     "src/**/*.ts"
   ]
 }

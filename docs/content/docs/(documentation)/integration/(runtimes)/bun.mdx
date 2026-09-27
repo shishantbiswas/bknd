@@ -1,41 +1,41 @@
 ---
 title: "Bun"
-description: "Run bknd inside Bun"
+description: "Run userbase inside Bun"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with Bun and bknd you can either install the package manually, and follow the descriptions below, or use the CLI starter:
+To get started with Bun and userbase you can either install the package manually, and follow the descriptions below, or use the CLI starter:
 
 ## CLI Starter
 
 Create a new Bun CLI starter project by running the following command:
 
 ```sh
-npx bknd create -i bun
+npx userbase create -i bun
 ```
 
 ### Manual
 
-Create a new Bun project and then install bknd as a dependency:
+Create a new Bun project and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -46,7 +46,7 @@ The `serve` function of the Bun adapter makes sure to also serve the static file
 the admin panel.
 
 ```tsx title="index.ts"
-import { serve } from "bknd/adapter/bun";
+import { serve } from "userbase/adapter/bun";
 
 // if the configuration is omitted, it uses an in-memory database
 serve({

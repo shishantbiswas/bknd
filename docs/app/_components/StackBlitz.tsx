@@ -4,7 +4,7 @@ import * as React from "react";
 
 export const examples = {
    adminRich: {
-      path: "github/bknd-io/bknd-examples",
+      path: "github/userbase-io/userbase-examples",
       startScript: "example-admin-rich",
       initialPath: "/data/schema",
    },
@@ -22,7 +22,7 @@ export const StackBlitz = ({
    [key: string]: unknown;
 }) => {
    const selected = example ? examples[example] : undefined;
-   const finalPath = path || selected?.path || "github/bknd-io/bknd-examples";
+   const finalPath = path || selected?.path || "github/userbase-io/userbase-examples";
 
    const params = new URLSearchParams({
       ctl: "1",

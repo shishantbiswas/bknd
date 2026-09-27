@@ -2,7 +2,7 @@ import {
   createFileRoute,
   useRouter,
 } from "@tanstack/react-router";
-import { getApi } from "@/bknd";
+import { getApi } from "@/userbase";
 import { createServerFn, useServerFn } from "@tanstack/react-start";
 import { Footer } from "@/components/Footer";
 import { List } from "@/components/List";
@@ -83,8 +83,8 @@ function App() {
           <div className="ml-3.5 mr-2 font-mono opacity-70">&amp;</div>
           <img
             className="dark:invert"
-            src="/bknd.svg"
-            alt="bknd logo"
+            src="/userbase.svg"
+            alt="userbase logo"
             width={183}
             height={59}
           />

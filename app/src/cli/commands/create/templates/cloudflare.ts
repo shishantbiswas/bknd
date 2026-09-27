@@ -11,8 +11,8 @@ export const cloudflare = {
    key: "cloudflare",
    title: "Cloudflare Basic",
    integration: "cloudflare",
-   description: "A basic bknd Cloudflare worker",
-   path: "gh:bknd-io/bknd/examples/cloudflare-worker",
+   description: "A basic userbase Cloudflare worker",
+   path: "gh:userbase-io/userbase/examples/cloudflare-worker",
    ref: true,
    setup: async (ctx) => {
       // overwrite assets directory & name
@@ -22,7 +22,7 @@ export const cloudflare = {
             ...json,
             name: ctx.name,
             assets: {
-               directory: "node_modules/bknd/dist/static",
+               directory: "node_modules/userbase/dist/static",
             },
          }),
          { dir: ctx.dir },

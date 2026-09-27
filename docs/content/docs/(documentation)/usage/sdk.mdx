@@ -1,14 +1,14 @@
 ---
 title: "SDK (TypeScript)"
-description: "Use the bknd SDK in TypeScript"
+description: "Use the userbase SDK in TypeScript"
 icon: TypeScript
 tags: ["documentation"]
 ---
 
-To start using the bknd API, start by creating a new API instance:
+To start using the userbase API, start by creating a new API instance:
 
 ```ts
-import { Api } from "bknd/client";
+import { Api } from "userbase/client";
 
 const api = new Api();
 
@@ -16,7 +16,7 @@ const api = new Api();
 await api.verifyAuth();
 ```
 
-The `Api` class is the main entry point for interacting with the bknd API. It provides methods
+The `Api` class is the main entry point for interacting with the userbase API. It provides methods
 for all available modules described below.
 
 ## Setup
@@ -28,7 +28,7 @@ You can initialize an API instance by providing the `Request` object, or manuall
 The recommended way to create an API instance is by passing the current `Request` object. This will automatically point the API to your current instance and extract the token from the headers (either from cookies or `Authorization` header):
 
 ```ts
-import { Api } from "bknd/client";
+import { Api } from "userbase/client";
 
 // replace this with the actual request
 let request: Request;
@@ -36,10 +36,10 @@ let request: Request;
 const api = new Api({ request });
 ```
 
-If the authentication details are contained in the current request, but you're hosting your bknd instance somewhere else, you can specify a `host` option:
+If the authentication details are contained in the current request, but you're hosting your userbase instance somewhere else, you can specify a `host` option:
 
 ```ts
-import { Api } from "bknd/client";
+import { Api } from "userbase/client";
 
 // replace this with the actual request
 let request: Request;
@@ -55,7 +55,7 @@ const api = new Api({
 If you want to have an API instance that is using a different token, e.g. an admin token, you can create it by specifying the `host` and `token` option:
 
 ```ts
-import { Api } from "bknd/client";
+import { Api } from "userbase/client";
 const api = new Api({
   host: "https://<your-endpoint>",
   token: "<your-token>",
@@ -64,11 +64,11 @@ const api = new Api({
 
 ### Using a local API
 
-In case the place where you're using the API is the same as your bknd instance (e.g. when using it embedded in a React framework), you can specify a `fetcher` option to point to your bknd app. This way, requests won't travel over the network and instead processed locally:
+In case the place where you're using the API is the same as your userbase instance (e.g. when using it embedded in a React framework), you can specify a `fetcher` option to point to your userbase app. This way, requests won't travel over the network and instead processed locally:
 
 ```ts
-import type { App } from "bknd";
-import { Api } from "bknd/client";
+import type { App } from "userbase";
+import { Api } from "userbase/client";
 
 // replace this with your actual `App` instance
 let app: App;

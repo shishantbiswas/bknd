@@ -1,41 +1,41 @@
 ---
 title: "Node"
-description: "Run bknd inside Node"
+description: "Run userbase inside Node"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with Node and bknd you can either install the package manually, and follow the descriptions below, or use the CLI starter:
+To get started with Node and userbase you can either install the package manually, and follow the descriptions below, or use the CLI starter:
 
 ### CLI Starter
 
 Create a new Node CLI starter project by running the following command:
 
 ```sh
-npx bknd create -i node
+npx userbase create -i node
 ```
 
 ### Manual
 
-Create a new Node project and then install bknd as a dependency:
+Create a new Node project and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -46,10 +46,10 @@ The `serve` function of the Node adapter makes sure to also serve the static fil
 the admin panel.
 
 ```tsx title="server.ts"
-import { serve } from "bknd/adapter/node";
+import { serve } from "userbase/adapter/node";
 
 // if the configuration is omitted, it uses an in-memory database
-/** @type {import("bknd/adapter/node").NodeAdapterOptions} */
+/** @type {import("userbase/adapter/node").NodeAdapterOptions} */
 const config = {
   connection: {
     url: "file:data.db",

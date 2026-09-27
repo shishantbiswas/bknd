@@ -1,5 +1,6 @@
-import config from "../bknd.config";
-import { getApp } from "bknd/adapter/tanstack-start";
+
+import config from "../userbase.config";
+import { getApp } from "userbase/adapter/tanstack-start";
 
 export async function getApi({
   headers,

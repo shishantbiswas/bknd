@@ -1,4 +1,4 @@
-# bknd-plasmic
+# userbase-plasmic
 
 To install dependencies:
 

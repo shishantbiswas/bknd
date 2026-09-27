@@ -4,7 +4,7 @@ import type { EntityRelation } from "data/relations";
 import { constructEntity, constructRelation } from "data/schema/constructor";
 import { RelationAccessor } from "data/relations/RelationAccessor";
 import { Flow, TaskMap } from "flows";
-import type { BkndAdminProps } from "ui/Admin";
+import type { UserbaseAdminProps } from "ui/Admin";
 
 export type AppType = ReturnType<App["toJSON"]>;
 
@@ -20,7 +20,7 @@ export class AppReduced {
 
    constructor(
       protected appJson: AppType,
-      protected _options: BkndAdminProps["config"] = {},
+      protected _options: UserbaseAdminProps["config"] = {},
    ) {
       this._entities = Object.entries(this.appJson.data.entities ?? {}).map(([name, entity]) => {
          return constructEntity(name, entity);

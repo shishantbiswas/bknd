@@ -1,6 +1,6 @@
 import type { APIContext } from "astro";
-import { serve } from "bknd/adapter/astro";
-import { config } from "../../bknd";
+import { serve } from "userbase/adapter/astro";
+import { config } from "../../userbase";
 
 export const prerender = false;
 export const ALL = serve<APIContext>(config);

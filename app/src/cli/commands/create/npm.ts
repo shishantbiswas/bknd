@@ -92,10 +92,10 @@ export async function replacePackageJsonVersions(
    );
 }
 
-export async function updateBkndPackages(dir?: string, map?: Record<string, string>) {
+export async function updateUserbasePackages(dir?: string, map?: Record<string, string>) {
    try {
       const versions = {
-         bknd: await sysGetVersion(),
+         userbase: await sysGetVersion(),
          ...(map ?? {}),
       };
       await replacePackageJsonVersions(

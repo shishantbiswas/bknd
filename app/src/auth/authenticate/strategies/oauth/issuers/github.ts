@@ -37,7 +37,7 @@ export const github: IssuerConfig<GithubUserInfo> = {
       try {
          const res = await fetch("https://api.github.com/user/emails", {
             headers: {
-               "User-Agent": "bknd", // this is mandatory... *smh*
+               "User-Agent": "userbase", // this is mandatory... *smh*
                Accept: "application/json",
                Authorization: `Bearer ${tokenResponse.access_token}`,
             },

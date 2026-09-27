@@ -6,14 +6,14 @@ tags: ["documentation"]
 import { TypeTable } from "fumadocs-ui/components/type-table";
 
 
-bknd features an integrated Admin UI that can be used to:
+userbase features an integrated Admin UI that can be used to:
 - fully manage your backend visually when run in [`db` mode](/usage/setup/#ui-only-mode)
 - manage your database contents
 - manage your media contents
 
-In case you're using bknd with a [React framework](integration/introduction/#start-with-a-framework) and render the Admin as React component, you can go further and customize the Admin UI to your liking.
+In case you're using userbase with a [React framework](integration/introduction/#start-with-a-framework) and render the Admin as React component, you can go further and customize the Admin UI to your liking.
 
-<AutoTypeTable path="../app/src/ui/Admin.tsx" name="BkndAdminProps" />
+<AutoTypeTable path="../app/src/ui/Admin.tsx" name="UserbaseAdminProps" />
 
 
 ## Advanced Example
@@ -29,7 +29,7 @@ The following example shows how to customize the Admin UI for each entity.
 - adds a custom route
 
 ```tsx
-import { Admin } from "bknd/ui";
+import { Admin } from "userbase/ui";
 import { Route } from "wouter";
 
 export function App() {
@@ -107,25 +107,25 @@ export function App() {
 
 ## `config`
 
-<AutoTypeTable path="../app/src/ui/Admin.tsx" name="BkndAdminConfig" />
+<AutoTypeTable path="../app/src/ui/Admin.tsx" name="UserbaseAdminConfig" />
 
 ### `entities`
 
 With the `entities` option, you can customize the Admin UI for each entity. You can override the header, footer, add additional actions, and override each field rendering.
 
 ```ts
-export type BkndAdminEntityContext = "list" | "create" | "update";
+export type UserbaseAdminEntityContext = "list" | "create" | "update";
 
-export type BkndAdminEntitiesOptions = {
-   [E in keyof DB]?: BkndAdminEntityOptions<E>;
+export type UserbaseAdminEntitiesOptions = {
+   [E in keyof DB]?: UserbaseAdminEntityOptions<E>;
 };
 
-export type BkndAdminEntityOptions<E extends keyof DB | string> = {
+export type UserbaseAdminEntityOptions<E extends keyof DB | string> = {
    /**
     * Header to be rendered depending on the context
     */
    header?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       data?: DB[E],
    ) => ReactNode | void | undefined;
@@ -133,7 +133,7 @@ export type BkndAdminEntityOptions<E extends keyof DB | string> = {
     * Footer to be rendered depending on the context
     */
    footer?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       data?: DB[E],
    ) => ReactNode | void | undefined;
@@ -141,7 +141,7 @@ export type BkndAdminEntityOptions<E extends keyof DB | string> = {
     * Actions to be rendered depending on the context
     */
    actions?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       data?: DB[E],
    ) => {
@@ -158,16 +158,16 @@ export type BkndAdminEntityOptions<E extends keyof DB | string> = {
     * Field UI overrides
     */
    fields?: {
-      [F in keyof DB[E]]?: BkndAdminEntityFieldOptions<E>;
+      [F in keyof DB[E]]?: UserbaseAdminEntityFieldOptions<E>;
    };
 };
 
-export type BkndAdminEntityFieldOptions<E extends keyof DB | string> = {
+export type UserbaseAdminEntityFieldOptions<E extends keyof DB | string> = {
    /**
     * Override the rendering of a certain field
     */
    render?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       field: Field,
       ctx: {
@@ -195,7 +195,7 @@ export type DropdownItem =
         [key: string]: any;
      };
 
-export type BkndAdminAppShellOptions = {
+export type UserbaseAdminAppShellOptions = {
    userMenu?: (DropdownItem | undefined | boolean)[];
 };
 ```

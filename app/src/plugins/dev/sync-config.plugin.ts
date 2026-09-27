@@ -1,4 +1,4 @@
-import { App, type AppConfig, type AppPlugin, type MaybePromise, type ModuleConfigs } from "bknd";
+import { App, type AppConfig, type AppPlugin, type MaybePromise, type ModuleConfigs } from "userbase";
 
 export type SyncConfigOptions = {
    enabled?: boolean;
@@ -23,7 +23,7 @@ export function syncConfig({
    };
 
    return (app: App) => ({
-      name: "bknd-sync-config",
+      name: "userbase-sync-config",
       onBuilt: async () => {
          if (!enabled) return;
          app.emgr.onEvent(

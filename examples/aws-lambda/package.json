@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bknd": "file:../../app"
+    "userbase": "file:../../app"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

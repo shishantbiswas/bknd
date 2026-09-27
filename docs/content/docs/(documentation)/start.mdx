@@ -8,21 +8,21 @@ import { Icon } from "@iconify/react";
 import { examples } from "@/app/_components/StackBlitz";
 import { SquareMousePointer, Code, Blend, Rocket } from 'lucide-react';
 
-## bknd is a lightweight batteries-included backend that embeds into your frontend app
+## userbase is a lightweight batteries-included backend that embeds into your frontend app
 
 <Callout type="warning" title="We are in beta">
   We're making great progress towards v1, but don't recommend production use yet.
-  Follow along for updates on [GitHub Releases](https://github.com/bknd-io/bknd/releases) and in our [Discord community](https://discord.gg/952SFk8Tb8)
+  Follow along for updates on [GitHub Releases](https://github.com/userbase-io/userbase/releases) and in our [Discord community](https://discord.gg/952SFk8Tb8)
 </Callout>
 
-bknd includes full REST APIs, an admin dashboard, auth, media uploads, a [type-safe SDK](/usage/sdk), [React hooks](/usage/react), and plugins to extend it. Host it with your SSR app or as a standalone service. Built on Web Standards, it runs anywhere JavaScript runs.
+userbase includes full REST APIs, an admin dashboard, auth, media uploads, a [type-safe SDK](/usage/sdk), [React hooks](/usage/react), and plugins to extend it. Host it with your SSR app or as a standalone service. Built on Web Standards, it runs anywhere JavaScript runs.
 
-Bring your [favorite frontend](./#start-with-a-frameworkruntime) and [favorite SQL database](./#use-your-favorite-sql-database), and we'll bring the ~~backend~~ bknd.
+Bring your [favorite frontend](./#start-with-a-frameworkruntime) and [favorite SQL database](./#use-your-favorite-sql-database), and we'll bring the ~~backend~~ userbase.
 
 <Cards>
   <Card
     href="/motivation"
-    title="Learn about why we built bknd"
+    title="Learn about why we built userbase"
     icon={<Rocket />}
   >
     Why another backend system?
@@ -31,27 +31,27 @@ Bring your [favorite frontend](./#start-with-a-frameworkruntime) and [favorite S
 
 ## Quickstart
 
-<Callout type="info" title="This demo bknd instance is for playing and learning">
-Don't worry about messing anything up in this stage since you're learning the ropes of bknd. If you want to start over, please delete the generated `data.db` database file and follow this tutorial again.
+<Callout type="info" title="This demo userbase instance is for playing and learning">
+Don't worry about messing anything up in this stage since you're learning the ropes of userbase. If you want to start over, please delete the generated `data.db` database file and follow this tutorial again.
 </Callout>
 
-Spin up a bknd instance via the [bknd CLI](/usage/cli):
+Spin up a userbase instance via the [userbase CLI](/usage/cli):
 
 <Tabs groupId='package-manager' persist items={[ 'npm','bun' ]}>
 
 ```bash tab="npm"
-npx bknd run
+npx userbase run
 ```
 
 ```bash tab="bun"
-bunx bknd run
+bunx userbase run
 ```
 
 </Tabs>
 
-This creates a local `data.db` SQLite database and starts the bknd web server at http://localhost:1337.
+This creates a local `data.db` SQLite database and starts the userbase web server at http://localhost:1337.
 
-By default, the admin dashboard is open and not guarded. This is intentional — bknd uses an opt-in philosophy to allow quick prototyping. Let's enable authentication and guard the dashboard to secure it.
+By default, the admin dashboard is open and not guarded. This is intentional — userbase uses an opt-in philosophy to allow quick prototyping. Let's enable authentication and guard the dashboard to secure it.
 
 1. Visit http://localhost:1337/auth/settings. Toggle "Authentication Enabled" to enable auth. Select "Update" to save.
 2. Visit http://localhost:1337/data/entity/users. Create a user by selecting "New User" and entering an email and password.
@@ -60,11 +60,11 @@ By default, the admin dashboard is open and not guarded. This is intentional —
 5. It's time to guard your admin dashboard. Visit http://localhost:1337/settings/auth. Select "Edit". Scroll to "Guard" and enable it. Then, select "Save". _(This should log you out!)_
 6. Now, log in to your secured admin dashboard at http://localhost:1337/auth/login.
 
-You did it! You've started the bknd server, created an admin user, and protected your app by enabling the guard.
+You did it! You've started the userbase server, created an admin user, and protected your app by enabling the guard.
 
 ## Modes
 
-What you just experienced is **UI-only mode** — bknd's data and configuration is managed entirely via the admin dashboard. But that's not the only way to use bknd:
+What you just experienced is **UI-only mode** — userbase's data and configuration is managed entirely via the admin dashboard. But that's not the only way to use userbase:
 
 <Cards className="grid-cols-3">
   <Card title="UI-only" href="/usage/setup#ui-only-mode" icon={<SquareMousePointer className="text-fd-primary !size-6" />}>
@@ -80,10 +80,10 @@ What you just experienced is **UI-only mode** — bknd's data and configuration 
 
 Learn more about each mode and the underlying configuration in [Setup & Modes](/usage/setup).
 
-## Try bknd in the browser
+## Try userbase in the browser
 
 <Card className="p-0 pb-1">
-  <StackBlitz path="github/bknd-io/bknd-demo" initialPath="/" />
+  <StackBlitz path="github/userbase-io/userbase-demo" initialPath="/" />
   <Accordions className="m-1">
     <Accordion title="What's going on?">
       The example shown is starting a [node server](/integration/node) using an [in-memory database](/usage/database#sqlite-in-memory). To ensure there are a few entities defined, it is using an [initial structure](/usage/database#initial-structure) using the prototype methods. Furthermore it uses the [seed option](/usage/database#seeding-the-database) to seed some data in the structure created.
@@ -191,7 +191,7 @@ Pick your framework or runtime to get started.
   href="/integration/docker"
 />
 
-  <Card title="Yours missing?" href="https://github.com/bknd-io/bknd/issues/new">
+  <Card title="Yours missing?" href="https://github.com/userbase-io/userbase/issues/new">
      Create a new issue to request a guide for your runtime or framework.
   </Card>
 </Cards>
@@ -228,7 +228,7 @@ The following databases are currently supported. Request a new integration if yo
   href="/usage/database#cloudflare-d1"
 />
 
-  <Card title="Yours missing?" href="https://github.com/bknd-io/bknd/issues/new">
+  <Card title="Yours missing?" href="https://github.com/userbase-io/userbase/issues/new">
     Create a new issue to request a new database integration.
   </Card>
 </Cards>

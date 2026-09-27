@@ -1,6 +1,6 @@
 import { AdminComponent } from "./Admin";
-import { getApi } from "@/bknd";
-import "bknd/dist/styles.css";
+import { getApi } from "@/userbase";
+import "userbase/dist/styles.css";
 
 export default async function AdminPage() {
    const api = await getApi({ verify: true });

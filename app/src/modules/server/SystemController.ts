@@ -16,7 +16,7 @@ import {
    isNode,
    type McpServer,
    threw,
-} from "bknd/utils";
+} from "userbase/utils";
 import type { Context, Hono } from "hono";
 import { Controller } from "modules/Controller";
 import { swaggerUI } from "@hono/swagger-ui";
@@ -489,7 +489,7 @@ export class SystemController extends Controller {
                id: this.app._id,
                version: {
                   config: c.get("app")?.version(),
-                  bknd: getVersion(),
+                  userbase: getVersion(),
                },
                mode: this.app.mode,
                readonly: this.app.isReadOnly(),
@@ -515,7 +515,7 @@ export class SystemController extends Controller {
          permission(SystemPermissions.openapi, {}),
          openAPISpecs(this.ctx.server, {
             info: {
-               title: "bknd API",
+               title: "userbase API",
                version: getVersion(),
             },
          }),
@@ -533,7 +533,7 @@ export class SystemController extends Controller {
       const { mcp } = this.app.modules.ctx();
       const { version, ...appConfig } = this.app.toJSON();
 
-      mcp.resource("system_config", "bknd://system/config", async (c) => {
+      mcp.resource("system_config", "userbase://system/config", async (c) => {
          await c.context.ctx().helper.granted(c, SystemPermissions.configRead, {});
 
          return c.json(this.app.toJSON(), {
@@ -542,7 +542,7 @@ export class SystemController extends Controller {
       })
          .resource(
             "system_config_module",
-            "bknd://system/config/{module}",
+            "userbase://system/config/{module}",
             async (c, { module }) => {
                await this.ctx.helper.granted(c, SystemPermissions.configRead, {
                   module,
@@ -557,7 +557,7 @@ export class SystemController extends Controller {
                list: Object.keys(appConfig),
             },
          )
-         .resource("system_schema", "bknd://system/schema", async (c) => {
+         .resource("system_schema", "userbase://system/schema", async (c) => {
             await this.ctx.helper.granted(c, SystemPermissions.schemaRead, {});
 
             return c.json(this.app.getSchema(), {
@@ -566,7 +566,7 @@ export class SystemController extends Controller {
          })
          .resource(
             "system_schema_module",
-            "bknd://system/schema/{module}",
+            "userbase://system/schema/{module}",
             async (c, { module }) => {
                await this.ctx.helper.granted(c, SystemPermissions.schemaRead, {
                   module,

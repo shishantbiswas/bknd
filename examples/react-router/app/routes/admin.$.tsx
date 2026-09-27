@@ -1,9 +1,9 @@
 import { lazy, Suspense, useSyncExternalStore } from "react";
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
-import { getApi } from "~/bknd";
+import { getApi } from "~/userbase";
 
-const Admin = lazy(() => import("bknd/ui").then((mod) => ({ default: mod.Admin })));
-import "bknd/dist/styles.css";
+const Admin = lazy(() => import("userbase/ui").then((mod) => ({ default: mod.Admin })));
+import "userbase/dist/styles.css";
 
 export const loader = async (args: LoaderFunctionArgs) => {
    const api = await getApi(args, { verify: true });

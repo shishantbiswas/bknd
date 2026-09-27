@@ -1,4 +1,4 @@
-import type { DB } from "bknd";
+import type { DB } from "userbase";
 import { Exception } from "core/errors";
 import { addFlashMessage } from "core/server/flash";
 import type { Context } from "hono";
@@ -7,7 +7,7 @@ import { sign, verify } from "hono/jwt";
 import { type CookieOptions, serializeSigned } from "hono/utils/cookie";
 import type { ServerEnv } from "modules/Controller";
 import { InvalidConditionsException } from "auth/errors";
-import { s, parse, secret, runtimeSupports, truncate, $console, pickKeys } from "bknd/utils";
+import { s, parse, secret, runtimeSupports, truncate, $console, pickKeys } from "userbase/utils";
 import type { AuthStrategy } from "./strategies/Strategy";
 
 type Input = any; // workaround

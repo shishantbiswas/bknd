@@ -3,7 +3,7 @@ import type { EntityManager } from "../entities";
 import { InvalidFieldConfigException, TransformPersistFailedException } from "../errors";
 import type { FieldSpec } from "data/connection/Connection";
 import type { TFieldTSType } from "data/entities/EntityTypescript";
-import { s, parse, InvalidSchemaError, snakeToPascalWithSpaces } from "bknd/utils";
+import { s, parse, InvalidSchemaError, snakeToPascalWithSpaces } from "userbase/utils";
 
 // @todo: contexts need to be reworked
 // e.g. "table" is irrelevant, because if read is not given, it fails

@@ -1,9 +1,9 @@
 "use client";
 
-import { type BkndAdminProps, Admin } from "bknd/ui";
+import { type UserbaseAdminProps, Admin } from "userbase/ui";
 import { useEffect, useState } from "react";
 
-export function AdminComponent(props: BkndAdminProps) {
+export function AdminComponent(props: UserbaseAdminProps) {
    const [ready, setReady] = useState(false);
 
    useEffect(() => {

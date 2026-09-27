@@ -1,21 +1,22 @@
+
 /// <reference types="@cloudflare/workers-types" />
 
-import { Connection } from "bknd";
-import { sqlite } from "bknd/adapter/sqlite";
-import { makeConfig as makeAdapterConfig } from "bknd/adapter";
+import { Connection } from "userbase";
+import { sqlite } from "userbase/adapter/sqlite";
+import { makeConfig as makeAdapterConfig } from "userbase/adapter";
 import { registerMedia } from "./storage/StorageR2Adapter";
 import { getBinding } from "./bindings";
 import { d1Sqlite } from "./connection/D1Connection";
-import type { CloudflareBkndConfig, CloudflareEnv } from ".";
-import { App } from "bknd";
+import type { CloudflareUserbaseConfig, CloudflareEnv } from ".";
+import { App } from "userbase";
 import type { Context as HonoContext, ExecutionContext } from "hono";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 import { setCookie } from "hono/cookie";
 
 export const constants = {
    exec_async_event_id: "cf_register_waituntil",
-   cache_endpoint: "/__bknd/cache",
-   do_endpoint: "/__bknd/do",
+   cache_endpoint: "/__userbase/cache",
+   do_endpoint: "/__userbase/do",
    d1_session: {
       cookie: "cf_d1_session",
       header: "x-cf-d1-session",
@@ -40,7 +41,7 @@ function getCookieValue(cookies: string | null, name: string) {
    return null;
 }
 
-export function d1SessionHelper(config: CloudflareBkndConfig<any>) {
+export function d1SessionHelper(config: CloudflareUserbaseConfig<any>) {
    const headerKey = constants.d1_session.header;
    const cookieKey = constants.d1_session.cookie;
    const transport = config.d1?.transport;
@@ -90,7 +91,7 @@ export function d1SessionHelper(config: CloudflareBkndConfig<any>) {
 
 let media_registered: boolean = false;
 export async function makeConfig<Env extends CloudflareEnv = CloudflareEnv>(
-   config: CloudflareBkndConfig<Env>,
+   config: CloudflareUserbaseConfig<Env>,
    args?: Partial<CloudflareContext<Env>>,
 ) {
    if (!media_registered && config.registerMedia !== false) {

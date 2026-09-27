@@ -34,7 +34,7 @@ export function Footer() {
       </Link>
       <Link
         className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-        to={"https://bknd.io" as string}
+        to={"https://userbase.io" as string}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -45,7 +45,7 @@ export function Footer() {
           width={16}
           height={16}
         />
-        Go to bknd.io →
+        Go to userbase.io →
       </Link>
     </footer>
   );

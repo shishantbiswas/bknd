@@ -1,7 +1,7 @@
 import type { PageServerLoad } from "./$types";
-import { getApp } from "bknd/adapter/sveltekit";
+import { getApp } from "userbase/adapter/sveltekit";
 import { env } from "$env/dynamic/private";
-import config from "../../bknd.config";
+import config from "../../userbase.config";
 
 export const load: PageServerLoad = async () => {
   const app = await getApp(config, env);

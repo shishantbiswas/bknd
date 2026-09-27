@@ -3,7 +3,7 @@ import { type Context, Hono } from "hono";
 import { getSignedCookie, setSignedCookie } from "hono/cookie";
 import * as oauth from "oauth4webapi";
 import * as issuers from "./issuers";
-import { s, filterKeys } from "bknd/utils";
+import { s, filterKeys } from "userbase/utils";
 import { Exception } from "core/errors";
 import { isDebug } from "core/env";
 import { AuthStrategy } from "../Strategy";

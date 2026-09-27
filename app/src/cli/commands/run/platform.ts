@@ -1,5 +1,5 @@
 import path from "node:path";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 import type { MiddlewareHandler } from "hono";
 import open from "open";
 import { fileExists, getRelativeDistPath } from "../../utils/sys";
@@ -86,7 +86,7 @@ export async function getConfigPath(filePath?: string) {
    }
 
    const exts = ["", ".js", ".ts", ".mjs", ".cjs", ".json"];
-   const paths = exts.map((e) => `bknd.config${e}`);
+   const paths = exts.map((e) => `userbase.config${e}`);
    for (const p of paths) {
       const _p = path.resolve(process.cwd(), p);
       if (await fileExists(_p)) {

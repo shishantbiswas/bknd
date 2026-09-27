@@ -1,19 +1,19 @@
 /// <reference types="./worker-configuration.d.ts" />
 
-import { devFsWrite, type CloudflareBkndConfig } from "bknd/adapter/cloudflare";
-import { hybrid } from "bknd/modes";
+import { devFsWrite, type CloudflareUserbaseConfig } from "userbase/adapter/cloudflare";
+import { hybrid } from "userbase/modes";
 
-export default hybrid<CloudflareBkndConfig>({
+export default hybrid<CloudflareUserbaseConfig>({
    // normally you would use e.g. `readFile` from `node:fs/promises`, however, cloudflare using vite plugin removes all Node APIs, therefore we need to use the module system to import the config file
    reader: async () => {
-      return (await import("./bknd-config.json").then((module) => module.default)) as any;
+      return (await import("./userbase-config.json").then((module) => module.default)) as any;
    },
    // a writer is required to sync the types and config. We're using a vite plugin that proxies writing files (since Node APIs are not available)
    writer: devFsWrite,
-   // the generated types are loaded using our tsconfig, and is automatically available in all bknd APIs
-   typesFilePath: "./bknd-types.d.ts",
+   // the generated types are loaded using our tsconfig, and is automatically available in all userbase APIs
+   typesFilePath: "./userbase-types.d.ts",
    // on every change, this config file is updated. When it's time to deploy, this will be inlined into your worker
-   configFilePath: "./bknd-config.json",
+   configFilePath: "./userbase-config.json",
    // secrets will always be extracted from the configuration, we're writing an example env file to know which secrets we need to provide prior to deploying
    syncSecrets: {
       enabled: true,
@@ -32,13 +32,13 @@ export default hybrid<CloudflareBkndConfig>({
          seed: async (ctx) => {
             // create some entries
             await ctx.em.mutator("todos").insertMany([
-               { title: "Learn bknd", done: true },
+               { title: "Learn userbase", done: true },
                { title: "Build something cool", done: false },
             ]);
 
             // and create a user
             await ctx.app.module.auth.createUser({
-               email: "test@bknd.io",
+               email: "test@userbase.io",
                password: "12345678",
             });
          },

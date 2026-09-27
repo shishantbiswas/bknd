@@ -1,7 +1,7 @@
-import type { User } from "bknd";
+import type { User } from "userbase";
 import type { Authenticator } from "auth/authenticate/Authenticator";
 import { InvalidCredentialsException } from "auth/errors";
-import { hash, $console, s, parse, jsc, describeRoute } from "bknd/utils";
+import { hash, $console, s, parse, jsc, describeRoute } from "userbase/utils";
 import { Hono } from "hono";
 import { compare as bcryptCompare, genSalt as bcryptGenSalt, hash as bcryptHash } from "bcryptjs";
 import { AuthStrategy } from "./Strategy";

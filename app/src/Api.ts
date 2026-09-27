@@ -1,10 +1,10 @@
-import type { SafeUser } from "bknd";
+import type { SafeUser } from "userbase";
 import { AuthApi, type AuthApiOptions } from "auth/api/AuthApi";
 import { DataApi, type DataApiOptions } from "data/api/DataApi";
 import { decode } from "hono/jwt";
 import { MediaApi, type MediaApiOptions } from "media/api/MediaApi";
 import { SystemApi } from "modules/SystemApi";
-import { omitKeys } from "bknd/utils";
+import { omitKeys } from "userbase/utils";
 import type { BaseModuleApiOptions } from "modules";
 
 export type TApiUser = SafeUser;

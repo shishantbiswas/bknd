@@ -1,6 +1,6 @@
 import { type LinkProps, Link as WouterLink, useRouter } from "wouter";
 import { useEvent } from "../../hooks/use-event";
-import { useBkndOptions } from "ui/client/BkndProvider";
+import { useUserbaseOptions } from "ui/client/UserbaseProvider";
 
 /*
  * Transforms `path` into its relative `base` version
@@ -71,8 +71,8 @@ export function Link({
 
       return false;
    }
-   const bkndOptions = useBkndOptions();
-   const adminBasePath = bkndOptions?.admin_basepath ?? "";
+   const userbaseOptions = useUserbaseOptions();
+   const adminBasePath = userbaseOptions?.admin_basepath ?? "";
    const _href = props.href ?? props.to;
 
    const href = router
@@ -85,7 +85,7 @@ export function Link({
    const active =
       href.replace(router.base, "").length <= 1 ? href === absPath : isActive(absPath, href);
 
-   // console.log({ adminBasePath, _href, href, bkndOptions })
+   // console.log({ adminBasePath, _href, href, userbaseOptions })
    if (native) {
       return <a className={`${active ? "active " : ""}${className}`} {...props} href={href} />;
    }

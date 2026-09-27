@@ -1,5 +1,5 @@
-import { mark, stripMark, $console, s, setPath } from "bknd/utils";
-import { BkndError } from "core/errors";
+import { mark, stripMark, $console, s, setPath } from "userbase/utils";
+import { UserbaseError } from "core/errors";
 import * as $diff from "core/object/diff";
 import type { Connection } from "data/connection";
 import type { EntityManager } from "data/entities/EntityManager";
@@ -44,26 +44,26 @@ const configJsonSchema = s.anyOf([
       }),
    ),
 ]);
-export const __bknd = proto.entity(TABLE_NAME, {
+export const __userbase = proto.entity(TABLE_NAME, {
    version: proto.number().required(),
    type: proto.enumm({ enum: ["config", "diff", "backup", "secrets"] }).required(),
    json: proto.jsonSchema({ schema: configJsonSchema.toJSON() }).required(),
    created_at: proto.datetime(),
    updated_at: proto.datetime(),
 });
-const __schema = proto.em({ __bknd }, ({ index }, { __bknd }) => {
-   index(__bknd).on(["version", "type"]);
+const __schema = proto.em({ __userbase }, ({ index }, { __userbase }) => {
+   index(__userbase).on(["version", "type"]);
 });
 
-type ConfigTable2 = proto.Schema<typeof __bknd>;
+type ConfigTable2 = proto.Schema<typeof __userbase>;
 interface T_INTERNAL_EM {
-   __bknd: ConfigTable2;
+   __userbase: ConfigTable2;
 }
 
 // @todo: cleanup old diffs on upgrade
 // @todo: cleanup multiple backups on upgrade
 export class DbModuleManager extends ModuleManager {
-   // internal em for __bknd config table
+   // internal em for __userbase config table
    __em!: EntityManager<T_INTERNAL_EM>;
 
    private _version: number = 0;
@@ -115,7 +115,7 @@ export class DbModuleManager extends ModuleManager {
    }
 
    private repo() {
-      return this.__em.repo(__bknd, {
+      return this.__em.repo(__userbase, {
          // to prevent exceptions when table doesn't exist
          silent: true,
          // disable counts for performance and compatibility
@@ -124,7 +124,7 @@ export class DbModuleManager extends ModuleManager {
    }
 
    private mutator() {
-      return this.__em.mutator(__bknd);
+      return this.__em.mutator(__userbase);
    }
 
    private get db() {
@@ -183,7 +183,7 @@ export class DbModuleManager extends ModuleManager {
 
       try {
          const state = await this.fetch();
-         if (!state || !state.configs) throw new BkndError("no config found");
+         if (!state || !state.configs) throw new UserbaseError("no config found");
          this.logger.log("fetched version", state.configs.version);
 
          if (state.configs.version !== version) {
@@ -271,7 +271,7 @@ export class DbModuleManager extends ModuleManager {
             }
          }
       } catch (e) {
-         if (e instanceof BkndError && e.message === "no config found") {
+         if (e instanceof UserbaseError && e.message === "no config found") {
             this.logger.log("no config, just save fresh");
             // no config, just save
             await this.mutator().insertOne({

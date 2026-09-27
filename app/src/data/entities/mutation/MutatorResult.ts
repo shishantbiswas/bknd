@@ -1,4 +1,4 @@
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 import type { Entity, EntityData } from "../Entity";
 import type { EntityManager } from "../EntityManager";
 import { Result, type ResultJSON, type ResultOptions } from "../Result";

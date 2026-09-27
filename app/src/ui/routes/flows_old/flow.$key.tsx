@@ -13,7 +13,7 @@ import { twMerge } from "tailwind-merge";
 import FlowCanvas from "ui/modules/flows/components/FlowCanvas";
 import { TaskForm } from "ui/modules/flows/components/form/TaskForm";
 import { useLocation } from "wouter";
-import { useBknd } from "../../client/BkndProvider";
+import { useUserbase } from "../../client/UserbaseProvider";
 import { Button } from "../../components/buttons/Button";
 import { IconButton } from "../../components/buttons/IconButton";
 import { Dropdown } from "../../components/overlay/Dropdown";
@@ -23,7 +23,7 @@ import { SectionHeader } from "../../layouts/AppShell/AppShell";
 import { useTheme } from "ui/client/use-theme";
 
 export function FlowEdit({ params }) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const { theme } = useTheme();
    const prefix = app.getAbsolutePath("settings");
    const [location, navigate] = useLocation();

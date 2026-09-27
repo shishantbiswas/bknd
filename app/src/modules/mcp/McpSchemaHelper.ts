@@ -1,4 +1,4 @@
-import type { App } from "bknd";
+import type { App } from "userbase";
 import {
    type Tool,
    type ToolAnnotation,
@@ -7,12 +7,12 @@ import {
    s,
    isPlainObject,
    autoFormatString,
-} from "bknd/utils";
+} from "userbase/utils";
 import type { ModuleBuildContext } from "modules";
 import { excludePropertyTypes, rescursiveClean } from "./utils";
 import type { DbModuleManager } from "modules/db/DbModuleManager";
 
-export const mcpSchemaSymbol = Symbol.for("bknd-mcp-schema");
+export const mcpSchemaSymbol = Symbol.for("userbase-mcp-schema");
 
 export interface McpToolOptions {
    title?: string;

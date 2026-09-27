@@ -1,10 +1,10 @@
-import type { BkndConfig } from "bknd/adapter";
-import { makeModeConfig, type BkndModeConfig } from "./shared";
-import { getDefaultConfig, type MaybePromise, type Merge } from "bknd";
+import type { UserbaseConfig } from "userbase/adapter";
+import { makeModeConfig, type UserbaseModeConfig } from "./shared";
+import { getDefaultConfig, type MaybePromise, type Merge } from "userbase";
 import type { DbModuleManager } from "modules/db/DbModuleManager";
-import { invariant, $console } from "bknd/utils";
+import { invariant, $console } from "userbase/utils";
 
-export type BkndHybridModeOptions = {
+export type UserbaseHybridModeOptions = {
    /**
     * Reader function to read the configuration from the file system.
     * This is required for hybrid mode to work.
@@ -16,17 +16,17 @@ export type BkndHybridModeOptions = {
    secrets?: Record<string, any>;
 };
 
-export type HybridBkndConfig<Args = any> = BkndModeConfig<Args, BkndHybridModeOptions>;
-export type HybridMode<AdapterConfig extends BkndConfig> = AdapterConfig extends BkndConfig<
+export type HybridUserbaseConfig<Args = any> = UserbaseModeConfig<Args, UserbaseHybridModeOptions>;
+export type HybridMode<AdapterConfig extends UserbaseConfig> = AdapterConfig extends UserbaseConfig<
    infer Args
 >
-   ? BkndModeConfig<Args, Merge<BkndHybridModeOptions & AdapterConfig>>
+   ? UserbaseModeConfig<Args, Merge<UserbaseHybridModeOptions & AdapterConfig>>
    : never;
 
 export function hybrid<
-   Config extends BkndConfig,
-   Args = Config extends BkndConfig<infer A> ? A : unknown,
->(hybridConfig: HybridMode<Config>): BkndConfig<Args> {
+   Config extends UserbaseConfig,
+   Args = Config extends UserbaseConfig<infer A> ? A : unknown,
+>(hybridConfig: HybridMode<Config>): UserbaseConfig<Args> {
    return {
       ...hybridConfig,
       app: async (args) => {
@@ -37,7 +37,7 @@ export function hybrid<
             syncSchemaOptions,
          } = await makeModeConfig(hybridConfig, args);
 
-         const configFilePath = appConfig.configFilePath ?? "bknd-config.json";
+         const configFilePath = appConfig.configFilePath ?? "userbase-config.json";
 
          if (appConfig?.options?.mode && appConfig?.options?.mode !== "db") {
             $console.warn("You should not set a different mode than `db` when using hybrid mode");

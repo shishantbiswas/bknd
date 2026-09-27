@@ -1,4 +1,4 @@
-import type { DB } from "bknd";
+import type { DB } from "userbase";
 import {
    type ComponentPropsWithRef,
    createContext,
@@ -10,7 +10,7 @@ import {
    useMemo,
    useRef,
 } from "react";
-import { isFileAccepted } from "bknd/utils";
+import { isFileAccepted } from "userbase/utils";
 import { type FileWithPath, useDropzone } from "./use-dropzone";
 import { checkMaxReached } from "./helper";
 import { DropzoneInner } from "./DropzoneInner";

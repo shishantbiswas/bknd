@@ -1,7 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 import appCss from "../styles.css?url";
 
@@ -16,7 +16,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack 🤝 Bknd.io",
+        title: "TanStack 🤝 Userbase.io",
       },
     ],
     links: [

@@ -1,5 +1,5 @@
-# bknd starter: Astro
-A minimal Astro project with bknd integration.
+# userbase starter: Astro
+A minimal Astro project with userbase integration.
 
 ## Project Structure
 
@@ -19,7 +19,7 @@ Inside of your Astro project, you'll see the following folders and files:
 └── package.json
 ```
 
-To update `bknd` config, check `src/api/[...api].astro` and `src/admin/[...admin].astro`.
+To update `userbase` config, check `src/api/[...api].astro` and `src/admin/[...admin].astro`.
 
 ## Commands
 
@@ -36,4 +36,4 @@ All commands are run from the root of the project, from a terminal:
 
 ## Want to learn more?
 
-Feel free to check [our documentation](https://docs.bknd.io/integration/astro) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).
+Feel free to check [our documentation](https://docs.userbase.io/integration/astro) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).

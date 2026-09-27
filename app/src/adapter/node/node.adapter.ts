@@ -2,12 +2,12 @@ import path from "node:path";
 import { serve as honoServe } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { registerLocalMediaAdapter } from "adapter/node/storage";
-import { type RuntimeBkndConfig, createRuntimeApp } from "bknd/adapter";
-import { config as $config, type App } from "bknd";
-import { $console } from "bknd/utils";
+import { type RuntimeUserbaseConfig, createRuntimeApp } from "userbase/adapter";
+import { config as $config, type App } from "userbase";
+import { $console } from "userbase/utils";
 
 type NodeEnv = NodeJS.ProcessEnv;
-export type NodeBkndConfig<Env = NodeEnv> = RuntimeBkndConfig<Env> & {
+export type NodeUserbaseConfig<Env = NodeEnv> = RuntimeUserbaseConfig<Env> & {
    port?: number;
    hostname?: string;
    listener?: Parameters<typeof honoServe>[1];
@@ -16,12 +16,12 @@ export type NodeBkndConfig<Env = NodeEnv> = RuntimeBkndConfig<Env> & {
 };
 
 export async function createApp<Env = NodeEnv>(
-   { distPath, relativeDistPath, ...config }: NodeBkndConfig<Env> = {},
+   { distPath, relativeDistPath, ...config }: NodeUserbaseConfig<Env> = {},
    args: Env = process.env as Env,
 ) {
    const root = path.relative(
       process.cwd(),
-      path.resolve(distPath ?? relativeDistPath ?? "./node_modules/bknd/dist", "static"),
+      path.resolve(distPath ?? relativeDistPath ?? "./node_modules/userbase/dist", "static"),
    );
    if (relativeDistPath) {
       $console.warn("relativeDistPath is deprecated, please use distPath instead");
@@ -38,7 +38,7 @@ export async function createApp<Env = NodeEnv>(
 }
 
 export function createHandler<Env = NodeEnv>(
-   config: NodeBkndConfig<Env> = {},
+   config: NodeUserbaseConfig<Env> = {},
    args: Env = process.env as Env,
 ) {
    let app: App | undefined;
@@ -51,7 +51,7 @@ export function createHandler<Env = NodeEnv>(
 }
 
 export function serve<Env = NodeEnv>(
-   { port = $config.server.default_port, hostname, listener, ...config }: NodeBkndConfig<Env> = {},
+   { port = $config.server.default_port, hostname, listener, ...config }: NodeUserbaseConfig<Env> = {},
    args: Env = process.env as Env,
 ) {
    honoServe(

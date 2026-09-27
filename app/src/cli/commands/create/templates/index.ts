@@ -33,7 +33,7 @@ export type Template = {
    description?: string;
    path: string;
    /**
-    * adds a ref "#{ref}" to the path. If "true", adds the current version of bknd
+    * adds a ref "#{ref}" to the path. If "true", adds the current version of userbase
     */
    ref?: true | string;
    /**
@@ -53,48 +53,48 @@ export const templates: Template[] = [
       key: "node",
       title: "Node.js Basic",
       integration: "node",
-      description: "A basic bknd Node.js server",
-      path: "gh:bknd-io/bknd/examples/node",
+      description: "A basic userbase Node.js server",
+      path: "gh:userbase-io/userbase/examples/node",
       ref: true,
    },
    {
       key: "bun",
       title: "Bun Basic",
       integration: "bun",
-      description: "A basic bknd Bun server",
-      path: "gh:bknd-io/bknd/examples/bun",
+      description: "A basic userbase Bun server",
+      path: "gh:userbase-io/userbase/examples/bun",
       ref: true,
    },
    {
       key: "nextjs",
       title: "Next.js Basic",
       integration: "nextjs",
-      description: "A basic bknd Next.js starter",
-      path: "gh:bknd-io/bknd/examples/nextjs",
+      description: "A basic userbase Next.js starter",
+      path: "gh:userbase-io/userbase/examples/nextjs",
       ref: true,
    },
    {
       key: "astro",
       title: "Astro Basic",
       integration: "astro",
-      description: "A basic bknd Astro starter",
-      path: "gh:bknd-io/bknd/examples/astro",
+      description: "A basic userbase Astro starter",
+      path: "gh:userbase-io/userbase/examples/astro",
       ref: true,
    },
    {
       key: "react-router",
       title: "React Router Basic",
       integration: "react-router",
-      description: "A basic bknd React Router starter",
-      path: "gh:bknd-io/bknd/examples/react-router",
+      description: "A basic userbase React Router starter",
+      path: "gh:userbase-io/userbase/examples/react-router",
       ref: true,
    },
    {
       key: "aws",
       title: "AWS Lambda Basic",
       integration: "aws",
-      description: "A basic bknd AWS Lambda starter",
-      path: "gh:bknd-io/bknd/examples/aws-lambda",
+      description: "A basic userbase AWS Lambda starter",
+      path: "gh:userbase-io/userbase/examples/aws-lambda",
       ref: true,
    },
    deno,

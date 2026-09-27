@@ -83,8 +83,8 @@ const external = [
    "node:test",
    "node:assert/strict",
    "@libsql/client",
-   "bknd",
-   /^bknd\/.*/,
+   "userbase",
+   /^userbase\/.*/,
    "jsonv-ts",
    /^jsonv-ts\/.*/,
 ] as const;
@@ -125,7 +125,7 @@ async function buildApi() {
 
 async function rewriteClient(path: string) {
    const bundle = await Bun.file(path).text();
-   await Bun.write(path, '"use client";\n' + bundle.replaceAll("ui/client", "bknd/client"));
+   await Bun.write(path, '"use client";\n' + bundle.replaceAll("ui/client", "userbase/client"));
 }
 
 /**
@@ -188,7 +188,7 @@ async function buildUi() {
 /**
  * Building UI Elements
  * - tailwind-merge is mocked, no exclude
- * - ui/client is external, and after built replaced with "bknd/client"
+ * - ui/client is external, and after built replaced with "userbase/client"
  */
 async function buildUiElements() {
    await tsup.build({
@@ -200,8 +200,8 @@ async function buildUiElements() {
       outDir: "dist/ui/elements",
       external: [
          "ui/client",
-         "bknd",
-         /^bknd\/.*/,
+         "userbase",
+         /^userbase\/.*/,
          "wouter",
          "react",
          "react-dom",
@@ -259,7 +259,7 @@ function baseConfig(adapter: string, overrides: Partial<tsup.Options> = {}): tsu
       external: [
          /^cloudflare*/,
          /^@?hono.*?/,
-         /^(bknd|react|next|node).*?/,
+         /^(userbase|react|next|node).*?/,
          /.*\.(html)$/,
          ...external,
          ...(Array.isArray(overrides.external) ? overrides.external : []),
@@ -305,7 +305,7 @@ async function buildAdapters() {
             entry: ["src/adapter/cloudflare/proxy.ts"],
             outDir: "dist/adapter/cloudflare",
             metafile: false,
-            external: [/bknd/, "wrangler", "node:process"],
+            external: [/userbase/, "wrangler", "node:process"],
          }),
       ),
 

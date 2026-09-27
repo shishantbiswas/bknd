@@ -7,27 +7,27 @@ import {
    type MaybePromise,
    registries as $registries,
    type Merge,
-} from "bknd";
-import { $console } from "bknd/utils";
+} from "userbase";
+import { $console } from "userbase/utils";
 import type { Context, MiddlewareHandler, Next } from "hono";
 import type { AdminControllerOptions } from "modules/server/AdminController";
 import type { Manifest } from "vite";
 
-export type BkndConfig<Args = any, Additional = {}> = Merge<
+export type UserbaseConfig<Args = any, Additional = {}> = Merge<
    CreateAppConfig &
       Omit<Additional, "app"> & {
          app?:
-            | Omit<BkndConfig<Args, Additional>, "app">
-            | ((args: Args) => MaybePromise<Omit<BkndConfig<Args, Additional>, "app">>);
+            | Omit<UserbaseConfig<Args, Additional>, "app">
+            | ((args: Args) => MaybePromise<Omit<UserbaseConfig<Args, Additional>, "app">>);
          onBuilt?: (app: App) => MaybePromise<void>;
          beforeBuild?: (app?: App, registries?: typeof $registries) => MaybePromise<void>;
          buildConfig?: Parameters<App["build"]>[0];
       }
 >;
 
-export type FrameworkBkndConfig<Args = any> = BkndConfig<Args>;
+export type FrameworkUserbaseConfig<Args = any> = UserbaseConfig<Args>;
 
-export type RuntimeBkndConfig<Args = any> = BkndConfig<Args> & {
+export type RuntimeUserbaseConfig<Args = any> = UserbaseConfig<Args> & {
    distPath?: string;
    serveStatic?: MiddlewareHandler | [string, MiddlewareHandler];
    adminOptions?: AdminControllerOptions | false;
@@ -38,9 +38,9 @@ export type DefaultArgs = {
 };
 
 export async function makeConfig<Args = DefaultArgs>(
-   config: BkndConfig<Args>,
+   config: UserbaseConfig<Args>,
    args?: Args,
-): Promise<Omit<BkndConfig<Args>, "app">> {
+): Promise<Omit<UserbaseConfig<Args>, "app">> {
    let additionalConfig: CreateAppConfig = {};
    const { app, ...rest } = config;
    if (app) {
@@ -57,10 +57,10 @@ export async function makeConfig<Args = DefaultArgs>(
    return { ...rest, ...additionalConfig };
 }
 
-export async function createAdapterApp<Config extends BkndConfig = BkndConfig, Args = DefaultArgs>(
+export async function createAdapterApp<Config extends UserbaseConfig = UserbaseConfig, Args = DefaultArgs>(
    config: Config = {} as Config,
    args?: Args,
-): Promise<{ app: App; config: BkndConfig<Args> }> {
+): Promise<{ app: App; config: UserbaseConfig<Args> }> {
    await config.beforeBuild?.(undefined, $registries);
 
    const appConfig = await makeConfig(config, args);
@@ -69,7 +69,7 @@ export async function createAdapterApp<Config extends BkndConfig = BkndConfig, A
       if (Connection.isConnection(config.connection)) {
          connection = config.connection;
       } else {
-         const sqlite = (await import("bknd/adapter/sqlite")).sqlite;
+         const sqlite = (await import("userbase/adapter/sqlite")).sqlite;
          const conf = appConfig.connection ?? { url: "file:data.db" };
          connection = sqlite(conf) as any;
          $console.info(`Using ${connection!.name} connection`, conf.url);
@@ -84,7 +84,7 @@ export async function createAdapterApp<Config extends BkndConfig = BkndConfig, A
 }
 
 export async function createFrameworkApp<Args = DefaultArgs>(
-   config: FrameworkBkndConfig = {},
+   config: FrameworkUserbaseConfig = {},
    args?: Args,
 ): Promise<App> {
    const { app, config: appConfig } = await createAdapterApp(config, args);
@@ -108,7 +108,7 @@ export async function createFrameworkApp<Args = DefaultArgs>(
 }
 
 export async function createRuntimeApp<Args = DefaultArgs>(
-   { serveStatic, adminOptions, ...config }: RuntimeBkndConfig<Args> = {},
+   { serveStatic, adminOptions, ...config }: RuntimeUserbaseConfig<Args> = {},
    args?: Args,
 ): Promise<App> {
    const { app, config: appConfig } = await createAdapterApp(config, args);
@@ -148,7 +148,7 @@ export async function createRuntimeApp<Args = DefaultArgs>(
  *
  * @example
  * ```typescript
- * import { serveStaticViaImport } from "bknd/adapter";
+ * import { serveStaticViaImport } from "userbase/adapter";
  *
  * serve({
  *   serveStatic: serveStaticViaImport(),
@@ -161,7 +161,7 @@ export function serveStaticViaImport(opts?: {
    package?: string;
 }) {
    let files: string[] | undefined;
-   const pkg = opts?.package ?? "bknd";
+   const pkg = opts?.package ?? "userbase";
 
    // @ts-ignore
    return async (c: Context, next: Next) => {

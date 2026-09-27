@@ -6,7 +6,7 @@ import {
    s,
    stringIdentifier,
    pickKeys,
-} from "bknd/utils";
+} from "userbase/utils";
 import {
    type TAppDataEntityFields,
    fieldsSchemaObject as originalFieldsSchemaObject,
@@ -29,7 +29,7 @@ import { MantineSelect } from "ui/components/form/hook-form-mantine/MantineSelec
 import type { TPrimaryFieldFormat } from "data/fields/PrimaryField";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import ErrorBoundary from "ui/components/display/ErrorBoundary";
-import { SchemaEditable } from "ui/client/bknd";
+import { SchemaEditable } from "ui/client/userbase";
 
 const fieldsSchemaObject = originalFieldsSchemaObject;
 const fieldsSchema = s.anyOf(Object.values(fieldsSchemaObject));

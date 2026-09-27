@@ -1,7 +1,7 @@
 import { Kysely, ParseJSONResultsPlugin } from "kysely";
 import { SqliteConnection } from "../SqliteConnection";
 import { SqliteIntrospector } from "../SqliteIntrospector";
-import type { DB } from "bknd";
+import type { DB } from "userbase";
 import type { SQLocalKysely } from "sqlocal/kysely";
 
 const plugins = [new ParseJSONResultsPlugin()];

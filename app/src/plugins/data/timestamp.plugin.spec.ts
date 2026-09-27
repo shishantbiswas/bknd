@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeAll, afterAll } from "bun:test";
 import { timestamps } from "./timestamps.plugin";
-import { em, entity, text } from "bknd";
+import { em, entity, text } from "userbase";
 import { createApp } from "core/test/utils";
 import { disableConsoleLog, enableConsoleLog } from "core/utils/test";
 

@@ -1,4 +1,4 @@
-import { createApp } from "bknd/adapter/bun";
+import { createApp } from "userbase/adapter/bun";
 
 async function generate() {
    console.info("Generating MCP documentation...");

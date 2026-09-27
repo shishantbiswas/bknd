@@ -1,11 +1,11 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import type { RuntimeBkndConfig } from "bknd/adapter";
+import type { RuntimeUserbaseConfig } from "userbase/adapter";
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
-import type { App, MaybePromise } from "bknd";
-import { $console } from "bknd/utils";
-import { createRuntimeApp } from "bknd/adapter";
+import type { App, MaybePromise } from "userbase";
+import { $console } from "userbase/utils";
+import { createRuntimeApp } from "userbase/adapter";
 import { registerAsyncsExecutionContext, makeConfig, type CloudflareContext } from "./config";
 
 declare global {
@@ -15,7 +15,7 @@ declare global {
 }
 
 export type CloudflareEnv = Cloudflare.Env;
-export type CloudflareBkndConfig<Env = CloudflareEnv> = RuntimeBkndConfig<Env> & {
+export type CloudflareUserbaseConfig<Env = CloudflareEnv> = RuntimeUserbaseConfig<Env> & {
    bindings?: (args: Env) => MaybePromise<{
       kv?: KVNamespace;
       db?: D1Database;
@@ -34,7 +34,7 @@ export type CloudflareBkndConfig<Env = CloudflareEnv> = RuntimeBkndConfig<Env> &
 };
 
 export async function createApp<Env extends CloudflareEnv = CloudflareEnv>(
-   config: CloudflareBkndConfig<Env> = {},
+   config: CloudflareUserbaseConfig<Env> = {},
    ctx: Partial<CloudflareContext<Env>> = {},
 ) {
    const appConfig = await makeConfig(config, ctx);
@@ -57,7 +57,7 @@ export const getFresh = createApp;
 
 let app: App | undefined;
 export function serve<Env extends CloudflareEnv = CloudflareEnv>(
-   config: CloudflareBkndConfig<Env> = {},
+   config: CloudflareUserbaseConfig<Env> = {},
    serveOptions?: (args: Env) => {
       warm?: boolean;
    },

@@ -1,8 +1,8 @@
 import type { Config } from "@libsql/client/node";
 import { StorageLocalAdapter } from "adapter/node/storage";
-import type { CliBkndConfig, CliCommand } from "cli/types";
+import type { CliUserbaseConfig, CliCommand } from "cli/types";
 import { Option } from "commander";
-import { config, type App, type CreateAppConfig, type MaybePromise, registries } from "bknd";
+import { config, type App, type CreateAppConfig, type MaybePromise, registries } from "userbase";
 import dotenv from "dotenv";
 import c from "picocolors";
 import path from "node:path";
@@ -14,8 +14,8 @@ import {
    serveStatic,
    startServer,
 } from "./platform";
-import { createRuntimeApp, makeConfig } from "bknd/adapter";
-import { colorizeConsole, isBun } from "bknd/utils";
+import { createRuntimeApp, makeConfig } from "userbase/adapter";
+import { colorizeConsole, isBun } from "userbase/utils";
 import { withConfigOptions, type WithConfigOptions } from "cli/utils/options";
 
 const env_files = [".env", ".dev.vars"];
@@ -69,7 +69,7 @@ async function makeApp(config: MakeAppConfig) {
    });
 }
 
-export async function makeConfigApp(_config: CliBkndConfig, platform?: Platform) {
+export async function makeConfigApp(_config: CliUserbaseConfig, platform?: Platform) {
    const config = await makeConfig(_config, process.env);
    return makeApp({
       ...config,
@@ -100,7 +100,7 @@ export async function makeAppFromEnv(options: Partial<RunOptions> = {}) {
    } else if (configFilePath) {
       console.info("Using config from", c.cyan(configFilePath));
       try {
-         const config = (await import(configFilePath).then((m) => m.default)) as CliBkndConfig;
+         const config = (await import(configFilePath).then((m) => m.default)) as CliUserbaseConfig;
          app = await makeConfigApp(config, options.server);
       } catch (e) {
          console.error("Failed to load config:", e);

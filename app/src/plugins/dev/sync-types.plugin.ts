@@ -1,4 +1,4 @@
-import { App, type AppPlugin, EntityTypescript } from "bknd";
+import { App, type AppPlugin, EntityTypescript } from "userbase";
 
 export type SyncTypesOptions = {
    enabled?: boolean;
@@ -13,7 +13,7 @@ export function syncTypes({
 }: SyncTypesOptions): AppPlugin {
    let firstBoot = true;
    return (app: App) => ({
-      name: "bknd-sync-types",
+      name: "userbase-sync-types",
       onBuilt: async () => {
          if (!enabled) return;
          app.emgr.onEvent(

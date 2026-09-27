@@ -1,19 +1,19 @@
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { useTheme } from "ui/client/use-theme";
 
-export function useBkndSystem() {
-   const { config, schema, actions: bkndActions } = useBknd();
+export function useUserbaseSystem() {
+   const { config, schema, actions: userbaseActions } = useUserbase();
    const { theme } = useTheme();
 
    const actions = {
       theme: {
          set: async (scheme: "light" | "dark") => {
-            return await bkndActions.patch("server", "admin", {
+            return await userbaseActions.patch("server", "admin", {
                color_scheme: scheme,
             });
          },
          toggle: async () => {
-            return await bkndActions.patch("server", "admin", {
+            return await userbaseActions.patch("server", "admin", {
                color_scheme: theme === "light" ? "dark" : "light",
             });
          },

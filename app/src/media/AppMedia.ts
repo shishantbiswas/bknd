@@ -1,5 +1,5 @@
-import type { AppEntity, FileUploadedEventData, StorageAdapter } from "bknd";
-import { $console } from "bknd/utils";
+import type { AppEntity, FileUploadedEventData, StorageAdapter } from "userbase";
+import { $console } from "userbase/utils";
 import type { Entity, EntityManager } from "data/entities";
 import { Storage } from "media/storage/Storage";
 import { Module } from "modules/Module";
@@ -12,7 +12,7 @@ import * as DatabaseEvents from "data/events";
 
 export type MediaFields = typeof AppMedia.mediaFields;
 export type MediaFieldSchema = FieldSchema<typeof AppMedia.mediaFields>;
-declare module "bknd" {
+declare module "userbase" {
    interface Media extends AppEntity, MediaFieldSchema {}
    interface DB {
       media: Media;

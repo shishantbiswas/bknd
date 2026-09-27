@@ -1,7 +1,7 @@
 import { IconHierarchy2 } from "@tabler/icons-react";
 import { isDebug } from "core/env";
 import { TbSettings } from "react-icons/tb";
-import { useBknd } from "../../client/BkndProvider";
+import { useUserbase } from "../../client/UserbaseProvider";
 import { IconButton } from "../../components/buttons/IconButton";
 import { Empty } from "../../components/display/Empty";
 import { Link } from "../../components/wouter/Link";
@@ -22,7 +22,7 @@ export function FlowsRoot(props) {
 }
 
 export function FlowsActual({ children }) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    return (
       <>
          <AppShell.Sidebar>

@@ -12,9 +12,9 @@ describe.skipIf(ALL_TESTS)("mailchannels", () => {
    it("should send an email", async () => {
       const driver = mailchannelsEmail({
          apiKey: process.env.MAILCHANNELS_API_KEY!,
-         from: { email: "accounts@bknd.io", name: "Dennis Senn" },
+         from: { email: "accounts@userbase.io", name: "Dennis Senn" },
       });
-      const response = await driver.send("ds@bknd.io", "Test", "Test");
+      const response = await driver.send("ds@userbase.io", "Test", "Test");
       expect(response).toBeDefined();
    });
 });

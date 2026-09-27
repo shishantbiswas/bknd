@@ -1,4 +1,4 @@
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import { Permission } from "./Permission";
 import { Policy, policySchema } from "./Policy";
 

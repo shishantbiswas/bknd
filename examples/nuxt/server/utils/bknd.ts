@@ -1,15 +1,15 @@
-import { type NuxtBkndConfig, getApp as getNuxtApp } from "bknd/adapter/nuxt";
-import bkndConfig from "../../bknd.config";
+import { type NuxtUserbaseConfig, getApp as getNuxtApp } from "userbase/adapter/nuxt";
+import userbaseConfig from "../../userbase.config";
 
 export async function getApp<Env = NodeJS.ProcessEnv>(
-   config: NuxtBkndConfig<Env>,
+   config: NuxtUserbaseConfig<Env>,
    args: Env = process.env as Env,
 ) {
    return await getNuxtApp(config, args);
 }
 
 export async function getApi({ headers, verify }: { verify?: boolean; headers?: Headers }) {
-   const app = await getApp(bkndConfig, process.env);
+   const app = await getApp(userbaseConfig, process.env);
 
    if (verify) {
       const api = app.getApi({ headers });

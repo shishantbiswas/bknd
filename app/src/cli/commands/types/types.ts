@@ -9,7 +9,7 @@ import { withConfigOptions, type WithConfigOptions } from "cli/utils/options";
 export const types: CliCommand = (program) => {
    withConfigOptions(program.command("types"))
       .description("generate types")
-      .addOption(new Option("-o, --outfile <outfile>", "output file").default("bknd-types.d.ts"))
+      .addOption(new Option("-o, --outfile <outfile>", "output file").default("userbase-types.d.ts"))
       .addOption(new Option("--dump", "dump types to console instead of writing to file"))
       .action(action);
 };

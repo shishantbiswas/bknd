@@ -1,3 +1,4 @@
+
 import { type CodeComponentMeta, type ComponentMeta, registerComponent } from "@plasmicapp/host";
 // biome-ignore lint/style/useImportType: <explanation>
 import React from "react";
@@ -225,7 +226,7 @@ export function registerImage(
 
 export const ImageMeta: CodeComponentMeta<ImageProps> = {
    name: "ImageLazy",
-   importPath: "@bknd/plasmic",
+   importPath: "@userbase/plasmic",
    props: {
       src: {
          type: "imageUrl",

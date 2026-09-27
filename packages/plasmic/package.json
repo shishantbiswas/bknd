@@ -1,5 +1,5 @@
 {
-   "name": "@bknd/plasmic",
+   "name": "@userbase/plasmic",
    "version": "0.5.1",
    "type": "module",
    "sideEffects": false,
@@ -19,12 +19,12 @@
    "dependencies": {},
    "devDependencies": {
       "@types/bun": "latest",
-      "bknd": "workspace:*",
+      "userbase": "workspace:*",
       "tsdx": "^0.14.1",
       "typescript": "^5.0.0"
    },
    "peerDependencies": {
-      "bknd": "*",
+      "userbase": "*",
       "react": ">=18",
       "react-dom": ">=18",
       "@plasmicapp/host": ">=1.0.0",

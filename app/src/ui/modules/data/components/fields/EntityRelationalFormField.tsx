@@ -1,11 +1,11 @@
 import { getHotkeyHandler, useHotkeys } from "@mantine/hooks";
 import { ucFirst } from "core/utils";
-import type { EntityData } from "bknd";
+import type { EntityData } from "userbase";
 import type { RelationField } from "data/relations";
 import { useEffect, useRef, useState } from "react";
 import { TbEye } from "react-icons/tb";
-import { useEntityQuery } from "bknd/client";
-import { useBknd } from "ui/client/bknd";
+import { useEntityQuery } from "userbase/client";
+import { useUserbase } from "ui/client/userbase";
 import { Button } from "ui/components/buttons/Button";
 import * as Formy from "ui/components/form/Formy";
 import { Popover } from "ui/components/overlay/Popover";
@@ -32,7 +32,7 @@ export function EntityRelationalFormField({
    disabled?: boolean;
    tabIndex?: number;
 }) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const entity = app.entity(field.target())!;
    const [query, setQuery] = useState<any>({
       limit: 10,

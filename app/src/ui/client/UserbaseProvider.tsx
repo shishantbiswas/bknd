@@ -9,15 +9,15 @@ import {
    useState,
    type ReactNode,
 } from "react";
-import { useApi } from "bknd/client";
+import { useApi } from "userbase/client";
 import { type TSchemaActions, getSchemaActions } from "./schema/actions";
 import { AppReduced } from "./utils/AppReduced";
 import { Message } from "ui/components/display/Message";
 import { useNavigate } from "ui/lib/routes";
-import type { BkndAdminProps } from "ui/Admin";
+import type { UserbaseAdminProps } from "ui/Admin";
 import type { TPermission } from "auth/authorize/Permission";
 
-export type BkndContext = {
+export type UserbaseContext = {
    version: number;
    readonly: boolean;
    schema: ModuleSchemas;
@@ -27,11 +27,11 @@ export type BkndContext = {
    requireSecrets: () => Promise<void>;
    actions: ReturnType<typeof getSchemaActions>;
    app: AppReduced;
-   options: BkndAdminProps["config"];
+   options: UserbaseAdminProps["config"];
    fallback: boolean;
 };
 
-const BkndContext = createContext<BkndContext>(undefined!);
+const UserbaseContext = createContext<UserbaseContext>(undefined!);
 export type { TSchemaActions };
 
 enum Fetching {
@@ -40,7 +40,7 @@ enum Fetching {
    Secrets = 2,
 }
 
-export function BkndProvider({
+export function UserbaseProvider({
    includeSecrets = false,
    options,
    children,
@@ -49,13 +49,13 @@ export function BkndProvider({
    includeSecrets?: boolean;
    children: any;
    fallback?: React.ReactNode;
-   options?: BkndAdminProps["config"];
+   options?: UserbaseAdminProps["config"];
 }) {
    const [withSecrets, setWithSecrets] = useState<boolean>(includeSecrets);
    const [schema, setSchema] =
       useState<
          Pick<
-            BkndContext,
+            UserbaseContext,
             "version" | "schema" | "config" | "permissions" | "fallback" | "readonly"
          >
       >();
@@ -150,12 +150,12 @@ export function BkndProvider({
    const hasSecrets = withSecrets && !error;
 
    return (
-      <BkndContext.Provider
+      <UserbaseContext.Provider
          value={{ ...schema, actions, requireSecrets, app, options: app.options, hasSecrets }}
          key={local_version}
       >
          {error ? <AccessDenied /> : children}
-      </BkndContext.Provider>
+      </UserbaseContext.Provider>
    );
 }
 
@@ -172,15 +172,15 @@ function AccessDenied() {
    );
 }
 
-export function useBknd({ withSecrets }: { withSecrets?: boolean } = {}): BkndContext {
-   const ctx = useContext(BkndContext);
+export function useUserbase({ withSecrets }: { withSecrets?: boolean } = {}): UserbaseContext {
+   const ctx = useContext(UserbaseContext);
    if (withSecrets) ctx.requireSecrets();
 
    return ctx;
 }
 
-export function useBkndOptions(): BkndAdminProps["config"] {
-   const ctx = useContext(BkndContext);
+export function useUserbaseOptions(): UserbaseAdminProps["config"] {
+   const ctx = useContext(UserbaseContext);
    return (
       ctx.options ?? {
          basepath: "/",
@@ -189,6 +189,6 @@ export function useBkndOptions(): BkndAdminProps["config"] {
 }
 
 export function SchemaEditable({ children }: { children: ReactNode }) {
-   const { readonly } = useBknd();
+   const { readonly } = useUserbase();
    return !readonly ? children : null;
 }

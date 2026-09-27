@@ -4,7 +4,7 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<h1>bknd + SvelteKit Example</h1>
+<h1>userbase + SvelteKit Example</h1>
 
 <h2>Todos</h2>
 <ul>

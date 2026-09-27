@@ -1,4 +1,4 @@
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";

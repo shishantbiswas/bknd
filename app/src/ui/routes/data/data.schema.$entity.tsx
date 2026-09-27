@@ -5,7 +5,7 @@ import {
    IconSettings,
 } from "@tabler/icons-react";
 import { isDebug } from "core/env";
-import type { Entity } from "bknd";
+import type { Entity } from "userbase";
 import { cloneDeep } from "lodash-es";
 import { useRef, useState } from "react";
 import {
@@ -16,7 +16,7 @@ import {
    TbPlus,
    TbSitemap,
 } from "react-icons/tb";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Empty } from "ui/components/display/Empty";
@@ -31,10 +31,10 @@ import { fieldSpecs } from "ui/modules/data/components/fields-specs";
 import { extractSchema } from "../settings/utils/schema";
 import { EntityFieldsForm, type EntityFieldsFormRef } from "./forms/entity.fields.form";
 import { RoutePathStateProvider } from "ui/hooks/use-route-path-state";
-import { SchemaEditable, useBknd } from "ui/client/bknd";
+import { SchemaEditable, useUserbase } from "ui/client/userbase";
 
 export function DataSchemaEntity({ params }) {
-   const { $data } = useBkndData();
+   const { $data } = useUserbaseData();
 
    const [navigate] = useNavigate();
    const entity = $data.entity(params.entity as string)!;
@@ -151,8 +151,8 @@ export function DataSchemaEntity({ params }) {
 const Fields = ({ entity }: { entity: Entity }) => {
    const [submitting, setSubmitting] = useState(false);
    const [updates, setUpdates] = useState(0);
-   const { actions, $data, config } = useBkndData();
-   const { readonly } = useBknd();
+   const { actions, $data, config } = useUserbaseData();
+   const { readonly } = useUserbase();
    const [res, setRes] = useState<any>();
    const ref = useRef<EntityFieldsFormRef>(null);
    async function handleUpdate() {
@@ -239,10 +239,10 @@ const Fields = ({ entity }: { entity: Entity }) => {
 };
 
 const BasicSettings = ({ entity }: { entity: Entity }) => {
-   const d = useBkndData();
+   const d = useUserbaseData();
    const config = d.entities?.[entity.name]?.config;
    const formRef = useRef<JsonSchemaFormRef>(null);
-   const { readonly } = useBknd();
+   const { readonly } = useUserbase();
 
    const schema = cloneDeep(
       // @ts-ignore

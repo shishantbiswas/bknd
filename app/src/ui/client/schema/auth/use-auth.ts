@@ -1,6 +1,6 @@
 import type { AuthState } from "Api";
-import type { AuthResponse } from "bknd";
-import { useApi, useInvalidate, useClientContext } from "bknd/client";
+import type { AuthResponse } from "userbase";
+import { useApi, useInvalidate, useClientContext } from "userbase/client";
 
 type LoginData = {
    email: string;

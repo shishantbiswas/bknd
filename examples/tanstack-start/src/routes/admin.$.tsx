@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useAuth } from "bknd/client";
-import "bknd/dist/styles.css";
-import { Admin } from "bknd/ui";
+import { useAuth } from "userbase/client";
+import "userbase/dist/styles.css";
+import { Admin } from "userbase/ui";
 
 export const Route = createFileRoute("/admin/$")({
   ssr: false, // "data-only" works too

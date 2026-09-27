@@ -1,10 +1,10 @@
-import { isObject } from "bknd/utils";
+import { isObject } from "userbase/utils";
 
 import type { KyselyJsonFrom } from "data/relations/EntityRelation";
 import type { RepoQuery } from "data/server/query";
 import { InvalidSearchParamsException } from "data/errors";
 import type { Entity, EntityManager, RepositoryQB } from "data/entities";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 
 export class WithBuilder {
    static addClause(

@@ -2,7 +2,7 @@ import { Flow, HttpTrigger } from "flows";
 import { Hono } from "hono";
 import { Module } from "modules/Module";
 import { TASKS, flowsConfigSchema } from "./flows-schema";
-import { type s, transformObject } from "bknd/utils";
+import { type s, transformObject } from "userbase/utils";
 
 export type AppFlowsSchema = s.Static<typeof flowsConfigSchema>;
 export type TAppFlowSchema = AppFlowsSchema["flows"][number];

@@ -1,7 +1,7 @@
-import type { PrimaryFieldType } from "bknd";
-import { encodeSearch } from "bknd/utils";
+import type { PrimaryFieldType } from "userbase";
+import { encodeSearch } from "userbase/utils";
 import { useLocation, useRouter } from "wouter";
-import { useBknd } from "../client/BkndProvider";
+import { useUserbase } from "../client/UserbaseProvider";
 
 export const routes = {
    data: {
@@ -48,7 +48,7 @@ export function withQuery(url: string, query: object) {
 }
 
 export function withAbsolute(url: string) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    return app.getAbsolutePath(url);
 }
 
@@ -63,7 +63,7 @@ export function useRouteNavigate() {
 export function useNavigate() {
    const [location, navigate] = useLocation();
    const router = useRouter();
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const basepath = app.options.basepath;
    return [
       (
@@ -140,7 +140,7 @@ export function useGoBack(
       absolute?: boolean;
    },
 ) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const [navigate] = useNavigate();
    const referrer = document.referrer;
    const history_length = window.history.length;

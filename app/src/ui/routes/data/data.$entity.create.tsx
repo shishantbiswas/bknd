@@ -1,7 +1,7 @@
-import type { EntityData } from "bknd";
+import type { EntityData } from "userbase";
 import { useState } from "react";
-import { useEntityMutate } from "bknd/client";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { useEntityMutate } from "userbase/client";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { Button } from "ui/components/buttons/Button";
 import { Message } from "ui/components/display/Message";
 import { useBrowserTitle } from "ui/hooks/use-browser-title";
@@ -11,7 +11,7 @@ import { Breadcrumbs2 } from "ui/layouts/AppShell/Breadcrumbs2";
 import { routes, useNavigate } from "ui/lib/routes";
 import { EntityForm } from "ui/modules/data/components/EntityForm";
 import { useEntityForm } from "ui/modules/data/hooks/useEntityForm";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import { notifications } from "@mantine/notifications";
 import { useEntityAdminOptions } from "ui/options";
 import { Dropdown } from "ui/components/overlay/Dropdown";
@@ -19,7 +19,7 @@ import { TbDots } from "react-icons/tb";
 import { IconButton } from "ui/components/buttons/IconButton";
 
 export function DataEntityCreate({ params }) {
-   const { $data } = useBkndData();
+   const { $data } = useUserbaseData();
    const [navigate, _, _goBack] = useNavigate();
    const entity = $data.entity(params.entity as string);
    if (!entity) {

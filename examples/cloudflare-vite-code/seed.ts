@@ -1,7 +1,7 @@
 /// <reference types="./worker-configuration.d.ts" />
 
-import { createFrameworkApp } from "bknd/adapter";
-import config from "./bknd.config.ts";
+import { createFrameworkApp } from "userbase/adapter";
+import config from "./userbase.config.ts";
 
 const app = await createFrameworkApp(config, {});
 
@@ -15,12 +15,12 @@ const {
 // only run if the database is empty
 if (usersCount === 0 && todosCount === 0) {
    await app.em.mutator("todos").insertMany([
-      { title: "Learn bknd", done: true },
+      { title: "Learn userbase", done: true },
       { title: "Build something cool", done: false },
    ]);
 
    await app.module.auth.createUser({
-      email: "test@bknd.io",
+      email: "test@userbase.io",
       password: "12345678",
    });
 }

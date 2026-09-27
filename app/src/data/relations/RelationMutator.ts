@@ -1,4 +1,4 @@
-import type { PrimaryFieldType } from "bknd";
+import type { PrimaryFieldType } from "userbase";
 import type { Entity, EntityManager } from "../entities";
 import {
    type EntityRelation,

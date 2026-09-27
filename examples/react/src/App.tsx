@@ -1,7 +1,7 @@
-import { boolean, em, entity, text } from "bknd";
+import { boolean, em, entity, text } from "userbase";
 import { Route } from "wouter";
 import IndexPage from "~/routes/_index";
-import { BkndBrowserApp, type BrowserBkndConfig, useApp } from "bknd/adapter/browser";
+import { UserbaseBrowserApp, type BrowserUserbaseConfig, useApp } from "userbase/adapter/browser";
 import { type ReactNode, useEffect } from "react";
 
 const schema = em({
@@ -13,7 +13,7 @@ const schema = em({
 
 // register your schema to get automatic type completion
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
    interface DB extends Database {}
 }
 
@@ -35,24 +35,24 @@ const config = {
       // the seed option is only executed if the database was empty
       seed: async (ctx) => {
          await ctx.em.mutator("todos").insertMany([
-            { title: "Learn bknd", done: true },
+            { title: "Learn userbase", done: true },
             { title: "Build something cool", done: false },
          ]);
 
          // @todo: auth is currently not working due to POST request
          await ctx.app.module.auth.createUser({
-            email: "test@bknd.io",
+            email: "test@userbase.io",
             password: "12345678",
          });
       },
    },
-} satisfies BrowserBkndConfig;
+} satisfies BrowserUserbaseConfig;
 
 export default function App() {
    return (
-      <BkndBrowserApp {...config} header={<Debug />}>
+      <UserbaseBrowserApp {...config} header={<Debug />}>
          <Route path="/" component={IndexPage} />
-      </BkndBrowserApp>
+      </UserbaseBrowserApp>
    );
 }
 

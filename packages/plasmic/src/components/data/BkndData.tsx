@@ -5,13 +5,13 @@ import {
    usePlasmicCanvasContext
 } from "@plasmicapp/host";
 import { usePlasmicQueryData } from "@plasmicapp/loader-react";
-import { useApi, useEntityQuery } from "bknd/client";
-import type { RepoQueryIn } from "bknd/data";
+import { useApi, useEntityQuery } from "userbase/client";
+import type { RepoQueryIn } from "userbase/data";
 // biome-ignore lint/style/useImportType: <explanation>
 import React from "react";
-import { usePlasmicBkndContext } from "../../contexts/BkndContext";
+import { usePlasmicUserbaseContext } from "../../contexts/UserbaseContext";
 
-type BkndDataProps = {
+type UserbaseDataProps = {
    children?: React.ReactNode;
    loading?: React.ReactNode;
    error?: React.ReactNode;
@@ -51,7 +51,7 @@ const EmptyComponent = ({ empty }: { empty?: React.ReactNode }) => {
    return empty ? <>{empty}</> : <>No data</>;
 };
 
-export function BkndData({
+export function UserbaseData({
    children,
    loading,
    error,
@@ -73,10 +73,10 @@ export function BkndData({
    preview,
    previewSlot,
    ...props
-}: BkndDataProps) {
-   //console.log("--bknd data");
+}: UserbaseDataProps) {
+   //console.log("--userbase data");
    const inEditor = !!usePlasmicCanvasContext();
-   const plasmicContext = usePlasmicBkndContext();
+   const plasmicContext = usePlasmicUserbaseContext();
 
    if (inEditor && preview) {
       let Component: React.ReactNode;
@@ -239,22 +239,22 @@ const ModeSWR = ({ children, loading, error, dataName, entityId, empty, entity }
    );
 };
 
-export function registerBkndData(
+export function registerUserbaseData(
    loader?: { registerComponent: typeof registerComponent },
-   customMeta?: ComponentMeta<BkndDataProps>
+   customMeta?: ComponentMeta<UserbaseDataProps>
 ) {
    if (loader) {
-      loader.registerComponent(BkndData, customMeta ?? BkndDataMeta);
+      loader.registerComponent(UserbaseData, customMeta ?? UserbaseDataMeta);
    } else {
-      registerComponent(BkndData, customMeta ?? BkndDataMeta);
+      registerComponent(UserbaseData, customMeta ?? UserbaseDataMeta);
    }
 }
 
-export const BkndDataMeta: ComponentMeta<BkndDataProps> = {
+export const UserbaseDataMeta: ComponentMeta<UserbaseDataProps> = {
    name: "BKND Data",
-   importName: "BkndData",
+   importName: "UserbaseData",
    section: "BKND",
-   importPath: "@bknd/plasmic",
+   importPath: "@userbase/plasmic",
    providesData: true,
    props: {
       entity: {

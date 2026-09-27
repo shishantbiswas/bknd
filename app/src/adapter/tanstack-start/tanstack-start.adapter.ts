@@ -1,12 +1,12 @@
-import { createFrameworkApp, type FrameworkBkndConfig } from "bknd/adapter";
+import { createFrameworkApp, type FrameworkUserbaseConfig } from "userbase/adapter";
 
 export type TanstackStartEnv = NodeJS.ProcessEnv;
 
-export type TanstackStartConfig<Env = TanstackStartEnv> = FrameworkBkndConfig<Env>;
+export type TanstackStartConfig<Env = TanstackStartEnv> = FrameworkUserbaseConfig<Env>;
 
 /**
- * Get bknd app instance
- * @param config - bknd configuration
+ * Get userbase app instance
+ * @param config - userbase configuration
  * @param args - environment variables
  */
 export async function getApp<Env = TanstackStartEnv>(
@@ -18,7 +18,7 @@ export async function getApp<Env = TanstackStartEnv>(
 
 /**
  * Create request handler for src/routes/api.$.ts
- * @param config - bknd configuration
+ * @param config - userbase configuration
  * @param args - environment variables
  */
 export function serve<Env = TanstackStartEnv>(

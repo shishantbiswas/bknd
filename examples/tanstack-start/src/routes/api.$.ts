@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import config from "../../bknd.config";
-import { serve } from "bknd/adapter/tanstack-start";
+import config from "../../userbase.config";
+import { serve } from "userbase/adapter/tanstack-start";
 
 const handler = serve(config);
 

@@ -1,6 +1,6 @@
 import type { AuthActionResponse } from "auth/api/AuthController";
 import type { AppAuthSchema } from "auth/auth-schema";
-import type { AuthResponse, SafeUser, AuthStrategy } from "bknd";
+import type { AuthResponse, SafeUser, AuthStrategy } from "userbase";
 import { type BaseModuleApiOptions, ModuleApi } from "modules/ModuleApi";
 
 export type AuthApiOptions = BaseModuleApiOptions & {
@@ -69,7 +69,7 @@ export class AuthApi extends ModuleApi<AuthApiOptions> {
    async logout() {
       return this.get(["logout"], undefined, {
          headers: {
-            // this way bknd detects a json request and doesn't redirect back
+            // this way userbase detects a json request and doesn't redirect back
             Accept: "application/json",
          },
       }).then(() => this.options.onTokenUpdate?.(undefined, true));

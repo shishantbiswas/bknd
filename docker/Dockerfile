@@ -2,12 +2,12 @@
 FROM node:24 as builder
 WORKDIR /app
 
-# define bknd version to be used as:
-# `docker build --build-arg VERSION=<version> -t bknd .`
+# define userbase version to be used as:
+# `docker build --build-arg VERSION=<version> -t userbase .`
 ARG VERSION=0.18.0
 
 # Install & copy required cli
-RUN npm install --omit=dev bknd@${VERSION}
+RUN npm install --omit=dev userbase@${VERSION}
 
 # Stage 2: Final minimal image
 FROM node:24-alpine
@@ -19,7 +19,7 @@ RUN npm install -g pm2
 RUN echo '{"type":"module"}' > package.json
 
 # Copy dist and node_modules from builder
-COPY --from=builder /app/node_modules/bknd/dist ./dist
+COPY --from=builder /app/node_modules/userbase/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
 # Create volume and init args

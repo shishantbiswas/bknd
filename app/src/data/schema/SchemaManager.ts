@@ -2,7 +2,7 @@ import type { CompiledQuery, TableMetadata } from "kysely";
 import type { IndexMetadata, SchemaResponse } from "data/connection/Connection";
 import type { Entity, EntityManager } from "data/entities";
 import { PrimaryField } from "data/fields";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 
 type IntrospectedTable = TableMetadata & {
    indices: IndexMetadata[];
@@ -41,7 +41,7 @@ type ColumnDiff = {
  * @todo: add modified fields
  * @todo: add drop tables
  *
- * @todo: change exclude tables to startWith, then add "bknd_" tables
+ * @todo: change exclude tables to startWith, then add "userbase_" tables
  */
 
 export class SchemaManager {
@@ -116,7 +116,7 @@ export class SchemaManager {
       // @todo: add drop tables (beware, there a system tables!)
       introspection
          .filter((table) => {
-            if (/bknd/.test(table.name) || table.isView) {
+            if (/userbase/.test(table.name) || table.isView) {
                return false;
             }
             return !entityStates.map((e) => e.name).includes(table.name);

@@ -1,7 +1,7 @@
 import type { CliCommand } from "cli/types";
 import { makeAppFromEnv } from "../run";
 import { getSystemMcp } from "modules/mcp/system-mcp";
-import { $console, stdioTransport } from "bknd/utils";
+import { $console, stdioTransport } from "userbase/utils";
 import { withConfigOptions, type WithConfigOptions } from "cli/utils/options";
 
 export const mcp: CliCommand = (program) =>

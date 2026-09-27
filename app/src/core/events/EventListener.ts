@@ -1,4 +1,4 @@
-import type { MaybePromise } from "bknd";
+import type { MaybePromise } from "userbase";
 import type { Event } from "./Event";
 import type { EventClass } from "./EventManager";
 

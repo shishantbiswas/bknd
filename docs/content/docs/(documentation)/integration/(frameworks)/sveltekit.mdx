@@ -1,29 +1,29 @@
 ---
 title: "SvelteKit"
-description: "Run bknd inside SvelteKit"
+description: "Run userbase inside SvelteKit"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with SvelteKit and bknd, create a new SvelteKit project by following the [official guide](https://svelte.dev/docs/kit/creating-a-project), and then install bknd as a dependency:
+To get started with SvelteKit and userbase, create a new SvelteKit project by following the [official guide](https://svelte.dev/docs/kit/creating-a-project), and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -36,22 +36,22 @@ bun add bknd
   [upgrade](https://nodejs.org/en/download/) if necessary.
 </Callout>
 
-Now create a `bknd.config.ts` file in the root of your project:
+Now create a `userbase.config.ts` file in the root of your project:
 
-```typescript title="bknd.config.ts"
-import type { SvelteKitBkndConfig } from "bknd/adapter/sveltekit";
+```typescript title="userbase.config.ts"
+import type { SvelteKitUserbaseConfig } from "userbase/adapter/sveltekit";
 
 export default {
   connection: {
     url: "file:data.db",
   },
-} satisfies SvelteKitBkndConfig;
+} satisfies SvelteKitUserbaseConfig;
 ```
 
-See [bknd.config.ts](/extending/config) for more information on how to configure bknd. The `SvelteKitBkndConfig` type extends the base config type with the following properties:
+See [userbase.config.ts](/extending/config) for more information on how to configure userbase. The `SvelteKitUserbaseConfig` type extends the base config type with the following properties:
 
 ```typescript
-export type SvelteKitBkndConfig<Env> = Pick<RuntimeBkndConfig<Env>, "adminOptions">;
+export type SvelteKitUserbaseConfig<Env> = Pick<RuntimeUserbaseConfig<Env>, "adminOptions">;
 ```
 
 ## Serve the API
@@ -60,17 +60,17 @@ The SvelteKit adapter uses SvelteKit's hooks mechanism to handle API requests. C
 
 ```typescript title="src/hooks.server.ts"
 import type { Handle } from "@sveltejs/kit";
-import { serve } from "bknd/adapter/sveltekit";
+import { serve } from "userbase/adapter/sveltekit";
 import { env } from "$env/dynamic/private";
-import config from "../bknd.config";
+import config from "../userbase.config";
 
-const bkndHandler = serve(config, env);
+const userbaseHandler = serve(config, env);
 
 export const handle: Handle = async ({ event, resolve }) => {
-  // handle bknd API requests
+  // handle userbase API requests
   const pathname = event.url.pathname;
   if (pathname.startsWith("/api/")) {
-    const res = await bkndHandler(event);
+    const res = await userbaseHandler(event);
     if (res.status !== 404) {
       return res;
     }
@@ -94,15 +94,15 @@ The SvelteKit adapter supports serving the Admin UI statically. First, copy the 
 ```json title="package.json"
 {
   "scripts": {
-    "postinstall": "bknd copy-assets --out static"  // [!code highlight]
+    "postinstall": "userbase copy-assets --out static"  // [!code highlight]
   }
 }
 ```
 
-Then update your `bknd.config.ts` to configure the admin base path:
+Then update your `userbase.config.ts` to configure the admin base path:
 
-```typescript title="bknd.config.ts"
-import type { SvelteKitBkndConfig } from "bknd/adapter/sveltekit";
+```typescript title="userbase.config.ts"
+import type { SvelteKitUserbaseConfig } from "userbase/adapter/sveltekit";
 
 export default {
   connection: {
@@ -111,24 +111,24 @@ export default {
   adminOptions: {  // [!code highlight]
     adminBasepath: "/admin"  // [!code highlight]
   },  // [!code highlight]
-} satisfies SvelteKitBkndConfig;
+} satisfies SvelteKitUserbaseConfig;
 ```
 
 Finally, update your `hooks.server.ts` to also handle admin routes:
 
 ```typescript title="src/hooks.server.ts"
 import type { Handle } from "@sveltejs/kit";
-import { serve } from "bknd/adapter/sveltekit";
+import { serve } from "userbase/adapter/sveltekit";
 import { env } from "$env/dynamic/private";
-import config from "../bknd.config";
+import config from "../userbase.config";
 
-const bkndHandler = serve(config, env);
+const userbaseHandler = serve(config, env);
 
 export const handle: Handle = async ({ event, resolve }) => {
-  // handle bknd API and admin requests
+  // handle userbase API and admin requests
   const pathname = event.url.pathname;
   if (pathname.startsWith("/api/") || pathname.startsWith("/admin")) {  // [!code highlight]
-    const res = await bkndHandler(event);
+    const res = await userbaseHandler(event);
     if (res.status !== 404) {
       return res;
     }
@@ -140,13 +140,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 ## Example usage of the API
 
-You can use the `getApp` function to access the bknd API in your server-side load functions:
+You can use the `getApp` function to access the userbase API in your server-side load functions:
 
 ```typescript title="src/routes/+page.server.ts"
 import type { PageServerLoad } from "./$types";
-import { getApp } from "bknd/adapter/sveltekit";
+import { getApp } from "userbase/adapter/sveltekit";
 import { env } from "$env/dynamic/private";
-import config from "../../bknd.config";
+import config from "../../userbase.config";
 
 export const load: PageServerLoad = async () => {
   const app = await getApp(config, env);
@@ -183,9 +183,9 @@ To use authentication in your load functions, pass the request headers to the AP
 
 ```typescript title="src/routes/+page.server.ts"
 import type { PageServerLoad } from "./$types";
-import { getApp } from "bknd/adapter/sveltekit";
+import { getApp } from "userbase/adapter/sveltekit";
 import { env } from "$env/dynamic/private";
-import config from "../../bknd.config";
+import config from "../../userbase.config";
 
 export const load: PageServerLoad = async ({ request }) => {
   const app = await getApp(config, env);
@@ -201,4 +201,4 @@ export const load: PageServerLoad = async ({ request }) => {
 };
 ```
 
-Check the [SvelteKit repository example](https://github.com/bknd-io/bknd/tree/main/examples/sveltekit) for more implementation details.
+Check the [SvelteKit repository example](https://github.com/userbase-io/userbase/tree/main/examples/sveltekit) for more implementation details.

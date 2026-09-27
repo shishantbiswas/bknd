@@ -1,5 +1,5 @@
-import type { PrimaryFieldType } from "bknd";
-import { s, parse } from "bknd/utils";
+import type { PrimaryFieldType } from "userbase";
+import { s, parse } from "userbase/utils";
 import type { ExpressionBuilder, SelectQueryBuilder } from "kysely";
 import type { Entity, EntityData, EntityManager } from "../entities";
 import {

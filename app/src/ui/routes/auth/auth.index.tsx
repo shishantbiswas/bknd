@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { TbArrowRight, TbCircle, TbCircleCheckFilled, TbFingerprint } from "react-icons/tb";
-import { useApiQuery } from "bknd/client";
-import { useBknd } from "ui/client/bknd";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+import { useApiQuery } from "userbase/client";
+import { useUserbase } from "ui/client/userbase";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { ButtonLink, type ButtonLinkProps } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Alert } from "ui/components/display/Alert";
@@ -10,10 +10,10 @@ import * as AppShell from "ui/layouts/AppShell/AppShell";
 import { routes, useNavigate } from "ui/lib/routes";
 
 export function AuthIndex() {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const {
       config: { roles, strategies, entity_name, enabled },
-   } = useBkndAuth();
+   } = useUserbaseAuth();
    const users_entity = entity_name;
    const $q = useApiQuery((api) => api.data.count(users_entity), {
       enabled,

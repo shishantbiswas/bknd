@@ -4,7 +4,7 @@ import { makeAppFromEnv } from "cli/commands/run";
 import { writeFile } from "node:fs/promises";
 import c from "picocolors";
 import { withConfigOptions } from "cli/utils/options";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 
 export const config: CliCommand = (program) => {
    withConfigOptions(program.command("config"))

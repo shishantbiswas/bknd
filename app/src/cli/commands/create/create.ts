@@ -5,9 +5,9 @@ import type { CliCommand } from "cli/types";
 import { typewriter, wait } from "cli/utils/cli";
 import { execAsync, getVersion } from "cli/utils/sys";
 import { Option } from "commander";
-import { env } from "bknd";
+import { env } from "userbase";
 import color from "picocolors";
-import { overridePackageJson, updateBkndPackages } from "./npm";
+import { overridePackageJson, updateUserbasePackages } from "./npm";
 import { type Template, templates, type TemplateSetupCtx } from "./templates";
 import { createScoped, flush } from "cli/utils/telemetry";
 import path from "node:path";
@@ -48,7 +48,7 @@ function errorOutro() {
    // biome-ignore lint/suspicious/noConsoleLog:
    console.log(
       color.yellow("Sorry that this happened. If you think this is a bug, please report it at: ") +
-         color.cyan("https://github.com/bknd-io/bknd/issues"),
+         color.cyan("https://github.com/userbase-io/userbase/issues"),
    );
    // biome-ignore lint/suspicious/noConsoleLog:
    console.log("");
@@ -80,12 +80,12 @@ async function action(options: {
 
    const version = await getVersion();
    $p.intro(
-      `👋 Welcome to the ${color.bold(color.cyan("bknd"))} create cli ${color.bold(`v${version}`)}`,
+      `👋 Welcome to the ${color.bold(color.cyan("userbase"))} create cli ${color.bold(`v${version}`)}`,
    );
 
    await $p.stream.message(
       (async function* () {
-         yield* typewriter("Thanks for choosing to create a new project with bknd!", color.dim);
+         yield* typewriter("Thanks for choosing to create a new project with userbase!", color.dim);
          await wait();
       })(),
    );
@@ -127,7 +127,7 @@ async function action(options: {
       ? downloadOpts.dir.split("/").pop()
       : downloadOpts.dir.replace(/[./]/g, "");
 
-   if (!name || name.length === 0) name = "bknd";
+   if (!name || name.length === 0) name = "userbase";
 
    let template: Template | undefined;
 
@@ -254,7 +254,7 @@ async function action(options: {
       }
 
       s.stop("Template downloaded.");
-      await updateBkndPackages(ctx.dir);
+      await updateUserbasePackages(ctx.dir);
 
       if (template.preinstall) {
          await template.preinstall(ctx);
@@ -335,7 +335,7 @@ async function action(options: {
          yield "\n\n";
          yield* typewriter(
             `Enter your project's directory using ${color.cyan("cd " + ctx.dir)}
-If you need help, check ${color.cyan("https://docs.bknd.io")} or join our Discord!`,
+If you need help, check ${color.cyan("https://docs.userbase.io")} or join our Discord!`,
          );
          await wait(2);
       })(),

@@ -1,9 +1,9 @@
-import type { AppPlugin, BkndConfig, MaybePromise, Merge } from "bknd";
-import { syncTypes, syncConfig } from "bknd/plugins";
+import type { AppPlugin, UserbaseConfig, MaybePromise, Merge } from "userbase";
+import { syncTypes, syncConfig } from "userbase/plugins";
 import { syncSecrets } from "plugins/dev/sync-secrets.plugin";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 
-export type BkndModeOptions = {
+export type UserbaseModeOptions = {
    /**
     * Whether the application is running in production.
     */
@@ -18,7 +18,7 @@ export type BkndModeOptions = {
    configFilePath?: string;
    /**
     * Types file path
-    * @default "bknd-types.d.ts"
+    * @default "userbase-types.d.ts"
     */
    typesFilePath?: string;
    /**
@@ -51,9 +51,9 @@ export type BkndModeOptions = {
    syncSchema?: boolean | { force?: boolean; drop?: boolean };
 };
 
-export type BkndModeConfig<Args = any, Additional = {}> = BkndConfig<
+export type UserbaseModeConfig<Args = any, Additional = {}> = UserbaseConfig<
    Args,
-   Merge<BkndModeOptions & Additional>
+   Merge<UserbaseModeOptions & Additional>
 >;
 
 function _isProd() {
@@ -66,7 +66,7 @@ function _isProd() {
 
 export async function makeModeConfig<
    Args = any,
-   Config extends BkndModeConfig<Args> = BkndModeConfig<Args>,
+   Config extends UserbaseModeConfig<Args> = UserbaseModeConfig<Args>,
 >({ app, ..._config }: Config, args: Args) {
    const appConfig = typeof app === "function" ? await app(args) : app;
 
@@ -99,7 +99,7 @@ export async function makeModeConfig<
 
    if (!isProd) {
       if (typesFilePath) {
-         if (plugins.some((p) => p.name === "bknd-sync-types")) {
+         if (plugins.some((p) => p.name === "userbase-sync-types")) {
             throw new Error("You have to unregister the `syncTypes` plugin");
          }
          needsWriter = true;
@@ -119,7 +119,7 @@ export async function makeModeConfig<
       }
 
       if (configFilePath) {
-         if (plugins.some((p) => p.name === "bknd-sync-config")) {
+         if (plugins.some((p) => p.name === "userbase-sync-config")) {
             throw new Error("You have to unregister the `syncConfig` plugin");
          }
          needsWriter = true;
@@ -139,7 +139,7 @@ export async function makeModeConfig<
       }
 
       if (syncSecretsOptions && syncSecretsOptions.enabled !== false) {
-         if (plugins.some((p) => p.name === "bknd-sync-secrets")) {
+         if (plugins.some((p) => p.name === "userbase-sync-secrets")) {
             throw new Error("You have to unregister the `syncSecrets` plugin");
          }
 

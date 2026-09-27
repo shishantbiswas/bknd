@@ -1,8 +1,8 @@
 /// <reference types="./worker-configuration.d.ts" />
 
-import type { CloudflareBkndConfig } from "bknd/adapter/cloudflare";
-import { code } from "bknd/modes";
-import { boolean, em, entity, text } from "bknd";
+import type { CloudflareUserbaseConfig } from "userbase/adapter/cloudflare";
+import { code } from "userbase/modes";
+import { boolean, em, entity, text } from "userbase";
 
 const schema = em({
    todos: entity("todos", {
@@ -13,13 +13,13 @@ const schema = em({
 
 // register your schema to get automatic type completion
 // alternatively, you can use the CLI to generate types
-// learn more at https://docs.bknd.io/usage/cli/#generating-types-types
+// learn more at https://docs.userbase.io/usage/cli/#generating-types-types
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
    interface DB extends Database {}
 }
 
-export default code<CloudflareBkndConfig>({
+export default code<CloudflareUserbaseConfig>({
    app: (env) => ({
       config: {
          data: schema.toJSON(),
