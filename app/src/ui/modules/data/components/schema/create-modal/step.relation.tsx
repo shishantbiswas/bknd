@@ -1,6 +1,12 @@
 import { Switch, TextInput } from "@mantine/core";
 import { IconDatabase } from "@tabler/icons-react";
-import { ManyToOneRelation, type RelationType, RelationTypes } from "data/relations";
+import {
+   DEFAULT_RELATION_CASCADE,
+   ManyToOneRelation,
+   type RelationType,
+   RelationCascades,
+   RelationTypes,
+} from "data/relations";
 import type { ReactNode } from "react";
 import { type Control, type FieldValues, type UseFormRegister, useForm } from "react-hook-form";
 import { TbRefresh } from "react-icons/tb";
@@ -46,7 +52,9 @@ const schema = s.strictObject({
    type: s.string({ enum: Relations.map((r) => r.type) }),
    source: stringIdentifier,
    target: stringIdentifier,
-   config: s.object({}),
+   config: s.object({
+      on_delete: s.string({ enum: RelationCascades }).optional(),
+   }),
 });
 
 type ComponentCtx<T extends FieldValues = FieldValues> = {
@@ -186,6 +194,25 @@ const Callout = ({ children }: { children: ReactNode }) => (
    <div className="bg-primary/5 py-4 px-5 rounded-lg mt-10">{children}</div>
 );
 
+function OnDelete({
+   control,
+   label = "On target delete",
+}: {
+   control: Control<any>;
+   label?: string;
+}) {
+   return (
+      <MantineSelect
+         control={control}
+         name="config.on_delete"
+         label={label}
+         allowDeselect={false}
+         defaultValue={DEFAULT_RELATION_CASCADE}
+         data={RelationCascades.map((cascade) => ({ value: cascade, label: cascade }))}
+      />
+   );
+}
+
 function ManyToOne({ register, control, data: { source, target, config } }: ComponentCtx) {
    return (
       <>
@@ -209,6 +236,7 @@ function ManyToOne({ register, control, data: { source, target, config } }: Comp
                   control={control}
                   placeholder={String(ManyToOneRelation.DEFAULTS.with_limit)}
                />
+               <OnDelete control={control} />
             </div>
             <div />
             <div className="flex flex-col gap-4">
@@ -222,30 +250,32 @@ function ManyToOne({ register, control, data: { source, target, config } }: Comp
          </div>
          {source && target && config && (
             <Callout>
-               <>
-                  <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
-                     <IconDatabase className="size-4" />
-                     {source}.{config.mappedBy || target}_id {"→"} {target}
-                  </pre>
+               <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
+                  <IconDatabase className="size-4" />
+                  {source}.{config.mappedBy || target}_id {"→"} {target}
+               </pre>
+               <p>
+                  Many <Pre>{source}</Pre> will each have one reference to <Pre>{target}</Pre>.
+               </p>
+               <p>
+                  A property <Pre>{config.mappedBy || target}_id</Pre> will be added to{" "}
+                  <Pre>{source}</Pre> (which references <Pre>{target}</Pre>).
+               </p>
+               <p>
+                  When creating <Pre>{source}</Pre>, a reference to <Pre>{target}</Pre> is{" "}
+                  <i>{config.required ? "required" : "optional"}</i>.
+               </p>
+               <p>
+                  If a <Pre>{target}</Pre> entry is deleted, the reference is{" "}
+                  <i>{config.on_delete ?? DEFAULT_RELATION_CASCADE}</i>.
+               </p>
+               {config.sourceCardinality ? (
                   <p>
-                     Many <Pre>{source}</Pre> will each have one reference to <Pre>{target}</Pre>.
+                     <Pre>{target}</Pre> should not have more than{" "}
+                     <Pre>{config.sourceCardinality}</Pre> referencing entr
+                     {config.sourceCardinality === 1 ? "y" : "ies"} to <Pre>{source}</Pre>.
                   </p>
-                  <p>
-                     A property <Pre>{config.mappedBy || target}_id</Pre> will be added to{" "}
-                     <Pre>{source}</Pre> (which references <Pre>{target}</Pre>).
-                  </p>
-                  <p>
-                     When creating <Pre>{source}</Pre>, a reference to <Pre>{target}</Pre> is{" "}
-                     <i>{config.required ? "required" : "optional"}</i>.
-                  </p>
-                  {config.sourceCardinality ? (
-                     <p>
-                        <Pre>{target}</Pre> should not have more than{" "}
-                        <Pre>{config.sourceCardinality}</Pre> referencing entr
-                        {config.sourceCardinality === 1 ? "y" : "ies"} to <Pre>{source}</Pre>.
-                     </p>
-                  ) : null}
-               </>
+               ) : null}
             </Callout>
          )}
       </>
@@ -258,7 +288,7 @@ function OneToOne({
    data: {
       source,
       target,
-      config: { mappedBy, required },
+      config: { mappedBy, required, on_delete },
    },
 }: ComponentCtx) {
    return (
@@ -271,6 +301,7 @@ function OneToOne({
                   placeholder={target}
                />
                <Switch label="Required" {...register("config.required")} />
+               <OnDelete control={control} />
             </div>
             <div />
             <div className="flex flex-col gap-4">
@@ -283,24 +314,26 @@ function OneToOne({
          </div>
          {source && target && (
             <Callout>
-               <>
-                  <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
-                     <IconDatabase className="size-4" />
-                     {source}.{mappedBy || target}_id {"↔"} {target}
-                  </pre>
-                  <p>
-                     A single entry of <Pre>{source}</Pre> will have a reference to{" "}
-                     <Pre>{target}</Pre>.
-                  </p>
-                  <p>
-                     A property <Pre>{mappedBy || target}_id</Pre> will be added to{" "}
-                     <Pre>{source}</Pre> (which references <Pre>{target}</Pre>).
-                  </p>
-                  <p>
-                     When creating <Pre>{source}</Pre>, a reference to <Pre>{target}</Pre> is{" "}
-                     <i>{required ? "required" : "optional"}</i>.
-                  </p>
-               </>
+               <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
+                  <IconDatabase className="size-4" />
+                  {source}.{mappedBy || target}_id {"↔"} {target}
+               </pre>
+               <p>
+                  A single entry of <Pre>{source}</Pre> will have a reference to <Pre>{target}</Pre>
+                  .
+               </p>
+               <p>
+                  A property <Pre>{mappedBy || target}_id</Pre> will be added to <Pre>{source}</Pre>{" "}
+                  (which references <Pre>{target}</Pre>).
+               </p>
+               <p>
+                  When creating <Pre>{source}</Pre>, a reference to <Pre>{target}</Pre> is{" "}
+                  <i>{required ? "required" : "optional"}</i>.
+               </p>
+               <p>
+                  If a <Pre>{target}</Pre> entry is deleted, the reference is{" "}
+                  <i>{on_delete ?? DEFAULT_RELATION_CASCADE}</i>.
+               </p>
             </Callout>
          )}
       </>
@@ -334,6 +367,7 @@ function ManyToMany({ register, control, data: { source, target, config } }: Com
                   {...register("config.connectionTableMappedName")}
                   placeholder={table}
                />
+               <OnDelete control={control} label="On delete (both references)" />
             </div>
             <div className="flex flex-col gap-4">
                {/*<TextInput
@@ -345,18 +379,20 @@ function ManyToMany({ register, control, data: { source, target, config } }: Com
          </div>
          {source && target && (
             <Callout>
-               <>
-                  <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
-                     <IconDatabase className="size-4" />
-                     {source} {"→"} {table} {"←"} {target}
-                  </pre>
-                  <p>
-                     Many <Pre>{source}</Pre> will have many <Pre>{target}</Pre>.
-                  </p>
-                  <p>
-                     A connection table <Pre>{table}</Pre> will be created to store the relations.
-                  </p>
-               </>
+               <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
+                  <IconDatabase className="size-4" />
+                  {source} {"→"} {table} {"←"} {target}
+               </pre>
+               <p>
+                  Many <Pre>{source}</Pre> will have many <Pre>{target}</Pre>.
+               </p>
+               <p>
+                  A connection table <Pre>{table}</Pre> will be created to store the relations.
+               </p>
+               <p>
+                  If an entry of <Pre>{source}</Pre> or <Pre>{target}</Pre> is deleted, the
+                  connection is <i>{config.on_delete ?? DEFAULT_RELATION_CASCADE}</i>.
+               </p>
             </Callout>
          )}
       </>
@@ -391,26 +427,24 @@ function Polymorphic({ register, control, data: { type, source, target, config }
          </div>
          {source && target && (
             <Callout>
-               <>
-                  <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
-                     <IconDatabase className="size-4" />
-                     {source} {"←"} {target}
-                  </pre>
+               <pre className="mb-2 opacity-70 flex flex-row items-center gap-2">
+                  <IconDatabase className="size-4" />
+                  {source} {"←"} {target}
+               </pre>
+               <p>
+                  <Pre>{source}</Pre> will have many <Pre>{target}</Pre>.
+               </p>
+               <p>
+                  <Pre>{target}</Pre> will get additional properties <Pre>reference</Pre> and{" "}
+                  <Pre>entity_id</Pre> to make the (polymorphic) reference.
+               </p>
+               {config.targetCardinality ? (
                   <p>
-                     <Pre>{source}</Pre> will have many <Pre>{target}</Pre>.
+                     <Pre>{source}</Pre> should not have more than{" "}
+                     <Pre>{config.targetCardinality}</Pre> reference
+                     {config.targetCardinality === 1 ? "" : "s"} to <Pre>{target}</Pre>.
                   </p>
-                  <p>
-                     <Pre>{target}</Pre> will get additional properties <Pre>reference</Pre> and{" "}
-                     <Pre>entity_id</Pre> to make the (polymorphic) reference.
-                  </p>
-                  {config.targetCardinality ? (
-                     <p>
-                        <Pre>{source}</Pre> should not have more than{" "}
-                        <Pre>{config.targetCardinality}</Pre> reference
-                        {config.targetCardinality === 1 ? "" : "s"} to <Pre>{target}</Pre>.
-                     </p>
-                  ) : null}
-               </>
+               ) : null}
             </Callout>
          )}
       </>

@@ -4,20 +4,22 @@ import type { EntityRelation } from "./EntityRelation";
 import type { EntityRelationAnchor } from "./EntityRelationAnchor";
 import type { TFieldTSType } from "data/entities/EntityTypescript";
 import { s } from "bknd/utils";
-
-const CASCADES = ["cascade", "set null", "set default", "restrict", "no action"] as const;
+import { DEFAULT_RELATION_CASCADE, RelationCascades, type RelationCascade } from "./relation-types";
 
 export const relationFieldConfigSchema = s.strictObject({
    reference: s.string(),
    target: s.string(), // @todo: potentially has to be an instance!
    target_field: s.string({ default: "id" }).optional(),
    target_field_type: s.string({ enum: ["text", "integer"], default: "integer" }).optional(),
-   on_delete: s.string({ enum: CASCADES, default: "set null" }).optional(),
+   on_delete: s.string({ enum: RelationCascades, default: DEFAULT_RELATION_CASCADE }).optional(),
    ...baseFieldConfigSchema.properties,
 });
 
 export type RelationFieldConfig = s.Static<typeof relationFieldConfigSchema>;
-export type RelationFieldBaseConfig = { label?: string };
+export type RelationFieldBaseConfig = {
+   label?: string;
+   on_delete?: RelationCascade;
+};
 
 export class RelationField extends Field<RelationFieldConfig> {
    override readonly type = "relation";
@@ -39,6 +41,8 @@ export class RelationField extends Field<RelationFieldConfig> {
       return new RelationField(name, {
          ...config,
          required: relation.required,
+         // the relation owns the referential action, the field only materializes it
+         on_delete: config?.on_delete ?? relation.config.on_delete,
          reference: target.reference,
          target: target.entity.name,
          target_field: target.entity.getPrimaryField().name,
@@ -48,6 +52,10 @@ export class RelationField extends Field<RelationFieldConfig> {
 
    reference() {
       return this.config.reference;
+   }
+
+   onDelete(): RelationCascade | undefined {
+      return this.config.on_delete;
    }
 
    target() {
@@ -63,7 +71,7 @@ export class RelationField extends Field<RelationFieldConfig> {
          ...super.schema()!,
          type: this.config.target_field_type ?? "integer",
          references: `${this.config.target}.${this.config.target_field}`,
-         onDelete: this.config.on_delete ?? "set null",
+         onDelete: this.config.on_delete ?? DEFAULT_RELATION_CASCADE,
       });
    }
 

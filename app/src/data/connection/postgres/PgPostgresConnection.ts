@@ -1,4 +1,8 @@
-import { Kysely, PostgresDialect, type PostgresDialectConfig as KyselyPostgresDialectConfig } from "kysely";
+import {
+   Kysely,
+   PostgresDialect,
+   type PostgresDialectConfig as KyselyPostgresDialectConfig,
+} from "kysely";
 import { PostgresIntrospector } from "./PostgresIntrospector";
 import { PostgresConnection, plugins } from "./PostgresConnection";
 import { customIntrospector } from "../Connection";

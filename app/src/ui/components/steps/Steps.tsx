@@ -64,6 +64,11 @@ export function Step({
    path = [],
    id,
    ...rest
-}: { children: React.ReactNode; disabled?: boolean; id: string; path?: string[] }) {
+}: {
+   children: React.ReactNode;
+   disabled?: boolean;
+   id: string;
+   path?: string[];
+}) {
    return <div {...rest}>{children}</div>;
 }

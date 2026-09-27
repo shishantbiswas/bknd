@@ -26,6 +26,7 @@ describe("Polymorphic", async () => {
          target: "media",
          config: {
             mappedBy: "image",
+            on_delete: "set null",
          },
       });
       // media should not see categories

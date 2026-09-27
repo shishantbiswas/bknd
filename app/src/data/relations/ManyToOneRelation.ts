@@ -7,7 +7,7 @@ import { EntityRelation, type KyselyQueryBuilder } from "./EntityRelation";
 import { EntityRelationAnchor } from "./EntityRelationAnchor";
 import { RelationField, type RelationFieldBaseConfig } from "./RelationField";
 import type { MutationInstructionResponse } from "./RelationMutator";
-import { type RelationType, RelationTypes } from "./relation-types";
+import { type RelationType, RelationCascades, RelationTypes } from "./relation-types";
 
 /**
  * Source entity receives the mapping field
@@ -31,6 +31,7 @@ export class ManyToOneRelation extends EntityRelation<typeof ManyToOneRelation.s
       fieldConfig: s
          .object({
             label: s.string(),
+            on_delete: s.string({ enum: RelationCascades }).optional(),
          })
          .optional(),
       ...EntityRelation.schema.properties,

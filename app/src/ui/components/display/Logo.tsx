@@ -4,7 +4,11 @@ export function Logo({
    scale = 0.2,
    fill,
    ...props
-}: { scale?: number; fill?: string; theme?: string }) {
+}: {
+   scale?: number;
+   fill?: string;
+   theme?: string;
+}) {
    const t = useTheme();
    const theme = props.theme ?? t.theme;
    const svgFill = fill ? fill : theme === "light" ? "black" : "white";

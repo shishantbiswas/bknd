@@ -110,7 +110,12 @@ const EntityLinkList = ({
    title,
    context,
    suggestCreate = false,
-}: { entities: Entity[]; title?: string; context: "data" | "schema"; suggestCreate?: boolean }) => {
+}: {
+   entities: Entity[];
+   title?: string;
+   context: "data" | "schema";
+   suggestCreate?: boolean;
+}) => {
    const { $data } = useBkndData();
    const { readonly } = useBknd();
    const navigate = useRouteNavigate();
@@ -195,7 +200,11 @@ const EntityContextMenu = ({
    entity,
    children,
    enabled = true,
-}: { entity: Entity; children: DropdownClickableChild; enabled?: boolean }) => {
+}: {
+   entity: Entity;
+   children: DropdownClickableChild;
+   enabled?: boolean;
+}) => {
    if (!enabled) return children;
    const [navigate] = useNavigate();
    const { $data } = useBkndData();

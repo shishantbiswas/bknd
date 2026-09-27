@@ -73,7 +73,13 @@ describe("Api", async () => {
 
    it("should extract tokens case insensitive", async () => {
       const token = await sign({ sub: "test" }, "1234");
-      expect(new Api({ headers: new Headers({ Authorization: `Bearer ${token}` }) }).getAuthState().token).toBe(token);
-      expect(new Api({ headers: new Headers({ Authorization: `bearer ${token}` }) }).getAuthState().token).toBe(token);
-   })
+      expect(
+         new Api({ headers: new Headers({ Authorization: `Bearer ${token}` }) }).getAuthState()
+            .token,
+      ).toBe(token);
+      expect(
+         new Api({ headers: new Headers({ Authorization: `bearer ${token}` }) }).getAuthState()
+            .token,
+      ).toBe(token);
+   });
 });
