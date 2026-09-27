@@ -2,8 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-#bknd-admin,
-.bknd-admin {
+#userbase-admin,
+.userbase-admin {
    --color-primary: var(--color-zinc-950);
    --color-background: var(--color-zinc-50);
    --color-muted: var(--color-zinc-200);
@@ -34,9 +34,9 @@
 }
 
 .dark,
-.dark .bknd-admin /* currently used for elements, drop after making headless */,
-#bknd-admin.dark,
-.bknd-admin.dark {
+.dark .userbase-admin /* currently used for elements, drop after making headless */,
+#userbase-admin.dark,
+.userbase-admin.dark {
    --color-primary: var(--color-zinc-50);
    --color-background: rgb(30 31 34);
    --color-muted: rgb(47 47 52);
@@ -70,7 +70,7 @@
    --color-info-foreground: var(--color-info-foreground);
 }
 
-#bknd-admin {
+#userbase-admin {
    @apply bg-background text-primary overflow-hidden h-dvh w-dvw;
 
    ::selection {
@@ -85,7 +85,7 @@
 }
 
 body,
-#bknd-admin {
+#userbase-admin {
    @apply flex flex-1 flex-col h-dvh w-dvw;
 }
 
@@ -97,8 +97,8 @@ body,
    @apply max-h-full w-auto;
 }
 
-#bknd-admin,
-.bknd-admin {
+#userbase-admin,
+.userbase-admin {
    /* Chrome, Edge, and Safari */
    & *::-webkit-scrollbar {
       @apply w-1;

@@ -1,6 +1,6 @@
 import { MarkerType, type Node, Position, ReactFlowProvider } from "@xyflow/react";
 import type { AppDataConfig, TAppDataEntity } from "data/data-schema";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 import { Canvas } from "ui/components/canvas/Canvas";
 import { layoutWithDagre } from "ui/components/canvas/layouts";
 import { Panels } from "ui/components/canvas/panels";
@@ -68,7 +68,7 @@ const nodeTypes = {
 export function DataSchemaCanvas() {
    const {
       config: { data },
-   } = useBknd();
+   } = useUserbase();
    const { theme } = useTheme();
    const nodes = entitiesToNodes(data.entities);
    const edges = relationsToEdges(data.relations).map((e) => ({

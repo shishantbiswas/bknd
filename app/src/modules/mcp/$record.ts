@@ -1,4 +1,4 @@
-import { getPath, s, Tool } from "bknd/utils";
+import { getPath, s, Tool } from "userbase/utils";
 import {
    McpSchemaHelper,
    mcpSchemaSymbol,
@@ -18,7 +18,7 @@ export interface RecordToolSchemaOptions
    extends s.IRecordOptions,
       SchemaWithMcpOptions<RecordToolAdditionalOptions> {}
 
-const opts = Symbol.for("bknd-mcp-record-opts");
+const opts = Symbol.for("userbase-mcp-record-opts");
 
 export class RecordToolSchema<
       AP extends s.Schema,

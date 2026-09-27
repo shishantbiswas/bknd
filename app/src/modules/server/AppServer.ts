@@ -1,6 +1,6 @@
 import { Exception } from "core/errors";
 import { isDebug } from "core/env";
-import { $console, mcpLogLevels, s } from "bknd/utils";
+import { $console, mcpLogLevels, s } from "userbase/utils";
 import { $object } from "modules/mcp";
 import { cors } from "hono/cors";
 import { Module } from "modules/Module";
@@ -77,7 +77,7 @@ export class AppServer extends Module<AppServerConfig> {
             if (new URL(c.req.url).pathname === "/") {
                c.res = undefined;
                c.res = Response.json({
-                  bknd: "hello world!",
+                  userbase: "hello world!",
                });
             }
          }

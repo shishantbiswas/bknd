@@ -1,5 +1,5 @@
 import { Exception } from "core/errors";
-import { type InvalidSchemaError, HttpStatus } from "bknd/utils";
+import { type InvalidSchemaError, HttpStatus } from "userbase/utils";
 import type { Entity } from "./entities";
 import type { Field } from "./fields";
 

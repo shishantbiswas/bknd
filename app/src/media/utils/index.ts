@@ -1,4 +1,4 @@
-import { isFile, randomString } from "bknd/utils";
+import { isFile, randomString } from "userbase/utils";
 import { extension } from "media/storage/mime-types-tiny";
 
 export function getExtensionFromName(filename: string): string | undefined {

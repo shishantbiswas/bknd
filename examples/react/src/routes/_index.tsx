@@ -1,7 +1,7 @@
 import { Center } from "~/components/Center";
-import { useEntityQuery } from "bknd/client";
-import type { SQLocalConnection } from "bknd";
-import { useApp } from "bknd/adapter/browser";
+import { useEntityQuery } from "userbase/client";
+import type { SQLocalConnection } from "userbase";
+import { useApp } from "userbase/adapter/browser";
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 
@@ -18,7 +18,7 @@ export default function IndexPage() {
    return (
       <Center className="flex-col gap-10 max-w-96 mx-auto">
          <div className="flex flex-col gap-2 items-center">
-            <img src="/bknd.svg" alt="bknd" className="w-48 dark:invert" />
+            <img src="/userbase.svg" alt="userbase" className="w-48 dark:invert" />
             <p className="font-mono">local</p>
          </div>
 

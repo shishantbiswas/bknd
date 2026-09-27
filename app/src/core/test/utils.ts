@@ -1,8 +1,8 @@
-import { Connection, createApp as createAppInternal, type CreateAppConfig } from "bknd";
-import { bunSqlite } from "bknd/adapter/bun";
-import type { McpServer } from "bknd/utils";
+import { Connection, createApp as createAppInternal, type CreateAppConfig } from "userbase";
+import { bunSqlite } from "userbase/adapter/bun";
+import type { McpServer } from "userbase/utils";
 
-export { App } from "bknd";
+export { App } from "userbase";
 
 export function createApp({ connection, ...config }: CreateAppConfig = {}) {
    return createAppInternal({

@@ -1,4 +1,4 @@
-import type { DB, EntityData, RepoQueryIn } from "bknd";
+import type { DB, EntityData, RepoQueryIn } from "userbase";
 
 import type { Insertable, Selectable, Updateable } from "kysely";
 import { type BaseModuleApiOptions, ModuleApi, type PrimaryFieldType } from "modules";

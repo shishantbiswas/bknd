@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { genericSqlite, type GenericSqliteConnection } from "bknd";
+import { genericSqlite, type GenericSqliteConnection } from "userbase";
 import type { QueryResult } from "kysely";
 
 export type DoSqliteConnection = GenericSqliteConnection<DurableObjectState["storage"]["sql"]>;

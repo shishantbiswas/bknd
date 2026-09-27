@@ -1,5 +1,5 @@
 {
-  "name": "my-bknd-app",
+  "name": "my-userbase-app",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,7 +16,7 @@
     "@tanstack/react-router-ssr-query": "^1.131.7",
     "@tanstack/react-start": "^1.132.0",
     "@tanstack/router-plugin": "^1.132.0",
-    "bknd": "file:../../app",
+    "userbase": "file:../../app",
     "lucide-react": "^0.561.0",
     "nitro": "^3.0.1-alpha.2",
     "react": "^19.2.0",

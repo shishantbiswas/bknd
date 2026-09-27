@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import { Permission } from "auth/authorize/Permission";
 import { Policy } from "auth/authorize/Policy";
 import { Hono } from "hono";
@@ -7,7 +7,7 @@ import { getPermissionRoutes, permission } from "auth/middlewares/permission.mid
 import { auth } from "auth/middlewares/auth.middleware";
 import { Guard, mergeFilters, type GuardConfig } from "auth/authorize/Guard";
 import { Role, RolePermission } from "auth/authorize/Role";
-import { Exception } from "bknd";
+import { Exception } from "userbase";
 import { convert } from "core/object/query/object-query";
 
 describe("Permission", () => {
@@ -421,7 +421,7 @@ describe("permission middleware", () => {
          );
 
       const res = await hono.request("/test");
-      // expecting 500 because bknd should have handled it correctly
+      // expecting 500 because userbase should have handled it correctly
       expect(res.status).toBe(500);
    });
 

@@ -1,5 +1,5 @@
-import type { SvelteKitBkndConfig } from "bknd/adapter/sveltekit";
-import { em, entity, text, libsql } from "bknd";
+import type { SvelteKitUserbaseConfig } from "userbase/adapter/sveltekit";
+import { em, entity, text, libsql } from "userbase";
 import { createClient } from "@libsql/client";
 
 const schema = em({
@@ -21,7 +21,7 @@ export default {
       enabled: true,
       allow_register: true,
       jwt: {
-        issuer: "bknd-sveltekit-example",
+        issuer: "userbase-sveltekit-example",
         secret: "dev-secret-change-in-production-1234567890abcdef",
       },
       roles: {
@@ -48,9 +48,9 @@ export default {
       });
 
       await ctx.em.mutator("todos").insertMany([
-        { title: "Learn bknd", done: "true" },
+        { title: "Learn userbase", done: "true" },
         { title: "Build with SvelteKit", done: "false" },
       ]);
     },
   },
-} as const satisfies SvelteKitBkndConfig;
+} as const satisfies SvelteKitUserbaseConfig;

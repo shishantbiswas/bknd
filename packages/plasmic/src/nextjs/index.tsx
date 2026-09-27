@@ -47,7 +47,7 @@ export function getStaticProps(PLASMIC: TPlasmic, opts?: TGetStaticPropsOptions)
       }
 
       const globalContextsProps = {
-         bkndContextProps: {
+         userbaseContextProps: {
             baseUrl
          }
       };

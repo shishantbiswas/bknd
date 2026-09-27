@@ -3,7 +3,7 @@ title: Events & Hooks
 tags: ["documentation"]
 ---
 
-bknd comes with a powerful built-in event system that allows you to hook into the app lifecycle and extend its functionality. You can hook into these events in two ways:
+userbase comes with a powerful built-in event system that allows you to hook into the app lifecycle and extend its functionality. You can hook into these events in two ways:
 
 - `async`: Your listener is not blocking the main execution flow. E.g. on Cloudflare Workers, by default, the `ExecutionContext`'s `waitUntil` method is used so that the listeners runs after the response is sent.
 - `sync`: Your listener is blocking the main execution flow. This allows to abort the request in your custom conditions. Some events also allow to return a modified event payload.
@@ -24,7 +24,7 @@ You can listen to events by using the `EventManager` exposed at `app.emgr`. To r
 - `onAny`: Register a listener for all events.
 
 ```typescript
-import { createApp, AppEvents } from "bknd";
+import { createApp, AppEvents } from "userbase";
 const app = createApp();
 
 app.emgr.onEvent(AppEvents.AppRequest, async (event) => {
@@ -41,10 +41,10 @@ app.emgr.onAny(async (event, name) => {
 });
 ```
 
-You may want to register your listeners inside [`bknd.config.ts`](/extending/config) to make sure they are registered before the app is built:
+You may want to register your listeners inside [`userbase.config.ts`](/extending/config) to make sure they are registered before the app is built:
 
-```typescript title="bknd.config.ts"
-import { AppEvents } from "bknd";
+```typescript title="userbase.config.ts"
+import { AppEvents } from "userbase";
 
 export default {
   onBuilt: (app) => {
@@ -76,7 +76,7 @@ This works for all three methods.
 These events are emitted by the `App` class and are available on the `AppEvents` object.
 
 ```typescript
-import { AppEvents } from "bknd";
+import { AppEvents } from "userbase";
 ```
 
 Available events:
@@ -95,7 +95,7 @@ Available events:
 These events are emitted by the `Database` class and are available on the `DatabaseEvents` object. These are divided by events triggered by the `Mutator` and `Repository` classes.
 
 ```typescript
-import { DatabaseEvents } from "bknd";
+import { DatabaseEvents } from "userbase";
 ```
 
 ### Mutator Events
@@ -127,7 +127,7 @@ These events are emitted during database queries (find operations).
 These events are emitted by the `Storage` class and are available on the `MediaEvents` object.
 
 ```typescript
-import { MediaEvents } from "bknd";
+import { MediaEvents } from "userbase";
 ```
 
 | Event               | Params                                   | Description                                                              |

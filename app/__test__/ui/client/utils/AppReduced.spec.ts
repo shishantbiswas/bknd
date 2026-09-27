@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { AppReduced, type AppType } from "ui/client/utils/AppReduced";
-import type { BkndAdminProps } from "ui/Admin";
+import type { UserbaseAdminProps } from "ui/Admin";
 
 // Import the normalizeAdminPath function for testing
 // Note: This assumes the function is exported or we need to test it indirectly through public methods
@@ -24,7 +24,7 @@ describe("AppReduced", () => {
 
    describe("getSettingsPath", () => {
       it("should return settings path with basepath", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -36,7 +36,7 @@ describe("AppReduced", () => {
       });
 
       it("should return settings path with empty basepath", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "",
             logo_return_path: "/",
          };
@@ -48,7 +48,7 @@ describe("AppReduced", () => {
       });
 
       it("should append additional path segments", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -60,7 +60,7 @@ describe("AppReduced", () => {
       });
 
       it("should normalize multiple slashes", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "//admin//",
             logo_return_path: "/",
          };
@@ -72,7 +72,7 @@ describe("AppReduced", () => {
       });
 
       it("should handle basepath without leading slash", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "admin",
             logo_return_path: "/",
          };
@@ -86,7 +86,7 @@ describe("AppReduced", () => {
 
    describe("getAbsolutePath", () => {
       it("should return absolute path with basepath", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -98,7 +98,7 @@ describe("AppReduced", () => {
       });
 
       it("should return base path when no path provided", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -110,7 +110,7 @@ describe("AppReduced", () => {
       });
 
       it("should normalize paths correctly", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "//admin//",
             logo_return_path: "/",
          };
@@ -124,7 +124,7 @@ describe("AppReduced", () => {
 
    describe("options getter", () => {
       it("should return merged options with defaults", () => {
-         const customOptions: BkndAdminProps["config"] = {
+         const customOptions: UserbaseAdminProps["config"] = {
             basepath: "/custom-admin",
             logo_return_path: "/custom-home",
          };
@@ -139,7 +139,7 @@ describe("AppReduced", () => {
       });
 
       it("should use default logo_return_path when not provided", () => {
-         const customOptions: BkndAdminProps["config"] = {
+         const customOptions: UserbaseAdminProps["config"] = {
             basepath: "/admin",
          };
 
@@ -153,7 +153,7 @@ describe("AppReduced", () => {
 
    describe("path normalization behavior", () => {
       it("should normalize duplicate slashes in settings path", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -165,7 +165,7 @@ describe("AppReduced", () => {
       });
 
       it("should handle root path normalization", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/",
             logo_return_path: "/",
          };
@@ -179,7 +179,7 @@ describe("AppReduced", () => {
       });
 
       it("should preserve entity paths ending with slash", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -191,7 +191,7 @@ describe("AppReduced", () => {
       });
 
       it("should remove trailing slashes from non-entity paths", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -205,7 +205,7 @@ describe("AppReduced", () => {
 
    describe("withBasePath - double slash fix (admin_basepath with trailing slash)", () => {
       it("should not produce double slashes when admin_basepath has trailing slash", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -218,7 +218,7 @@ describe("AppReduced", () => {
       });
 
       it("should work correctly when admin_basepath has no trailing slash", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -230,7 +230,7 @@ describe("AppReduced", () => {
       });
 
       it("should handle absolute paths with admin_basepath trailing slash", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -243,7 +243,7 @@ describe("AppReduced", () => {
       });
 
       it("should handle settings path with admin_basepath trailing slash", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };
@@ -258,7 +258,7 @@ describe("AppReduced", () => {
 
    describe("edge cases", () => {
       it("should handle undefined basepath", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             logo_return_path: "/",
          };
 
@@ -270,7 +270,7 @@ describe("AppReduced", () => {
       });
 
       it("should handle null path segments", () => {
-         const options: BkndAdminProps["config"] = {
+         const options: UserbaseAdminProps["config"] = {
             basepath: "/admin",
             logo_return_path: "/",
          };

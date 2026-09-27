@@ -3,7 +3,7 @@
 import type { App } from "App";
 import { isDebug } from "core/env";
 import { config } from "core/config";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 import { addFlashMessage } from "core/server/flash";
 import { html } from "hono/html";
 import { Fragment } from "hono/jsx";
@@ -14,9 +14,9 @@ import type { TApiUser } from "Api";
 import type { AppTheme } from "ui/client/use-theme";
 import type { Manifest } from "vite";
 
-const htmlBkndContextReplace = "<!-- BKND_CONTEXT -->";
+const htmlUserbaseContextReplace = "<!-- BKND_CONTEXT -->";
 
-export type AdminBkndWindowContext = {
+export type AdminUserbaseWindowContext = {
    user?: TApiUser;
    logout_route: string;
    admin_basepath: string;
@@ -120,7 +120,7 @@ export class AdminController extends Controller {
                context: (c) => ({}),
             }),
             async (c) => {
-               const obj: AdminBkndWindowContext = {
+               const obj: AdminUserbaseWindowContext = {
                   user: c.get("auth")?.user,
                   logout_route: authRoutes.logout,
                   admin_basepath: this.options.adminBasepath.replace(/\/+$/, ""),
@@ -171,19 +171,19 @@ export class AdminController extends Controller {
       return hono;
    }
 
-   private async getHtml(obj: AdminBkndWindowContext) {
-      const bknd_context = `window.__BKND__ = JSON.parse('${JSON.stringify(obj)}');`;
+   private async getHtml(obj: AdminUserbaseWindowContext) {
+      const userbase_context = `window.__BKND__ = JSON.parse('${JSON.stringify(obj)}');`;
 
       if (this.options.html) {
-         if (this.options.html.includes(htmlBkndContextReplace)) {
+         if (this.options.html.includes(htmlUserbaseContextReplace)) {
             return this.options.html.replace(
-               htmlBkndContextReplace,
-               "<script>" + bknd_context + "</script>",
+               htmlUserbaseContextReplace,
+               "<script>" + userbase_context + "</script>",
             );
          }
 
          $console.warn(
-            `Custom HTML needs to include '${htmlBkndContextReplace}' to inject BKND context`,
+            `Custom HTML needs to include '${htmlUserbaseContextReplace}' to inject BKND context`,
          );
          return this.options.html as string;
       }
@@ -210,7 +210,7 @@ export class AdminController extends Controller {
                },
             }).then((res) => res.json());
          } else {
-            const manifestPath = "bknd/dist/manifest.json";
+            const manifestPath = "userbase/dist/manifest.json";
             // @ts-ignore
             manifest = await import(/* @vite-ignore */ manifestPath, {
                with: { type: "json" },
@@ -283,7 +283,7 @@ export class AdminController extends Controller {
                   </div>
                   <script
                      dangerouslySetInnerHTML={{
-                        __html: bknd_context,
+                        __html: userbase_context,
                      }}
                   />
                   {!isProd && <script type="module" src={mainPath} />}

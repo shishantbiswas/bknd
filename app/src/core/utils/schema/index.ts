@@ -1,5 +1,5 @@
 import { Exception } from "core/errors";
-import { HttpStatus } from "bknd/utils";
+import { HttpStatus } from "userbase/utils";
 import * as s from "jsonv-ts";
 
 export { validator as jsc, type Options } from "jsonv-ts/hono";
@@ -24,7 +24,7 @@ export { secret, SecretSchema } from "./secret";
 
 export { s };
 
-const symbol = Symbol("bknd-validation-mark");
+const symbol = Symbol("userbase-validation-mark");
 
 export function stripMark<O = any>(obj: O) {
    const newObj = structuredClone(obj);

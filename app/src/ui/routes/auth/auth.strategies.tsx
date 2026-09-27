@@ -14,8 +14,8 @@ import {
    TbSettings,
 } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
-import { useBknd } from "ui/client/bknd";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+import { useUserbase } from "ui/client/userbase";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Message } from "ui/components/display/Message";
@@ -44,7 +44,7 @@ export function AuthStrategiesList(props) {
       config: {
          auth: { enabled },
       },
-   } = useBknd({ withSecrets: true });
+   } = useUserbase({ withSecrets: true });
    if (!hasSecrets) {
       return <Message.MissingPermission what="Auth Strategies" />;
    } else if (!enabled) {
@@ -60,8 +60,8 @@ const formOptions = {
 };
 
 function AuthStrategiesListInternal() {
-   const { readonly } = useBknd();
-   const $auth = useBkndAuth();
+   const { readonly } = useUserbase();
+   const $auth = useUserbaseAuth();
    const config = $auth.config.strategies;
    const schema = $auth.schema.properties.strategies;
    const schemas = Object.fromEntries(
@@ -139,7 +139,7 @@ type StrategyProps = {
 
 const Strategy = ({ type, name, unavailable }: StrategyProps) => {
    const errors = useFormError(name, { strict: true });
-   const $auth = useBkndAuth();
+   const $auth = useUserbaseAuth();
    const schemas = Object.fromEntries(
       // @ts-ignore
       $auth.schema.properties.strategies.additionalProperties.anyOf.map((s) => [

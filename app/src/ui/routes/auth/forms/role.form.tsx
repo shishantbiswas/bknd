@@ -1,9 +1,9 @@
 import { Input, Switch, Tooltip } from "@mantine/core";
 import { guardRoleSchema } from "auth/auth-schema";
-import { ucFirst, type s } from "bknd/utils";
+import { ucFirst, type s } from "userbase/utils";
 import { forwardRef, useImperativeHandle } from "react";
 import { type UseControllerProps, useController, useForm } from "react-hook-form";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Button } from "ui/components/buttons/Button";
 import { MantineSwitch } from "ui/components/form/hook-form-mantine/MantineSwitch";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
@@ -24,7 +24,7 @@ export const AuthRoleForm = forwardRef<
       debug?: boolean;
    }
 >(({ role, debug }, ref) => {
-   const { permissions } = useBknd();
+   const { permissions } = useUserbase();
 
    const {
       formState: { isValid },

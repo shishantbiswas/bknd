@@ -1,8 +1,8 @@
-import type { PrimaryFieldType, RepoQueryIn } from "bknd";
+import type { PrimaryFieldType, RepoQueryIn } from "userbase";
 import type { MediaFieldSchema } from "media/AppMedia";
 import type { TAppMediaConfig } from "media/media-schema";
 import { useId, useEffect, useRef, useState } from "react";
-import { type Api, useApi, useApiInfiniteQuery, useApiQuery, useInvalidate } from "bknd/client";
+import { type Api, useApi, useApiInfiniteQuery, useApiQuery, useInvalidate } from "userbase/client";
 import { useEvent } from "ui/hooks/use-event";
 import { Dropzone, type DropzoneProps } from "./Dropzone";
 import { mediaItemsToFileStates } from "./helper";

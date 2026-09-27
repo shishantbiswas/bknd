@@ -9,7 +9,7 @@ export default function App() {
     <Router
       root={props => (
         <MetaProvider>
-          <Title>Solid Start 🤝 Bknd.io</Title>
+          <Title>Solid Start 🤝 Userbase.io</Title>
           <Suspense>{props.children}</Suspense>
         </MetaProvider>
       )}

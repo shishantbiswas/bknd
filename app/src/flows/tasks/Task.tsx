@@ -1,7 +1,7 @@
-//import { BkndError, SimpleRenderer } from "core";
-import { BkndError } from "core/errors";
+//import { UserbaseError, SimpleRenderer } from "core";
+import { UserbaseError } from "core/errors";
 
-import { s, parse } from "bknd/utils";
+import { s, parse } from "userbase/utils";
 import type { InputsMap } from "../flows/Execution";
 import { SimpleRenderer } from "core/template/SimpleRenderer";
 
@@ -116,9 +116,9 @@ export abstract class Task<Params extends s.Schema = s.Schema, Output = unknown>
             try {
                newParams[key] = await renderer.render(value as string);
             } catch (e: any) {
-               // wrap in bknd error for better error display
-               if (!(e instanceof BkndError)) {
-                  throw new BkndError(
+               // wrap in userbase error for better error display
+               if (!(e instanceof UserbaseError)) {
+                  throw new UserbaseError(
                      "Failed to resolve param",
                      {
                         key,
@@ -176,7 +176,7 @@ export abstract class Task<Params extends s.Schema = s.Schema, Output = unknown>
       } catch (e: any) {
          success = false;
 
-         if (e instanceof BkndError) {
+         if (e instanceof UserbaseError) {
             error = e.toJSON();
          } else {
             error = {
@@ -190,7 +190,7 @@ export abstract class Task<Params extends s.Schema = s.Schema, Output = unknown>
    }
 
    protected error(message: string, details?: Record<string, any>) {
-      return new BkndError(message, details, "runtime");
+      return new UserbaseError(message, details, "runtime");
    }
 
    abstract execute(inputs: Map<string, any>): Promise<Output>;

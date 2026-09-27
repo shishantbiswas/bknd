@@ -1,22 +1,22 @@
-import type { DB, Field } from "bknd";
+import type { DB, Field } from "userbase";
 import type { ReactNode } from "react";
 import type { Entity } from "data/entities";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 import type { DropdownProps } from "ui/components/overlay/Dropdown";
 import type { ButtonProps } from "ui/components/buttons/Button";
 
-export type BkndAdminEntityContext = "list" | "create" | "update";
+export type UserbaseAdminEntityContext = "list" | "create" | "update";
 
-export type BkndAdminEntitiesOptions = {
-   [E in keyof DB]?: BkndAdminEntityOptions<E>;
+export type UserbaseAdminEntitiesOptions = {
+   [E in keyof DB]?: UserbaseAdminEntityOptions<E>;
 };
 
-export type BkndAdminEntityOptions<E extends keyof DB | string> = {
+export type UserbaseAdminEntityOptions<E extends keyof DB | string> = {
    /**
     * Header to be rendered depending on the context
     */
    header?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       data?: DB[E],
    ) => ReactNode | void | undefined;
@@ -24,7 +24,7 @@ export type BkndAdminEntityOptions<E extends keyof DB | string> = {
     * Footer to be rendered depending on the context
     */
    footer?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       data?: DB[E],
    ) => ReactNode | void | undefined;
@@ -32,7 +32,7 @@ export type BkndAdminEntityOptions<E extends keyof DB | string> = {
     * Actions to be rendered depending on the context
     */
    actions?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       data?: DB[E],
    ) => {
@@ -49,16 +49,16 @@ export type BkndAdminEntityOptions<E extends keyof DB | string> = {
     * Field UI overrides
     */
    fields?: {
-      [F in keyof DB[E]]?: BkndAdminEntityFieldOptions<E>;
+      [F in keyof DB[E]]?: UserbaseAdminEntityFieldOptions<E>;
    };
 };
 
-export type BkndAdminEntityFieldOptions<E extends keyof DB | string> = {
+export type UserbaseAdminEntityFieldOptions<E extends keyof DB | string> = {
    /**
     * Override the rendering of a certain field
     */
    render?: (
-      context: BkndAdminEntityContext,
+      context: UserbaseAdminEntityContext,
       entity: Entity,
       field: Field,
       ctx: {
@@ -69,8 +69,8 @@ export type BkndAdminEntityFieldOptions<E extends keyof DB | string> = {
    ) => ReactNode | void | undefined;
 };
 
-export function useEntityAdminOptions(entity: Entity, context: BkndAdminEntityContext, data?: any) {
-   const b = useBknd();
+export function useEntityAdminOptions(entity: Entity, context: UserbaseAdminEntityContext, data?: any) {
+   const b = useUserbase();
    const opts = b.options?.entities?.[entity.name];
    const footer = opts?.footer?.(context, entity, data) ?? null;
    const header = opts?.header?.(context, entity, data) ?? null;

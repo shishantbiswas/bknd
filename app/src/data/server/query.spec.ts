@@ -1,6 +1,6 @@
 import { test, describe, expect, beforeAll, afterAll } from "bun:test";
 import * as q from "./query";
-import { parse as $parse, type ParseOptions } from "bknd/utils";
+import { parse as $parse, type ParseOptions } from "userbase/utils";
 import type { PrimaryFieldType } from "modules";
 import type { Generated } from "kysely";
 import { disableConsoleLog, enableConsoleLog } from "core/utils/test";

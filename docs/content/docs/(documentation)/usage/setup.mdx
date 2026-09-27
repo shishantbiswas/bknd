@@ -1,13 +1,13 @@
 ---
 title: "Setup & Modes"
-description: "Choose a mode and get bknd running with your app"
+description: "Choose a mode and get userbase running with your app"
 icon: Pin
 tags: ["documentation"]
 ---
 
 import { SquareMousePointer, Code, Blend } from 'lucide-react';
 
-bknd supports three modes. Each mode determines how your backend is configured and where that configuration lives.
+userbase supports three modes. Each mode determines how your backend is configured and where that configuration lives.
 
 ## Choose your mode
 
@@ -35,34 +35,34 @@ You can always change modes later. Start with UI-only if you're exploring.
 
 ## UI-only mode
 
-This is the default. Run bknd and configure everything through the Admin UI. No setup code required beyond a database connection.
+This is the default. Run userbase and configure everything through the Admin UI. No setup code required beyond a database connection.
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase";
 
 export default {
   connection: { url: "file:data.db" },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 If you want to provide an initial data structure (entities, auth settings, etc.), pass it via `config`. It will only be applied when the database is empty.
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase";
 
 export default {
   connection: { url: "file:data.db" },
   config: {
     auth: { enabled: true },
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 <Callout type="info">
   In UI-only mode, the `config` property is only applied on first boot. After that, all changes are made through the Admin UI.
 </Callout>
 
-**Next step:** Pick your [framework or runtime integration](/integration/introduction) to wire bknd into your app.
+**Next step:** Pick your [framework or runtime integration](/integration/introduction) to wire userbase into your app.
 
 ---
 
@@ -70,9 +70,9 @@ export default {
 
 Define your data structure programmatically with a Drizzle-like API. The Admin UI becomes read-only for configuration — you still use it to manage data.
 
-```typescript title="bknd.config.ts"
-import { type BkndConfig, em, entity, text, boolean } from "bknd";
-import { secureRandomString } from "bknd/utils";
+```typescript title="userbase.config.ts"
+import { type UserbaseConfig, em, entity, text, boolean } from "userbase";
+import { secureRandomString } from "userbase/utils";
 
 const schema = em({
   todos: entity("todos", {
@@ -93,12 +93,12 @@ export default {
   options: {
     mode: "code",
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 Unlike UI-only mode, the `config` is applied on every boot. If you change the schema, you may need to [sync the database](/usage/cli#syncing-the-database-sync).
 
-**Next step:** Pick your [framework or runtime integration](/integration/introduction) to wire bknd into your app.
+**Next step:** Pick your [framework or runtime integration](/integration/introduction) to wire userbase into your app.
 
 ---
 
@@ -106,8 +106,8 @@ Unlike UI-only mode, the `config` is applied on every boot. If you change the sc
 
 Use the Admin UI to configure your backend while developing. When you're ready to deploy, export the config and run in code mode for production.
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase";
 import appConfig from "./appconfig.json" with { type: "json" };
 
 export default {
@@ -119,49 +119,49 @@ export default {
       secrets: process.env,
     },
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 To export your config, secrets, and types, use the CLI or plugins:
 
 | What | CLI Command | Plugin |
 |------|-------------|--------|
-| Configuration | [`bknd config`](/usage/cli/#getting-the-configuration-config) | [`syncConfig`](/extending/plugins/#syncconfig) |
-| Secrets | [`bknd secrets`](/usage/cli/#getting-the-secrets-secrets) | [`syncSecrets`](/extending/plugins/#syncsecrets) |
-| Types | [`bknd types`](/usage/cli/#generating-types-types) | [`syncTypes`](/extending/plugins/#synctypes) |
+| Configuration | [`userbase config`](/usage/cli/#getting-the-configuration-config) | [`syncConfig`](/extending/plugins/#syncconfig) |
+| Secrets | [`userbase secrets`](/usage/cli/#getting-the-secrets-secrets) | [`syncSecrets`](/extending/plugins/#syncsecrets) |
+| Types | [`userbase types`](/usage/cli/#generating-types-types) | [`syncTypes`](/extending/plugins/#synctypes) |
 
-**Next step:** Pick your [framework or runtime integration](/integration/introduction) to wire bknd into your app.
+**Next step:** Pick your [framework or runtime integration](/integration/introduction) to wire userbase into your app.
 
 ---
 
 ## Mode helpers
 
-For code and hybrid modes, bknd provides helper functions that handle syncing, mode switching, and schema validation automatically.
+For code and hybrid modes, userbase provides helper functions that handle syncing, mode switching, and schema validation automatically.
 
-```typescript title="bknd.config.ts (code mode with Bun)"
-import { code } from "bknd/modes";
-import { type BunBkndConfig, writer } from "bknd/adapter/bun";
+```typescript title="userbase.config.ts (code mode with Bun)"
+import { code } from "userbase/modes";
+import { type BunUserbaseConfig, writer } from "userbase/adapter/bun";
 
-export default code<BunBkndConfig>({
+export default code<BunUserbaseConfig>({
   connection: { url: "file:data.db" },
   writer,
   isProduction: Bun.env.NODE_ENV === "production",
-  typesFilePath: "bknd-types.d.ts",
+  typesFilePath: "userbase-types.d.ts",
 });
 ```
 
-```typescript title="bknd.config.ts (hybrid mode with Bun)"
-import { hybrid } from "bknd/modes";
-import { type BunBkndConfig, writer, reader } from "bknd/adapter/bun";
+```typescript title="userbase.config.ts (hybrid mode with Bun)"
+import { hybrid } from "userbase/modes";
+import { type BunUserbaseConfig, writer, reader } from "userbase/adapter/bun";
 
-export default hybrid<BunBkndConfig>({
+export default hybrid<BunUserbaseConfig>({
   connection: { url: "file:data.db" },
   writer,
   reader,
   secrets: await Bun.file(".env.local").json(),
   isProduction: Bun.env.NODE_ENV === "production",
-  typesFilePath: "bknd-types.d.ts",
-  configFilePath: "bknd-config.json",
+  typesFilePath: "userbase-types.d.ts",
+  configFilePath: "userbase-config.json",
 });
 ```
 
@@ -175,6 +175,6 @@ Mode helpers give you:
 
 ## Further reading
 
-- [Framework & runtime integrations](/integration/introduction) — wire bknd into Next.js, Astro, Bun, Cloudflare, etc.
+- [Framework & runtime integrations](/integration/introduction) — wire userbase into Next.js, Astro, Bun, Cloudflare, etc.
 - [Database configuration](/usage/database) — choose and configure your SQL database
-- [Configuration reference](/extending/config) — full `BkndConfig` API, plugins, events, and lifecycle hooks
+- [Configuration reference](/extending/config) — full `UserbaseConfig` API, plugins, events, and lifecycle hooks

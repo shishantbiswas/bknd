@@ -1,10 +1,10 @@
-import type { PrimaryFieldType } from "bknd";
-import { ucFirst } from "bknd/utils";
-import type { Entity, EntityData, EntityRelation } from "bknd";
+import type { PrimaryFieldType } from "userbase";
+import { ucFirst } from "userbase/utils";
+import type { Entity, EntityData, EntityRelation } from "userbase";
 import { Fragment, useState } from "react";
 import { TbDots } from "react-icons/tb";
-import { useApiQuery, useEntityQuery } from "bknd/client";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { useApiQuery, useEntityQuery } from "userbase/client";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Message } from "ui/components/display/Message";
@@ -13,7 +13,7 @@ import { useBrowserTitle } from "ui/hooks/use-browser-title";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
 import { Breadcrumbs2 } from "ui/layouts/AppShell/Breadcrumbs2";
 import { routes, useNavigate } from "ui/lib/routes";
-import { bkndModals } from "ui/modals";
+import { userbaseModals } from "ui/modals";
 import { EntityForm } from "ui/modules/data/components/EntityForm";
 import { EntityTable2 } from "ui/modules/data/components/EntityTable2";
 import { useEntityForm } from "ui/modules/data/hooks/useEntityForm";
@@ -25,7 +25,7 @@ export function DataEntityUpdate({ params }) {
 }
 
 function DataEntityUpdateImpl({ params }) {
-   const { $data, relations } = useBkndData();
+   const { $data, relations } = useUserbaseData();
    const entity = $data.entity(params.entity as string);
    if (!entity) {
       return <Message.NotFound description={`Entity "${params.entity}" doesn't exist.`} />;
@@ -134,7 +134,7 @@ function DataEntityUpdateImpl({ params }) {
                         {
                            label: "Inspect",
                            onClick: () => {
-                              bkndModals.open("debug", {
+                              userbaseModals.open("debug", {
                                  data: {
                                     data: data as any,
                                     entity: entity.toJSON(),

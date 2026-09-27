@@ -8,7 +8,7 @@
       "dev": "tsx --watch index.js"
    },
    "dependencies": {
-      "bknd": "file:../../app",
+      "userbase": "file:../../app",
       "@hono/node-server": "^1.13.3"
    },
    "devDependencies": {

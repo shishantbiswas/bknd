@@ -1,19 +1,19 @@
-import type { BkndConfig } from "bknd/adapter";
-import { makeModeConfig, type BkndModeConfig } from "./shared";
-import { $console } from "bknd/utils";
+import type { UserbaseConfig } from "userbase/adapter";
+import { makeModeConfig, type UserbaseModeConfig } from "./shared";
+import { $console } from "userbase/utils";
 
-export type BkndCodeModeConfig<Args = any> = BkndModeConfig<Args>;
+export type UserbaseCodeModeConfig<Args = any> = UserbaseModeConfig<Args>;
 
-export type CodeMode<AdapterConfig extends BkndConfig> = AdapterConfig extends BkndConfig<
+export type CodeMode<AdapterConfig extends UserbaseConfig> = AdapterConfig extends UserbaseConfig<
    infer Args
 >
-   ? BkndModeConfig<Args, AdapterConfig>
+   ? UserbaseModeConfig<Args, AdapterConfig>
    : never;
 
 export function code<
-   Config extends BkndConfig,
-   Args = Config extends BkndConfig<infer A> ? A : unknown,
->(codeConfig: CodeMode<Config>): BkndConfig<Args> {
+   Config extends UserbaseConfig,
+   Args = Config extends UserbaseConfig<infer A> ? A : unknown,
+>(codeConfig: CodeMode<Config>): UserbaseConfig<Args> {
    return {
       ...codeConfig,
       app: async (args) => {

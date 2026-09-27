@@ -1,4 +1,4 @@
-import type { PrimaryFieldType, Entity, EntityData, Field } from "bknd";
+import type { PrimaryFieldType, Entity, EntityData, Field } from "userbase";
 import type { FieldApi, ReactFormExtendedApi } from "@tanstack/react-form";
 import type { JSX } from "react";
 import { useStore } from "@tanstack/react-store";
@@ -13,7 +13,7 @@ import { EntityJsonSchemaFormField } from "./fields/EntityJsonSchemaFormField";
 import { EntityRelationalFormField } from "./fields/EntityRelationalFormField";
 import ErrorBoundary from "ui/components/display/ErrorBoundary";
 import { Alert } from "ui/components/display/Alert";
-import { bkndModals } from "ui/modals";
+import { userbaseModals } from "ui/modals";
 import type { EnumField, JsonField, JsonSchemaField } from "data/fields";
 import type { RelationField } from "data/relations";
 import { useEntityAdminOptions } from "ui/options";
@@ -251,7 +251,7 @@ function EntityMediaFormField({
 
    const key = JSON.stringify([entity, entityId, field.name, value.length]);
    const onClick = (file: FileState) => {
-      bkndModals.open(bkndModals.ids.mediaInfo, {
+      userbaseModals.open(userbaseModals.ids.mediaInfo, {
          file,
       });
    };

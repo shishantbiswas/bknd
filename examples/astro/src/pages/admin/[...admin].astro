@@ -1,8 +1,8 @@
 ---
-import { Admin } from "bknd/ui";
-import "bknd/dist/styles.css";
+import { Admin } from "userbase/ui";
+import "userbase/dist/styles.css";
 
-import { getApi } from "../../bknd";
+import { getApi } from "../../userbase";
 
 const api = await getApi(Astro, { verify: true });
 const user = api.getUser();

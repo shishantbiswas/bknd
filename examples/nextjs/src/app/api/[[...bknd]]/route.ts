@@ -1,5 +1,5 @@
-import { config } from "@/bknd";
-import { serve } from "bknd/adapter/nextjs";
+import { config } from "@/userbase";
+import { serve } from "userbase/adapter/nextjs";
 
 // since we're using the local media adapter in this example,
 // we can't use the edge runtime.
@@ -8,7 +8,7 @@ import { serve } from "bknd/adapter/nextjs";
 const handler = serve({
    ...config,
    cleanRequest: {
-      searchParams: ["bknd"],
+      searchParams: ["userbase"],
    },
 });
 

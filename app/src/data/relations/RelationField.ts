@@ -3,7 +3,7 @@ import { Field, baseFieldConfigSchema } from "../fields";
 import type { EntityRelation } from "./EntityRelation";
 import type { EntityRelationAnchor } from "./EntityRelationAnchor";
 import type { TFieldTSType } from "data/entities/EntityTypescript";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import { DEFAULT_RELATION_CASCADE, RelationCascades, type RelationCascade } from "./relation-types";
 
 export const relationFieldConfigSchema = s.strictObject({

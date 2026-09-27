@@ -86,7 +86,7 @@ SchemaFormModal.defaultTitle = "JSON Schema Form Modal";
 SchemaFormModal.modalProps = {
    size: "md",
    classNames: {
-      root: "bknd-admin",
+      root: "userbase-admin",
       header: "!bg-lightest !py-3 px-5 !h-auto !min-h-px",
       content: "rounded-lg select-none",
       title: "!font-bold !text-md",

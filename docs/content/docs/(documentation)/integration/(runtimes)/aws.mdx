@@ -1,41 +1,41 @@
 ---
 title: "AWS Lambda"
-description: "Run bknd inside AWS Lambda"
+description: "Run userbase inside AWS Lambda"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with AWS Lambda and bknd you can either install the package manually and follow the descriptions below, or use the CLI starter:
+To get started with AWS Lambda and userbase you can either install the package manually and follow the descriptions below, or use the CLI starter:
 
 ### CLI Starter
 
 Create a new Bun CLI starter project by running the following command:
 
 ```sh
-npx bknd create -i aws
+npx userbase create -i aws
 ```
 
 ### Manual
 
-Create a new AWS Lambda project and then install bknd as a dependency:
+Create a new AWS Lambda project and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -45,8 +45,8 @@ bun add bknd
 To serve the API, you can use the `serveLambda` function of the AWS Lambda adapter.
 
 ```tsx title="index.mjs"
-import { serveLambda } from "bknd/adapter/aws";
-import { libsql } from "bknd";
+import { serveLambda } from "userbase/adapter/aws";
+import { libsql } from "userbase";
 
 export const handler = serveLambda({
   connection: libsql({
@@ -65,13 +65,13 @@ Lambda functions should be as small as possible. Therefore, the static files for
 Instead, we recommend to copy the static files and bundle them with the lambda function. To copy the static files, you can use the `copy-assets` command:
 
 ```bash
-npx bknd copy-assets --out static
+npx userbase copy-assets --out static
 ```
 
 This will copy the static files to the `static` directory and then serve them from there:
 
 ```tsx title="index.mjs"
-import { serveLambda } from "bknd/adapter/aws";
+import { serveLambda } from "userbase/adapter/aws";
 
 export const handler = serveLambda({
   connection: {
@@ -97,7 +97,7 @@ To deploy a lambda function, you could follow these steps:
 5. Create a lambda function
 6. Create a function URL for the lambda function & make it publicly accessible (optional)
 
-Depending on your use case, you may want to skip step 6 and use the AWS API Gateway to serve the lambda function. Here is an [example deployment script](https://github.com/bknd-io/bknd/blob/main/examples/aws-lambda/deploy.sh) which creates the AWS resources described above, bundles the lambda function and uploads it.
+Depending on your use case, you may want to skip step 6 and use the AWS API Gateway to serve the lambda function. Here is an [example deployment script](https://github.com/userbase-io/userbase/blob/main/examples/aws-lambda/deploy.sh) which creates the AWS resources described above, bundles the lambda function and uploads it.
 
 ### Using the CLI starter
 
@@ -111,8 +111,8 @@ To make adjustments to the lambda function created (e.g. architecture, memory, t
 
 ```sh title="deploy.sh"
 # cat deploy.sh | head -12
-FUNCTION_NAME="bknd-lambda"
-ROLE_NAME="bknd-lambda-execution-role"
+FUNCTION_NAME="userbase-lambda"
+ROLE_NAME="userbase-lambda-execution-role"
 RUNTIME="nodejs22.x"
 HANDLER="index.handler"
 ARCHITECTURE="arm64" # or "x86_64"

@@ -10,7 +10,7 @@ import {
 import type { ReactNode } from "react";
 import { type Control, type FieldValues, type UseFormRegister, useForm } from "react-hook-form";
 import { TbRefresh } from "react-icons/tb";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Button } from "ui/components/buttons/Button";
 import { MantineNumberInput } from "ui/components/form/hook-form-mantine/MantineNumberInput";
 import { MantineSelect } from "ui/components/form/hook-form-mantine/MantineSelect";
@@ -18,7 +18,7 @@ import { useStepContext } from "ui/components/steps/Steps";
 import { useEvent } from "ui/hooks/use-event";
 import { ModalBody, ModalFooter } from "./CreateModal";
 import type { TCreateModalSchema } from "./schema";
-import { s, stringIdentifier } from "bknd/utils";
+import { s, stringIdentifier } from "userbase/utils";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 
 const Relations: {
@@ -64,7 +64,7 @@ type ComponentCtx<T extends FieldValues = FieldValues> = {
 };
 
 export function StepRelation() {
-   const { config } = useBknd();
+   const { config } = useUserbase();
    const entities = config.data.entities;
    const count = Object.keys(entities ?? {}).length;
    const { nextStep, stepBack, state, path, setState } = useStepContext<TCreateModalSchema>();

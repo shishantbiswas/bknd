@@ -1,4 +1,4 @@
-import { getApp } from "~/bknd";
+import { getApp } from "~/userbase";
 
 const handler = async (args: { request: Request }) => {
    const app = await getApp();

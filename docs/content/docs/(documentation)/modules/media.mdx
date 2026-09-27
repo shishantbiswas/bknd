@@ -6,11 +6,11 @@ tags: ["documentation"]
 
 <Callout type="info" title="The documentation is currently a work in progress">
   Check back soon — or stay updated on our progress on
-  [GitHub](https://github.com/bknd-io/bknd) and join the conversation in
+  [GitHub](https://github.com/userbase-io/userbase) and join the conversation in
   [Discord](https://discord.gg/952SFk8Tb8).
 </Callout>
 
-**bknd** provides a flexible and efficient way to handle media files, making it easy to upload, manage, and deliver content across various platforms.
+**userbase** provides a flexible and efficient way to handle media files, making it easy to upload, manage, and deliver content across various platforms.
 
 ### **Core Features**
 
@@ -27,11 +27,11 @@ and control without added complexity.
 
 ### Pre-built support for S3
 
-There are two ways to enable S3 or S3 compatible storage in bknd.
+There are two ways to enable S3 or S3 compatible storage in userbase.
 
 1. Enable via the admin UI.
 
-   Simply navigate to the **Media** tab of the bknd admin UI and enable the S3 media support.
+   Simply navigate to the **Media** tab of the userbase admin UI and enable the S3 media support.
    Enter your AWS S3-compatible storage Access Key, Secret Access Key, and URL.
    This will automatically configure the S3 adapter for you.
 
@@ -42,10 +42,10 @@ There are two ways to enable S3 or S3 compatible storage in bknd.
 
 2. Enable programmatically.
 
-   To enable using a code-first approach, create corresponding configuration using the `config` option in your `bknd.config.ts` file.
+   To enable using a code-first approach, create corresponding configuration using the `config` option in your `userbase.config.ts` file.
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd/adapter";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase/adapter";
 
 export default {
   config: {
@@ -61,16 +61,16 @@ export default {
       },
     },
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### Local adapter for development
 
 For local development and testing, you can use the local file system adapter. This is particularly useful when working with Node.js environments.
 
-```typescript title="bknd.config.ts"
-import { registerLocalMediaAdapter } from "bknd/adapter/node";
-import type { BkndConfig } from "bknd/adapter";
+```typescript title="userbase.config.ts"
+import { registerLocalMediaAdapter } from "userbase/adapter/node";
+import type { UserbaseConfig } from "userbase/adapter";
 
 // Register the local media adapter
 const local = registerLocalMediaAdapter();
@@ -84,7 +84,7 @@ export default {
       }),
     },
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 This configuration will store uploaded files in the specified directory,

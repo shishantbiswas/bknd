@@ -1,4 +1,4 @@
-import { transformObject } from "bknd/utils";
+import { transformObject } from "userbase/utils";
 import { Module } from "modules/Module";
 import { DataController } from "./api/DataController";
 import { type AppDataConfig, dataConfigSchema } from "./data-schema";

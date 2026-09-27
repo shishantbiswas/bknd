@@ -3,7 +3,7 @@ import { useMcpStore } from "./state";
 import * as Tools from "./tools";
 import { TbWorld } from "react-icons/tb";
 import { McpIcon } from "./components/mcp-icon";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Empty } from "ui/components/display/Empty";
 import { Button } from "ui/components/buttons/Button";
 import { appShellStore } from "ui/store";
@@ -14,7 +14,7 @@ import { Route, Switch } from "wouter";
 export default function ToolsMcp() {
    useBrowserTitle(["MCP UI"]);
 
-   const { config } = useBknd();
+   const { config } = useUserbase();
    const openSidebar = appShellStore((store) => store.toggleSidebar("default"));
    const mcpPath = config.server.mcp.path;
 

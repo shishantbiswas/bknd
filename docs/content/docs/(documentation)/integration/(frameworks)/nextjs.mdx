@@ -1,41 +1,41 @@
 ---
 title: "Next.js"
-description: "Run bknd inside Next.js"
+description: "Run userbase inside Next.js"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with Next.js and bknd you can either install the package manually, and follow the descriptions below, or use the CLI starter.
+To get started with Next.js and userbase you can either install the package manually, and follow the descriptions below, or use the CLI starter.
 
 ### CLI Starter
 
 Create a new Next.js CLI starter project by running the following command:
 
 ```sh
-  npx bknd create -i nextjs
+  npx userbase create -i nextjs
 ```
 
 ### Manual
 
-Create a new Next.js project by following the [official guide](https://nextjs.org/docs/pages/api-reference/cli/create-next-app), and then install bknd as a dependency:
+Create a new Next.js project by following the [official guide](https://nextjs.org/docs/pages/api-reference/cli/create-next-app), and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -48,43 +48,43 @@ bun add bknd
   [upgrade](https://nodejs.org/en/download/) if necessary.
 </Callout>
 
-Now create a `bknd.config.ts` file in the root of your project. If you created the project using the CLI starter, this file is already created for you.
+Now create a `userbase.config.ts` file in the root of your project. If you created the project using the CLI starter, this file is already created for you.
 
-```typescript title="bknd.config.ts"
-import type { NextjsBkndConfig } from "bknd/adapter/nextjs";
+```typescript title="userbase.config.ts"
+import type { NextjsUserbaseConfig } from "userbase/adapter/nextjs";
 
 export default {
   connection: {
     url: "file:data.db",
   },
-} satisfies NextjsBkndConfig;
+} satisfies NextjsUserbaseConfig;
 ```
 
-See [bknd.config.ts](/extending/config) for more information on how to configure bknd. The `NextjsBkndConfig` type extends the `BkndConfig` type with the following additional properties:
+See [userbase.config.ts](/extending/config) for more information on how to configure userbase. The `NextjsUserbaseConfig` type extends the `UserbaseConfig` type with the following additional properties:
 
 ```typescript
 type NextjsEnv = NextApiRequest["env"];
-export type NextjsBkndConfig<Env = NextjsEnv> = FrameworkBkndConfig<Env> & {
+export type NextjsUserbaseConfig<Env = NextjsEnv> = FrameworkUserbaseConfig<Env> & {
   cleanRequest?: { searchParams?: string[] };
 };
 ```
 
 ## Serve the API
 
-Create a helper file to instantiate the bknd instance and retrieve the API, importing the configuration from the `bknd.config.ts` file:
+Create a helper file to instantiate the userbase instance and retrieve the API, importing the configuration from the `userbase.config.ts` file:
 
-```ts title="src/bknd.ts"
+```ts title="src/userbase.ts"
 import {
-  type NextjsBkndConfig,
-  getApp as getBkndApp,
-} from "bknd/adapter/nextjs";
+  type NextjsUserbaseConfig,
+  getApp as getUserbaseApp,
+} from "userbase/adapter/nextjs";
 import { headers } from "next/headers";
-import config from "../bknd.config";
+import config from "../userbase.config";
 
 export { config };
 
 export async function getApp() {
-  return await getBkndApp(config, process.env);
+  return await getUserbaseApp(config, process.env);
 }
 
 export async function getApi(opts?: { verify?: boolean }) {
@@ -101,11 +101,11 @@ export async function getApi(opts?: { verify?: boolean }) {
 
 For more information about the connection object, refer to the [Database](/usage/database) guide.
 
-Now to expose the API, create a catch-all route file at `src/api/[[...bknd]]/route.ts`:
+Now to expose the API, create a catch-all route file at `src/api/[[...userbase]]/route.ts`:
 
-```ts title="src/api/[[...bknd]]/route.ts"
-import { config } from "@/bknd";
-import { serve } from "bknd/adapter/nextjs";
+```ts title="src/api/[[...userbase]]/route.ts"
+import { config } from "@/userbase";
+import { serve } from "userbase/adapter/nextjs";
 
 // optionally, you can set the runtime to edge for better performance
 // export const runtime = "edge";
@@ -115,7 +115,7 @@ const handler = serve({
   cleanRequest: {
     // depending on what name you used for the catch-all route,
     // you need to change this to clean it from the request.
-    searchParams: ["bknd"],
+    searchParams: ["userbase"],
   },
 });
 
@@ -133,7 +133,7 @@ Create a file at `admin/[[...admin]]/page.client.tsx`:
 "use client";
 import dynamic from "next/dynamic";
 
-export const Admin = dynamic(async () => (await import("bknd/ui")).Admin, {
+export const Admin = dynamic(async () => (await import("userbase/ui")).Admin, {
   ssr: false,
 });
 ```
@@ -144,8 +144,8 @@ export const Admin = dynamic(async () => (await import("bknd/ui")).Admin, {
 
 Create a page at `admin/[[...admin]]/page.tsx`:
 ```tsx title="admin/[[...admin]]/page.tsx"
-import { getApi } from "@/bknd";
-import "bknd/dist/styles.css";
+import { getApi } from "@/userbase";
+import "userbase/dist/styles.css";
 import { Admin } from "./page.client";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
@@ -176,12 +176,12 @@ export default async function AdminPage() {
 
 ## React SDK configuration
 
-To use queries and mutation on client side, bknd provides first class support for it with it's [React SDK](/usage/react) 
+To use queries and mutation on client side, userbase provides first class support for it with it's [React SDK](/usage/react) 
 to set it up with Next.js add the `ClientProvider` to your root layout
 
 
 ```tsx title="app/layout.tsx"
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 export default function RootLayout({
   children,
@@ -206,7 +206,7 @@ export default function RootLayout({
 You can use the `getApi` helper function we've already set up to fetch and mutate in static pages and server components:
 
 ```tsx title="app/page.tsx"
-import { getApi } from "@/bknd";
+import { getApi } from "@/userbase";
 
 export default async function Home() {
   const api = await getApi();

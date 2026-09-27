@@ -1,9 +1,9 @@
 import { describe, beforeAll, afterAll, test } from "bun:test";
 import type { PostgresConnection } from "data/connection/postgres/PostgresConnection";
-import { pg, postgresJs } from "bknd";
+import { pg, postgresJs } from "userbase";
 import { Pool } from "pg";
 import postgres from "postgres";
-import { disableConsoleLog, enableConsoleLog, $waitUntil } from "bknd/utils";
+import { disableConsoleLog, enableConsoleLog, $waitUntil } from "userbase/utils";
 import { $ } from "bun";
 import { connectionTestSuite } from "data/connection/connection-test-suite";
 import { bunTestRunner } from "adapter/bun/test";
@@ -15,7 +15,7 @@ const credentials = {
    port: 5432,
    user: "postgres",
    password: "postgres",
-   database: "bknd",
+   database: "userbase",
 };
 
 async function cleanDatabase(connection: InstanceType<typeof PostgresConnection>) {
@@ -47,7 +47,7 @@ describe("postgres", () => {
       }
        
       if (!(await isPostgresRunning())) {
-         await $`docker run --rm --name bknd-test-postgres -d -e POSTGRES_PASSWORD=${credentials.password} -e POSTGRES_USER=${credentials.user} -e POSTGRES_DB=${credentials.database} -p ${credentials.port}:5432 postgres:17`;
+         await $`docker run --rm --name userbase-test-postgres -d -e POSTGRES_PASSWORD=${credentials.password} -e POSTGRES_USER=${credentials.user} -e POSTGRES_DB=${credentials.database} -p ${credentials.port}:5432 postgres:17`;
          await $waitUntil("Postgres is running", isPostgresRunning, 500, 20);
          await new Promise((resolve) => setTimeout(resolve, 500));
       }
@@ -57,7 +57,7 @@ describe("postgres", () => {
    afterAll(async () => {
       if (await isPostgresRunning()) {
          try {
-            await $`docker stop bknd-test-postgres`;
+            await $`docker stop userbase-test-postgres`;
          } catch (e) {}
       }
 

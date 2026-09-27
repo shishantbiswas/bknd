@@ -2,9 +2,9 @@ import {
    genericSqlite,
    type GenericSqliteConnection,
    type GenericSqliteConnectionConfig,
-} from "bknd";
+} from "userbase";
 import { DatabaseSync } from "node:sqlite";
-import { omitKeys } from "bknd/utils";
+import { omitKeys } from "userbase/utils";
 
 export type NodeSqliteConnection = GenericSqliteConnection<DatabaseSync>;
 export type NodeSqliteConnectionConfig = Omit<

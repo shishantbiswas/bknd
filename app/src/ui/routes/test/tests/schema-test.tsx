@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 import { JsonSchemaForm } from "ui/components/form/json-schema";
 import { Scrollable } from "ui/layouts/AppShell/AppShell";
 
@@ -70,7 +70,7 @@ const uiSchema = {
 };
 
 export default function SchemaTest() {
-   const { app, schema } = useBknd();
+   const { app, schema } = useUserbase();
    const keys = ["auth", "server", "media", "data"] as const;
    const [tab, setTab] = useState(keys[0]);
    console.log("schema", schema, app.config);

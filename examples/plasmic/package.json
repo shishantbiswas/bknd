@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bknd/plasmic": "workspace:*",
+    "@userbase/plasmic": "workspace:*",
     "@plasmicapp/loader-react": "^1.0.373",
-    "bknd": "workspace:*"
+    "userbase": "workspace:*"
   },
   "devDependencies": {}
 }

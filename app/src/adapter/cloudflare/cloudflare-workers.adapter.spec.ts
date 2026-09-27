@@ -3,7 +3,7 @@ import { makeConfig, type CloudflareContext } from "./config";
 import { disableConsoleLog, enableConsoleLog } from "core/utils";
 import { adapterTestSuite } from "adapter/adapter-test-suite";
 import { bunTestRunner } from "adapter/bun/test";
-import { type CloudflareBkndConfig, createApp } from "./cloudflare-workers.adapter";
+import { type CloudflareUserbaseConfig, createApp } from "./cloudflare-workers.adapter";
 
 beforeAll(disableConsoleLog);
 afterAll(enableConsoleLog);
@@ -40,7 +40,7 @@ describe("cf adapter", () => {
       expect(dynamicConfig.connection).toBeDefined();
    });
 
-   adapterTestSuite<CloudflareBkndConfig, CloudflareContext<any>>(bunTestRunner, {
+   adapterTestSuite<CloudflareUserbaseConfig, CloudflareContext<any>>(bunTestRunner, {
       makeApp: async (c, a) => {
          return await createApp(c, { env: a } as any);
       },

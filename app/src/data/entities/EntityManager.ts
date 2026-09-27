@@ -1,5 +1,5 @@
-import type { DB as DefaultDB } from "bknd";
-import { $console } from "bknd/utils";
+import type { DB as DefaultDB } from "userbase";
+import { $console } from "userbase/utils";
 import { EventManager } from "core/events";
 import { sql } from "kysely";
 import { Connection } from "../connection/Connection";

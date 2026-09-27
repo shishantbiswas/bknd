@@ -1,2 +1,2 @@
 export * from "./OpfsStorageAdapter";
-export * from "./BkndBrowserApp";
+export * from "./UserbaseBrowserApp";

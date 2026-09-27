@@ -1,4 +1,4 @@
-import { registries } from "bknd";
+import { registries } from "userbase";
 import { type LocalAdapterConfig, StorageLocalAdapter } from "./StorageLocalAdapter";
 
 export * from "./StorageLocalAdapter";

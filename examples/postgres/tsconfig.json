@@ -24,8 +24,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "paths": {
-      "bknd": ["../app/src/index.ts"],
-      "bknd/*": ["../app/src/*"]
+      "userbase": ["../app/src/index.ts"],
+      "userbase/*": ["../app/src/*"]
     }
   },
   "include": ["./src/**/*.ts"],

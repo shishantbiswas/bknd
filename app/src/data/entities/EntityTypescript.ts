@@ -1,6 +1,6 @@
 import type { Entity, EntityManager, TEntityType } from "data/entities";
 import type { EntityRelation } from "data/relations";
-import { autoFormatString } from "bknd/utils";
+import { autoFormatString } from "userbase/utils";
 import { usersFields } from "auth/auth-entities";
 import { mediaFields } from "media/media-entities";
 
@@ -170,15 +170,15 @@ export class EntityTypescript {
       const strings: string[] = [];
       const tables: Record<string, string> = {};
       const imports: Record<string, string[]> = {
-         bknd: ["DB"],
+         userbase: ["DB"],
          kysely: ["Insertable", "Selectable", "Updateable", "Generated"],
       };
 
       // add global types
       let g = "declare global {\n";
-      g += `${this.getTab(1)}type BkndEntity<T extends keyof DB> = Selectable<DB[T]>;\n`;
-      g += `${this.getTab(1)}type BkndEntityCreate<T extends keyof DB> = Insertable<DB[T]>;\n`;
-      g += `${this.getTab(1)}type BkndEntityUpdate<T extends keyof DB> = Updateable<DB[T]>;\n`;
+      g += `${this.getTab(1)}type UserbaseEntity<T extends keyof DB> = Selectable<DB[T]>;\n`;
+      g += `${this.getTab(1)}type UserbaseEntityCreate<T extends keyof DB> = Insertable<DB[T]>;\n`;
+      g += `${this.getTab(1)}type UserbaseEntityUpdate<T extends keyof DB> = Updateable<DB[T]>;\n`;
       g += "}";
       strings.push(g);
 
@@ -207,7 +207,7 @@ export class EntityTypescript {
       strings.push(tables_string);
 
       // merge
-      let merge = `declare module "bknd" {\n`;
+      let merge = `declare module "userbase" {\n`;
       for (const systemEntity of system_entities) {
          const system_fields = Object.keys(systemEntities[systemEntity.name]);
          const additional_fields = systemEntity.fields

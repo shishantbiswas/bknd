@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { isDebug } from "core/env";
 import { TbChevronDown, TbChevronUp } from "react-icons/tb";
-import { useBknd } from "ui/client/BkndProvider";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+import { useUserbase } from "ui/client/UserbaseProvider";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { Button } from "ui/components/buttons/Button";
 import { Icon } from "ui/components/display/Icon";
 import { Message } from "ui/components/display/Message";
@@ -37,7 +37,7 @@ const useAuthSettingsStore = create(
 export function AuthSettings(props) {
    useBrowserTitle(["Auth", "Settings"]);
 
-   const { hasSecrets } = useBknd({ withSecrets: true });
+   const { hasSecrets } = useUserbase({ withSecrets: true });
    if (!hasSecrets) {
       return <Message.MissingPermission what="Auth Settings" />;
    }
@@ -51,8 +51,8 @@ const formConfig = {
 };
 
 function AuthSettingsInternal() {
-   const { config, schema: _schema, actions, $auth } = useBkndAuth();
-   const { readonly } = useBknd();
+   const { config, schema: _schema, actions, $auth } = useUserbaseAuth();
+   const { readonly } = useUserbase();
    const schema = JSON.parse(JSON.stringify(_schema));
 
    schema.properties.jwt.required = ["alg"];

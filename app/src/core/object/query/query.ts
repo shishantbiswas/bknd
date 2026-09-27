@@ -1,5 +1,5 @@
 import type { PrimaryFieldType } from "core/config";
-import { getPath, invariant, isPlainObject } from "bknd/utils";
+import { getPath, invariant, isPlainObject } from "userbase/utils";
 
 export type Primitive = PrimaryFieldType | string | number | boolean;
 export function isPrimitive(value: any): value is Primitive {

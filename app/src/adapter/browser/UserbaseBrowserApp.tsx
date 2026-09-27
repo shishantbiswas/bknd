@@ -7,20 +7,20 @@ import {
    useState,
    type ReactNode,
 } from "react";
-import { checksum } from "bknd/utils";
-import { App, registries, sqlocal, type BkndConfig } from "bknd";
+import { checksum } from "userbase/utils";
+import { App, registries, sqlocal, type UserbaseConfig } from "userbase";
 import { Route, Router, Switch } from "wouter";
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 import { SQLocalKysely } from "sqlocal/kysely";
 import type { ClientConfig, DatabasePath } from "sqlocal";
-import { OpfsStorageAdapter } from "bknd/adapter/browser";
-import type { BkndAdminConfig } from "bknd/ui";
+import { OpfsStorageAdapter } from "userbase/adapter/browser";
+import type { UserbaseAdminConfig } from "userbase/ui";
 
 const Admin = lazy(() =>
    Promise.all([
-      import("bknd/ui"),
+      import("userbase/ui"),
       // @ts-ignore
-      import("bknd/dist/styles.css"),
+      import("userbase/dist/styles.css"),
    ]).then(([mod]) => ({
       default: mod.Admin,
    })),
@@ -34,34 +34,34 @@ function safeViewTransition(fn: () => void) {
    }
 }
 
-export type BrowserBkndConfig<Args = ImportMetaEnv> = Omit<
-   BkndConfig<Args>,
+export type BrowserUserbaseConfig<Args = ImportMetaEnv> = Omit<
+   UserbaseConfig<Args>,
    "connection" | "app"
 > & {
-   adminConfig?: BkndAdminConfig;
+   adminConfig?: UserbaseAdminConfig;
    connection?: ClientConfig | DatabasePath;
 };
 
-export type BkndBrowserAppProps = {
+export type UserbaseBrowserAppProps = {
    children: ReactNode;
    header?: ReactNode;
    loading?: ReactNode;
    notFound?: ReactNode;
-} & BrowserBkndConfig;
+} & BrowserUserbaseConfig;
 
-const BkndBrowserAppContext = createContext<{
+const UserbaseBrowserAppContext = createContext<{
    app: App;
    hash: string;
 }>(undefined!);
 
-export function BkndBrowserApp({
+export function UserbaseBrowserApp({
    children,
    adminConfig,
    header,
    loading,
    notFound,
    ...config
-}: BkndBrowserAppProps) {
+}: UserbaseBrowserAppProps) {
    const [app, setApp] = useState<App | undefined>(undefined);
    const [hash, setHash] = useState<string>("");
    const adminRoutePath = (adminConfig?.basepath ?? "") + "/*?";
@@ -90,7 +90,7 @@ export function BkndBrowserApp({
    }
 
    return (
-      <BkndBrowserAppContext.Provider value={{ app, hash }}>
+      <UserbaseBrowserAppContext.Provider value={{ app, hash }}>
          <ClientProvider storage={window.localStorage} fetcher={app.server.request}>
             {header}
             <Router key={hash}>
@@ -110,12 +110,12 @@ export function BkndBrowserApp({
                </Switch>
             </Router>
          </ClientProvider>
-      </BkndBrowserAppContext.Provider>
+      </UserbaseBrowserAppContext.Provider>
    );
 }
 
 export function useApp() {
-   return useContext(BkndBrowserAppContext);
+   return useContext(UserbaseBrowserAppContext);
 }
 
 const Center = (props: React.HTMLAttributes<HTMLDivElement>) => (
@@ -133,7 +133,7 @@ const Center = (props: React.HTMLAttributes<HTMLDivElement>) => (
 );
 
 let initialized = false;
-async function setup(config: BrowserBkndConfig = {}) {
+async function setup(config: BrowserUserbaseConfig = {}) {
    if (initialized) return;
    initialized = true;
 

@@ -1,5 +1,5 @@
 import { Field, baseFieldConfigSchema } from "./Field";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 
 export const virtualFieldConfigSchema = s
    .strictObject({

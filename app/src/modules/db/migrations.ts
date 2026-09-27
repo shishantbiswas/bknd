@@ -1,4 +1,4 @@
-import { transformObject } from "bknd/utils";
+import { transformObject } from "userbase/utils";
 import type { Kysely } from "kysely";
 import { set } from "lodash-es";
 import type { InitialModuleConfigs } from "modules/ModuleManager";
@@ -134,7 +134,7 @@ export const migrations: Migration[] = [
 ];
 
 export const CURRENT_VERSION = migrations[migrations.length - 1]?.version ?? 0;
-export const TABLE_NAME = "__bknd";
+export const TABLE_NAME = "__userbase";
 
 export async function migrateTo(
    current: number,

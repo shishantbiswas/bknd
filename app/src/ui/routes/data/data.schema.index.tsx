@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
-import { SchemaEditable } from "ui/client/bknd";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { SchemaEditable } from "ui/client/userbase";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { Button } from "ui/components/buttons/Button";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
 
@@ -11,7 +11,7 @@ const DataSchemaCanvas = lazy(() =>
 );
 
 export function DataSchemaIndex() {
-   const { $data } = useBkndData();
+   const { $data } = useUserbaseData();
    return (
       <>
          <AppShell.SectionHeader

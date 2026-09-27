@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set variables
-FUNCTION_NAME="bknd-lambda"
-ROLE_NAME="bknd-lambda-execution-role"
+FUNCTION_NAME="userbase-lambda"
+ROLE_NAME="userbase-lambda-execution-role"
 RUNTIME="nodejs22.x"
 HANDLER="index.handler"
 ARCHITECTURE="arm64" # or "x86_64"
@@ -16,7 +16,7 @@ echo "Building Lambda package..."
 rm -rf dist && mkdir dist
 
 # copy assets
-node_modules/.bin/bknd copy-assets --out=dist/static
+node_modules/.bin/userbase copy-assets --out=dist/static
 
 # Run esbuild and check for errors
 # important to use --platform=browser for libsql dependency (otherwise we need to push node_modules)

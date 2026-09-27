@@ -1,5 +1,5 @@
-# bknd starter: Cloudflare Workers
-A minimal Node.js project with bknd integration.
+# userbase starter: Cloudflare Workers
+A minimal Node.js project with userbase integration.
 
 ## Project Structure
 
@@ -13,7 +13,7 @@ Inside of your Node.js project, you'll see the following folders and files:
 └── wrangler.json
 ```
 
-To update `bknd` config, check `src/index.ts`.
+To update `userbase` config, check `src/index.ts`.
 
 ## Commands
 
@@ -34,4 +34,4 @@ npx wrangler d1 create my-database
 
 ## Want to learn more?
 
-Feel free to check [our documentation](https://docs.bknd.io/integration/cloudflare) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).
+Feel free to check [our documentation](https://docs.userbase.io/integration/cloudflare) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).

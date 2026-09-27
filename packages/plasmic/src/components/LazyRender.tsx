@@ -89,7 +89,7 @@ export function registerLazyRender(
 
 export const LazyRenderMeta: CodeComponentMeta<LazyRenderProps> = {
    name: "LazyRender",
-   importPath: "@bknd/plasmic",
+   importPath: "@userbase/plasmic",
    props: {
       forceLoad: {
          type: "boolean",

@@ -7,7 +7,7 @@ import { EntityManager } from "data/entities/EntityManager";
 import { Module, type ModuleBuildContext } from "modules/Module";
 import { getDummyConnection } from "../helper";
 import { ModuleHelper } from "modules/ModuleHelper";
-import { DebugLogger, McpServer } from "bknd/utils";
+import { DebugLogger, McpServer } from "userbase/utils";
 
 export function makeCtx(overrides?: Partial<ModuleBuildContext>): ModuleBuildContext {
    const { dummyConnection } = getDummyConnection();

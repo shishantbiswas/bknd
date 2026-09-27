@@ -1,9 +1,9 @@
 import { useHotkeys } from "@mantine/hooks";
-import { ucFirst, type s } from "bknd/utils";
+import { ucFirst, type s } from "userbase/utils";
 import { omit } from "lodash-es";
 import { type ReactNode, useMemo, useRef, useState } from "react";
 import { TbSettings } from "react-icons/tb";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Alert } from "ui/components/display/Alert";
@@ -54,7 +54,7 @@ export function Setting<Schema extends s.ObjectSchema = s.ObjectSchema>({
    properties,
 }: SettingProps<Schema>) {
    const [submitting, setSubmitting] = useState(false);
-   const { actions, readonly } = useBknd();
+   const { actions, readonly } = useUserbase();
    const formRef = useRef<JsonSchemaFormRef>(null);
    const schemaLocalModalRef = useRef<SettingsSchemaModalRef>(null);
    const schemaModalRef = useRef<SettingsSchemaModalRef>(null);

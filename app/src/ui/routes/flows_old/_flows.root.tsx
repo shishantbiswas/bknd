@@ -3,7 +3,7 @@ import { ReactFlowProvider } from "@xyflow/react";
 import { ucFirstAllSnakeToPascalWithSpaces } from "core/utils";
 import { TbSettings } from "react-icons/tb";
 import { useLocation } from "wouter";
-import { useBknd } from "../../client/BkndProvider";
+import { useUserbase } from "../../client/UserbaseProvider";
 import { useFlows } from "../../client/schema/flows/use-flows";
 import { IconButton } from "../../components/buttons/IconButton";
 import { Empty } from "../../components/display/Empty";
@@ -17,7 +17,7 @@ export function FlowsRoot({ children }) {
 }
 
 export function FlowsEmpty() {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    useBrowserTitle(["Flows"]);
    const [, navigate] = useLocation();
    const { flows } = useFlows();

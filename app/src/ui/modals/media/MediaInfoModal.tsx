@@ -1,6 +1,7 @@
+
 import type { ContextModalProps } from "@mantine/modals";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
-import { useEntityQuery } from "bknd/client";
+import { useEntityQuery } from "userbase/client";
 import { type FileState, Media } from "ui/elements";
 import { autoFormatString, datetimeStringLocal, formatNumber } from "core/utils";
 import { twMerge } from "tailwind-merge";
@@ -9,7 +10,7 @@ import { TbCheck, TbCopy } from "react-icons/tb";
 import { useClipboard } from "@mantine/hooks";
 import { ButtonLink } from "ui/components/buttons/Button";
 import { routes } from "ui/lib/routes";
-import { useBkndMedia } from "ui/client/schema/media/use-bknd-media";
+import { useUserbaseMedia } from "ui/client/schema/media/use-userbase-media";
 import { JsonViewer } from "ui";
 
 export type MediaInfoModalProps = {
@@ -23,7 +24,7 @@ export function MediaInfoModal({
 }: ContextModalProps<MediaInfoModalProps>) {
    const {
       config: { entity_name, basepath },
-   } = useBkndMedia();
+   } = useUserbaseMedia();
    const $q = useEntityQuery(entity_name as "media", undefined, {
       where: {
          path: file.path,
@@ -245,7 +246,7 @@ MediaInfoModal.modalProps = {
       },
    },
    classNames: {
-      root: "bknd-admin w-full max-w-xl",
+      root: "userbase-admin w-full max-w-xl",
       content: "overflow-hidden",
       title: "font-bold !text-md",
       body: "max-h-inherit !p-0",

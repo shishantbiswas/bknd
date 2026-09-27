@@ -1,5 +1,5 @@
-import type { PrimaryFieldType } from "bknd";
-import { $console } from "bknd/utils";
+import type { PrimaryFieldType } from "userbase";
+import { $console } from "userbase/utils";
 import { Event, InvalidEventReturn } from "core/events";
 import type { Entity, EntityData } from "../entities";
 import type { RepoQuery } from "data/server/query";

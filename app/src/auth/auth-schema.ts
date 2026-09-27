@@ -1,7 +1,7 @@
 import { cookieConfig, jwtConfig } from "auth/authenticate/Authenticator";
 import { CustomOAuthStrategy, OAuthStrategy, PasswordStrategy } from "auth/authenticate/strategies";
 import { roleSchema } from "auth/authorize/Role";
-import { objectTransform, omitKeys, pick, s } from "bknd/utils";
+import { objectTransform, omitKeys, pick, s } from "userbase/utils";
 import { $object, $record } from "modules/mcp";
 
 export const Strategies = {

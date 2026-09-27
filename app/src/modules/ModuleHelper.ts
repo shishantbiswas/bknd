@@ -7,7 +7,7 @@ import type { ModuleBuildContext, ModuleBuildContextMcpContext } from "./Module"
 import type { EntityRelation } from "data/relations";
 import type { Permission, PermissionContext } from "auth/authorize/Permission";
 import { Exception } from "core/errors";
-import { invariant, isPlainObject } from "bknd/utils";
+import { invariant, isPlainObject } from "userbase/utils";
 
 export class ModuleHelper {
    constructor(protected ctx: Omit<ModuleBuildContext, "helper">) {}

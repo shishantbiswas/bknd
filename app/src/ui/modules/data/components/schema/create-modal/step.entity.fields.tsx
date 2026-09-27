@@ -1,4 +1,4 @@
-import { objectCleanEmpty, type s } from "bknd/utils";
+import { objectCleanEmpty, type s } from "userbase/utils";
 import { type TAppDataEntityFields, entitiesSchema } from "data/data-schema";
 import { mergeWith } from "lodash-es";
 import { useRef } from "react";
@@ -10,7 +10,7 @@ import {
    type EntityFieldsFormRef,
 } from "ui/routes/data/forms/entity.fields.form";
 import { ModalBody, ModalFooter, useStepContext } from "./CreateModal";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { entitySchema, type TCreateModalSchema } from "./schema";
 
@@ -19,7 +19,7 @@ type Schema = s.Static<typeof schema>;
 
 export function StepEntityFields() {
    const { nextStep, stepBack, state, setState } = useStepContext<TCreateModalSchema>();
-   const { config } = useBkndData();
+   const { config } = useUserbaseData();
    const entity = state.entities?.create?.[0]!;
    const defaultFields = { id: { type: "primary", name: "id" } } as const;
    const ref = useRef<EntityFieldsFormRef>(null);

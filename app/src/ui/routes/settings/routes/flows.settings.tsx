@@ -1,6 +1,6 @@
 import { transform } from "lodash-es";
 import { Route, Switch } from "wouter";
-import { useBknd } from "../../../client/BkndProvider";
+import { useUserbase } from "../../../client/UserbaseProvider";
 import { Setting } from "../components/Setting";
 
 const uiSchema = {
@@ -30,7 +30,7 @@ const uiSchema = {
 };
 
 export const FlowsSettings = ({ schema, config }) => {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const prefix = app.getAbsolutePath("settings");
 
    function fillTasks(schema: any, flow: any, key: string) {

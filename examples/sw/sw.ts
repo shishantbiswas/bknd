@@ -3,16 +3,16 @@
 
 declare const self: ServiceWorkerGlobalScope;
 
-import { App } from "bknd";
+import { App } from "userbase";
 
-async function getBknd() {
-   const bknd = App.create({
+async function getUserbase() {
+   const userbase = App.create({
       connection: {
          url: "http://localhost:8080"
       }
    });
-   await bknd.build();
-   return bknd;
+   await userbase.build();
+   return userbase;
 }
 
 self.addEventListener("fetch", async (e) => {
@@ -21,8 +21,8 @@ self.addEventListener("fetch", async (e) => {
       e.respondWith(
          (async () => {
             try {
-               const bknd = await getBknd();
-               return bknd.fetch(e.request);
+               const userbase = await getUserbase();
+               return userbase.fetch(e.request);
             } catch (e) {
                return new Response(e.message, { status: 500 });
             }

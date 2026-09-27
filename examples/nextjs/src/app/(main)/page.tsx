@@ -1,4 +1,4 @@
-import { getApi } from "@/bknd";
+import { getApi } from "@/userbase";
 import { revalidatePath } from "next/cache";
 import { Fragment } from "react";
 import { List } from "@/components/List";

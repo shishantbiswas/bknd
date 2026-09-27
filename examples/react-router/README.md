@@ -1,5 +1,5 @@
-# bknd starter: React Router
-A minimal React Router project with bknd integration.
+# userbase starter: React Router
+A minimal React Router project with userbase integration.
 
 ## Project Structure
 
@@ -9,7 +9,7 @@ Inside of your React Router project, you'll see the following folders and files:
 /
 ├── public/
 ├── app/
-│   ├── bknd.ts
+│   ├── userbase.ts
 │   ├── root.tsx
 │   └── routes/
 │       ├── _index.tsx
@@ -18,7 +18,7 @@ Inside of your React Router project, you'll see the following folders and files:
 └── package.json
 ```
 
-To update `bknd` config, check `app/routes/api.$.ts` and `app/routes/admin.$.ts`.
+To update `userbase` config, check `app/routes/api.$.ts` and `app/routes/admin.$.ts`.
 
 ## Commands
 
@@ -32,4 +32,4 @@ All commands are run from the root of the project, from a terminal:
 
 ## Want to learn more?
 
-Feel free to check [our documentation](https://docs.bknd.io/integration/remix) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).
+Feel free to check [our documentation](https://docs.userbase.io/integration/remix) or jump into our [Discord server](https://discord.gg/952SFk8Tb8).

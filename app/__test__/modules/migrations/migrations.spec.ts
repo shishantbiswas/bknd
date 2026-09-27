@@ -25,7 +25,7 @@ async function createVersionedApp(
    const { version, ...rest } = config;
 
    const db = dummyConnection.kysely as Kysely<any>;
-   await sql`CREATE TABLE "__bknd" (
+   await sql`CREATE TABLE "__userbase" (
        "id"         integer not null primary key autoincrement,
        "version"    integer,
        "type"       text,
@@ -35,7 +35,7 @@ async function createVersionedApp(
     )`.execute(db);
 
    await db
-      .insertInto("__bknd")
+      .insertInto("__userbase")
       .values({
          version,
          type: "config",
@@ -61,7 +61,7 @@ async function getRawConfig(
 ) {
    const db = app.em.connection.kysely;
    return await db
-      .selectFrom("__bknd")
+      .selectFrom("__userbase")
       .selectAll()
       .where("version", "=", opts?.version ?? CURRENT_VERSION)
       .$if((opts?.types?.length ?? 0) > 0, (qb) => qb.where("type", "in", opts?.types))

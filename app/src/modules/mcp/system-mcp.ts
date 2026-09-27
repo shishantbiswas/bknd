@@ -1,6 +1,6 @@
 import type { App } from "App";
 import { mcpSchemaSymbol, type McpSchema } from "modules/mcp";
-import { getMcpServer, isObject, s, McpServer } from "bknd/utils";
+import { getMcpServer, isObject, s, McpServer } from "userbase/utils";
 import { getVersion } from "core/env";
 
 export function getSystemMcp(app: App) {
@@ -29,7 +29,7 @@ export function getSystemMcp(app: App) {
 
    return new McpServer(
       {
-         name: "bknd",
+         name: "userbase",
          version: getVersion(),
       },
       { app, ctx: () => app.modules.ctx() },

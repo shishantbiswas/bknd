@@ -10,7 +10,7 @@ import type { CliCommand } from "../types";
 export const debug: CliCommand = (program) => {
    program
       .command("debug")
-      .description("debug bknd")
+      .description("debug userbase")
       .addArgument(new Argument("<subject>", "subject to debug").choices(Object.keys(subjects)))
       .action(action);
 };

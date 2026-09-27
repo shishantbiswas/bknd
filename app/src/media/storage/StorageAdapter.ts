@@ -1,7 +1,7 @@
 import type { FileListObject, FileMeta, FileBody, FileUploadPayload } from "media/storage/Storage";
-import type { s } from "bknd/utils";
+import type { s } from "userbase/utils";
 
-const SYMBOL = Symbol.for("bknd:storage");
+const SYMBOL = Symbol.for("userbase:storage");
 
 export abstract class StorageAdapter {
    constructor() {

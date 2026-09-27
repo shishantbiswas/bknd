@@ -1,7 +1,7 @@
 import { readFile, readdir, stat, unlink, writeFile } from "node:fs/promises";
-import type { FileBody, FileListObject, FileMeta, FileUploadPayload } from "bknd";
-import { StorageAdapter, guessMimeType } from "bknd";
-import { parse, s, isFile } from "bknd/utils";
+import type { FileBody, FileListObject, FileMeta, FileUploadPayload } from "userbase";
+import { StorageAdapter, guessMimeType } from "userbase";
+import { parse, s, isFile } from "userbase/utils";
 
 export const localAdapterConfig = s.object(
    {

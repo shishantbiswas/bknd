@@ -1,9 +1,9 @@
-import { omitKeys } from "bknd/utils";
+import { omitKeys } from "userbase/utils";
 import type { EntityManager } from "data/entities";
 import { TransformPersistFailedException } from "../errors";
 import { Field, type TActionContext, type TRenderContext, baseFieldConfigSchema } from "./Field";
 import type { TFieldTSType } from "data/entities/EntityTypescript";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 
 export const jsonFieldConfigSchema = s
    .strictObject({

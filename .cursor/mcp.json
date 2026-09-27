@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "bknd": {
+    "userbase": {
       "url": "http://localhost:28623/api/system/mcp"
     }
   }

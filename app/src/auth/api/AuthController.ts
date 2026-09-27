@@ -1,4 +1,4 @@
-import type { DB, SafeUser } from "bknd";
+import type { DB, SafeUser } from "userbase";
 import type { AuthStrategy } from "auth/authenticate/strategies/Strategy";
 import type { AppAuth } from "auth/AppAuth";
 import * as AuthPermissions from "auth/auth-permissions";
@@ -14,7 +14,7 @@ import {
    transformObject,
    mcpTool,
    $console,
-} from "bknd/utils";
+} from "userbase/utils";
 import type { PasswordStrategy } from "auth/authenticate/strategies";
 
 export type AuthActionResponse = {

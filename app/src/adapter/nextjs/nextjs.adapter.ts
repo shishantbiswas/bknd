@@ -1,21 +1,21 @@
-import { createFrameworkApp, type FrameworkBkndConfig } from "bknd/adapter";
-import { isNode } from "bknd/utils";
+import { createFrameworkApp, type FrameworkUserbaseConfig } from "userbase/adapter";
+import { isNode } from "userbase/utils";
 // @ts-expect-error next is not installed
 import type { NextApiRequest } from "next";
 
 type NextjsEnv = NextApiRequest["env"];
-export type NextjsBkndConfig<Env = NextjsEnv> = FrameworkBkndConfig<Env> & {
+export type NextjsUserbaseConfig<Env = NextjsEnv> = FrameworkUserbaseConfig<Env> & {
    cleanRequest?: { searchParams?: string[] };
 };
 
 export async function getApp<Env = NextjsEnv>(
-   config: NextjsBkndConfig<Env>,
+   config: NextjsUserbaseConfig<Env>,
    args: Env = process.env as Env,
 ) {
    return await createFrameworkApp(config, args);
 }
 
-function getCleanRequest(req: Request, cleanRequest: NextjsBkndConfig["cleanRequest"]) {
+function getCleanRequest(req: Request, cleanRequest: NextjsUserbaseConfig["cleanRequest"]) {
    if (!cleanRequest) return req;
 
    const url = new URL(req.url);
@@ -41,7 +41,7 @@ function getCleanRequest(req: Request, cleanRequest: NextjsBkndConfig["cleanRequ
 }
 
 export function serve<Env = NextjsEnv>(
-   { cleanRequest, ...config }: NextjsBkndConfig<Env> = {},
+   { cleanRequest, ...config }: NextjsUserbaseConfig<Env> = {},
    args: Env = process.env as Env,
 ) {
    return async (req: Request) => {

@@ -1,6 +1,6 @@
 import { MediaAdapters } from "media/media-registry";
 import { registries } from "modules/registries";
-import { s, objectTransform } from "bknd/utils";
+import { s, objectTransform } from "userbase/utils";
 import { $object, $record, $schema } from "modules/mcp";
 
 export const ADAPTERS = {

@@ -1,4 +1,4 @@
-import type { s } from "bknd/utils";
+import type { s } from "userbase/utils";
 import { StringSchema } from "jsonv-ts";
 
 export class SecretSchema<O extends s.IStringOptions> extends StringSchema<O> {}

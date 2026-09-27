@@ -1,8 +1,8 @@
 "use client";
 
-import { Admin, type BkndAdminProps } from "bknd/ui";
+import { Admin, type UserbaseAdminProps } from "userbase/ui";
 
-export const AdminImpl = (props: BkndAdminProps) => {
+export const AdminImpl = (props: UserbaseAdminProps) => {
    if (typeof window === "undefined") {
       return null;
    }

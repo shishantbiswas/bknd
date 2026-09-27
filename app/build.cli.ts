@@ -1,9 +1,9 @@
 import pkg from "./package.json" with { type: "json" };
 import c from "picocolors";
-import { formatNumber } from "bknd/utils";
+import { formatNumber } from "userbase/utils";
 
 const deps = Object.keys(pkg.dependencies);
-const external = ["jsonv-ts/*", "wrangler", "bknd", "bknd/*", ...deps];
+const external = ["jsonv-ts/*", "wrangler", "userbase", "userbase/*", ...deps];
 
 const result = await Bun.build({
    entrypoints: ["./src/cli/index.ts"],

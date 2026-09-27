@@ -1,4 +1,4 @@
-import { registerAll } from "@bknd/plasmic";
+import { registerAll } from "@userbase/plasmic";
 import {
    type ComponentRenderData,
    PlasmicCanvasHost,

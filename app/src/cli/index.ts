@@ -13,8 +13,8 @@ async function main() {
 
    const version = await getVersion();
    program
-      .name("bknd")
-      .description(color.yellowBright("⚡") + " bknd cli " + color.bold(color.cyan(`v${version}`)))
+      .name("userbase")
+      .description(color.yellowBright("⚡") + " userbase cli " + color.bold(color.cyan(`v${version}`)))
       .version(version)
       .hook("preAction", (thisCommand, actionCommand) => {
          capture(`cmd_${actionCommand.name()}`);

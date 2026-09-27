@@ -1,7 +1,7 @@
 "use server";
 
 import { getContext } from "waku/middleware/context";
-import { getApi } from "../../bknd";
+import { getApi } from "../../userbase";
 
 export { unstable_rerenderRoute as rerender } from "waku/router/server";
 

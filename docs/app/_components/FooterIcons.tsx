@@ -5,7 +5,7 @@ export function FooterIcons() {
     <div className="flex justify-between items-center w-full px-2">
       <div className="flex items-center gap-3">
         <a
-          href="https://github.com/bknd-io/bknd"
+          href="https://github.com/userbase-io/userbase"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"

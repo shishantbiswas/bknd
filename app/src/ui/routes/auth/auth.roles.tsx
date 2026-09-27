@@ -3,22 +3,22 @@ import {
    ucFirstAllSnakeToPascalWithSpaces,
    s,
    stringIdentifier,
-} from "bknd/utils";
-import { useBkndAuth } from "ui/client/schema/auth/use-bknd-auth";
+} from "userbase/utils";
+import { useUserbaseAuth } from "ui/client/schema/auth/use-userbase-auth";
 import { Alert } from "ui/components/display/Alert";
-import { bkndModals } from "ui/modals";
+import { userbaseModals } from "ui/modals";
 import { Button } from "../../components/buttons/Button";
 import { CellValue, DataTable } from "../../components/table/DataTable";
 import * as AppShell from "../../layouts/AppShell/AppShell";
 import { routes, useNavigate } from "../../lib/routes";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { useBrowserTitle } from "ui/hooks/use-browser-title";
 import { Message } from "ui/components/display/Message";
 
 export function AuthRolesList(props) {
    useBrowserTitle(["Auth", "Roles"]);
 
-   const { hasSecrets } = useBknd({ withSecrets: true });
+   const { hasSecrets } = useUserbase({ withSecrets: true });
    if (!hasSecrets) {
       return <Message.MissingPermission what="Auth Roles" />;
    }
@@ -28,8 +28,8 @@ export function AuthRolesList(props) {
 
 function AuthRolesListInternal() {
    const [navigate] = useNavigate();
-   const { config, actions } = useBkndAuth();
-   const { readonly } = useBknd();
+   const { config, actions } = useUserbaseAuth();
+   const { readonly } = useUserbase();
 
    const data = Object.values(
       transformObject(config.roles ?? {}, (role, name) => ({
@@ -49,7 +49,7 @@ function AuthRolesListInternal() {
 
    function openCreateModal() {
       if (readonly) return;
-      bkndModals.open(
+      userbaseModals.open(
          "form",
          {
             schema: s.strictObject({

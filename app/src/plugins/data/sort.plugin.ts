@@ -1,5 +1,5 @@
-import { Exception, type App, type AppPlugin, DatabaseEvents, em, entity, number } from "bknd";
-import { invariant, HttpStatus, jsc, s, $console } from "bknd/utils";
+import { Exception, type App, type AppPlugin, DatabaseEvents, em, entity, number } from "userbase";
+import { invariant, HttpStatus, jsc, s, $console } from "userbase/utils";
 import { Hono } from "hono";
 import { sql } from "kysely";
 
@@ -330,7 +330,7 @@ function registerListeners(app: App, entities: SortPluginOptions["entities"]) {
       },
       {
          mode: "sync",
-         id: "bknd-sort-insert",
+         id: "userbase-sort-insert",
       },
    );
 
@@ -417,7 +417,7 @@ function registerListeners(app: App, entities: SortPluginOptions["entities"]) {
       },
       {
          mode: "sync",
-         id: "bknd-sort-update",
+         id: "userbase-sort-update",
       },
    );
 }

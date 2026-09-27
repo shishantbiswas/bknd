@@ -2,7 +2,7 @@ import "../styles.css";
 
 import type { ReactNode } from "react";
 
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 type RootLayoutProps = { children: ReactNode };
 

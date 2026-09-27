@@ -6,11 +6,11 @@ import type {
    RepositoryResult,
    ResponseObject,
    ModuleApi,
-} from "bknd";
-import { objectTransform, encodeSearch } from "bknd/utils";
+} from "userbase";
+import { objectTransform, encodeSearch } from "userbase/utils";
 import type { Insertable, Selectable, Updateable, Generated } from "kysely";
 import useSWR, { type SWRConfiguration, type SWRResponse, mutate } from "swr";
-import { type Api, useApi } from "bknd/client";
+import { type Api, useApi } from "userbase/client";
 
 export class UseEntityApiError<Payload = any> extends Error {
    constructor(

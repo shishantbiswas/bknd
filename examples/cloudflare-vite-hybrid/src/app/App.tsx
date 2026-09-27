@@ -2,7 +2,7 @@ import { Router, Switch, Route } from "wouter";
 import Home from "./routes/home.tsx";
 import { lazy, Suspense, useEffect, useState } from "react";
 const Admin = lazy(() => import("./routes/admin.tsx"));
-import { useAuth } from "bknd/client";
+import { useAuth } from "userbase/client";
 
 export default function App() {
    const auth = useAuth();

@@ -1,6 +1,6 @@
 import { McpClient, type McpClientConfig } from "jsonv-ts/mcp";
-import { useApi } from "bknd/client";
-import { useBknd } from "ui/client/bknd";
+import { useApi } from "userbase/client";
+import { useUserbase } from "ui/client/userbase";
 
 const clients = new Map<string, McpClient>();
 
@@ -12,7 +12,7 @@ export function getClient(opts: McpClientConfig) {
 }
 
 export function useMcpClient() {
-   const { config } = useBknd();
+   const { config } = useUserbase();
    const api = useApi();
    const token = api.getAuthState().token;
    const headers =

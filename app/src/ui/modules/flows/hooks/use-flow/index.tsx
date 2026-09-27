@@ -5,7 +5,7 @@ import { selectAtom } from "jotai/utils";
 import { isEqual } from "lodash-es";
 import type { ModuleSchemas } from "modules/ModuleManager";
 import { createContext, useCallback, useContext, useEffect } from "react";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 
 export type TFlowNodeData = {
    label: string;
@@ -50,7 +50,7 @@ const DEFAULT_FLOW: TAppFlowSchema = { trigger: { type: "manual" }, tasks: {}, c
 export function FlowCanvasProvider({ children, name }: { children: any; name?: string }) {
    //const [dirty, setDirty] = useState(false);
    const setFlowState = useSetAtom(flowStateAtom);
-   const s = useBknd();
+   const s = useUserbase();
    const data = name ? (s.config.flows.flows[name] as TAppFlowSchema) : undefined;
    const schema = s.schema.flows.properties.flows;
 

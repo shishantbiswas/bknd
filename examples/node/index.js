@@ -1,10 +1,10 @@
-import { serve } from "bknd/adapter/node";
+import { serve } from "userbase/adapter/node";
 
 // Actually, all it takes is the following line:
 // serve();
 
 // this is optional, if omitted, it uses an in-memory database
-/** @type {import("bknd/adapter/node").NodeBkndConfig} */
+/** @type {import("userbase/adapter/node").NodeUserbaseConfig} */
 const config = {
    connection: {
       url: "data.db",

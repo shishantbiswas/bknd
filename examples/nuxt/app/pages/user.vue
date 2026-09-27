@@ -19,8 +19,8 @@ onMounted(() => {
         <div class="ml-3.5 mr-2 font-mono opacity-70">&amp;</div>
         <img 
           class="dark:invert" 
-          src="/bknd.svg" 
-          alt="bknd logo" 
+          src="/userbase.svg" 
+          alt="userbase logo" 
           width="183" 
           height="59" 
         />
@@ -41,7 +41,7 @@ onMounted(() => {
         <p className="text-xs opacity-50">
           Sign in with:
           <b>
-            <code>test@bknd.io</code>
+            <code>test@userbase.io</code>
           </b>
           /
           <b>

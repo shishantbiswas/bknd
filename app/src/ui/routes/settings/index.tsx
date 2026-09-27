@@ -1,6 +1,6 @@
 import { IconRefresh, IconSettings } from "@tabler/icons-react";
 import { ucFirst } from "core/utils";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Empty } from "ui/components/display/Empty";
 import { Message } from "ui/components/display/Message";
 import { Link } from "ui/components/wouter/Link";
@@ -15,7 +15,7 @@ import { ServerSettings } from "./routes/server.settings";
 import { IconButton } from "ui/components/buttons/IconButton";
 
 function SettingsSidebar() {
-   const { version, schema, actions, app } = useBknd();
+   const { version, schema, actions, app } = useUserbase();
    useBrowserTitle(["Settings"]);
 
    async function handleRefresh() {
@@ -57,7 +57,7 @@ function SettingsSidebar() {
 }
 
 export default function SettingsRoutes() {
-   const b = useBknd({ withSecrets: true });
+   const b = useUserbase({ withSecrets: true });
    if (!b.hasSecrets) return <Message.MissingPermission what="the settings" />;
 
    return (
@@ -120,7 +120,7 @@ const uiSchema = {
 };
 
 const SettingRoutesRoutes = () => {
-   const { schema, config } = useBknd();
+   const { schema, config } = useUserbase();
 
    console.log("flows", {
       schema: schema.flows,
@@ -150,7 +150,7 @@ const FallbackRoutes = ({
    config,
    ...settingProps
 }: SettingProps<any> & { module: string }) => {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const prefix = app.getAbsolutePath("settings");
 
    return (

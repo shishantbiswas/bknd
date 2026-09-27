@@ -1,10 +1,10 @@
-import { objectTransform } from "bknd/utils";
+import { objectTransform } from "userbase/utils";
 import { MediaField, mediaFieldConfigSchema } from "../media/MediaField";
 import { FieldClassMap } from "data/fields";
 import { RelationClassMap, RelationFieldClassMap } from "data/relations";
 import { entityConfigSchema, entityTypes } from "data/entities";
 import { primaryFieldTypes, baseFieldConfigSchema } from "./fields";
-import { s } from "bknd/utils";
+import { s } from "userbase/utils";
 import { $object, $record } from "modules/mcp";
 
 export const FIELDS = {

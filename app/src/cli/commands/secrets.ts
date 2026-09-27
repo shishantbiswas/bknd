@@ -3,7 +3,7 @@ import { makeAppFromEnv } from "cli/commands/run";
 import { writeFile } from "node:fs/promises";
 import c from "picocolors";
 import { withConfigOptions, type WithConfigOptions } from "cli/utils/options";
-import { transformObject } from "bknd/utils";
+import { transformObject } from "userbase/utils";
 import { Option } from "commander";
 
 export const secrets: CliCommand = (program) => {

@@ -1,4 +1,4 @@
-import { s, type ParseOptions, parse, InvalidSchemaError, HttpStatus } from "bknd/utils";
+import { s, type ParseOptions, parse, InvalidSchemaError, HttpStatus } from "userbase/utils";
 
 export const permissionOptionsSchema = s
    .strictObject({

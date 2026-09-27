@@ -1,10 +1,10 @@
 import { describe, it, expect } from "bun:test";
 import * as sDirect from "jsonv-ts";
-import { s as sFromBknd } from "bknd/utils";
+import { s as sFromUserbase } from "userbase/utils";
 
 describe("jsonv-ts resolution", () => {
    it("should resolve to a single instance", () => {
-      const sameNamespace = sDirect === (sFromBknd as unknown as typeof sDirect);
+      const sameNamespace = sDirect === (sFromUserbase as unknown as typeof sDirect);
       // If this fails, two instances are being loaded via different specifiers/paths
       expect(sameNamespace).toBe(true);
    });

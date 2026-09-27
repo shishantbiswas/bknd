@@ -1,5 +1,5 @@
-import { serve } from "bknd/adapter/nuxt";
-import config from "../../bknd.config";
+import { serve } from "userbase/adapter/nuxt";
+import config from "../../userbase.config";
 
 export default defineEventHandler(async (event) => {
   const pathname = event.path

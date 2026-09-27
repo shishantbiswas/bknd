@@ -1,12 +1,12 @@
 import type { AppAuthOAuthStrategy, AppAuthSchema } from "auth/auth-schema";
 import clsx from "clsx";
 import { NativeForm } from "ui/components/form/native-form/NativeForm";
-import { transformObject } from "bknd/utils";
+import { transformObject } from "userbase/utils";
 import { useEffect, useState, type ComponentPropsWithoutRef, type FormEvent } from "react";
 import { Button } from "ui/components/buttons/Button";
 import { Group, Input, Password, Label } from "ui/components/form/Formy/components";
 import { SocialLink } from "./SocialLink";
-import { useAuth } from "bknd/client";
+import { useAuth } from "userbase/client";
 import { Alert } from "ui/components/display/Alert";
 import { useLocation } from "wouter";
 

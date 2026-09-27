@@ -8,7 +8,7 @@ import type {
 } from "@aws-sdk/client-s3";
 import { AwsClient } from "core/clients/aws/AwsClient";
 import { isDebug } from "core/env";
-import { isFile, pickHeaders2, parse, s, secret } from "bknd/utils";
+import { isFile, pickHeaders2, parse, s, secret } from "userbase/utils";
 import { transform } from "lodash-es";
 import type { FileBody, FileListObject } from "../../Storage";
 import { StorageAdapter } from "../../StorageAdapter";

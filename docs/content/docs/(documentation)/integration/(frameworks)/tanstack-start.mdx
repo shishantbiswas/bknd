@@ -1,29 +1,29 @@
 ---
 title: "Tanstack Start"
-description: "Run bknd inside Tanstack Start"
+description: "Run userbase inside Tanstack Start"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with Tanstack Start and bknd, create a new Tanstack Start project by following the [official guide](https://tanstack.com/start/latest/docs/framework/react/getting-started#start-a-new-project-from-scratch), and then install bknd as a dependency:
+To get started with Tanstack Start and userbase, create a new Tanstack Start project by following the [official guide](https://tanstack.com/start/latest/docs/framework/react/getting-started#start-a-new-project-from-scratch), and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -36,11 +36,11 @@ bun add bknd
   [upgrade](https://nodejs.org/en/download/) if necessary.
 </Callout>
 
-Now create a `bknd.config.ts` file in the root of your project:
+Now create a `userbase.config.ts` file in the root of your project:
 
-```typescript title="bknd.config.ts"
-import { type TanstackStartConfig } from "bknd/adapter/tanstack-start";
-import { em, entity, text, boolean } from "bknd";
+```typescript title="userbase.config.ts"
+import { type TanstackStartConfig } from "userbase/adapter/tanstack-start";
+import { em, entity, text, boolean } from "userbase";
 
 const schema = em({
   todos: entity("todos", {
@@ -68,13 +68,13 @@ export default {
     seed: async (ctx) => {
       // create some entries
       await ctx.em.mutator("todos").insertMany([
-        { title: "Learn bknd", done: true },
+        { title: "Learn userbase", done: true },
         { title: "Build something cool", done: false },
       ]);
 
       // and create a user
       await ctx.app.module.auth.createUser({
-        email: "test@bknd.io",
+        email: "test@userbase.io",
         password: "12345678",
       });
     },
@@ -85,10 +85,10 @@ export default {
 For more information about the connection object, refer to the [Database](/usage/database) guide.
 
 
-See [bknd.config.ts](/extending/config) for more information on how to configure bknd. The `TanstackStartConfig` type extends the base config type with the following properties:
+See [userbase.config.ts](/extending/config) for more information on how to configure userbase. The `TanstackStartConfig` type extends the base config type with the following properties:
 
 ```typescript
-export type TanstackStartConfig<Env = TanstackStartEnv> = FrameworkBkndConfig<Env>;
+export type TanstackStartConfig<Env = TanstackStartEnv> = FrameworkUserbaseConfig<Env>;
 ```
 
 ## Serve the API
@@ -97,8 +97,8 @@ The Tanstack Start adapter uses Tanstack Start's hooks mechanism to handle API r
 
 ```typescript title="/src/routes/api.$.ts"
 import { createFileRoute } from "@tanstack/react-router";
-import config from "../../bknd.config";
-import { serve } from "bknd/adapter/tanstack-start";
+import config from "../../userbase.config";
+import { serve } from "userbase/adapter/tanstack-start";
 
 const handler = serve(config);
 
@@ -111,11 +111,11 @@ export const Route = createFileRoute("/api/$")({
 });
 ```
 
-Create a helper file to instantiate the bknd instance and retrieve the API, importing the configuration from the `bknd.config.ts` file:
+Create a helper file to instantiate the userbase instance and retrieve the API, importing the configuration from the `userbase.config.ts` file:
 
-```ts title="src/bknd.ts"
-import config from "../bknd.config";
-import { getApp } from "bknd/adapter/tanstack-start";
+```ts title="src/userbase.ts"
+import config from "../userbase.config";
+import { getApp } from "userbase/adapter/tanstack-start";
 
 export async function getApi({
   headers,
@@ -146,9 +146,9 @@ Create a page at /src/routes/admin.$.tsx:
 
 ```typescript title="/src/routes/admin.$.tsx"
 import { createFileRoute } from "@tanstack/react-router";
-import { useAuth } from "bknd/client";
-import "bknd/dist/styles.css";
-import { Admin } from "bknd/ui";
+import { useAuth } from "userbase/client";
+import "userbase/dist/styles.css";
+import { Admin } from "userbase/ui";
 
 export const Route = createFileRoute("/admin/$")({
   ssr: false, // [!code highlight] "data-only" works too
@@ -178,12 +178,12 @@ function RouteComponent() {
 
 ## Example usage of the API
 
-You can use the `getApp` function to access the bknd API in your app:
+You can use the `getApp` function to access the userbase API in your app:
 These are a few examples how you can validate user and handle server-side requests using `createServerFn`.
 
 ```typescript title="src/routes/index.tsx"
 import { createFileRoute } from "@tanstack/react-router";
-import { getApi } from "@/bknd";
+import { getApi } from "@/userbase";
 import { createServerFn } from "@tanstack/react-start";
 
 export const getTodo = createServerFn()
@@ -225,7 +225,7 @@ function App() {
 To use authentication in your app, pass the request headers to the API:
 
 ```typescript title="src/routes/user.tsx"
-import { getApi } from "@/bknd";
+import { getApi } from "@/userbase";
 import { createServerFn } from "@tanstack/react-start";
 import { Link } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
@@ -274,7 +274,7 @@ function RouteComponent() {
           <p className="text-xs opacity-50">
             Sign in with:
             <b>
-              <code>test@bknd.io</code>
+              <code>test@userbase.io</code>
             </b>
             /
             <b>
@@ -288,4 +288,4 @@ function RouteComponent() {
 }
 ```
 
-Check the [Tanstack Start repository example](https://github.com/bknd-io/bknd/tree/main/examples/tanstack-start) for more implementation details.
+Check the [Tanstack Start repository example](https://github.com/userbase-io/userbase/tree/main/examples/tanstack-start) for more implementation details.

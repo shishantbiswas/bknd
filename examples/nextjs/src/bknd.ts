@@ -1,11 +1,11 @@
-import { getApp as getBkndApp } from "bknd/adapter/nextjs";
+import { getApp as getUserbaseApp } from "userbase/adapter/nextjs";
 import { headers } from "next/headers";
-import config from "../bknd.config";
+import config from "../userbase.config";
 
 export { config };
 
 export async function getApp() {
-   return await getBkndApp(config, process.env);
+   return await getUserbaseApp(config, process.env);
 }
 
 export async function getApi(opts?: { verify?: boolean }) {

@@ -19,7 +19,7 @@ import {
 } from "react-icons/tb";
 import { Dropdown, type DropdownItem } from "ui/components/overlay/Dropdown";
 import { IconButton } from "ui/components/buttons/IconButton";
-import { formatNumber } from "bknd/utils";
+import { formatNumber } from "userbase/utils";
 import type { DropzoneRenderProps, FileState } from "./Dropzone";
 import { useDropzoneFileState, useDropzoneState } from "./Dropzone";
 

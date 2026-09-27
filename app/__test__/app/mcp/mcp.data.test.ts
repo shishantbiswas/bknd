@@ -1,8 +1,8 @@
 import { describe, test, expect, beforeEach, beforeAll, afterAll } from "bun:test";
 import { type App, createApp, createMcpToolCaller } from "core/test/utils";
 import { getSystemMcp } from "modules/mcp/system-mcp";
-import { pickKeys, type McpServer } from "bknd/utils";
-import { entity, text } from "bknd";
+import { pickKeys, type McpServer } from "userbase/utils";
+import { entity, text } from "userbase";
 import { disableConsoleLog, enableConsoleLog } from "core/utils";
 
 beforeAll(disableConsoleLog);

@@ -29,13 +29,13 @@
     "outDir": "./dist/types",
     "paths": {
       "*": ["./src/*"],
-      "bknd": ["./src/index.ts"],
-      "bknd/utils": ["./src/core/utils/index.ts"],
-      "bknd/adapter": ["./src/adapter/index.ts"],
-      "bknd/adapter/*": ["./src/adapter/*/index.ts"],
-      "bknd/client": ["./src/ui/client/index.ts"],
-      "bknd/modes": ["./src/modes/index.ts"],
-      "bknd/elements": ["./src/ui/elements/index.ts"]
+      "userbase": ["./src/index.ts"],
+      "userbase/utils": ["./src/core/utils/index.ts"],
+      "userbase/adapter": ["./src/adapter/index.ts"],
+      "userbase/adapter/*": ["./src/adapter/*/index.ts"],
+      "userbase/client": ["./src/ui/client/index.ts"],
+      "userbase/modes": ["./src/modes/index.ts"],
+      "userbase/elements": ["./src/ui/elements/index.ts"]
     }
   },
   "include": [

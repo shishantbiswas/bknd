@@ -9,10 +9,10 @@ import {
    IconSettings,
    IconSwitchHorizontal,
 } from "@tabler/icons-react";
-import type { Entity, TEntityType } from "bknd";
+import type { Entity, TEntityType } from "userbase";
 import { TbDatabasePlus } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
-import { useBkndData } from "ui/client/schema/data/use-bknd-data";
+import { useUserbaseData } from "ui/client/schema/data/use-userbase-data";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Empty } from "ui/components/display/Empty";
@@ -22,11 +22,11 @@ import { useBrowserTitle } from "ui/hooks/use-browser-title";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
 import { routes, useNavigate, useRouteNavigate } from "ui/lib/routes";
 import { testIds } from "ui/lib/config";
-import { SchemaEditable, useBknd } from "ui/client/bknd";
+import { SchemaEditable, useUserbase } from "ui/client/userbase";
 
 export function DataRoot({ children }) {
    // @todo: settings routes should be centralized
-   const { entities, $data } = useBkndData();
+   const { entities, $data } = useUserbaseData();
    const entityList: Record<TEntityType, Entity[]> = {
       regular: [],
       generated: [],
@@ -116,8 +116,8 @@ const EntityLinkList = ({
    context: "data" | "schema";
    suggestCreate?: boolean;
 }) => {
-   const { $data } = useBkndData();
-   const { readonly } = useBknd();
+   const { $data } = useUserbaseData();
+   const { readonly } = useUserbase();
    const navigate = useRouteNavigate();
 
    if (entities.length === 0) {
@@ -207,7 +207,7 @@ const EntityContextMenu = ({
 }) => {
    if (!enabled) return children;
    const [navigate] = useNavigate();
-   const { $data } = useBkndData();
+   const { $data } = useUserbaseData();
 
    // get href from children (single item)
    const href = (children as any).props.href;
@@ -276,8 +276,8 @@ const EntityContextMenu = ({
 export function DataEmpty() {
    useBrowserTitle(["Data"]);
    const [navigate] = useNavigate();
-   const { $data } = useBkndData();
-   const { readonly } = useBknd();
+   const { $data } = useUserbaseData();
+   const { readonly } = useUserbase();
 
    function handleButtonClick() {
       navigate(routes.data.schema.root());

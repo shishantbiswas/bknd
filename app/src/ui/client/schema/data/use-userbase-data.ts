@@ -9,13 +9,13 @@ import {
    fieldsSchema,
    relationsSchema,
 } from "data/data-schema";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import type { TSchemaActions } from "ui/client/schema/actions";
-import { bkndModals } from "ui/modals";
-import { s, parse, InvalidSchemaError, transformObject } from "bknd/utils";
+import { userbaseModals } from "ui/modals";
+import { s, parse, InvalidSchemaError, transformObject } from "userbase/utils";
 
-export function useBkndData() {
-   const { config, app, schema, actions: bkndActions } = useBknd();
+export function useUserbaseData() {
+   const { config, app, schema, actions: userbaseActions } = useUserbase();
 
    // @todo: potentially store in ref, so it doesn't get recomputed? or use memo?
    const entities = transformObject(config.data.entities ?? {}, (entity, name) => {
@@ -30,7 +30,7 @@ export function useBkndData() {
                forceParse: true,
             });
             // @todo: check for existing?
-            return await bkndActions.add("data", `entities.${name}`, validated);
+            return await userbaseActions.add("data", `entities.${name}`, validated);
          },
          patch: (entityName: string) => {
             const entity = entities[entityName];
@@ -40,13 +40,13 @@ export function useBkndData() {
 
             return {
                config: async (partial: Partial<TAppDataEntity["config"]>): Promise<boolean> => {
-                  return await bkndActions.overwrite(
+                  return await userbaseActions.overwrite(
                      "data",
                      `entities.${entityName}.config`,
                      partial,
                   );
                },
-               fields: entityFieldActions(bkndActions, entityName),
+               fields: entityFieldActions(userbaseActions, entityName),
             };
          },
       },
@@ -57,7 +57,7 @@ export function useBkndData() {
                skipMark: true,
                forceParse: true,
             });
-            return await bkndActions.add("data", `relations.${name}`, validated);
+            return await userbaseActions.add("data", `relations.${name}`, validated);
          },
       },
    };
@@ -82,14 +82,14 @@ export function useBkndData() {
 }
 
 const modals = {
-   createAny: () => bkndModals.open(bkndModals.ids.dataCreate, {}),
+   createAny: () => userbaseModals.open(userbaseModals.ids.dataCreate, {}),
    createEntity: () =>
-      bkndModals.open(bkndModals.ids.dataCreate, {
+      userbaseModals.open(userbaseModals.ids.dataCreate, {
          initialPath: ["entities", "entity"],
          initialState: { action: "entity" },
       }),
    createRelation: (entity?: string) =>
-      bkndModals.open(bkndModals.ids.dataCreate, {
+      userbaseModals.open(userbaseModals.ids.dataCreate, {
          initialPath: ["entities", "relation"],
          initialState: {
             action: "relation",
@@ -99,7 +99,7 @@ const modals = {
          },
       }),
    createMedia: (entity?: string) =>
-      bkndModals.open(bkndModals.ids.dataCreate, {
+      userbaseModals.open(userbaseModals.ids.dataCreate, {
          initialPath: ["entities", "template-media"],
          initialState: {
             action: "template-media",
@@ -110,14 +110,14 @@ const modals = {
       }),
 };
 
-function entityFieldActions(bkndActions: TSchemaActions, entityName: string) {
+function entityFieldActions(userbaseActions: TSchemaActions, entityName: string) {
    return {
       add: async (name: string, field: TAppDataField) => {
          const validated = parse(fieldsSchema, field, {
             skipMark: true,
             forceParse: true,
          });
-         return await bkndActions.add("data", `entities.${entityName}.fields.${name}`, validated);
+         return await userbaseActions.add("data", `entities.${entityName}.fields.${name}`, validated);
       },
       patch: () => null,
       set: async (fields: TAppDataEntityFields) => {
@@ -126,7 +126,7 @@ function entityFieldActions(bkndActions: TSchemaActions, entityName: string) {
                skipMark: true,
                forceParse: true,
             });
-            const res = await bkndActions.overwrite(
+            const res = await userbaseActions.overwrite(
                "data",
                `entities.${entityName}.fields`,
                validated,

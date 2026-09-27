@@ -1,9 +1,9 @@
-export { default as Admin, type BkndAdminProps, type BkndAdminConfig } from "./Admin";
+export { default as Admin, type UserbaseAdminProps, type UserbaseAdminConfig } from "./Admin";
 export * from "./components/form/json-schema-form";
 export { JsonViewer } from "./components/code/JsonViewer";
 export type * from "./options";
 
-// bknd admin ui
+// userbase admin ui
 export { Button } from "./components/buttons/Button";
 export { IconButton } from "./components/buttons/IconButton";
 export * as Formy from "./components/form/Formy";

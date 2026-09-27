@@ -4,7 +4,7 @@ import { getSystemMcp } from "modules/mcp/system-mcp";
 import { registries } from "index";
 import { StorageLocalAdapter } from "adapter/node/storage/StorageLocalAdapter";
 import { disableConsoleLog, enableConsoleLog } from "core/utils";
-import type { McpServer } from "bknd/utils";
+import type { McpServer } from "userbase/utils";
 
 beforeAll(disableConsoleLog);
 afterAll(enableConsoleLog);

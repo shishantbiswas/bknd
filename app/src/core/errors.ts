@@ -27,7 +27,7 @@ export class Exception extends Error {
    }
 }
 
-export class BkndError extends Error {
+export class UserbaseError extends Error {
    constructor(
       message: string,
       public details?: Record<string, any>,
@@ -37,7 +37,7 @@ export class BkndError extends Error {
    }
 
    static with(message: string, details?: Record<string, any>, type?: string) {
-      throw new BkndError(message, details, type);
+      throw new UserbaseError(message, details, type);
    }
 
    toJSON() {

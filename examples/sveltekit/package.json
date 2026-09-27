@@ -1,12 +1,12 @@
 {
-  "name": "bknd-sveltekit-example",
+  "name": "userbase-sveltekit-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "postinstall": "node node_modules/.bin/bknd copy-assets --out static"
+    "postinstall": "node node_modules/.bin/userbase copy-assets --out static"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^7.0.0",
@@ -17,7 +17,7 @@
     "vite": "^7.0.0"
   },
   "dependencies": {
-    "bknd": "file:../../app",
+    "userbase": "file:../../app",
     "@libsql/client": "^0.15.0"
   },
   "type": "module"

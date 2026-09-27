@@ -136,7 +136,7 @@ describe("AppAuth", () => {
       }
    });
 
-   test("registers auth middleware for bknd routes only", async () => {
+   test("registers auth middleware for userbase routes only", async () => {
       const app = createApp({
          config: {
             auth: {

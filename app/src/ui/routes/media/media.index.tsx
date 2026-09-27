@@ -1,15 +1,15 @@
 import { IconPhoto } from "@tabler/icons-react";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 import { Empty } from "ui/components/display/Empty";
 import { useBrowserTitle } from "ui/hooks/use-browser-title";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
 import { useLocation } from "wouter";
-import { bkndModals } from "ui/modals";
+import { userbaseModals } from "ui/modals";
 import { DropzoneContainer } from "ui/elements/media/DropzoneContainer";
 import type { FileState } from "ui/elements/media/Dropzone";
 
 export function MediaIndex() {
-   const { config } = useBknd();
+   const { config } = useUserbase();
    const [, navigate] = useLocation();
    useBrowserTitle(["Media"]);
 
@@ -28,7 +28,7 @@ export function MediaIndex() {
    }
 
    const onClick = (file: FileState) => {
-      bkndModals.open(bkndModals.ids.mediaInfo, {
+      userbaseModals.open(userbaseModals.ids.mediaInfo, {
          file,
       });
    };

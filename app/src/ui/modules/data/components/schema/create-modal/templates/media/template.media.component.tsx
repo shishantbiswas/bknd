@@ -1,9 +1,9 @@
 import { Radio, TextInput } from "@mantine/core";
-import { transformObject, s, stringIdentifier } from "bknd/utils";
+import { transformObject, s, stringIdentifier } from "userbase/utils";
 import type { MediaFieldConfig } from "media/MediaField";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { MantineNumberInput } from "ui/components/form/hook-form-mantine/MantineNumberInput";
 import { MantineRadio } from "ui/components/form/hook-form-mantine/MantineRadio";
 import { MantineSelect } from "ui/components/form/hook-form-mantine/MantineSelect";
@@ -35,7 +35,7 @@ export function TemplateMediaComponent() {
    });
    const [forbidden, setForbidden] = useState<boolean>(false);
 
-   const { config } = useBknd();
+   const { config } = useUserbase();
    const media_enabled = config.media.enabled ?? false;
    const media_entity = config.media.entity_name ?? "media";
    const entities = transformObject(config.data.entities ?? {}, (entity, name) =>

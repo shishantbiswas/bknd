@@ -17,7 +17,7 @@ const config = {
    serverExternalPackages: ["typescript", "twoslash"],
 
    webpack(config) {
-      config.resolve.alias["@/bknd"] = path.resolve(__dirname, "../app/src");
+      config.resolve.alias["@/userbase"] = path.resolve(__dirname, "../app/src");
       config.resolve.alias["@"] = path.resolve(__dirname);
       return config;
    },

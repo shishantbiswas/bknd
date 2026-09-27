@@ -1,12 +1,12 @@
-import { getApp as getBkndApp } from "bknd/adapter/solid-start";
-import bkndConfig from "../../bknd.config";
-import type { App } from "bknd";
+import { getApp as getUserbaseApp } from "userbase/adapter/solid-start";
+import userbaseConfig from "../../userbase.config";
+import type { App } from "userbase";
 
 let client: App | null = null;
 
 export const getApp = async () => {
   if (!client) {
-    client = await getBkndApp(bkndConfig);
+    client = await getUserbaseApp(userbaseConfig);
   }
   return client;
 };

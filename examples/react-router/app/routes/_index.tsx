@@ -5,13 +5,13 @@ import {
    useFetcher,
    useLoaderData,
 } from "react-router";
-import { getApi } from "~/bknd";
+import { getApi } from "~/userbase";
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 export function meta({}: Route.MetaArgs) {
    return [
-      { title: "New bknd React Router App" },
-      { name: "description", content: "Welcome to bknd & React Router!" },
+      { title: "New userbase React Router App" },
+      { name: "description", content: "Welcome to userbase & React Router!" },
    ];
 }
 
@@ -38,7 +38,7 @@ export default function Index() {
       <div className="flex h-screen items-center justify-center">
          <div className="flex flex-col items-center gap-16">
             <header className="flex flex-col items-center gap-9">
-               <img src="/bknd.svg" alt="bknd" className="block w-48 dark:invert" />
+               <img src="/userbase.svg" alt="userbase" className="block w-48 dark:invert" />
                <div className="h-[144px] w-96">
                   <img
                      src="/logo-light.svg"

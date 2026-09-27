@@ -1,13 +1,13 @@
-import type { NextjsBkndConfig } from "bknd/adapter/nextjs";
-import { boolean, em, entity, text } from "bknd";
-import { registerLocalMediaAdapter } from "bknd/adapter/node";
-import { secureRandomString } from "bknd/utils";
+import type { NextjsUserbaseConfig } from "userbase/adapter/nextjs";
+import { boolean, em, entity, text } from "userbase";
+import { registerLocalMediaAdapter } from "userbase/adapter/node";
+import { secureRandomString } from "userbase/utils";
 
 // The local media adapter works well in development, and server based
 // deployments. However, on vercel or any other serverless deployments,
 // you shouldn't use a filesystem based media adapter.
 //
-// Additionally, if you run the bknd api on the "edge" runtime,
+// Additionally, if you run the userbase api on the "edge" runtime,
 // this would not work as well.
 //
 // For production, it is recommended to uncomment the line below.
@@ -22,7 +22,7 @@ const schema = em({
 
 // register your schema to get automatic type completion
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
    interface DB extends Database {}
 }
 
@@ -39,7 +39,7 @@ export default {
       auth: {
          enabled: true,
          jwt: {
-            issuer: "bknd-nextjs-example",
+            issuer: "userbase-nextjs-example",
             secret: secureRandomString(64),
          },
          cookie: {
@@ -60,15 +60,15 @@ export default {
       seed: async (ctx) => {
          // create some entries
          await ctx.em.mutator("todos").insertMany([
-            { title: "Learn bknd", done: true },
+            { title: "Learn userbase", done: true },
             { title: "Build something cool", done: false },
          ]);
 
          // and create a user
          await ctx.app.module.auth.createUser({
-            email: "test@bknd.io",
+            email: "test@userbase.io",
             password: "12345678",
          });
       },
    },
-} as const satisfies NextjsBkndConfig;
+} as const satisfies NextjsUserbaseConfig;

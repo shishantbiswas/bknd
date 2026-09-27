@@ -1,4 +1,4 @@
-import { type App, ModuleManagerEvents, type AppPlugin } from "bknd";
+import { type App, ModuleManagerEvents, type AppPlugin } from "userbase";
 
 export type SyncSecretsOptions = {
    enabled?: boolean;
@@ -13,7 +13,7 @@ export function syncSecrets({
 }: SyncSecretsOptions): AppPlugin {
    let firstBoot = true;
    return (app: App) => ({
-      name: "bknd-sync-secrets",
+      name: "userbase-sync-secrets",
       onBuilt: async () => {
          if (!enabled) return;
          const manager = app.modules;

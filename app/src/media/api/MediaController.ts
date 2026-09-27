@@ -6,7 +6,7 @@ import type { AppMedia } from "../AppMedia";
 import { MediaField } from "../MediaField";
 import * as MediaPermissions from "media/media-permissions";
 import * as StorageEvents from "media/storage/events";
-import { jsc, s, describeRoute, HttpStatus, getFileFromContext } from "bknd/utils";
+import { jsc, s, describeRoute, HttpStatus, getFileFromContext } from "userbase/utils";
 import { getRandomizedFilename } from "media/utils";
 
 export class MediaController extends Controller {

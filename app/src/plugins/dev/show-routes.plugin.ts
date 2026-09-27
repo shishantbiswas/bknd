@@ -1,4 +1,4 @@
-import type { App, AppPlugin } from "bknd";
+import type { App, AppPlugin } from "userbase";
 import { showRoutes as showRoutesHono } from "hono/dev";
 
 export type ShowRoutesOptions = {
@@ -8,7 +8,7 @@ export type ShowRoutesOptions = {
 export function showRoutes({ once = false }: ShowRoutesOptions = {}): AppPlugin {
    let shown = false;
    return (app: App) => ({
-      name: "bknd-show-routes",
+      name: "userbase-show-routes",
       onBuilt: () => {
          if (once && shown) return;
          shown = true;

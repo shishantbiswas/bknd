@@ -1,5 +1,5 @@
 import type { EntityManager } from "data/entities";
-import { omitKeys, s } from "bknd/utils";
+import { omitKeys, s } from "userbase/utils";
 import { TransformPersistFailedException } from "../errors";
 import { Field, type TActionContext, baseFieldConfigSchema } from "./Field";
 

@@ -1,6 +1,6 @@
 ---
 title: "SDK (React)"
-description: "Use the bknd SDK for React"
+description: "Use the userbase SDK for React"
 icon: React
 tags: ["documentation"]
 ---
@@ -21,10 +21,10 @@ There are several useful hooks to work with your backend:
 
 ## Setup
 
-In order to use the React hooks, make sure you wrap your `<App />` inside `<ClientProvider />`. This provides the bknd API instance to all hooks in your component tree:
+In order to use the React hooks, make sure you wrap your `<App />` inside `<ClientProvider />`. This provides the userbase API instance to all hooks in your component tree:
 
 ```tsx
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 export default function App() {
   return <ClientProvider>{/* your app */}</ClientProvider>;
@@ -38,11 +38,11 @@ The `ClientProvider` accepts the following props:
 <TypeTable
   type={{
     baseUrl: {
-      description: 'The base URL of your bknd instance (similar to host in the API). If left blank, it points to the same origin, which is useful when bknd is served from your framework (e.g., Next.js, Astro, React Router)',
+      description: 'The base URL of your userbase instance (similar to host in the API). If left blank, it points to the same origin, which is useful when userbase is served from your framework (e.g., Next.js, Astro, React Router)',
       type: 'string',
     },
     children: {
-      description: 'React components that will have access to the bknd context',
+      description: 'React components that will have access to the userbase context',
       type: 'ReactNode',
     },
   }}
@@ -77,24 +77,24 @@ All [Api options](/usage/sdk#setup) are also supported and will be passed to the
 
 ### Usage Examples
 
-**Using with a remote bknd instance:**
+**Using with a remote userbase instance:**
 
 ```tsx
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 export default function App() {
   return (
-    <ClientProvider baseUrl="https://your-bknd-instance.com">
+    <ClientProvider baseUrl="https://your-userbase-instance.com">
       {/* your app */}
     </ClientProvider>
   );
 }
 ```
 
-**Using with an embedded bknd instance (same origin):**
+**Using with an embedded userbase instance (same origin):**
 
 ```tsx
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 export default function App() {
   // no baseUrl needed - will use window.location.origin
@@ -105,12 +105,12 @@ export default function App() {
 **Using with custom authentication:**
 
 ```tsx
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 export default function App() {
   return (
     <ClientProvider
-      baseUrl="https://your-bknd-instance.com"
+      baseUrl="https://your-userbase-instance.com"
       token="your-auth-token"
       onAuthStateChange={(state) => {
         console.log("Auth state changed:", state);
@@ -129,7 +129,7 @@ For all examples below, we'll assume that your app is wrapped inside the `Client
 Returns the [Api instance](/usage/sdk) from the `ClientProvider` context. This gives you direct access to all API methods for data, auth, media, and system operations.
 
 ```tsx
-import { useApi } from "bknd/client";
+import { useApi } from "userbase/client";
 
 export default async function App() {
   const api = useApi();
@@ -165,7 +165,7 @@ See the [SDK documentation](/usage/sdk) for all available API methods and option
 Provides authentication state and helper functions for login, register, logout, and token management. This hook automatically tracks the authentication state from the `ClientProvider` context.
 
 ```tsx
-import { useAuth } from "bknd/client";
+import { useAuth } from "userbase/client";
 
 export default function AuthComponent() {
   const { user, verified, login, logout } = useAuth();
@@ -199,7 +199,7 @@ export default function AuthComponent() {
 <TypeTable
   type={{
     baseUrl: {
-      description: 'Optional base URL to use a different bknd instance',
+      description: 'Optional base URL to use a different userbase instance',
       type: 'string',
     },
   }}
@@ -264,7 +264,7 @@ Depending on your deployment architecture, there are different ways to handle au
 Use this pattern when your frontend and backend are deployed independently on different domains. The token is stored in the browser's localStorage.
 
 ```tsx
-import { ClientProvider, useAuth } from "bknd/client";
+import { ClientProvider, useAuth } from "userbase/client";
 import { useEffect, useState } from "react";
 
 // setup ClientProvider with localStorage
@@ -328,7 +328,7 @@ function AuthComponent() {
 Use this pattern when your frontend and backend are deployed on the same domain or when using a framework that serves both. Authentication is handled via HTTP-only cookies.
 
 ```tsx
-import { ClientProvider, useAuth } from "bknd/client";
+import { ClientProvider, useAuth } from "userbase/client";
 import { useEffect } from "react";
 
 // setup ClientProvider with credentials included
@@ -391,12 +391,12 @@ function InnerApp() {
 
 #### 3. Full Stack (Embedded Mode)
 
-Use this pattern when bknd is embedded in your framework (e.g., Next.js, Astro, React Router). The backend and frontend run in the same process.
+Use this pattern when userbase is embedded in your framework (e.g., Next.js, Astro, React Router). The backend and frontend run in the same process.
 
 ```tsx
 // this example is not specific to any framework, but you can use it with any framework that supports server-side rendering
 
-import { ClientProvider, useAuth } from "bknd/client";
+import { ClientProvider, useAuth } from "userbase/client";
 import { useEffect } from "react";
 
 // setup: extract user from server-side
@@ -465,7 +465,7 @@ This hook wraps the API class in an SWR hook for convenience. You can use any AP
 supported, like so:
 
 ```tsx
-import { useApiQuery } from "bknd/client";
+import { useApiQuery } from "userbase/client";
 
 export default function App() {
   const { data, ...swr } = useApiQuery((api) => api.data.readMany("comments"));
@@ -516,7 +516,7 @@ following example we'll also use a `refine` function as well as `revalidateOnFoc
 
 ```tsx
 import { useEffect, useState } from "react";
-import { useApiQuery } from "bknd/client";
+import { useApiQuery } from "userbase/client";
 
 export default function App() {
   const [text, setText] = useState("");
@@ -572,7 +572,7 @@ This hook wraps the endpoints of `DataApi` and returns CRUD options as parameter
 
 ```tsx
 import { useState, useEffect } from "react";
-import { useEntity } from "bknd/client";
+import { useEntity } from "userbase/client";
 
 export default function App() {
   const [data, setData] = useState<any>();
@@ -633,7 +633,7 @@ of entities instead of a single entry.
 This hook wraps the actions from `useEntity` around `SWR` for automatic data fetching, caching, and revalidation. It combines the power of SWR with CRUD operations for your entities.
 
 ```tsx
-import { useEntityQuery } from "bknd/client";
+import { useEntityQuery } from "userbase/client";
 
 export default function App() {
   const { data } = useEntityQuery("comments", 1);
@@ -717,7 +717,7 @@ The `query` parameter accepts a `RepoQueryIn` object with the following options:
 
 #### Options
 
-The `options` parameter extends SWR's configuration and adds bknd-specific options:
+The `options` parameter extends SWR's configuration and adds userbase-specific options:
 
 <TypeTable
   type={{
@@ -820,7 +820,7 @@ The hook returns an object with the following properties:
 Fetching a limited, sorted list of entities:
 
 ```tsx
-import { useEntityQuery } from "bknd/client";
+import { useEntityQuery } from "userbase/client";
 
 export default function TodoList() {
   const { data: todos, isLoading } = useEntityQuery("todos", undefined, {
@@ -846,7 +846,7 @@ All actions returned from `useEntityQuery` are conveniently wrapped to automatic
 
 ```tsx
 import { useState, useEffect } from "react";
-import { useEntityQuery } from "bknd/client";
+import { useEntityQuery } from "userbase/client";
 
 export default function App() {
   const [text, setText] = useState("");
@@ -889,7 +889,7 @@ export default function App() {
 Here's a comprehensive example showing all CRUD operations with query parameters:
 
 ```tsx
-import { useEntityQuery } from "bknd/client";
+import { useEntityQuery } from "userbase/client";
 
 export default function TodoList() {
   const { data: todos, create, update, _delete, isLoading } = useEntityQuery(
@@ -973,7 +973,7 @@ await mutate(commentId);
 This hook provides a convenient way to invalidate SWR cache entries for manual revalidation.
 
 ```tsx
-import { useInvalidate } from "bknd/client";
+import { useInvalidate } from "userbase/client";
 
 export default function App() {
   const invalidate = useInvalidate();
@@ -1018,7 +1018,7 @@ export default function App() {
 This hook provides mutation actions without fetching data. Useful when you only need to perform CRUD operations without subscribing to data updates.
 
 ```tsx
-import { useEntityMutate } from "bknd/client";
+import { useEntityMutate } from "userbase/client";
 
 export default function QuickActions() {
   const { create, update, _delete, mutate } = useEntityMutate("todos");

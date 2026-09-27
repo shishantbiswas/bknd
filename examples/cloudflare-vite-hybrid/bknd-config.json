@@ -158,7 +158,7 @@
       "secret": "",
       "alg": "HS256",
       "expires": 0,
-      "issuer": "bknd-cloudflare-example",
+      "issuer": "userbase-cloudflare-example",
       "fields": [
         "id",
         "email",

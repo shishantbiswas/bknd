@@ -12,7 +12,7 @@ import {
    type MaybePromise,
    type EntityConfig,
    DatabaseEvents,
-} from "bknd";
+} from "userbase";
 import {
    invariant,
    s,
@@ -22,7 +22,7 @@ import {
    randomString,
    $console,
    pickKeys,
-} from "bknd/utils";
+} from "userbase/utils";
 import { Hono } from "hono";
 
 export type EmailOTPPluginOptions = {
@@ -381,7 +381,7 @@ function registerListeners(app: App, entityName: string) {
          },
          {
             mode: "sync",
-            id: "bknd-email-otp",
+            id: "userbase-email-otp",
          },
       );
    });

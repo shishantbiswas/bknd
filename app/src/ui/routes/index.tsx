@@ -10,8 +10,8 @@ import { Root, RootEmpty } from "./root";
 import SettingsRoutes from "./settings";
 import { FlashMessage } from "ui/modules/server/FlashMessage";
 import { AuthRegister } from "ui/routes/auth/auth.register";
-import { BkndModalsProvider } from "ui/modals";
-import { useBkndWindowContext } from "bknd/client";
+import { UserbaseModalsProvider } from "ui/modals";
+import { useUserbaseWindowContext } from "userbase/client";
 import ToolsRoutes from "./tools";
 
 // @ts-ignore
@@ -23,28 +23,28 @@ try {
 } catch {}
 
 export function Routes({
-   BkndWrapper,
+   UserbaseWrapper,
    basePath = "",
    children,
 }: {
-   BkndWrapper: ComponentType<{ children: ReactNode }>;
+   UserbaseWrapper: ComponentType<{ children: ReactNode }>;
    basePath?: string;
    children?: ReactNode;
 }) {
    const { theme } = useTheme();
-   const ctx = useBkndWindowContext();
+   const ctx = useUserbaseWindowContext();
    const actualBasePath = (basePath || ctx.admin_basepath).replace(/\/+$/, "");
 
    return (
-      <div id="bknd-admin" className={theme + " antialiased"}>
+      <div id="userbase-admin" className={theme + " antialiased"}>
          <FlashMessage />
          <Router base={actualBasePath}>
             <Switch>
                <Route path="/auth/login" component={AuthLogin} />
                <Route path="/auth/register" component={AuthRegister} />
 
-               <BkndWrapper>
-                  <BkndModalsProvider>
+               <UserbaseWrapper>
+                  <UserbaseModalsProvider>
                      <Route path="/" nest>
                         <Root>
                            <Switch>
@@ -94,8 +94,8 @@ export function Routes({
                            </Switch>
                         </Root>
                      </Route>
-                  </BkndModalsProvider>
-               </BkndWrapper>
+                  </UserbaseModalsProvider>
+               </UserbaseWrapper>
             </Switch>
          </Router>
       </div>

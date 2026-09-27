@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { setCookie } from "hono/cookie";
 
-const flash_key = "__bknd_flash";
+const flash_key = "__userbase_flash";
 export type FlashMessageType = "error" | "warning" | "success" | "info";
 
 export function addFlashMessage(c: Context, message: string, type: FlashMessageType = "info") {

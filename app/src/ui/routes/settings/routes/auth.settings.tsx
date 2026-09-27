@@ -1,7 +1,7 @@
 import { transformObject } from "core/utils";
 import { cloneDeep, pick } from "lodash-es";
 import { Route, Switch } from "wouter";
-import { useBknd } from "../../../client/BkndProvider";
+import { useUserbase } from "../../../client/UserbaseProvider";
 import { Setting } from "../components/Setting";
 
 const uiSchema = {
@@ -42,7 +42,7 @@ const uiSchema = {
 };
 
 export const AuthSettings = ({ schema: _unsafe_copy, config }) => {
-   const _s = useBknd();
+   const _s = useUserbase();
    const _schema = cloneDeep(_unsafe_copy);
    const prefix = _s.app.getAbsolutePath("settings");
 

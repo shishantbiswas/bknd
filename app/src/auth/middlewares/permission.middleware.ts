@@ -1,5 +1,5 @@
 import type { Permission, PermissionContext } from "auth/authorize/Permission";
-import { $console, threw } from "bknd/utils";
+import { $console, threw } from "userbase/utils";
 import type { Context, Hono } from "hono";
 import type { RouterRoute } from "hono/types";
 import { createMiddleware } from "hono/factory";

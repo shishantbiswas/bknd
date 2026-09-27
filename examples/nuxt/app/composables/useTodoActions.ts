@@ -1,4 +1,4 @@
-import type { DB } from "bknd";
+import type { DB } from "userbase";
 
 type Todo = DB["todos"];
 

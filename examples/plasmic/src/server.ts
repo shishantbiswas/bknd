@@ -1,6 +1,6 @@
-import { serve } from "bknd/adapter/vite";
-import { App, boolean, em, entity, text } from "bknd";
-import { secureRandomString } from "bknd/utils";
+import { serve } from "userbase/adapter/vite";
+import { App, boolean, em, entity, text } from "userbase";
+import { secureRandomString } from "userbase/utils";
 
 export default serve({
    config: {
@@ -20,7 +20,7 @@ export default serve({
    options: {
       seed: async (ctx) => {
          await ctx.em.mutator("todos" as any).insertMany([
-            { title: "Learn bknd", done: true },
+            { title: "Learn userbase", done: true },
             { title: "Build something cool", done: false },
          ]);
       },
@@ -32,7 +32,7 @@ export default serve({
          async () => {
             // ... to create an initial user
             await app.module.auth.createUser({
-               email: "ds@bknd.io",
+               email: "ds@userbase.io",
                password: "12345678",
             });
          },

@@ -1,20 +1,20 @@
-import { type FrameworkBkndConfig, createFrameworkApp } from "bknd/adapter";
+import { type FrameworkUserbaseConfig, createFrameworkApp } from "userbase/adapter";
 
 type ReactRouterEnv = NodeJS.ProcessEnv;
 type ReactRouterFunctionArgs = {
    request: Request;
 };
-export type ReactRouterBkndConfig<Env = ReactRouterEnv> = FrameworkBkndConfig<Env>;
+export type ReactRouterUserbaseConfig<Env = ReactRouterEnv> = FrameworkUserbaseConfig<Env>;
 
 export async function getApp<Env = ReactRouterEnv>(
-   config: ReactRouterBkndConfig<Env>,
+   config: ReactRouterUserbaseConfig<Env>,
    args: Env = process.env as Env,
 ) {
    return await createFrameworkApp(config, args);
 }
 
 export function serve<Env = ReactRouterEnv>(
-   config: ReactRouterBkndConfig<Env> = {},
+   config: ReactRouterUserbaseConfig<Env> = {},
    args: Env = process.env as Env,
 ) {
    return async (fnArgs: ReactRouterFunctionArgs) => {

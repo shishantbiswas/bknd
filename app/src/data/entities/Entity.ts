@@ -1,5 +1,5 @@
 import { config } from "core/config";
-import { snakeToPascalWithSpaces, transformObject, $console, s, parse } from "bknd/utils";
+import { snakeToPascalWithSpaces, transformObject, $console, s, parse } from "userbase/utils";
 import {
    type Field,
    PrimaryField,
@@ -36,7 +36,7 @@ export type EntityJSON = ReturnType<Entity["toJSON"]>;
 export const entityTypes = ["regular", "system", "generated"] as const;
 export type TEntityType = (typeof entityTypes)[number];
 
-const ENTITY_SYMBOL = Symbol.for("bknd:entity");
+const ENTITY_SYMBOL = Symbol.for("userbase:entity");
 
 /**
  * @todo: add check for adding fields (primary and relation not allowed)

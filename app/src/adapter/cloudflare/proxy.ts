@@ -2,12 +2,12 @@ import {
    d1Sqlite,
    getBinding,
    registerMedia,
-   type CloudflareBkndConfig,
+   type CloudflareUserbaseConfig,
    type CloudflareEnv,
-} from "bknd/adapter/cloudflare";
+} from "userbase/adapter/cloudflare";
 import type { GetPlatformProxyOptions, PlatformProxy } from "wrangler";
 import process from "node:process";
-import { $console } from "bknd/utils";
+import { $console } from "userbase/utils";
 
 export type WithPlatformProxyOptions = {
    /**
@@ -42,7 +42,7 @@ async function getPlatformProxy(opts?: GetPlatformProxyOptions) {
 }
 
 export function withPlatformProxy<Env extends CloudflareEnv>(
-   config: CloudflareBkndConfig<Env> = {},
+   config: CloudflareUserbaseConfig<Env> = {},
    opts?: WithPlatformProxyOptions,
 ) {
    const use_proxy =
@@ -91,5 +91,5 @@ export function withPlatformProxy<Env extends CloudflareEnv>(
             connection,
          };
       },
-   } satisfies CloudflareBkndConfig<Env>;
+   } satisfies CloudflareUserbaseConfig<Env>;
 }

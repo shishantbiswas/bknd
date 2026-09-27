@@ -1,15 +1,15 @@
-import { createRuntimeApp, type RuntimeBkndConfig } from "bknd/adapter";
+import { createRuntimeApp, type RuntimeUserbaseConfig } from "userbase/adapter";
 
 export type SolidStartEnv = NodeJS.ProcessEnv;
-export type SolidStartBkndConfig<Env = SolidStartEnv> = RuntimeBkndConfig<Env>;
+export type SolidStartUserbaseConfig<Env = SolidStartEnv> = RuntimeUserbaseConfig<Env>;
 
 /**
- * Get bknd app instance
- * @param config - bknd configuration
+ * Get userbase app instance
+ * @param config - userbase configuration
  * @param args - environment variables
  */
 export async function getApp<Env = SolidStartEnv>(
-   config: SolidStartBkndConfig<Env>,
+   config: SolidStartUserbaseConfig<Env>,
    args: Env = process.env as Env,
 ) {
    return await createRuntimeApp(config, args);
@@ -17,11 +17,11 @@ export async function getApp<Env = SolidStartEnv>(
 
 /**
  * Create middleware handler for Solid Start
- * @param config - bknd configuration
+ * @param config - userbase configuration
  * @param args - environment variables
  */
 export function serve<Env = SolidStartEnv>(
-   config: SolidStartBkndConfig<Env> = {},
+   config: SolidStartUserbaseConfig<Env> = {},
    args: Env = process.env as Env,
 ) {
    return async (req: Request) => {

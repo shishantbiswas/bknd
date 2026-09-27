@@ -1,5 +1,5 @@
-import type { DB as DefaultDB, EntityRelation, PrimaryFieldType } from "bknd";
-import { $console } from "bknd/utils";
+import type { DB as DefaultDB, EntityRelation, PrimaryFieldType } from "userbase";
+import { $console } from "userbase/utils";
 import { type EmitsEvents, EventManager } from "core/events";
 import { type SelectQueryBuilder, sql } from "kysely";
 import { InvalidSearchParamsException } from "../../errors";

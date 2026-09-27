@@ -16,7 +16,7 @@
     "incremental": true,
     "paths": {
       "@/.source": ["./.source/index.ts"],
-      "@/bknd/*": ["../app/src/"],
+      "@/userbase/*": ["../app/src/"],
       "@/*": ["./*"]
     },
 

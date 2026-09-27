@@ -1,4 +1,4 @@
-import type { EntityData } from "bknd";
+import type { EntityData } from "userbase";
 import type { JsonSchemaField } from "data/fields";
 import * as Formy from "ui/components/form/Formy";
 import { FieldLabel } from "ui/components/form/Formy";

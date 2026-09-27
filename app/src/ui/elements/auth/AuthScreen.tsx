@@ -26,7 +26,7 @@ export function AuthScreen({
    }
 
    return (
-      <div className="flex flex-1 flex-col select-none h-dvh w-dvw justify-center items-center bknd-admin">
+      <div className="flex flex-1 flex-col select-none h-dvh w-dvw justify-center items-center userbase-admin">
          {!loading && (
             <div className="flex flex-col gap-4 items-center w-96 px-6 py-7">
                {logo ? logo : null}

@@ -1,9 +1,9 @@
 ---
-title: bknd.config.ts
+title: userbase.config.ts
 tags: ["documentation"]
 ---
 
-The central configuration file to extend bknd should be placed in the root of your project, so that the [CLI](/usage/cli#using-configuration-file-bknd-config) can automatically pick it up. It allows to:
+The central configuration file to extend userbase should be placed in the root of your project, so that the [CLI](/usage/cli#using-configuration-file-userbase-config) can automatically pick it up. It allows to:
 
 - define your database connection centrally
 - pass in [initial configuration](/usage/database#initial-structure) or [data seeds](/usage/database#seeding-the-database) when booting the first time
@@ -11,16 +11,16 @@ The central configuration file to extend bknd should be placed in the root of yo
 - hook into system events
 - define custom routes and endpoints
 
-A simple example of a `bknd.config.ts` file:
+A simple example of a `userbase.config.ts` file:
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd/adapter";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase/adapter";
 
 export default {
   connection: {
     url: "file:data.db",
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 The supported configuration file extensions are `js`, `ts`, `mjs`, `cjs` and `json`. Throughout the documentation, we'll use `ts` for the file extension.
@@ -30,8 +30,8 @@ The supported configuration file extensions are `js`, `ts`, `mjs`, `cjs` and `js
 Here is an example of a configuration file that specifies a database connection, registers a plugin, add custom routes using [Hono](https://hono.dev/) and performs a [Kysely](https://kysely.dev/) query.
 
 ```typescript
-import type { BkndConfig } from "bknd/adapter";
-import { showRoutes } from "bknd/plugins";
+import type { UserbaseConfig } from "userbase/adapter";
+import { showRoutes } from "userbase/plugins";
 
 export default {
   connection: {
@@ -51,17 +51,17 @@ export default {
   options: {
     plugins: [showRoutes()],
   },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 
-## Configuration (`BkndConfig`)
+## Configuration (`UserbaseConfig`)
 
-The `BkndConfig` type is the main configuration object for the `createApp` function. It has
+The `UserbaseConfig` type is the main configuration object for the `createApp` function. It has
 the following properties:
 
 ```typescript
-import type { App, InitialModuleConfigs, ModuleBuildContext, Connection, MaybePromise } from "bknd";
+import type { App, InitialModuleConfigs, ModuleBuildContext, Connection, MaybePromise } from "userbase";
 import type { Config } from "@libsql/client";
 
 type AppPlugin = (app: App) => Promise<void> | void;
@@ -72,14 +72,14 @@ type ManagerOptions = {
   seed?: (ctx: ModuleBuildContext) => Promise<void>;
 };
 
-type BkndConfig<Args = any> = {
+type UserbaseConfig<Args = any> = {
   connection?: Connection | Config;
   config?: InitialModuleConfigs;
   options?: {
     plugins?: AppPlugin[];
     manager?: ManagerOptions;
   };
-  app?: BkndConfig<Args> | ((args: Args) => MaybePromise<BkndConfig<Args>>);
+  app?: UserbaseConfig<Args> | ((args: Args) => MaybePromise<UserbaseConfig<Args>>);
   onBuilt?: (app: App) => Promise<void>;
   beforeBuild?: (app?: App) => Promise<void>;
   buildConfig?: {
@@ -97,19 +97,19 @@ The `connection` property is the main connection object to the database. It can 
 const connection = { url: "<url>" };
 
 // the same as above, but more explicit
-import { sqlite } from "bknd/adapter/sqlite";
+import { sqlite } from "userbase/adapter/sqlite";
 const connection = sqlite({ url: "<url>" });
 
 // Node.js SQLite, default on Node.js
-import { nodeSqlite } from "bknd/adapter/node";
+import { nodeSqlite } from "userbase/adapter/node";
 const connection = nodeSqlite({ url: "<url>" });
 
 // Bun SQLite, default on Bun
-import { bunSqlite } from "bknd/adapter/bun";
+import { bunSqlite } from "userbase/adapter/bun";
 const connection = bunSqlite({ url: "<url>" });
 
 // LibSQL, default on Cloudflare
-import { libsql } from "bknd";
+import { libsql } from "userbase";
 const connection = libsql({ url: "<url>" });
 ```
 
@@ -217,13 +217,13 @@ to the latest version upon boot ([`db` mode](/usage/setup#ui-only-mode) only). T
 You can use the [CLI](/usage/cli/#getting-the-configuration-config) to get the default configuration:
 
 ```sh
-npx bknd config --default --pretty
+npx userbase config --default --pretty
 ```
 
 To validate your configuration against a JSON schema, you can also dump the schema using the CLI:
 
 ```sh
-npx bknd schema
+npx userbase schema
 ```
 
 To create an initial data structure, you can use helpers [described here](/usage/database#data-structure).
@@ -233,7 +233,7 @@ To create an initial data structure, you can use helpers [described here](/usage
 The `app` property is a function that returns a `CreateAppConfig` object. It allows accessing the adapter specific environment variables. This is especially useful when using the [Cloudflare Workers](/integration/cloudflare) runtime, where the environment variables are only available inside the request handler.
 
 ```typescript
-import type { BkndConfig } from "bknd/adapter";
+import type { UserbaseConfig } from "userbase/adapter";
 
 export default {
   app: (env) => ({
@@ -241,7 +241,7 @@ export default {
       url: env.DB_URL,
     },
   }),
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 See [Database](/usage/database) for more information on how to configure the database connection.
@@ -251,7 +251,7 @@ See [Database](/usage/database) for more information on how to configure the dat
 The `beforeBuild` property is an async function that is called before the app is built. It allows to modify the app instance that may influence the build process.
 
 ```typescript
-import type { BkndConfig } from "bknd/adapter";
+import type { UserbaseConfig } from "userbase/adapter";
 
 export default {
   beforeBuild: async (app: App) => {
@@ -265,8 +265,8 @@ export default {
 The `onBuilt` property is an async function that is called after the app has been built. It allows to hook into the app after it has been built. This is useful for defining event listeners or register custom routes, as both the event manager and the server are recreated during the build process.
 
 ```typescript
-import { type App, AppEvents } from "bknd";
-import type { BkndConfig } from "bknd/adapter";
+import { type App, AppEvents } from "userbase";
+import type { UserbaseConfig } from "userbase/adapter";
 
 export default {
   onBuilt: async (app: App) => {
@@ -290,7 +290,7 @@ but before its event is emitted. This is useful for adding custom routes or othe
 A simple plugin that adds a custom route looks like this:
 
 ```ts
-import type { AppPlugin } from "bknd";
+import type { AppPlugin } from "userbase";
 
 export const myPlugin: AppPlugin = (app) => {
   app.server.get("/hello", (c) => c.json({ hello: "world" }));
@@ -323,7 +323,7 @@ type ModuleBuildContext = {
 const seed = async (ctx: ModuleBuildContext) => {
   // seed the database
   await ctx.em.mutator("todos").insertMany([
-    { title: "Learn bknd", done: true },
+    { title: "Learn userbase", done: true },
     { title: "Build something cool", done: false },
   ]);
 };
@@ -331,14 +331,14 @@ const seed = async (ctx: ModuleBuildContext) => {
 
 ## Framework & Runtime configuration
 
-Depending on which framework or runtime you're using to run bknd, the configuration object will extend the `BkndConfig` type with additional properties.
+Depending on which framework or runtime you're using to run userbase, the configuration object will extend the `UserbaseConfig` type with additional properties.
 
-### `RuntimeBkndConfig`
+### `RuntimeUserbaseConfig`
 
 [Runtime adapters](/integration/runtime) need additional configuration to serve static assets for the admin UI.
 
 ```typescript
-export type RuntimeBkndConfig<Args = any> = BkndConfig<Args> & {
+export type RuntimeUserbaseConfig<Args = any> = UserbaseConfig<Args> & {
   // the path to the dist folder to serve static assets for the admin UI
   distPath?: string;
   // custom middleware to serve static assets for the admin UI
@@ -348,13 +348,13 @@ export type RuntimeBkndConfig<Args = any> = BkndConfig<Args> & {
 };
 ```
 
-### `FrameworkBkndConfig`
+### `FrameworkUserbaseConfig`
 
-[Framework adapters](/integration/framework) may need additional configuration based on the framework's requirements. For example, the `NextjsBkndConfig` type extends the `BkndConfig` type with the following additional properties:
+[Framework adapters](/integration/framework) may need additional configuration based on the framework's requirements. For example, the `NextjsUserbaseConfig` type extends the `UserbaseConfig` type with the following additional properties:
 
 ```typescript
 type NextjsEnv = NextApiRequest["env"];
-export type NextjsBkndConfig<Env = NextjsEnv> = FrameworkBkndConfig<Env> & {
+export type NextjsUserbaseConfig<Env = NextjsEnv> = FrameworkUserbaseConfig<Env> & {
   cleanRequest?: { searchParams?: string[] };
 };
 ```
@@ -363,16 +363,16 @@ Next.js adds the mounted path to the request object, so that the `cleanRequest` 
 
 ## Using the configuration file
 
-The configuration file is automatically picked up if you're using the [CLI](/usage/cli). This allows interacting with your application using the `bknd` command. For example, you can run the following command in the root of your project to start an instance:
+The configuration file is automatically picked up if you're using the [CLI](/usage/cli). This allows interacting with your application using the `userbase` command. For example, you can run the following command in the root of your project to start an instance:
 
 ```bash
-npx bknd run
+npx userbase run
 ```
 
 When serving your application, you need to make sure to import the contents of your configuration file. If you're using Next.js for example, it's recommended to follow these steps:
 
-1. create a `bknd.config.ts` file in the root of your project which defines the connection to the database, adds event listeners and custom routes.
-2. create a `bknd.ts` file inside your app folder which exports helper functions to instantiate the bknd instance and retrieve the API.
-3. create a catch-all route file at `src/api/[[...bknd]]/route.ts` which serves the bknd API.
+1. create a `userbase.config.ts` file in the root of your project which defines the connection to the database, adds event listeners and custom routes.
+2. create a `userbase.ts` file inside your app folder which exports helper functions to instantiate the userbase instance and retrieve the API.
+3. create a catch-all route file at `src/api/[[...userbase]]/route.ts` which serves the userbase API.
 
 This way, your application and the CLI are using the same configuration.

@@ -4221,37 +4221,37 @@
   ],
   "resources": [
     {
-      "uri": "bknd://data/entities",
+      "uri": "userbase://data/entities",
       "name": "data_entities",
       "title": "Entities",
       "description": "Retrieve all entities"
     },
     {
-      "uri": "bknd://data/relations",
+      "uri": "userbase://data/relations",
       "name": "data_relations",
       "title": "Relations",
       "description": "Retrieve all relations"
     },
     {
-      "uri": "bknd://data/indices",
+      "uri": "userbase://data/indices",
       "name": "data_indices",
       "title": "Indices",
       "description": "Retrieve all indices"
     },
     {
-      "uri": "bknd://system/config",
+      "uri": "userbase://system/config",
       "name": "system_config"
     },
     {
-      "uriTemplate": "bknd://system/config/{module}",
+      "uriTemplate": "userbase://system/config/{module}",
       "name": "system_config_module"
     },
     {
-      "uri": "bknd://system/schema",
+      "uri": "userbase://system/schema",
       "name": "system_schema"
     },
     {
-      "uriTemplate": "bknd://system/schema/{module}",
+      "uriTemplate": "userbase://system/schema/{module}",
       "name": "system_schema_module"
     }
   ]

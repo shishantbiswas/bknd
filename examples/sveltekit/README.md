@@ -1,6 +1,6 @@
-# bknd + SvelteKit Example
+# userbase + SvelteKit Example
 
-This example shows how to integrate bknd with SvelteKit.
+This example shows how to integrate userbase with SvelteKit.
 
 ## Setup
 
@@ -11,8 +11,8 @@ bun run dev
 
 ## How it works
 
-1. **`bknd.config.ts`** - bknd configuration with database connection, schema, and seed data
-2. **`src/hooks.server.ts`** - Routes `/api/*` requests to bknd
+1. **`userbase.config.ts`** - userbase configuration with database connection, schema, and seed data
+2. **`src/hooks.server.ts`** - Routes `/api/*` requests to userbase
 3. **`src/routes/+page.server.ts`** - Uses `getApp()` to fetch data server-side
 
 ## API Endpoints

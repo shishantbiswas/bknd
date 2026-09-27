@@ -61,7 +61,7 @@ export function createMantineTheme(scheme: "light" | "dark"): {
                classNames: (theme, props) => ({
                   //input: "focus:border-primary/50 bg-transparent disabled:text-primary",
                   input,
-                  dropdown: `bknd-admin ${scheme} bg-background border-primary/20`,
+                  dropdown: `userbase-admin ${scheme} bg-background border-primary/20`,
                }),
                defaultProps: {
                   checkIconPosition: "right",
@@ -101,7 +101,7 @@ export function createMantineTheme(scheme: "light" | "dark"): {
             Modal: Modal.extend({
                classNames: (theme, props) => ({
                   ...props.classNames,
-                  root: `bknd-admin ${scheme} ${props.className ?? ""}`,
+                  root: `userbase-admin ${scheme} ${props.className ?? ""}`,
                   content: "!bg-background !rounded-lg !select-none",
                   overlay: "!backdrop-blur-sm",
                }),

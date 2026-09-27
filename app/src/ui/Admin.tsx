@@ -1,16 +1,16 @@
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import React, { type ReactNode } from "react";
-import { BkndProvider } from "ui/client/bknd";
+import { UserbaseProvider } from "ui/client/userbase";
 import { useTheme, type AppTheme } from "ui/client/use-theme";
 import { Logo } from "ui/components/display/Logo";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
-import { ClientProvider, useBkndWindowContext, type ClientProviderProps } from "bknd/client";
+import { ClientProvider, useUserbaseWindowContext, type ClientProviderProps } from "userbase/client";
 import { createMantineTheme } from "./lib/mantine/theme";
 import { Routes } from "./routes";
-import type { BkndAdminAppShellOptions, BkndAdminEntitiesOptions } from "./options";
+import type { UserbaseAdminAppShellOptions, UserbaseAdminEntitiesOptions } from "./options";
 
-export type BkndAdminConfig = {
+export type UserbaseAdminConfig = {
    /**
     * Base path of the Admin UI
     * @default `/`
@@ -34,14 +34,14 @@ export type BkndAdminConfig = {
    /**
     * Entities configuration like headers, footers, actions, field renders, etc.
     */
-   entities?: BkndAdminEntitiesOptions;
+   entities?: UserbaseAdminEntitiesOptions;
    /**
     * App shell configuration like user menu actions.
     */
-   appShell?: BkndAdminAppShellOptions;
+   appShell?: UserbaseAdminAppShellOptions;
 };
 
-export type BkndAdminProps = {
+export type UserbaseAdminProps = {
    /**
     * Base URL of the API, only needed if you are not using the `withProvider` prop
     */
@@ -53,11 +53,11 @@ export type BkndAdminProps = {
    /**
     * Admin UI customization options
     */
-   config?: BkndAdminConfig;
+   config?: UserbaseAdminConfig;
    children?: ReactNode;
 };
 
-export default function Admin(props: BkndAdminProps) {
+export default function Admin(props: UserbaseAdminProps) {
    const Provider = ({ children }: any) =>
       props.withProvider ? (
          <ClientProvider
@@ -77,23 +77,23 @@ export default function Admin(props: BkndAdminProps) {
    );
 }
 
-function AdminInner(props: BkndAdminProps) {
+function AdminInner(props: UserbaseAdminProps) {
    const { theme } = useTheme();
    const config = {
       ...props.config,
-      ...useBkndWindowContext(),
+      ...useUserbaseWindowContext(),
    };
 
-   const BkndWrapper = ({ children }: { children: ReactNode }) => (
-      <BkndProvider options={config} fallback={<Skeleton theme={config?.theme} />}>
+   const UserbaseWrapper = ({ children }: { children: ReactNode }) => (
+      <UserbaseProvider options={config} fallback={<Skeleton theme={config?.theme} />}>
          {children}
-      </BkndProvider>
+      </UserbaseProvider>
    );
 
    return (
       <MantineProvider {...createMantineTheme(theme as any)}>
          <Notifications position="top-right" />
-         <Routes BkndWrapper={BkndWrapper} basePath={config?.basepath}>
+         <Routes UserbaseWrapper={UserbaseWrapper} basePath={config?.basepath}>
             {props.children}
          </Routes>
       </MantineProvider>
@@ -105,7 +105,7 @@ const Skeleton = ({ theme }: { theme?: any }) => {
    const actualTheme = theme && ["dark", "light"].includes(theme) ? theme : t.theme;
 
    return (
-      <div id="bknd-admin" className={actualTheme + " antialiased"}>
+      <div id="userbase-admin" className={actualTheme + " antialiased"}>
          <AppShell.Root>
             <header
                data-shell="header"

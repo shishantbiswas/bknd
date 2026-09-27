@@ -1,6 +1,6 @@
 import type { AppAuthSchema } from "auth/auth-schema";
 import { useEffect, useState } from "react";
-import { useApi } from "bknd/client";
+import { useApi } from "userbase/client";
 
 type AuthStrategyData = Pick<AppAuthSchema, "strategies" | "basepath">;
 export const useAuthStrategies = (options?: {

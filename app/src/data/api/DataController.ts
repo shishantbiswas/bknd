@@ -9,7 +9,7 @@ import {
    pickKeys,
    mcpTool,
    convertNumberedObjectToArray,
-} from "bknd/utils";
+} from "userbase/utils";
 import * as SystemPermissions from "modules/permissions";
 import type { AppDataConfig } from "../data-schema";
 import type { EntityManager, EntityData } from "data/entities";
@@ -689,7 +689,7 @@ export class DataController extends Controller {
       this.ctx.mcp
          .resource(
             "data_entities",
-            "bknd://data/entities",
+            "userbase://data/entities",
             (c) => c.json(c.context.ctx().em.toJSON().entities),
             {
                title: "Entities",
@@ -698,7 +698,7 @@ export class DataController extends Controller {
          )
          .resource(
             "data_relations",
-            "bknd://data/relations",
+            "userbase://data/relations",
             (c) => c.json(c.context.ctx().em.toJSON().relations),
             {
                title: "Relations",
@@ -707,7 +707,7 @@ export class DataController extends Controller {
          )
          .resource(
             "data_indices",
-            "bknd://data/indices",
+            "userbase://data/indices",
             (c) => c.json(c.context.ctx().em.toJSON().indices),
             {
                title: "Indices",

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set variables
-FUNCTION_NAME="bknd-lambda"
-ROLE_NAME="bknd-lambda-execution-role"
+FUNCTION_NAME="userbase-lambda"
+ROLE_NAME="userbase-lambda-execution-role"
 
 echo "Starting cleanup of AWS resources..."
 

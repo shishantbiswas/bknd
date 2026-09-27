@@ -1,7 +1,7 @@
-import { registerLocalMediaAdapter } from "bknd/adapter/node";
-import type { ReactRouterBkndConfig } from "bknd/adapter/react-router";
-import { boolean, em, entity, text } from "bknd";
-import { secureRandomString } from "bknd/utils";
+import { registerLocalMediaAdapter } from "userbase/adapter/node";
+import type { ReactRouterUserbaseConfig } from "userbase/adapter/react-router";
+import { boolean, em, entity, text } from "userbase";
+import { secureRandomString } from "userbase/utils";
 
 // since we're running in node, we can register the local media adapter
 const local = registerLocalMediaAdapter();
@@ -15,7 +15,7 @@ const schema = em({
 
 // register your schema to get automatic type completion
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
    interface DB extends Database {}
 }
 
@@ -33,7 +33,7 @@ export default {
       auth: {
          enabled: true,
          jwt: {
-            issuer: "bknd-remix-example",
+            issuer: "userbase-remix-example",
             secret: secureRandomString(64),
          },
       },
@@ -50,15 +50,15 @@ export default {
       seed: async (ctx) => {
          // create some entries
          await ctx.em.mutator("todos").insertMany([
-            { title: "Learn bknd", done: true },
+            { title: "Learn userbase", done: true },
             { title: "Build something cool", done: false },
          ]);
 
          // and create a user
          await ctx.app.module.auth.createUser({
-            email: "test@bknd.io",
+            email: "test@userbase.io",
             password: "12345678",
          });
       },
    },
-} as const satisfies ReactRouterBkndConfig<{ DB_URL?: string }>;
+} as const satisfies ReactRouterUserbaseConfig<{ DB_URL?: string }>;

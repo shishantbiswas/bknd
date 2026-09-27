@@ -1,5 +1,5 @@
 import { TbSettings } from "react-icons/tb";
-import { useBknd } from "ui/client/BkndProvider";
+import { useUserbase } from "ui/client/UserbaseProvider";
 import { IconButton } from "ui/components/buttons/IconButton";
 import { Icon } from "ui/components/display/Icon";
 import { Link } from "ui/components/wouter/Link";
@@ -7,7 +7,7 @@ import { useBrowserTitle } from "ui/hooks/use-browser-title";
 import * as AppShell from "ui/layouts/AppShell/AppShell";
 
 export function MediaRoot({ children }) {
-   const { app, config } = useBknd();
+   const { app, config } = useUserbase();
    const mediaDisabled = !config.media.enabled;
    useBrowserTitle(["Media"]);
 

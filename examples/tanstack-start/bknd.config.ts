@@ -1,6 +1,6 @@
-import { em, entity, text, boolean } from "bknd";
-import { registerLocalMediaAdapter } from "bknd/adapter/node";
-import { TanstackStartConfig } from "bknd/adapter/tanstack-start";
+import { em, entity, text, boolean } from "userbase";
+import { registerLocalMediaAdapter } from "userbase/adapter/node";
+import { TanstackStartConfig } from "userbase/adapter/tanstack-start";
 
 const local = registerLocalMediaAdapter();
 
@@ -13,7 +13,7 @@ const schema = em({
 
 // register your schema to get automatic type completion
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
   interface DB extends Database {}
 }
 
@@ -26,13 +26,13 @@ export default {
     seed: async (ctx) => {
       // create some entries
       await ctx.em.mutator("todos").insertMany([
-        { title: "Learn bknd", done: true },
+        { title: "Learn userbase", done: true },
         { title: "Build something cool", done: false },
       ]);
 
       // and create a user
       await ctx.app.module.auth.createUser({
-        email: "test@bknd.io",
+        email: "test@userbase.io",
         password: "12345678",
       });
     },

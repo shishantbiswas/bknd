@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
-import { devFsVitePlugin } from "bknd/adapter/cloudflare";
+import { devFsVitePlugin } from "userbase/adapter/cloudflare";
 
 export default defineConfig({
    plugins: [

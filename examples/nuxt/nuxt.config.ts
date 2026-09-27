@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   app: {
     head: {
-      title: "Nuxt 🤝 Bknd.io",
+      title: "Nuxt 🤝 Userbase.io",
     },
   },
   css: ["assets/css/main.css"],

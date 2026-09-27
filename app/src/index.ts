@@ -32,7 +32,7 @@ export {
 export type * from "modules/ModuleApi";
 
 export type { ServerEnv } from "modules/Controller";
-export type { BkndConfig } from "bknd/adapter";
+export type { UserbaseConfig } from "userbase/adapter";
 
 export * as middlewares from "modules/middlewares";
 export { registries } from "modules/registries";
@@ -42,7 +42,7 @@ export { getSystemMcp } from "modules/mcp/system-mcp";
  * Core
  */
 export type { MaybePromise, Merge } from "core/types";
-export { Exception, BkndError } from "core/errors";
+export { Exception, UserbaseError } from "core/errors";
 export { isDebug, env } from "core/env";
 export { type PrimaryFieldType, config, type DB, type AppEntity } from "core/config";
 export { Permission } from "auth/authorize/Permission";

@@ -9,8 +9,8 @@ export const aws = {
    key: "aws",
    title: "AWS Lambda Basic",
    integration: "aws",
-   description: "A basic bknd AWS Lambda starter",
-   path: "gh:bknd-io/bknd/examples/aws-lambda",
+   description: "A basic userbase AWS Lambda starter",
+   path: "gh:userbase-io/userbase/examples/aws-lambda",
    ref: true,
    setup: async (ctx) => {
       await $p.stream.info(

@@ -1,4 +1,4 @@
-import { isPlainObject, transformObject, s } from "bknd/utils";
+import { isPlainObject, transformObject, s } from "userbase/utils";
 
 export function rescursiveClean(
    input: s.Schema,

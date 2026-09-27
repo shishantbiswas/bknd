@@ -16,7 +16,7 @@ import {
 } from "kysely";
 import type { jsonArrayFrom, jsonBuildObject, jsonObjectFrom } from "kysely/helpers/sqlite";
 import type { BaseIntrospector, BaseIntrospectorConfig } from "./BaseIntrospector";
-import type { DB } from "bknd";
+import type { DB } from "userbase";
 import type { Constructor } from "core/registry/Registry";
 import { KyselyPluginRunner } from "data/plugins/KyselyPluginRunner";
 import type { Field } from "data/fields/Field";
@@ -85,7 +85,7 @@ export type ConnQueryResults<T extends ConnQuery[]> = {
    [K in keyof T]: ConnQueryResult<T[K]>;
 };
 
-const CONN_SYMBOL = Symbol.for("bknd:connection");
+const CONN_SYMBOL = Symbol.for("userbase:connection");
 
 export type Features = {
    batching: boolean;

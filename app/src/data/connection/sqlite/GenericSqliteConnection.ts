@@ -8,7 +8,7 @@ import {
 } from "kysely-generic-sqlite";
 import { SqliteConnection } from "./SqliteConnection";
 import type { ConnQuery, ConnQueryResults, Features } from "../Connection";
-import type { MaybePromise } from "bknd";
+import type { MaybePromise } from "userbase";
 
 export type { IGenericSqlite };
 export type TStatement = { sql: string; parameters?: any[] | readonly any[] };

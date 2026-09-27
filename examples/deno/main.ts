@@ -1,4 +1,4 @@
-import { createRuntimeApp, serveStaticViaImport } from "bknd/adapter";
+import { createRuntimeApp, serveStaticViaImport } from "userbase/adapter";
 
 const app = await createRuntimeApp({
    connection: {

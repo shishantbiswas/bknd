@@ -1,4 +1,4 @@
-import { Tool, getPath, limitObjectDepth, s } from "bknd/utils";
+import { Tool, getPath, limitObjectDepth, s } from "userbase/utils";
 import {
    McpSchemaHelper,
    mcpSchemaSymbol,

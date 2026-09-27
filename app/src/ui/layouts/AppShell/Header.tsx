@@ -10,8 +10,8 @@ import {
    TbUser,
    TbX,
 } from "react-icons/tb";
-import { useAuth, useBkndWindowContext } from "bknd/client";
-import { useBknd } from "ui/client/bknd";
+import { useAuth, useUserbaseWindowContext } from "userbase/client";
+import { useUserbase } from "ui/client/userbase";
 import { useTheme } from "ui/client/use-theme";
 import { Button } from "ui/components/buttons/Button";
 import { IconButton } from "ui/components/buttons/IconButton";
@@ -30,7 +30,7 @@ import { useAppShellAdminOptions } from "ui/options";
 
 export function HeaderNavigation() {
    const [location, navigate] = useLocation();
-   const { config } = useBknd();
+   const { config } = useUserbase();
 
    const items: {
       label: string;
@@ -115,7 +115,7 @@ function SidebarToggler({ name = "default" }: { name?: string }) {
 }
 
 export function Header({ hasSidebar = true }) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const { theme } = useTheme();
    const { logo_return_path = "/" } = app.options;
 
@@ -146,12 +146,12 @@ export function Header({ hasSidebar = true }) {
 }
 
 function UserMenu() {
-   const { config } = useBknd();
+   const { config } = useUserbase();
    const uiOptions = useAppShellAdminOptions();
 
    const auth = useAuth();
    const [navigate] = useNavigate();
-   const { logout_route } = useBkndWindowContext();
+   const { logout_route } = useUserbaseWindowContext();
 
    async function handleLogout() {
       await auth.logout();
@@ -175,7 +175,7 @@ function UserMenu() {
       },
       {
          label: "Docs",
-         onClick: () => window.open("https://docs.bknd.io", "_blank"),
+         onClick: () => window.open("https://docs.userbase.io", "_blank"),
          icon: IconBook,
       },
    ];

@@ -1,8 +1,8 @@
-import { useBknd } from "../client/BkndProvider";
+import { useUserbase } from "../client/UserbaseProvider";
 
 /** @deprecated */
 export function useFlows() {
-   const { app } = useBknd();
+   const { app } = useUserbase();
 
    return {
       flows: app.flows,
@@ -12,7 +12,7 @@ export function useFlows() {
 
 /** @deprecated */
 export function useFlow(name: string) {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const flow = app.flows.find((f) => f.name === name);
 
    return {

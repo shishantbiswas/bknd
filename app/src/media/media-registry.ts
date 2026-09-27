@@ -1,6 +1,6 @@
 import { type Constructor, Registry } from "core/registry/Registry";
 import type { StorageAdapter } from "./storage/StorageAdapter";
-import type { s } from "bknd/utils";
+import type { s } from "userbase/utils";
 import { StorageS3Adapter } from "./storage/adapters/s3/StorageS3Adapter";
 import { StorageCloudinaryAdapter } from "./storage/adapters/cloudinary/StorageCloudinaryAdapter";
 

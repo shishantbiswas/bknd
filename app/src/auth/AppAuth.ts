@@ -1,8 +1,8 @@
-import type { DB, PrimaryFieldType } from "bknd";
+import type { DB, PrimaryFieldType } from "userbase";
 import * as AuthPermissions from "auth/auth-permissions";
 import type { AuthStrategy } from "auth/authenticate/strategies/Strategy";
 import type { PasswordStrategy } from "auth/authenticate/strategies/PasswordStrategy";
-import { $console, secureRandomString, transformObject, pickKeys } from "bknd/utils";
+import { $console, secureRandomString, transformObject, pickKeys } from "userbase/utils";
 import type { Entity, EntityManager } from "data/entities";
 import { em, entity, enumm, type FieldSchema } from "data/prototype";
 import { Module } from "modules/Module";
@@ -16,7 +16,7 @@ import { Role } from "./authorize/Role";
 
 export type UsersFields = typeof AppAuth.usersFields;
 export type UserFieldSchema = FieldSchema<typeof AppAuth.usersFields>;
-declare module "bknd" {
+declare module "userbase" {
    interface Users extends AppEntity, UserFieldSchema {}
    interface DB {
       users: Users;

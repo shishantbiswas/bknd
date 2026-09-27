@@ -1,5 +1,5 @@
 import { cloneDeep } from "lodash-es";
-import { useBknd } from "ui/client/bknd";
+import { useUserbase } from "ui/client/userbase";
 import { Setting } from "ui/routes/settings/components/Setting";
 import { Route } from "wouter";
 
@@ -17,7 +17,7 @@ const uiSchema = {
 };
 
 export const ServerSettings = ({ schema: _unsafe_copy, config }) => {
-   const { app } = useBknd();
+   const { app } = useUserbase();
    const _schema = cloneDeep(_unsafe_copy);
    const prefix = app.getAbsolutePath("settings");
 

@@ -1,5 +1,5 @@
-import type { PrimaryFieldType } from "bknd";
-import { snakeToPascalWithSpaces, s } from "bknd/utils";
+import type { PrimaryFieldType } from "userbase";
+import { snakeToPascalWithSpaces, s } from "userbase/utils";
 import type { ExpressionBuilder } from "kysely";
 import type { Entity, EntityManager } from "../entities";
 import type { RepoQuery } from "../server/query";

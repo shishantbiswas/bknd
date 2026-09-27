@@ -1,8 +1,8 @@
-import { getApp as getBkndApp } from "bknd/adapter/react-router";
-import config from "../bknd.config";
+import { getApp as getUserbaseApp } from "userbase/adapter/react-router";
+import config from "../userbase.config";
 
 export async function getApp() {
-   return await getBkndApp(config, process.env as any);
+   return await getUserbaseApp(config, process.env as any);
 }
 
 export async function getApi(args?: { request: Request }, opts?: { verify?: boolean }) {

@@ -8,7 +8,7 @@ import { resolve } from "node:path";
  */
 export function devFsVitePlugin({
    verbose = false,
-   configFile = "bknd.config.ts",
+   configFile = "userbase.config.ts",
 }: {
    verbose?: boolean;
    configFile?: string;
@@ -195,7 +195,7 @@ export function devFsVitePlugin({
             return;
          }
 
-         // Check if this is the bknd config file
+         // Check if this is the userbase config file
          if (id.includes(configFile)) {
             if (verbose) {
                console.debug("[dev-fs-plugin] Transforming", configFile);

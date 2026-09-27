@@ -5,7 +5,7 @@ icon: Database
 tags: ["documentation"]
 ---
 
-In order to use **bknd**, you need to prepare access information to your database and potentially install additional dependencies. Connections to the database are managed using Kysely. Therefore, all [its dialects](https://kysely.dev/docs/dialects) are theoretically supported.
+In order to use **userbase**, you need to prepare access information to your database and potentially install additional dependencies. Connections to the database are managed using Kysely. Therefore, all [its dialects](https://kysely.dev/docs/dialects) are theoretically supported.
 
 Currently supported and tested databases are:
 
@@ -13,7 +13,7 @@ Currently supported and tested databases are:
 - SQLite (remote): Turso, Cloudflare D1
 - Postgres: Vanilla Postgres, Supabase, Neon, Xata
 
-By default, bknd will try to use a SQLite database in-memory. Depending on your runtime, a different SQLite implementation will be used.
+By default, userbase will try to use a SQLite database in-memory. Depending on your runtime, a different SQLite implementation will be used.
 
 ## Defining the connection
 
@@ -21,13 +21,13 @@ There are mainly 3 ways to define the connection to your database, when
 
 1. creating an app using `App.create()` or `createApp()`
 2. creating an app using a [Framework or Runtime adapter](/integration/introduction)
-3. starting a quick instance using the [CLI](/usage/cli#using-configuration-file-bknd-config)
+3. starting a quick instance using the [CLI](/usage/cli#using-configuration-file-userbase-config)
 
 When creating an app using `App.create()` or `createApp()`, you can pass a connection object in the configuration object.
 
 ```typescript title="app.ts"
-import { createApp } from "bknd";
-import { sqlite } from "bknd/adapter/sqlite";
+import { createApp } from "userbase";
+import { sqlite } from "userbase/adapter/sqlite";
 
 // a connection is required when creating an app like this
 const app = createApp({
@@ -35,10 +35,10 @@ const app = createApp({
 });
 ```
 
-When using an adapter, or using the CLI, bknd will automatically try to use a SQLite implementation depending on the runtime:
+When using an adapter, or using the CLI, userbase will automatically try to use a SQLite implementation depending on the runtime:
 
 ```javascript title="app.js"
-import { serve } from "bknd/adapter/node";
+import { serve } from "userbase/adapter/node";
 
 serve({
   // connection is optional, but recommended
@@ -49,25 +49,25 @@ serve({
 You can also pass a connection instance to the `connection` property to explictly use a specific connection.
 
 ```javascript title="app.js"
-import { serve } from "bknd/adapter/node";
-import { sqlite } from "bknd/adapter/sqlite";
+import { serve } from "userbase/adapter/node";
+import { sqlite } from "userbase/adapter/sqlite";
 
 serve({
   connection: sqlite({ url: "file:data.db" }),
 });
 ```
 
-If you're using [`bknd.config.*`](/extending/config), you can specify the connection on the exported object.
+If you're using [`userbase.config.*`](/extending/config), you can specify the connection on the exported object.
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase";
 
 export default {
   connection: { url: "file:data.db" },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
-Throughout the documentation, it is assumed you use `bknd.config.ts` to define your connection.
+Throughout the documentation, it is assumed you use `userbase.config.ts` to define your connection.
 
 ## SQLite
 
@@ -89,30 +89,30 @@ The `sqlite` adapter is automatically resolved based on the runtime.
 
 The bundled version of the `libsql` connection only works with remote databases. However, you can pass in a `Client` from `@libsql/client`, see [LibSQL](#libsql) for more details.
 
-```typescript title="bknd.config.ts"
-import type { BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import type { UserbaseConfig } from "userbase";
 
-// no connection is required, bknd will use a SQLite database in-memory
+// no connection is required, userbase will use a SQLite database in-memory
 // this does not work on edge environments!
-export default {} satisfies BkndConfig;
+export default {} satisfies UserbaseConfig;
 
 // or explicitly in-memory
 export default {
   connection: { url: ":memory:" },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 
 // or explicitly as a file
 export default {
   connection: { url: "file:<path/to/your/database.db>" },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### Node.js SQLite
 
 To use the Node.js SQLite adapter directly, use the `nodeSqlite` function as value for the `connection` property. This lets you customize the database connection, such as enabling WAL mode.
 
-```typescript title="bknd.config.ts"
-import { nodeSqlite, type NodeBkndConfig } from "bknd/adapter/node";
+```typescript title="userbase.config.ts"
+import { nodeSqlite, type NodeUserbaseConfig } from "userbase/adapter/node";
 
 export default {
   connection: nodeSqlite({
@@ -121,15 +121,15 @@ export default {
       db.exec("PRAGMA journal_mode = WAL;");
     },
   }),
-} satisfies NodeBkndConfig;
+} satisfies NodeUserbaseConfig;
 ```
 
 ### Bun SQLite
 
 You can explicitly use the Bun SQLite adapter by passing the `bunSqlite` function to the `connection` property. This allows further configuration of the database, e.g. enabling WAL mode.
 
-```typescript title="bknd.config.ts"
-import { bunSqlite, type BunBkndConfig } from "bknd/adapter/bun";
+```typescript title="userbase.config.ts"
+import { bunSqlite, type BunUserbaseConfig } from "userbase/adapter/bun";
 
 export default {
   connection: bunSqlite({ 
@@ -138,28 +138,28 @@ export default {
       db.run("PRAGMA journal_mode = WAL;");
     },
   }),
-} satisfies BunBkndConfig;
+} satisfies BunUserbaseConfig;
 ```
 
 ### LibSQL
 
 Turso offers a SQLite-fork called LibSQL that runs a server around your SQLite database. The edge-version of the adapter is included in the bundle (remote only):
 
-```typescript title="bknd.config.ts"
-import { libsql, type BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import { libsql, type UserbaseConfig } from "userbase";
 
 export default {
   connection: libsql({
     url: "libsql://<database>.turso.io",
     authToken: "<auth-token>",
   }),
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 If you wish to use LibSQL as file, in-memory or make use of [Embedded Replicas](https://docs.turso.tech/features/embedded-replicas/introduction), you have to pass in the `Client` from `@libsql/client`:
 
-```typescript title="bknd.config.ts"
-import { libsql, type BkndConfig } from "bknd";
+```typescript title="userbase.config.ts"
+import { libsql, type UserbaseConfig } from "userbase";
 import { createClient } from "@libsql/client";
 
 const client = createClient({
@@ -169,7 +169,7 @@ const client = createClient({
 
 export default {
   connection: libsql(client),
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### Cloudflare D1
@@ -179,7 +179,7 @@ Using the [Cloudflare Adapter](/integration/cloudflare), you can choose to use a
 To manually specify which D1 database to take, you can specify it explicitly:
 
 ```ts
-import { serve, d1 } from "bknd/adapter/cloudflare";
+import { serve, d1 } from "userbase/adapter/cloudflare";
 
 export default serve<Env>({
   app: (env) => d1({ binding: env.D1_BINDING }),
@@ -188,7 +188,7 @@ export default serve<Env>({
 
 ### SQLocal
 
-To use bknd with `sqlocal` for a offline expierence, you need to install the `sqlocal` package. You can do so by running the following command:
+To use userbase with `sqlocal` for a offline expierence, you need to install the `sqlocal` package. You can do so by running the following command:
 
 ```bash
 npm install sqlocal
@@ -197,7 +197,7 @@ npm install sqlocal
 Consult the [sqlocal documentation](https://sqlocal.dallashoffman.com/guide/setup) for connection options:
 
 ```ts
-import { createApp, sqlocal } from "bknd";
+import { createApp, sqlocal } from "userbase";
 import { SQLocalKysely } from "sqlocal/kysely";
 
 const app = createApp({
@@ -207,15 +207,15 @@ const app = createApp({
 
 ## PostgreSQL
 
-Postgres is built-in to bknd, you can connect to your Postgres database using `pg` or `postgres` dialects. Additionally, you may also define your custom connection.
+Postgres is built-in to userbase, you can connect to your Postgres database using `pg` or `postgres` dialects. Additionally, you may also define your custom connection.
 
 ### Using `pg`
 
 To establish a connection to your database, you can use any connection options available on the [`pg`](https://node-postgres.com/apis/client) package. Wrap the `Pool` in the `pg` function to create a connection.
 
 ```ts
-import { serve } from "bknd/adapter/node";
-import { pg } from "bknd";
+import { serve } from "userbase/adapter/node";
+import { pg } from "userbase";
 import { Pool } from "pg";
 
 serve({
@@ -232,8 +232,8 @@ serve({
 To establish a connection to your database, you can use any connection options available on the [`postgres`](https://github.com/porsager/postgres) package. Wrap the `Sql` in the `postgresJs` function to create a connection.
 
 ```ts
-import { serve } from "bknd/adapter/node";
-import { postgresJs } from "bknd";
+import { serve } from "userbase/adapter/node";
+import { postgresJs } from "userbase";
 import postgres from 'postgres'
 
 serve({
@@ -250,7 +250,7 @@ Several Postgres hosting providers offer their own clients to connect to their d
 Example using `@neondatabase/serverless`:
 
 ```ts
-import { createCustomPostgresConnection } from "bknd";
+import { createCustomPostgresConnection } from "userbase";
 import { NeonDialect } from "kysely-neon";
 
 const neon = createCustomPostgresConnection("neon", NeonDialect);
@@ -265,7 +265,7 @@ serve({
 Example using `@xata.io/client`:
 
 ```ts
-import { createCustomPostgresConnection } from "bknd";
+import { createCustomPostgresConnection } from "userbase";
 import { XataDialect } from "@xata.io/kysely";
 import { buildClient } from "@xata.io/client";
 
@@ -292,7 +292,7 @@ serve({
 Creating a custom connection is as easy as extending the `Connection` class and passing constructing a Kysely instance.
 
 ```ts
-import { createApp, Connection } from "bknd";
+import { createApp, Connection } from "userbase";
 import { Kysely } from "kysely";
 
 class CustomConnection extends Connection {
@@ -315,7 +315,7 @@ To provide a database structure, you can pass `config` to the creation of an app
 Here is a quick example:
 
 ```typescript
-import { createApp, em, entity, text, number } from "bknd";
+import { createApp, em, entity, text, number } from "userbase";
 
 const schema = em(
   {
@@ -382,7 +382,7 @@ You can add additional fields to these entities. System-defined fields don't hav
 If you'd like to connect your entities to system entities, you need them in the schema to access their reference when making relations. From the example above, if you'd like to connect the `posts` entity to the `users` entity, you can do so like this:
 
 ```typescript
-import { em, entity, text, number, systemEntity } from "bknd";
+import { em, entity, text, number, systemEntity } from "userbase";
 
 const schema = em(
   {
@@ -419,7 +419,7 @@ If media is enabled, you can upload media directly or associate it with an entit
 3. specify the mapped field name by using the `mappedBy` option
 
 ```typescript
-import { em, entity, text, number, systemEntity, medium, media } from "bknd";
+import { em, entity, text, number, systemEntity, medium, media } from "userbase";
 
 const schema = em(
   {
@@ -463,16 +463,16 @@ To get type completion, there are two options:
 1. Use the CLI to [generate the types](/usage/cli#generating-types-types) (recommended)
 2. If you have an initial structure created with the prototype functions, you can extend the `DB` interface with your own schema.
 
-All entity related functions use the types defined in `DB` from `bknd`. To get type completion, you can extend that interface with your own schema:
+All entity related functions use the types defined in `DB` from `userbase`. To get type completion, you can extend that interface with your own schema:
 
 ```typescript
-import { em } from "bknd";
-import { Api } from "bknd/client";
+import { em } from "userbase";
+import { Api } from "userbase/client";
 
 const schema = em({ /* ... */ });
 
 type Database = (typeof schema)["DB"];
-declare module "bknd" {
+declare module "userbase" {
   interface DB extends Database {}
 }
 
@@ -490,7 +490,7 @@ provides the `ModuleBuildContext` as the first argument.
 
 
 ```typescript
-import { createApp, type ModuleBuildContext } from "bknd";
+import { createApp, type ModuleBuildContext } from "userbase";
 
 const app = createApp({
   connection: { /* ... */ },
@@ -511,7 +511,7 @@ Note that in [`db` mode](/usage/setup#ui-only-mode), the seed function will only
 In [`code` mode](/usage/setup#code-only-mode), the seed function will not be automatically executed. You can manually execute it by running the following command:
 
 ```bash
-npx bknd sync --seed --force
+npx userbase sync --seed --force
 ```
 
 See the [sync command](/usage/cli#syncing-the-database-sync) documentation for more details.

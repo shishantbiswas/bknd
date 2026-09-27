@@ -1,5 +1,5 @@
 import { describe, expect, mock, test, beforeAll, afterAll } from "bun:test";
-import { createApp as internalCreateApp, type CreateAppConfig } from "bknd";
+import { createApp as internalCreateApp, type CreateAppConfig } from "userbase";
 import { getDummyConnection } from "../../__test__/helper";
 import { ModuleManager } from "modules/ModuleManager";
 import { em, entity, text } from "data/prototype";

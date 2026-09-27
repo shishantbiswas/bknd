@@ -1,41 +1,41 @@
 ---
 title: "React Router"
-description: "Run bknd inside React Router"
+description: "Run userbase inside React Router"
 tags: ["documentation"]
 ---
 
 ## Installation
 
-To get started with React Router and bknd you can either install the package manually, and follow the descriptions below, or use the CLI starter:
+To get started with React Router and userbase you can either install the package manually, and follow the descriptions below, or use the CLI starter:
 
 ### CLI Starter
 
 Create a new React Router CLI starter project by running the following command:
 
 ```sh
-  npx bknd create -i react-router
+  npx userbase create -i react-router
 ```
 
 ### Manual
 
-Create a new React Router project by following the [official guide](https://reactrouter.com/start/framework/installation), and then install bknd as a dependency:
+Create a new React Router project by following the [official guide](https://reactrouter.com/start/framework/installation), and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -48,41 +48,41 @@ bun add bknd
   [upgrade](https://nodejs.org/en/download/) if necessary.
 </Callout>
 
-Now create a `bknd.config.ts` file in the root of your project. If you created the project using the CLI starter, this file is already created for you.
+Now create a `userbase.config.ts` file in the root of your project. If you created the project using the CLI starter, this file is already created for you.
 
-```typescript title="bknd.config.ts"
-import type { ReactRouterBkndConfig } from "bknd/adapter/react-router";
+```typescript title="userbase.config.ts"
+import type { ReactRouterUserbaseConfig } from "userbase/adapter/react-router";
 
 export default {
   connection: {
     url: "file:data.db",
   },
-} satisfies ReactRouterBkndConfig;
+} satisfies ReactRouterUserbaseConfig;
 ```
 
-See [bknd.config.ts](/extending/config) for more information on how to configure bknd. The `ReactRouterBkndConfig` type extends the `BkndConfig` type with the following additional properties:
+See [userbase.config.ts](/extending/config) for more information on how to configure userbase. The `ReactRouterUserbaseConfig` type extends the `UserbaseConfig` type with the following additional properties:
 
 ```typescript
 type ReactRouterEnv = NodeJS.ProcessEnv;
 type ReactRouterFunctionArgs = {
   request: Request;
 };
-export type ReactRouterBkndConfig<Env = ReactRouterEnv> =
-  FrameworkBkndConfig<Env>;
+export type ReactRouterUserbaseConfig<Env = ReactRouterEnv> =
+  FrameworkUserbaseConfig<Env>;
 ```
 
 ## Serve the API
 
 ### Helper Functions (Optional)
 
-For convenience, you can create a helper file to instantiate the bknd instance and retrieve the API. This is optional but recommended as it simplifies usage throughout your app. The examples below assume you've created this helper, but you can adjust the approach according to your needs.
+For convenience, you can create a helper file to instantiate the userbase instance and retrieve the API. This is optional but recommended as it simplifies usage throughout your app. The examples below assume you've created this helper, but you can adjust the approach according to your needs.
 
-```ts title="app/bknd.ts"
+```ts title="app/userbase.ts"
 import {
-  type ReactRouterBkndConfig,
-  getApp as getBkndApp,
-} from "bknd/adapter/react-router";
-import config from "../bknd.config";
+  type ReactRouterUserbaseConfig,
+  getApp as getUserbaseApp,
+} from "userbase/adapter/react-router";
+import config from "../userbase.config";
 
 export { config };
 
@@ -90,7 +90,7 @@ export { config };
 // e.g. when deploying to cloudflare workers, you'd want the FunctionArgs to be passed in
 // to resolve environment variables
 export async function getApp() {
-  return await getBkndApp(config, process.env as any);
+  return await getUserbaseApp(config, process.env as any);
 }
 
 export async function getApi(
@@ -112,10 +112,10 @@ For more information about the connection object, refer to the [Database](/usage
 
 ### API Route
 
-Create a catch-all route file at `app/routes/api.$.ts` that forwards requests to bknd:
+Create a catch-all route file at `app/routes/api.$.ts` that forwards requests to userbase:
 
 ```ts title="app/routes/api.$.ts"
-import { getApp } from "~/bknd";
+import { getApp } from "~/userbase";
 
 const handler = async (args: { request: Request }) => {
   const app = await getApp();
@@ -141,17 +141,17 @@ export default [
 
 ## Enabling the Admin UI
 
-Create a route file at `app/routes/admin.$.tsx` to enable the bknd Admin UI for managing your data, schema, and users:
+Create a route file at `app/routes/admin.$.tsx` to enable the userbase Admin UI for managing your data, schema, and users:
 
 ```tsx title="app/routes/admin.$.tsx"
 import { lazy, Suspense, useSyncExternalStore } from "react";
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
-import { getApi } from "~/bknd";
+import { getApi } from "~/userbase";
 
 const Admin = lazy(() =>
-  import("bknd/ui").then((mod) => ({ default: mod.Admin })),
+  import("userbase/ui").then((mod) => ({ default: mod.Admin })),
 );
-import "bknd/dist/styles.css";
+import "userbase/dist/styles.css";
 
 export const loader = async (args: LoaderFunctionArgs) => {
   const api = await getApi(args, { verify: true });
@@ -201,7 +201,7 @@ You can use the `getApi` helper function we've already set up to fetch and mutat
 
 ```tsx title="app/routes/_index.tsx"
 import { useLoaderData, type LoaderFunctionArgs } from "react-router";
-import { getApi } from "~/bknd";
+import { getApi } from "~/userbase";
 
 export const loader = async (args: LoaderFunctionArgs) => {
   // use authentication from request
@@ -226,11 +226,11 @@ export default function Index() {
 
 ## Using React Hooks (Optional)
 
-If you want to use bknd's client-side React hooks (like `useEntityQuery`, `useAuth`, etc.), wrap your app in the `ClientProvider` component. This is typically done in `app/root.tsx`:
+If you want to use userbase's client-side React hooks (like `useEntityQuery`, `useAuth`, etc.), wrap your app in the `ClientProvider` component. This is typically done in `app/root.tsx`:
 
 ```tsx title="app/root.tsx"
 // other imports
-import { ClientProvider } from "bknd/client";
+import { ClientProvider } from "userbase/client";
 
 // ...
 export default function App() {
@@ -243,4 +243,4 @@ export default function App() {
 // ...
 ```
 
-The `ClientProvider` automatically uses the same origin for API requests, which works perfectly when bknd is served from your React Router app. For more details on using React hooks, see the [React SDK documentation](/usage/react).
+The `ClientProvider` automatically uses the same origin for API requests, which works perfectly when userbase is served from your React Router app. For more details on using React hooks, see the [React SDK documentation](/usage/react).

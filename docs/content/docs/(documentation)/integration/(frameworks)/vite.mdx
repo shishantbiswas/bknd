@@ -1,6 +1,6 @@
 ---
 title: "Vite"
-description: "Run bknd inside Vite"
+description: "Run userbase inside Vite"
 tags: ["documentation"]
 ---
 
@@ -9,24 +9,24 @@ Vite is a powerful toolkit to accelerate your local development.
 ## Installation
 
 Create a new vite project by following the [official guide](https://vite.dev/guide/#scaffolding-your-first-vite-project)
-and then install bknd as a dependency:
+and then install userbase as a dependency:
 
 <Tabs groupId='package-manager' persist items={[ 'npm', 'pnpm', 'yarn', 'bun']}>
 
 ```bash tab="npm"
-npm install bknd
+npm install userbase
 ```
 
 ```bash tab="pnpm"
-pnpm install bknd
+pnpm install userbase
 ```
 
 ```bash tab="yarn"
-yarn add bknd
+yarn add userbase
 ```
 
 ```bash tab="bun"
-bun add bknd
+bun add userbase
 ```
 
 </Tabs>
@@ -45,47 +45,47 @@ npm install @hono/vite-dev-server
   [upgrade](https://nodejs.org/en/download/) if necessary.
 </Callout>
 
-Now create a `bknd.config.ts` file in the root of your project.
+Now create a `userbase.config.ts` file in the root of your project.
 
-```typescript title="bknd.config.ts"
-import type { ViteBkndConfig } from "bknd/adapter/vite";
+```typescript title="userbase.config.ts"
+import type { ViteUserbaseConfig } from "userbase/adapter/vite";
 
 export default {
   connection: {
     url: "file:data.db",
   },
-} satisfies ViteBkndConfig;
+} satisfies ViteUserbaseConfig;
 ```
 
-See [bknd.config.ts](/extending/config) for more information on how to configure bknd.
-The `ViteBkndConfig` type extends the `BkndConfig` type with the following additional properties:
+See [userbase.config.ts](/extending/config) for more information on how to configure userbase.
+The `ViteUserbaseConfig` type extends the `UserbaseConfig` type with the following additional properties:
 
 ```typescript
 export type ViteEnv = NodeJS.ProcessEnv;
-export type ViteBkndConfig<Env = ViteEnv> = RuntimeBkndConfig<Env> & {};
+export type ViteUserbaseConfig<Env = ViteEnv> = RuntimeUserbaseConfig<Env> & {};
 ```
 
 ## Serve the API
 
-To serve the **bknd** API, you first have to create a local server file for you vite environment.
+To serve the **userbase** API, you first have to create a local server file for you vite environment.
 Create a `server.ts` file:
 
 ```typescript title="server.ts"
-import { serve } from "bknd/adapter/vite";
-import config from "./bknd.config";
+import { serve } from "userbase/adapter/vite";
+import config from "./userbase.config";
 
 export default serve(config);
 ```
 
 You can also run your vite server in `mode: "fresh"`, this will re-create the app on every fetch.
-This is only useful for when working on the `bknd` repository directly.
+This is only useful for when working on the `userbase` repository directly.
 
 For more information about the connection object, refer to the [Database](/usage/database) guide.
 
 Next, adjust your `vite.config.ts` to look like the following:
 
 ```ts title="vite.config.ts"
-import { devServer } from "bknd/adapter/vite";
+import { devServer } from "userbase/adapter/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -105,7 +105,7 @@ export default defineConfig({
 
 Now you can start your application using `npm run dev`. Now opening http://localhost:5174/
 looks like an empty project. That's because we only registered the API, head over to
-http://localhost:5174/api/system/config to see **bknd** respond.
+http://localhost:5174/api/system/config to see **userbase** respond.
 
 ## Serve the Admin UI
 
@@ -113,8 +113,8 @@ After adding the API, you can easily add the Admin UI by simply returning it in 
 Replace all of its content with the following:
 
 ```tsx title="App.tsx"
-import { Admin } from "bknd/ui";
-import "bknd/dist/styles.css";
+import { Admin } from "userbase/ui";
+import "userbase/dist/styles.css";
 
 export default function App() {
   return <Admin withProvider />;
@@ -131,12 +131,12 @@ options you can make use of to adjust it according to your setup.
 ### Use custom HTML to serve the Admin UI
 
 There might be cases you want to be sure to be in control over the HTML that is being used.
-`bknd` generates it automatically, but you use your own one as follows:
+`userbase` generates it automatically, but you use your own one as follows:
 
 ```typescript title="server.ts"
-import { serve, addViteScript } from "bknd/adapter/vite";
+import { serve, addViteScript } from "userbase/adapter/vite";
 import { readFile } from "node:fs/promises";
-import config from "./bknd.config";
+import config from "./userbase.config";
 
 let html = await readFile("./index.html", "utf-8");
 
@@ -160,8 +160,8 @@ By default, the entry point `/src/main.tsx` is used and should fit most cases. I
 you can supply a different one like so:
 
 ```typescript title="server.ts"
-import { serve } from "bknd/adapter/vite";
-import config from "./bknd.config";
+import { serve } from "userbase/adapter/vite";
+import config from "./userbase.config";
 
 // the configuration given is optional
 export default serve({

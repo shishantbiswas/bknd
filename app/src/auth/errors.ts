@@ -1,6 +1,6 @@
 import { Exception } from "core/errors";
 import { isDebug } from "core/env";
-import { HttpStatus } from "bknd/utils";
+import { HttpStatus } from "userbase/utils";
 
 export class AuthException extends Exception {
    getSafeErrorAndCode() {

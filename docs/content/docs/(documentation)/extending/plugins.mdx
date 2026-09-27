@@ -5,7 +5,7 @@ tags: ["documentation"]
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 
-bknd allows you to extend its functionality by creating plugins. These allows to hook into the app lifecycle and to provide a data structure that is guaranteed to be merged. A plugin is a function that takes in an instance of `App` and returns the following structure:
+userbase allows you to extend its functionality by creating plugins. These allows to hook into the app lifecycle and to provide a data structure that is guaranteed to be merged. A plugin is a function that takes in an instance of `App` and returns the following structure:
 
 <AutoTypeTable path="../app/src/App.ts" name="AppPluginConfig" />
 
@@ -15,7 +15,7 @@ To create a simple plugin which guarantees an entity `pages` to be available and
 
 ```tsx title="myPagesPlugin.tsx"
 /** @jsxImportSource hono/jsx */
-import { type App, type AppPlugin, em, entity, text } from "bknd";
+import { type App, type AppPlugin, em, entity, text } from "userbase";
 
 export const myPagesPlugin: AppPlugin = (app) => ({
    name: "my-pages-plugin",
@@ -29,7 +29,7 @@ export const myPagesPlugin: AppPlugin = (app) => ({
    }),
    // execute code after the app is built
    onBuilt: () => {
-      // register a new endpoint, make sure that you choose an endpoint that is reachable for bknd
+      // register a new endpoint, make sure that you choose an endpoint that is reachable for userbase
       app.server.get("/my-pages", async (c) => {
          const { data: pages } = await app.em.repo("pages").findMany({});
          return c.html(
@@ -48,17 +48,17 @@ export const myPagesPlugin: AppPlugin = (app) => ({
 
 ```
 
-And then register it in your `bknd.config.ts` file:
+And then register it in your `userbase.config.ts` file:
 
 ```typescript
-import type { BkndConfig } from "bknd/adapter";
+import type { UserbaseConfig } from "userbase/adapter";
 import { myPagesPlugin } from "./myPagesPlugin";
 
 export default {
    options: {
       plugins: [myPagesPlugin],
    }
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 The schema returned from the plugin will be merged into the schema of the app.
@@ -66,14 +66,14 @@ The schema returned from the plugin will be merged into the schema of the app.
 
 ## Built-in plugins
 
-bknd comes with a few built-in plugins that you can use.
+userbase comes with a few built-in plugins that you can use.
 
 ### `syncTypes`
 
-A simple plugin that writes down the TypeScript types of the data schema on boot and each build. The output is equivalent to running `npx bknd types`.
+A simple plugin that writes down the TypeScript types of the data schema on boot and each build. The output is equivalent to running `npx userbase types`.
 
-```typescript title="bknd.config.ts"
-import { syncTypes } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { syncTypes } from "userbase/plugins";
 import { writeFile } from "node:fs/promises";
 
 export default {
@@ -84,20 +84,20 @@ export default {
             enabled: true,
             // your writing function (required)
             write: async (et) => {
-               await writeFile("bknd-types.d.ts", et.toString(), "utf-8");
+               await writeFile("userbase-types.d.ts", et.toString(), "utf-8");
             }
          }),
       ]
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### `syncConfig`
 
 A simple plugin that writes down the app configuration on boot and each build.
 
-```typescript title="bknd.config.ts"
-import { syncConfig } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { syncConfig } from "userbase/plugins";
 import { writeFile } from "node:fs/promises";
 
 export default {
@@ -113,15 +113,15 @@ export default {
          }),
       ]
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### `syncSecrets`
 
 A simple plugin that writes down the app secrets on boot and each build.
 
-```typescript title="bknd.config.ts"
-import { syncSecrets } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { syncSecrets } from "userbase/plugins";
 import { writeFile } from "node:fs/promises";
 
 export default {
@@ -143,15 +143,15 @@ export default {
          }),
       ]
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### `showRoutes`
 
 A simple plugin that logs the routes of your app in the console.
 
-```typescript title="bknd.config.ts"
-import { showRoutes } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { showRoutes } from "userbase/plugins";
 
 export default {
    options: {
@@ -162,7 +162,7 @@ export default {
          })
       ],
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 ### `cloudflareImageOptimization`
@@ -173,8 +173,8 @@ export default {
 
 A plugin that add Cloudflare Image Optimization to your app's media storage.
 
-```typescript title="bknd.config.ts"
-import { cloudflareImageOptimization } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { cloudflareImageOptimization } from "userbase/plugins";
 
 export default {
    options: {
@@ -191,7 +191,7 @@ export default {
          })
       ],
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 Here is a break down of all configuration options:
@@ -243,8 +243,8 @@ Now you can add query parameters for the transformations, e.g. `?width=1000&heig
 
 A plugin that adds `created_at` and `updated_at` fields to the specified entities.
 
-```typescript title="bknd.config.ts"
-import { timestamps } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { timestamps } from "userbase/plugins";
 
 export default {
    options: {
@@ -257,7 +257,7 @@ export default {
          })
       ],
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 
@@ -300,9 +300,9 @@ Content-Type: application/json
 If the code is valid, the user will be authenticated by sending a `Set-Cookie` header and a body property `token` with the JWT token (equally to the login endpoint).
 
 
-```typescript title="bknd.config.ts"
-import { emailOTP } from "bknd/plugins";
-import { resendEmail } from "bknd";
+```typescript title="userbase.config.ts"
+import { emailOTP } from "userbase/plugins";
+import { resendEmail } from "userbase";
 
 export default {
    options: {
@@ -331,7 +331,7 @@ export default {
          })
       ],
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 <AutoTypeTable path="../app/src/plugins/auth/email-otp.plugin.ts" name="EmailOTPPluginOptions" />
@@ -341,8 +341,8 @@ export default {
 
 A plugin that maintains sequential numeric positions for one or more entities. Positions are updated automatically when items are inserted or moved. You can optionally configure a scope so that positions are maintained independently within groups, such as tasks within a project.
 
-```typescript title="bknd.config.ts"
-import { sort } from "bknd/plugins";
+```typescript title="userbase.config.ts"
+import { sort } from "userbase/plugins";
 
 export default {
    options: {
@@ -357,7 +357,7 @@ export default {
          }),
       ],
    },
-} satisfies BkndConfig;
+} satisfies UserbaseConfig;
 ```
 
 The configured `field` is used for the numeric position. If the field does not exist, the plugin adds it as a number field with a default value of `0`; if it already exists, it must be a number field. The plugin also adds an index for the field when one is not already present. The optional `scope` field limits reordering to records with the same scope value.

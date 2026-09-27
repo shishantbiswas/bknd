@@ -5,7 +5,7 @@ icon: Box
 tags: ["documentation"]
 ---
 
-Not only creating and maintaing a backend is time-consuming, but also integrating it into your frontend can be a hassle. With `bknd/elements`, you can easily add media uploads and authentication forms to your app without having to figure out API details.
+Not only creating and maintaing a backend is time-consuming, but also integrating it into your frontend can be a hassle. With `userbase/elements`, you can easily add media uploads and authentication forms to your app without having to figure out API details.
 
 <Callout type="info">
   In order to use these exported elements, make sure to wrap your app inside
@@ -17,10 +17,10 @@ Not only creating and maintaing a backend is time-consuming, but also integratin
 
 ### Media.Dropzone
 
-The `Media.Dropzone` element allows retrieving from and uploading media items to your bknd instance. Without any properties specified, it will behave similar to your media library inside the bknd Admin UI. Here is how to get the last 10 items:
+The `Media.Dropzone` element allows retrieving from and uploading media items to your userbase instance. Without any properties specified, it will behave similar to your media library inside the userbase Admin UI. Here is how to get the last 10 items:
 
 ```tsx
-import { Media } from "bknd/elements";
+import { Media } from "userbase/elements";
 
 export default function MediaGallery() {
   return <Media.Dropzone query={{ limit: 10, sort: "-id" }} />;
@@ -30,7 +30,7 @@ export default function MediaGallery() {
 Since you can also upload media to a specific entity, you can also point that `Dropzone` to it. Here is an example of a single user avatar that gets overwritten on re-upload:
 
 ```tsx
-import { Media } from "bknd/elements";
+import { Media } from "userbase/elements";
 
 export default function UserAvatar() {
   return (
@@ -53,7 +53,7 @@ export default function UserAvatar() {
 You can also customize the rendering of the media items and its uploading by passing a react element as a child. Here is an example of a custom `Media.Dropzone` that renders an user avatar (styled using tailwind):
 
 ```tsx
-import { Media, useMediaDropzone, useMediaDropzoneState } from "bknd/elements";
+import { Media, useMediaDropzone, useMediaDropzoneState } from "userbase/elements";
 
 export default function CustomUserAvatar() {
   return (
@@ -105,14 +105,14 @@ function CustomUserAvatar() {
 
 ## Auth
 
-Adding authentication to your app with bknd is as easy as adding a `<form method="POST" />` with an action pointing to the action (`login` or `register`) to the strategy you want to use, e.g. for the password strategy, use `/api/auth/password/login`. But to make it even easier, you can use the `Auth.*` elements.
+Adding authentication to your app with userbase is as easy as adding a `<form method="POST" />` with an action pointing to the action (`login` or `register`) to the strategy you want to use, e.g. for the password strategy, use `/api/auth/password/login`. But to make it even easier, you can use the `Auth.*` elements.
 
 ### `Auth.Screen`
 
 The `Auth.Screen` element is a wrapper around the `Auth.Form` element that provides a full page screen. The current layout is admittedly very basic, but there will be more customization options in the future.
 
 ```tsx
-import { Auth } from "bknd/elements";
+import { Auth } from "userbase/elements";
 
 export default function LoginScreen() {
   return <Auth.Screen action="login" />;
@@ -128,10 +128,10 @@ Note that this component doesn't require any strategy-specific information, as i
 
 ### `Auth.Form`
 
-If you only wish to render the form itself without the screen, you can use the `Auth.Form` element. Unlike the `Auth.Screen`, this element requires the `strategy` prop to be set to the strategy you want to use. You can either specify it manually, use use the exported hook `useAuthStrategies()` for fetch them from your bknd instance.
+If you only wish to render the form itself without the screen, you can use the `Auth.Form` element. Unlike the `Auth.Screen`, this element requires the `strategy` prop to be set to the strategy you want to use. You can either specify it manually, use use the exported hook `useAuthStrategies()` for fetch them from your userbase instance.
 
 ```tsx
-import { Auth, useAuthStrategies } from "bknd/elements";
+import { Auth, useAuthStrategies } from "userbase/elements";
 
 export default function LoginForm() {
   const { strategies, basepath, loading } = useAuthStrategies();

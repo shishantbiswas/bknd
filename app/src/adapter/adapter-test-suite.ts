@@ -1,10 +1,10 @@
 import type { TestRunner } from "core/test";
-import type { BkndConfig, DefaultArgs } from "./index";
+import type { UserbaseConfig, DefaultArgs } from "./index";
 import type { App } from "App";
 import { disableConsoleLog, enableConsoleLog } from "core/utils/test";
 
 export function adapterTestSuite<
-   Config extends BkndConfig = BkndConfig,
+   Config extends UserbaseConfig = UserbaseConfig,
    Args extends DefaultArgs = DefaultArgs,
 >(
    testRunner: TestRunner,
@@ -39,7 +39,7 @@ export function adapterTestSuite<
          }),
          beforeBuild,
          onBuilt,
-      } as const satisfies BkndConfig;
+      } as const satisfies UserbaseConfig;
 
       const app = await makeApp(
          config as any,
