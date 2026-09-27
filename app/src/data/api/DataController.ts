@@ -100,7 +100,7 @@ export class DataController extends Controller {
             context: (_c) => ({ module: "data" }),
          }),
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          describeRoute({
             summary: "Retrieve data schema",
@@ -131,7 +131,7 @@ export class DataController extends Controller {
             context: (_c) => ({ module: "data" }),
          }),
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          describeRoute({
             summary: "Retrieve entity schema",
@@ -192,7 +192,7 @@ export class DataController extends Controller {
             context: (_c) => ({ module: "data" }),
          }),
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          describeRoute({
             summary: "Retrieve entity info",
@@ -246,7 +246,7 @@ export class DataController extends Controller {
       hono.post(
          "/:entity/fn/count",
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          describeRoute({
             summary: "Count entities",
@@ -271,7 +271,7 @@ export class DataController extends Controller {
       hono.post(
          "/:entity/fn/exists",
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          describeRoute({
             summary: "Check if entity exists",
@@ -324,7 +324,7 @@ export class DataController extends Controller {
          jsc("param", s.object({ entity: entitiesEnum })),
          jsc("query", repoQuery, { skipOpenAPI: true }),
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          async (c) => {
             const { entity } = c.req.valid("param");
@@ -460,7 +460,7 @@ export class DataController extends Controller {
             tags: ["data"],
          }),
          permission(DataPermissions.entityRead, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          mcpTool("data_entity_read_many", {
             inputSchema: {

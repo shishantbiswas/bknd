@@ -190,7 +190,7 @@ export class MediaController extends Controller {
          ),
          jsc("query", s.object({ overwrite: s.boolean().optional() })),
          permission(DataPermissions.entityCreate, {
-            context: (c) => ({ entity: c.req.param("entity") }),
+            context: (c) => ({ entity: c.req.param("entity")! }),
          }),
          permission(MediaPermissions.uploadFile, {}),
          async (c) => {
