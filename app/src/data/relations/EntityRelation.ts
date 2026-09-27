@@ -8,7 +8,7 @@ import {
    RelationHelper,
 } from "../relations";
 import type { RepoQuery } from "../server/query";
-import type { RelationType } from "./relation-types";
+import { DEFAULT_RELATION_CASCADE, RelationCascades, type RelationType } from "./relation-types";
 
 const directions = ["source", "target"] as const;
 export type TDirection = (typeof directions)[number];
@@ -35,6 +35,7 @@ export abstract class EntityRelation<
       mappedBy: s.string().optional(),
       inversedBy: s.string().optional(),
       required: s.boolean().optional(),
+      on_delete: s.string({ enum: RelationCascades, default: DEFAULT_RELATION_CASCADE }).optional(),
    });
 
    // don't make protected, App requires it to instantiatable

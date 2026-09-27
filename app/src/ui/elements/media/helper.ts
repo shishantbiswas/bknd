@@ -35,7 +35,12 @@ export function checkMaxReached({
    current = 0,
    overwrite,
    added,
-}: { maxItems?: number; current?: number; overwrite?: boolean; added: number }) {
+}: {
+   maxItems?: number;
+   current?: number;
+   overwrite?: boolean;
+   added: number;
+}) {
    if (!maxItems) {
       return {
          reject: false,

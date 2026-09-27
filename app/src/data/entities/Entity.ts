@@ -194,7 +194,10 @@ export class Entity<
    getFields({
       virtual = false,
       primary = true,
-   }: { virtual?: boolean; primary?: boolean } = {}): Field[] {
+   }: {
+      virtual?: boolean;
+      primary?: boolean;
+   } = {}): Field[] {
       return this.fields.filter((f) => {
          if (!virtual && f.isVirtual()) return false;
          if (!primary && f instanceof PrimaryField) return false;

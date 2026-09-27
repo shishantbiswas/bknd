@@ -45,9 +45,9 @@ export class EntityManager<TBD extends object = DefaultDB> {
       emgr?: EventManager<any>,
    ) {
       // add entities & relations
-      entities.forEach((entity) => this.addEntity(entity));
-      relations.forEach((relation) => this.addRelation(relation));
-      indices.forEach((index) => this.addIndex(index));
+      entities.forEach((entity) => void this.addEntity(entity));
+      relations.forEach((relation) => void this.addRelation(relation));
+      indices.forEach((index) => void this.addIndex(index));
 
       if (!Connection.isConnection(connection)) {
          throw new UnableToConnectException("");

@@ -20,10 +20,7 @@ export async function getApp<Env>(
  * @param config - bknd configuration
  * @param args - environment variables
  */
-export function serve<Env>(
-   config: NuxtBkndConfig<Env> = {} as NuxtBkndConfig<Env>,
-   args: Env,
-) {
+export function serve<Env>(config: NuxtBkndConfig<Env> = {} as NuxtBkndConfig<Env>, args: Env) {
    return async (request: Request) => {
       return (await getApp(config, args)).fetch(request);
    };

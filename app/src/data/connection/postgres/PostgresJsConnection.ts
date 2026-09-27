@@ -24,8 +24,6 @@ export class PostgresJsConnection extends PostgresConnection<PostgresJSDialectCo
    }
 }
 
-export function postgresJs(
-   config: PostgresJSDialectConfig,
-): PostgresJsConnection {
+export function postgresJs(config: PostgresJSDialectConfig): PostgresJsConnection {
    return new PostgresJsConnection(config);
 }

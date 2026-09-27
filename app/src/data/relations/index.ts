@@ -3,6 +3,7 @@ import { ManyToOneRelation, type ManyToOneRelationConfig } from "./ManyToOneRela
 import { OneToOneRelation, type OneToOneRelationConfig } from "./OneToOneRelation";
 import { PolymorphicRelation, type PolymorphicRelationConfig } from "./PolymorphicRelation";
 import { type RelationType, RelationTypes } from "./relation-types";
+import { DEFAULT_RELATION_CASCADE, RelationCascades, type RelationCascade } from "./relation-types";
 
 export * from "./EntityRelation";
 export * from "./EntityRelationAnchor";
@@ -28,6 +29,9 @@ export {
    type PolymorphicRelationConfig,
    RelationTypes,
    type RelationType,
+   RelationCascades,
+   type RelationCascade,
+   DEFAULT_RELATION_CASCADE,
    // field
    RelationField,
    relationFieldConfigSchema,

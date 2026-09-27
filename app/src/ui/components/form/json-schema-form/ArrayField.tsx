@@ -117,7 +117,11 @@ const ArrayAdd = ({
    schema,
    path: _path,
    label = "Add",
-}: { schema: JsonSchema; path: string; label?: string }) => {
+}: {
+   schema: JsonSchema;
+   path: string;
+   label?: string;
+}) => {
    const {
       setValue,
       value: { currentIndex },

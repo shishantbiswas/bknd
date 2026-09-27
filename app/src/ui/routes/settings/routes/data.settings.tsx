@@ -66,7 +66,10 @@ const relationAnyOfValues = {
 export const DataSettings = ({
    schema,
    config,
-}: { schema: ModuleSchemas["data"]; config: ModuleConfigs["data"] }) => {
+}: {
+   schema: ModuleSchemas["data"];
+   config: ModuleConfigs["data"];
+}) => {
    const { app, readonly } = useBknd();
    const prefix = app.getAbsolutePath("settings");
    const entities = Object.keys(config.entities ?? {});

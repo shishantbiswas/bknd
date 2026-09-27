@@ -101,7 +101,12 @@ export function useNavigate() {
                }
             }
 
-            const _url = options?.absolute ? `~/${app.options.basepath}/${app.options.admin_basepath}${url}`.replace(/\/+/g, "/") : url;
+            const _url = options?.absolute
+               ? `~/${app.options.basepath}/${app.options.admin_basepath}${url}`.replace(
+                    /\/+/g,
+                    "/",
+                 )
+               : url;
             const state = {
                ...options?.state,
                referrer: location,

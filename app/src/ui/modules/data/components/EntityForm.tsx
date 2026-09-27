@@ -283,7 +283,10 @@ function EntityJsonFormField({
    fieldApi,
    field,
    ...props
-}: { fieldApi: TFieldApi; field: JsonField }) {
+}: {
+   fieldApi: TFieldApi;
+   field: JsonField;
+}) {
    const [error, setError] = useState<any>(null);
    const handleUpdate = useEvent((value: any) => {
       setError(null);
@@ -312,7 +315,10 @@ function EntityEnumFormField({
    fieldApi,
    field,
    ...props
-}: { fieldApi: TFieldApi; field: EnumField }) {
+}: {
+   fieldApi: TFieldApi;
+   field: EnumField;
+}) {
    const handleUpdate = useEvent((e: React.ChangeEvent<HTMLTextAreaElement>) => {
       fieldApi.handleChange(e.target.value);
    });

@@ -26,9 +26,7 @@ export function shouldSkip(c: Context<ServerEnv>, skip?: (string | RegExp)[]) {
    return result;
 }
 
-export const auth = (options?: {
-   skip?: (string | RegExp)[];
-}) =>
+export const auth = (options?: { skip?: (string | RegExp)[] }) =>
    createMiddleware<ServerEnv>(async (c, next) => {
       if (!c.get("auth")) {
          c.set("auth", {

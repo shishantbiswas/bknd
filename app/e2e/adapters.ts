@@ -3,7 +3,10 @@ import path from "node:path";
 import c from "picocolors";
 
 const basePath = new URL(import.meta.resolve("../../")).pathname.slice(0, -1);
-type RunOptions = Omit<Bun.SpawnOptions.SpawnOptions<"ignore", "pipe", "pipe">, "stdout" | "stderr">;
+type RunOptions = Omit<
+   Bun.SpawnOptions.SpawnOptions<"ignore", "pipe", "pipe">,
+   "stdout" | "stderr"
+>;
 
 async function run(
    cmd: string[] | string,
