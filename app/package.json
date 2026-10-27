@@ -52,7 +52,7 @@
     "@codemirror/lang-html": "^6.4.11",
     "@codemirror/lang-json": "^6.0.2",
     "@hello-pangea/dnd": "^18.0.1",
-    "@hono/swagger-ui": "^0.5.2",
+    "@hono/swagger-ui": "^0.6.1",
     "@mantine/core": "^7.17.1",
     "@mantine/hooks": "^7.17.1",
     "@tanstack/react-form": "^1.0.5",
@@ -62,7 +62,7 @@
     "bcryptjs": "^3.0.3",
     "dayjs": "^1.11.20",
     "fast-xml-parser": "^5.3.1",
-    "hono": "4.10.4",
+    "hono": "4.13.14",
     "json-schema-library": "10.0.0-rc7",
     "json-schema-to-ts": "^3.1.1",
     "jsonv-ts": "^0.10.1",
@@ -83,7 +83,7 @@
     "@cloudflare/vitest-pool-workers": "^0.10.4",
     "@cloudflare/workers-types": "^4.20251014.0",
     "@dagrejs/dagre": "^1.1.4",
-    "@hono/vite-dev-server": "^0.23.0",
+    "@hono/vite-dev-server": "^0.26.1",
     "@hookform/resolvers": "^5.2.2",
     "@libsql/client": "^0.15.15",
     "@mantine/modals": "^7.17.1",
@@ -145,7 +145,7 @@
     "wrangler": "^4.45.4"
   },
   "optionalDependencies": {
-    "@hono/node-server": "^1.19.6"
+    "@hono/node-server": "^2.1.5"
   },
   "peerDependencies": {
     "react": ">=19",
