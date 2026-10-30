@@ -3,7 +3,11 @@ import { Entity } from "data/entities";
 import type { Field } from "data/fields";
 import { FIELDS, RELATIONS, type TAppDataEntity, type TAppDataRelation } from "data/data-schema";
 
-export function constructEntity(name: string, entityConfig: TAppDataEntity) {
+export function constructEntity(
+   name: string,
+   entityConfig: TAppDataEntity,
+   default_primary_format?: "uuid" | "integer",
+) {
    const fields = transformObject(entityConfig.fields ?? {}, (fieldConfig, name) => {
       const { type } = fieldConfig;
       if (!(type in FIELDS)) {
@@ -15,12 +19,11 @@ export function constructEntity(name: string, entityConfig: TAppDataEntity) {
       return returnal;
    });
 
-   return new Entity(
-      name,
-      Object.values(fields),
-      entityConfig.config as any,
-      entityConfig.type as any,
-   );
+   const fieldConfig = {
+      ...entityConfig.config,
+      primary_format: default_primary_format ?? "integer",
+   } as any;
+   return new Entity(name, Object.values(fields), fieldConfig, entityConfig.type as any);
 }
 
 export function constructRelation(

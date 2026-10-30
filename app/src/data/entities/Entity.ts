@@ -55,7 +55,7 @@ export class Entity<
    protected data: EntityData[] | undefined;
    readonly type: TEntityType = "regular";
 
-   constructor(name: string, fields?: Field[], config?: EntityConfig, type?: TEntityType) {
+   constructor(name: string, fields: Field[], config: EntityConfig, type?: TEntityType) {
       if (typeof name !== "string" || name.length === 0) {
          throw new Error("Entity name must be a non-empty string");
       }
@@ -69,6 +69,7 @@ export class Entity<
       if (primary_count > 1) {
          throw new Error(`Entity "${name}" has more than one primary field`);
       }
+      console.log({ primary_format: this.config.primary_format });
       this.fields =
          primary_count === 1
             ? []
@@ -79,7 +80,7 @@ export class Entity<
               ];
 
       if (fields) {
-         fields.forEach((field) => this.addField(field));
+         fields.forEach((field) => void this.addField(field));
       }
 
       if (type) this.type = type;
@@ -95,8 +96,8 @@ export class Entity<
 
    static create(args: {
       name: string;
-      fields?: Field[];
-      config?: EntityConfig;
+      fields: Field[];
+      config: EntityConfig;
       type?: TEntityType;
    }) {
       return new Entity(args.name, args.fields, args.config, args.type);
@@ -194,7 +195,10 @@ export class Entity<
    getFields({
       virtual = false,
       primary = true,
-   }: { virtual?: boolean; primary?: boolean } = {}): Field[] {
+   }: {
+      virtual?: boolean;
+      primary?: boolean;
+   } = {}): Field[] {
       return this.fields.filter((f) => {
          if (!virtual && f.isVirtual()) return false;
          if (!primary && f instanceof PrimaryField) return false;

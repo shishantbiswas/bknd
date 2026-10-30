@@ -16,7 +16,7 @@ export class AppData extends Module<AppDataConfig> {
       } = this.config;
 
       const entities = transformObject(_entities, (entityConfig, name) => {
-         return constructEntity(name, entityConfig);
+         return constructEntity(name, entityConfig, this.config.default_primary_format);
       });
 
       const _entity = (_e: Entity | string): Entity => {

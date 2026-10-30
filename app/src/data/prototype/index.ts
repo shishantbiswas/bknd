@@ -185,7 +185,7 @@ export function entity<
 >(
    name: EntityName,
    fields: Fields,
-   config?: EntityConfig,
+   config: EntityConfig,
    type?: TEntityType,
 ): Entity<EntityName, Fields> {
    const _fields: Field[] = [];
@@ -210,7 +210,7 @@ type SystemEntities = {
 export function systemEntity<
    E extends keyof SystemEntities,
    Fields extends Record<string, Field<any, any, any>>,
->(name: E, fields: Fields, config?: EntityConfig) {
+>(name: E, fields: Fields, config: EntityConfig) {
    return entity<E, SystemEntities[E] & Fields>(name, fields as any, config, "system");
 }
 

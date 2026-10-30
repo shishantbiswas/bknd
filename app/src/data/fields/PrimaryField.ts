@@ -24,7 +24,7 @@ export class PrimaryField<Required extends true | false = false> extends Field<
    override readonly type = "primary";
 
    constructor(name: string = config.data.default_primary_field, cfg?: PrimaryFieldConfig) {
-      super(name, { ...cfg, fillable: false, required: false });
+      super(name, { ...cfg, fillable: false, required: false  });
    }
 
    override isRequired(): boolean {

@@ -14,7 +14,37 @@ import { slugify } from "./src/core/utils/strings";
 util.inspect.defaultOptions.depth = 5;
 registries.media.register("local", StorageLocalAdapter);
 
-const config: CreateAppConfig = {};
+import { em, entity, text, number } from "bknd";
+const schema = em(
+   {
+      posts: entity("posts", {
+         // "id" is automatically added
+         title: text().required(),
+         slug: text().required(),
+         content: text(),
+         views: number(),
+      }),
+      comments: entity("comments", {
+         content: text(),
+      }),
+      // relations and indices are defined separately.
+      // the first argument are the helper functions, the second the entities.
+   },
+   ({ relation, index }, { posts, comments }) => {
+      relation(comments).manyToOne(posts);
+      // relation as well as index can be chained!
+      index(posts).on(["title"]).on(["slug"], true);
+   },
+);
+
+const config: CreateAppConfig = {
+   config: {
+      data: {
+         ...schema.toJSON(),
+         default_primary_format: "uuid",
+      },
+   },
+};
 
 const dbType = import.meta.env.VITE_DB_TYPE ?? "node";
 $console.debug("Using db type", dbType);
